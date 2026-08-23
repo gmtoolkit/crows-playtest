@@ -3,6 +3,9 @@
 <header class="crow-header">
 
   <div class="identity">
+    {{!-- Decorative only; the class is what resolves the glyph, never a
+          hardcoded codepoint. --}}
+    <i class="fa-solid fa-crow crow-watermark" aria-hidden="true"></i>
     <img class="portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
     <div class="names">
       <input class="crow-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'CROWS.Name'}}">

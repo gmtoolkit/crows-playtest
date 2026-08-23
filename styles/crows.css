@@ -1741,22 +1741,28 @@
   color: #e0b9b9;
 }
 
-/* A crow silhouette watching from the corner of the header. */
-.crows .crow-header .identity::after {
-  content: "\f52f"; /* fa-crow */
-  font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free", "FontAwesome";
-  font-weight: 900;
-  position: absolute;
-  right: 0.5rem;
-  top: 0.2rem;
-  font-size: 2.6rem;
-  line-height: 1;
-  color: #000;
-  opacity: 0.5;
-  pointer-events: none;
-  text-shadow: 0 0 12px rgba(0, 0, 0, 0.9);
-}
-
+/**
+ * A crow silhouette watching from the corner of the header.
+ *
+ * Rendered as a real <i class="fa-solid fa-crow"> element rather than a CSS
+ * `content` codepoint. Hardcoding the glyph put a PETROL PUMP on the character
+ * sheet: fa-crow is \f520 and \f52f is fa-gas-pump. Foundry's Font Awesome
+ * also defines glyphs through a `--fa` custom property, so the class is the
+ * only thing that reliably resolves to the icon it names.
+ */
 .crows .crow-header .identity {
   position: relative;
+}
+
+.crows .crow-watermark {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.1rem;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: #050403;
+  opacity: 0.55;
+  pointer-events: none;
+  text-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
+  transform: scaleX(-1); /* facing back into the sheet */
 }
