@@ -1,4 +1,5 @@
 import { cardFields, attackFields } from "./fields.mjs";
+import { displayDamage, damageNotation } from "../dice/tiers.mjs";
 
 const fields = foundry.data.fields;
 
@@ -58,5 +59,15 @@ export default class WeaponData extends foundry.abstract.TypeDataModel {
     this.isThrown = this.range.type === "both" || "thrown" in this.propertyMap;
     /** Reach-extending weapons only extend reach for their own attacks (R p18). */
     this.reach = this.range.type === "ranged" ? 0 : this.range.value;
+
+    // Card faces show the damage THIS carrier deals, not the raw notation.
+    const actor = this.parent?.actor ?? null;
+    this.displayTier2 = displayDamage(this.tier2, actor, this.characteristic);
+    this.displayTier3 = displayDamage(this.tier3, actor, this.characteristic);
+
+    // Tooltip form: the notation the printed card uses ("3 + S"), never the
+    // internal "@mod" placeholder.
+    this.notationTier2 = damageNotation(this.tier2, this.characteristic);
+    this.notationTier3 = damageNotation(this.tier3, this.characteristic);
   }
 }

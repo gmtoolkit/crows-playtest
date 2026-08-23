@@ -43,6 +43,16 @@
     <div class="pr-outcome">{{{tierText}}}</div>
   {{/if}}
 
+  {{#if damage}}
+    <div class="pr-damage">
+      <span class="dmg-value">{{damage.value}}</span>
+      <span class="dmg-label">{{localize "CROWS.Damage"}}</span>
+      {{#if damage.piercing}}<span class="badge piercing">{{localize "CROWS.Piercing"}}</span>{{/if}}
+      {{#if damage.hasDice}}<span class="dmg-formula">({{damage.formula}})</span>{{/if}}
+      {{#if damage.note}}<span class="dmg-note">{{damage.note}}</span>{{/if}}
+    </div>
+  {{/if}}
+
   {{#if item.system.note}}
     <div class="pr-rider">{{{item.system.note}}}</div>
   {{/if}}
@@ -55,11 +65,14 @@
       </button>
     {{/if}}
 
-    {{#if tierText}}
+    {{!-- Only offered when this outcome actually deals damage. A button that
+          silently applies 0 is worse than no button. --}}
+    {{#if damage}}
       <button type="button" data-crows-action="applyDamage"
-              data-amount="{{result.damage}}"
-              data-piercing="{{item.system.piercing}}">
-        <i class="fa-solid fa-droplet"></i> {{localize "CROWS.ApplyDamage"}}
+              data-amount="{{damage.value}}"
+              data-piercing="{{damage.piercing}}">
+        <i class="fa-solid fa-droplet"></i>
+        {{localize "CROWS.ApplyDamage"}} ({{damage.value}})
       </button>
     {{/if}}
   </footer>

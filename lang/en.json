@@ -490,5 +490,6 @@
   "CROWS.RoleGuide": "Guide",
   "CROWS.RoleScout": "Scout",
   "CROWS.RoleTracker": "Tracker",
-  "CROWS.MagicSlotOverload": "Overloaded magic slot: chaos floods the body"
+  "CROWS.MagicSlotOverload": "Overloaded magic slot: chaos floods the body",
+  "CROWS.Damage": "damage"
 }

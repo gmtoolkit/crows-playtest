@@ -1,4 +1,5 @@
 import { cardFields, attackFields } from "./fields.mjs";
+import { displayDamage, damageNotation } from "../dice/tiers.mjs";
 
 const fields = foundry.data.fields;
 
@@ -78,5 +79,14 @@ export default class SpellbookData extends foundry.abstract.TypeDataModel {
     this.expertise = this.discipline;
     /** Empty books cannot be cast from until their dice are restored. */
     this.exhausted = this.ud.max > 0 && this.ud.value <= 0;
+
+    // Castings are Mind tests, so card damage resolves against Mind.
+    const actor = this.parent?.actor ?? null;
+    this.displayTier2 = displayDamage(this.tier2, actor, "mind");
+    this.displayTier3 = displayDamage(this.tier3, actor, "mind");
+
+    // Tooltip form: the notation the printed card uses ("4 + M").
+    this.notationTier2 = damageNotation(this.tier2, "mind");
+    this.notationTier3 = damageNotation(this.tier3, "mind");
   }
 }

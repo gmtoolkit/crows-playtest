@@ -185,6 +185,70 @@ export function resolveCraftingRoll({ dice, mod = 0, bonus = 0, edges = 0, banes
 }
 
 /**
+ * Parse a printed tier outcome into an evaluable damage formula.
+ *
+ * The books write damage several ways and all of them have to land on the
+ * chat card as a number the GM can actually apply:
+ *
+ *   "3 + S"          weapon card, characteristic spelled out
+ *   "2 + A or S"      weapon card, attacker's choice
+ *   "4+M"             spellbook card, no spaces
+ *   "2 dam"           creature stat block
+ *   "8 dam*"          creature stat block with a rider note
+ *   "1d6 P dam"       piercing, bypasses Armor Defense
+ *   "6 damage; weakened"  damage plus a condition
+ *   "Push 1"          not damage at all
+ *
+ * Characteristic references collapse to `@mod`, which the roller binds to
+ * whichever characteristic was actually used. The last case must yield no
+ * formula at all, so the caller does not offer an Apply Damage button for an
+ * outcome that deals none.
+ *
+ * @param {string} text
+ * @returns {{formula: string|null, piercing: boolean, rider: boolean, note: string}}
+ */
+export function parseDamage(text) {
+  const empty = { formula: null, piercing: false, rider: false, note: "" };
+  if (!text) return empty;
+
+  let s = String(text).trim();
+
+  // A trailing asterisk points at a named rider on the stat block.
+  const rider = s.includes("*");
+  s = s.replace(/\*/g, "");
+
+  // "6 damage; weakened" — keep the clause, it is not part of the formula.
+  let note = "";
+  const semi = s.search(/[;,]/);
+  if (semi >= 0) {
+    note = s.slice(semi + 1).trim();
+    s = s.slice(0, semi);
+  }
+
+  // A standalone capital P marks piercing damage (R p12). Case matters: it
+  // must not match the "p" in "push".
+  const piercing = /(^|\s)P(\s|$)/.test(s);
+  s = s.replace(/(^|\s)P(\s|$)/g, " ");
+
+  s = s.replace(/\b(dam|damage)\b/gi, " ");
+
+  // Characteristic references become @mod. Pair form first, so "A or S" does
+  // not become "@mod or @mod".
+  s = s.replace(/\b[AMS]\s+or\s+[AMS]\b/g, "@mod");
+  s = s.replace(/(?<![\w@])[AMS](?![\w])/g, "@mod");
+
+  s = s.replace(/\s+/g, " ").trim();
+  s = s.replace(/^[+\s]+/, "").replace(/[+\s]+$/, "").trim();
+
+  // Anything left that is not arithmetic over numbers, dice, and @mod is prose
+  // ("Push 1", "The target can counter") and yields no damage.
+  const numeric = /^[\d\s+\-*/().]*(?:(?:\d*d\d+|@mod|\d+)[\s+\-*/().]*)+$/i;
+  if (!s || !numeric.test(s)) return { ...empty, piercing, rider, note };
+
+  return { formula: s, piercing, rider, note };
+}
+
+/**
  * Roll a usage-dice pool: every die showing 1 or 2 is removed (R p13).
  * @param {number[]} faces  The d6 results.
  * @param {number} current  Dice in the pool before rolling.
@@ -211,4 +275,87 @@ export function resolveEncounterCheck(face, en) {
     immediate: occurs && face === 10,
     warning: occurs && face < 10
   };
+}
+
+/**
+ * Resolve the printed tier damage into something worth showing on a card face.
+ *
+ * The stored text is the card's own notation ("3 + S", "2 + A or S", "8 dam*")
+ * or the normalised "@mod" form. Neither reads well in a 70px slot, and
+ * "@mod" reads like a bug. When the item is carried by an actor, substitute
+ * that actor's real modifier so the card shows the number this crow deals.
+ *
+ * Dice expressions stay as formulas — "1d6 + 2" is the honest display.
+ *
+ * @param {string} text          The printed tier text.
+ * @param {Actor|null} actor     The owner, if any.
+ * @param {string} characteristic Which characteristic the attack uses.
+ * @returns {string}             Display text.
+ */
+export function displayDamage(text, actor, characteristic) {
+  if (!text) return "";
+  const parsed = parseDamage(text);
+  if (!parsed.formula) return text;
+
+  const mod = actor?.system?.characteristicMod?.(characteristic);
+  if (mod === undefined || mod === null) {
+    // No owner: show the printed notation rather than the @mod placeholder.
+    return text.replace(/@mod/g, "mod");
+  }
+
+  // Substitute the bare number: the printed formula already supplies the
+  // operator ("3 + @mod"), so injecting one produces "3 + + 2".
+  const bound = tidySigns(parsed.formula.replace(/@mod/g, String(mod)));
+
+  // Collapse a pure-arithmetic expression to its value; leave dice alone.
+  if (!/d\d/i.test(bound)) {
+    const cleaned = bound.replace(/\s+/g, " ").trim();
+    if (/^[\d+\-*/() ]+$/.test(cleaned)) {
+      try {
+        // eslint-disable-next-line no-new-func
+        const value = Function(`"use strict"; return (${cleaned});`)();
+        if (Number.isFinite(value)) return `${value}${parsed.piercing ? " P" : ""}`;
+      } catch {
+        /* fall through to the formula */
+      }
+    }
+  }
+  return `${bound.replace(/\s+/g, " ").trim()}${parsed.piercing ? " P" : ""}`;
+}
+
+/**
+ * Collapse doubled signs left by substituting a negative modifier.
+ * "3 + -1" reads badly and "1d6 - -2" reads worse; both are also avoidable.
+ */
+export function tidySigns(formula) {
+  return String(formula)
+    .replace(/\+\s*-\s*/g, "- ")
+    .replace(/-\s*-\s*/g, "+ ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/** Characteristic abbreviations as the cards print them. */
+const ABBR = {
+  agility: "A",
+  mind: "M",
+  strength: "S",
+  agilityOrStrength: "A or S",
+  agilityOrMind: "A or M",
+  mindOrStrength: "M or S",
+  none: ""
+};
+
+/**
+ * Render stored damage back into the notation the printed card uses, so a
+ * tooltip reads "3 + S" rather than exposing the internal "@mod" placeholder.
+ */
+export function damageNotation(text, characteristic) {
+  if (!text) return "";
+  const abbr = ABBR[characteristic] ?? "";
+  return String(text)
+    .replace(/@mod/g, abbr)
+    .replace(/\+\s*$/, "")
+    .replace(/\s+/g, " ")
+    .trim();
 }

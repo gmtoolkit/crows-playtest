@@ -81,6 +81,14 @@
   cursor: pointer;
   font-family: inherit;
   transition: border-color 120ms, background 120ms;
+  /**
+   * Foundry v14 gives every button a fixed height. Several of ours are
+   * multi-line (the characteristic chips stack abbreviation, value and name),
+   * and that fixed height silently clips the last line. Verified in-world:
+   * without this the chip is 28px tall and needs 57px.
+   */
+  height: auto;
+  min-height: 0;
 }
 
 .crows button:hover {
@@ -1492,4 +1500,45 @@
 
 .crows-rest {
   border-left-color: #6d8f4a;
+}
+
+.crows-chat .pr-damage {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  padding: 0.25rem 0.4rem;
+  background: rgba(157, 34, 34, 0.16);
+  border-left: 3px solid #9d2222;
+  border-radius: 2px;
+}
+
+.crows-chat .dmg-value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #d33a3a;
+  line-height: 1;
+}
+
+.crows-chat .dmg-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94866f;
+}
+
+.crows-chat .dmg-formula {
+  font-size: 0.68rem;
+  color: #94866f;
+}
+
+.crows-chat .dmg-note {
+  font-size: 0.72rem;
+  color: #cfc2a8;
+  font-style: italic;
+}
+
+.crows-chat .badge.piercing {
+  background: #9d2222;
+  color: #fff;
 }
