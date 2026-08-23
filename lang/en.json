@@ -491,5 +491,8 @@
   "CROWS.RoleScout": "Scout",
   "CROWS.RoleTracker": "Tracker",
   "CROWS.MagicSlotOverload": "Overloaded magic slot: chaos floods the body",
-  "CROWS.Damage": "damage"
+  "CROWS.Damage": "damage",
+  "CROWS.DTWarning": "{minutes} minutes left in this dungeon turn.",
+  "CROWS.Settings.TurnWarnings": "Warn as the dungeon turn runs down",
+  "CROWS.Settings.TurnWarningsHint": "A notification and a soft chime at 10, 5 and 1 minutes remaining, so the table can spend the last of the turn deliberately."
 }

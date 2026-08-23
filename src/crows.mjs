@@ -27,7 +27,7 @@ import CreatureSheet from "./apps/creature-sheet.mjs";
 import CrowsItemSheet from "./apps/item-sheet.mjs";
 
 import { PowerRoll } from "./dice/power-roll.mjs";
-import { DungeonTurn } from "./system/dungeon-turn.mjs";
+import { DungeonTurn, DungeonTurnPanel } from "./system/dungeon-turn.mjs";
 import { registerSettings } from "./system/settings.mjs";
 import { registerHandlebars } from "./system/handlebars.mjs";
 import { CrowsCombat } from "./system/combat.mjs";
@@ -89,6 +89,7 @@ Hooks.once("init", () => {
     CROWS,
     PowerRoll,
     DungeonTurn,
+    DungeonTurnPanel,
     documents: { CrowsActor, CrowsItem }
   };
 });
@@ -123,6 +124,33 @@ function registerSheets() {
 
 Hooks.once("ready", () => {
   DungeonTurn.initialise();
+});
+
+/* -------------------------------------------- */
+/*  Scene controls                              */
+/* -------------------------------------------- */
+
+/**
+ * A dungeon-turn button on the token toolbar.
+ *
+ * The clock is the game's central mechanic, so reaching it should not require
+ * opening a character sheet first. In v14 `controls` and `tools` are Records
+ * keyed by name, not arrays.
+ */
+Hooks.on("getSceneControlButtons", (controls) => {
+  const tokens = controls.tokens;
+  if (!tokens) return;
+
+  tokens.tools.crowsDungeonTurn = {
+    name: "crowsDungeonTurn",
+    order: 100,
+    title: "CROWS.DungeonTurn",
+    icon: "fa-solid fa-hourglass-half",
+    button: true,
+    // Players get the button only when the world lets them watch the clock.
+    visible: game.user.isGM || game.settings.get(CROWS.id, "showTurnClockToPlayers"),
+    onChange: () => DungeonTurnPanel.show()
+  };
 });
 
 /* -------------------------------------------- */

@@ -55,6 +55,29 @@ export class DungeonTurn {
     Hooks.on("updateSetting", (setting) => {
       if (setting.key === `${CROWS.id}.dungeonTurnState`) DungeonTurnPanel.refresh();
     });
+
+    /**
+     * Pausing the game pauses the dungeon turn.
+     *
+     * "The timer shouldn't be stopped unless the group takes a break from play
+     * or if the Ref wants to pause to explain or look up the rules" (R p13).
+     * Foundry's pause button is exactly that signal, so the two should not be
+     * tracked separately — a Ref who pauses to look something up should not
+     * also have to remember the DT clock.
+     */
+    Hooks.on("pauseGame", async (paused) => {
+      if (!game.user.isActiveGM) return;
+      const s = this.state;
+      if (!s.active) return;
+      if (paused === s.paused) return;
+      await this.togglePause();
+    });
+
+    // Players see the clock too, if the world allows it — the pressure only
+    // works when the table can watch it run down.
+    if (this.state.active && (game.user.isGM || game.settings.get(CROWS.id, "showTurnClockToPlayers"))) {
+      DungeonTurnPanel.show();
+    }
   }
 
   static async #tick() {
@@ -63,8 +86,41 @@ export class DungeonTurn {
 
     DungeonTurnPanel.refresh();
 
+    // Audible warnings before the turn lands. A torch guttering out should not
+    // be a surprise — the crows should hear the clock running down and get the
+    // chance to spend their last minutes deliberately.
+    this.#maybeWarn();
+
     // The GM alone advances the turn.
     if (game.user.isActiveGM && this.remaining <= 0) await this.endTurn();
+  }
+
+  /** Fire each warning threshold exactly once per turn. */
+  static #warned = new Set();
+
+  static #maybeWarn() {
+    const minutesLeft = this.remaining / 60_000;
+    const turn = this.state.turn;
+
+    for (const threshold of CROWS.dungeonTurn.warnMinutes) {
+      const key = `${turn}:${threshold}`;
+      if (this.#warned.has(key)) continue;
+      if (minutesLeft > threshold) continue;
+
+      this.#warned.add(key);
+      if (!game.settings.get(CROWS.id, "turnWarnings")) continue;
+
+      ui.notifications.warn(game.i18n.format("CROWS.DTWarning", { minutes: threshold }));
+      foundry.audio.AudioHelper.play(
+        { src: "sounds/notify.wav", volume: 0.35, autoplay: true, loop: false },
+        false
+      );
+    }
+  }
+
+  /** Forget the warnings fired for the turn that just ended. */
+  static resetWarnings() {
+    this.#warned.clear();
   }
 
   /* -------------------------------------------- */
@@ -80,6 +136,7 @@ export class DungeonTurn {
       en,
       label
     });
+    this.resetWarnings();
 
     await ChatMessage.create({
       content: `<div class="crows-dt-banner"><h3>${game.i18n.format("CROWS.DTStarted", {
@@ -160,6 +217,7 @@ export class DungeonTurn {
     if (game.settings.get(CROWS.id, "autoEncounterCheck")) encounter = await this.rollEncounterCheck(s.en);
 
     // 3. Advance.
+    this.resetWarnings();
     await game.settings.set(CROWS.id, "dungeonTurnState", { ...s, turn: s.turn + 1, startedAt: Date.now() });
 
     if (!silent) {

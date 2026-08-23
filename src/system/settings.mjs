@@ -91,6 +91,16 @@ export function registerSettings() {
     default: true
   });
 
+  /** Warn the table as the turn runs down (10, 5 and 1 minutes remaining). */
+  game.settings.register(id, "turnWarnings", {
+    name: "CROWS.Settings.TurnWarnings",
+    hint: "CROWS.Settings.TurnWarningsHint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true
+  });
+
   /** Play a sound when a dungeon turn ends. Torches going out should sting. */
   game.settings.register(id, "turnEndSound", {
     name: "CROWS.Settings.TurnEndSound",

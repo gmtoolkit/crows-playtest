@@ -251,6 +251,11 @@ CROWS.dungeonTurn = {
   intenseMinutes: 20,
   /** Outside a dungeon, this many in-fiction hours equals one DT. */
   hoursPerTurnOutsideDungeon: 2,
+  /**
+   * Minutes remaining at which to warn the table. The pressure only works if
+   * the crows can hear it coming and choose how to spend the last of it.
+   */
+  warnMinutes: [10, 5, 1],
   /** Alternative to the timer: each DT lasts this many rooms. */
   roomsFormula: "1d6"
 };
