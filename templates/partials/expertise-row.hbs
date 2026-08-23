@@ -1,19 +1,27 @@
-{{!-- One expertise: name, spendable use pips, and its trained total. --}}
+{{!-- One expertise: name, spendable use pips, and "left / trained".
+
+      The pips ARE the spend control — clicking a full one spends a use and
+      clicking a spent one gives it back. That leaves a single reading on the
+      row, because two unlabelled number boxes side by side never said which
+      was which. --}}
 <li class="expertise-row {{#unless row.remaining}}exhausted{{/unless}}" data-expertise="{{row.key}}">
   <span class="exp-name">{{row.label}}</span>
 
-  <span class="exp-pips" data-tooltip="{{row.remaining}} / {{row.uses}}">
+  <span class="exp-pips">
     {{#each row.pips}}
-      <span class="exp-pip {{#if this.spent}}spent{{/if}}"></span>
+      <button type="button" class="exp-pip {{#if this.spent}}spent{{/if}}"
+              data-action="toggleExpertiseUse" data-expertise="{{../row.key}}" data-index="{{@index}}"
+              data-tooltip="{{#if this.spent}}{{localize 'CROWS.RestoreUse'}}{{else}}{{localize 'CROWS.SpendUse'}}{{/if}}"></button>
     {{/each}}
   </span>
 
-  {{#if editable}}
-    <input class="exp-uses" type="number" min="0" name="system.expertises.{{row.key}}.uses" value="{{row.uses}}"
-           data-tooltip="{{localize 'CROWS.TrainedUses'}}">
-    <input class="exp-spent" type="number" min="0" name="system.expertises.{{row.key}}.spent" value="{{row.spent}}"
-           data-tooltip="{{localize 'CROWS.SpentUses'}}">
-  {{else}}
-    <span class="exp-count">{{row.remaining}}/{{row.uses}}</span>
-  {{/if}}
+  <span class="exp-count" data-tooltip="{{localize 'CROWS.ExpertiseCountHint'}}">
+    <span class="exp-remaining">{{row.remaining}}</span>
+    <span class="exp-sep">/</span>
+    {{#if editable}}
+      <input class="exp-uses" type="number" min="0" name="system.expertises.{{row.key}}.uses" value="{{row.uses}}">
+    {{else}}
+      <span class="exp-trained">{{row.uses}}</span>
+    {{/if}}
+  </span>
 </li>

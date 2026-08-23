@@ -1,6 +1,30 @@
 {{!-- Expertise uses. Each pip is one use; a spent pip returns on a completed
-      rest, unless the rest happened inside the Miasma (R p27). --}}
+      rest, unless the rest happened inside the Miasma (R p27).
+
+      Advancement sits at the TOP rather than the foot of the list: XP
+      available and the cap on uses per expertise are what you consult BEFORE
+      spending, and 30 expertises is far enough to scroll that a footer may as
+      well not exist. --}}
 <section class="tab crow-expertises {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
+
+  <header class="advancement">
+    <div class="adv-stat xp" data-tooltip="{{localize 'CROWS.AvailableXPHint'}}">
+      <span class="adv-value">{{system.xp.available}}</span>
+      <span class="adv-label">{{localize "CROWS.AvailableXP"}}</span>
+    </div>
+    <div class="adv-stat" data-tooltip="{{localize 'CROWS.MaxUsesHint'}}">
+      <span class="adv-value">{{system.advancement.maxUses}}</span>
+      <span class="adv-label">{{localize "CROWS.MaxUses"}}</span>
+    </div>
+    <div class="adv-stat" data-tooltip="{{localize 'CROWS.ExpertiseBonusesHint'}}">
+      <span class="adv-value">{{system.advancement.expertiseBonuses}}</span>
+      <span class="adv-label">{{localize "CROWS.ExpertiseBonuses"}}</span>
+    </div>
+    <div class="adv-stat" data-tooltip="{{localize 'CROWS.CharacteristicBonusesHint'}}">
+      <span class="adv-value">{{system.advancement.characteristicBonuses}}</span>
+      <span class="adv-label">{{localize "CROWS.CharacteristicBonuses"}}</span>
+    </div>
+  </header>
 
   <p class="tab-hint">{{localize "CROWS.ExpertiseHint"}}</p>
 
@@ -16,18 +40,4 @@
   {{else}}
     <p class="empty">{{localize "CROWS.NoExpertises"}}</p>
   {{/each}}
-
-  <footer class="advancement">
-    <h3>{{localize "CROWS.Advancement"}}</h3>
-    <dl>
-      <dt>{{localize "CROWS.ExpertiseBonuses"}}</dt>
-      <dd>{{system.advancement.expertiseBonuses}}</dd>
-      <dt>{{localize "CROWS.CharacteristicBonuses"}}</dt>
-      <dd>{{system.advancement.characteristicBonuses}}</dd>
-      <dt>{{localize "CROWS.MaxUses"}}</dt>
-      <dd>{{system.advancement.maxUses}}</dd>
-      <dt>{{localize "CROWS.AvailableXP"}}</dt>
-      <dd>{{system.xp.available}}</dd>
-    </dl>
-  </footer>
 </section>

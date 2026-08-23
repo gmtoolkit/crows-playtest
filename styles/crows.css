@@ -645,11 +645,24 @@
   gap: 2px;
 }
 
+/* Pips are buttons now, so the Foundry button chrome has to come off. */
 .crows .exp-pip {
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
+  flex: 0 0 auto;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  border: none;
   border-radius: 2px;
   background: var(--crows-gold);
+  cursor: pointer;
+  transition: transform 90ms ease, background 120ms ease;
+}
+
+.crows .exp-pip:hover {
+  transform: scale(1.25);
+  background: var(--crows-gold-bright, #e8c46a);
 }
 
 .crows .exp-pip.spent {
@@ -657,30 +670,83 @@
   border: 1px solid var(--crows-edge);
 }
 
-.crows .exp-uses,
-.crows .exp-spent {
-  width: 2.6rem;
+.crows .exp-pip.spent:hover {
+  background: rgba(212, 175, 90, 0.35);
+}
+
+/* "left / trained" — one reading instead of two unlabelled boxes. */
+.crows .exp-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
+  font-size: 0.72rem;
+  color: var(--crows-muted);
+  white-space: nowrap;
+}
+
+.crows .exp-remaining {
+  color: var(--crows-gold);
+  font-weight: 600;
+  min-width: 0.8rem;
+  text-align: right;
+}
+
+.crows .exp-uses {
+  width: 2.1rem;
   text-align: center;
   padding: 0.05rem;
   font-size: 0.7rem;
+  min-height: 0;
+  height: auto;
 }
 
-.crows .advancement dl {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 0.15rem 0.7rem;
-  font-size: 0.75rem;
-  margin: 0;
+/**
+ * Advancement, as a strip at the top of the tab.
+ *
+ * XP available and the cap on uses are what you check BEFORE spending, so
+ * they cannot sit under thirty expertises' worth of scroll.
+ */
+.crows .advancement {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
 }
 
-.crows .advancement dt {
-  color: var(--crows-muted);
+.crows .advancement .adv-stat {
+  flex: 1 1 8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  padding: 0.3rem 0.4rem;
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
 }
 
-.crows .advancement dd {
-  margin: 0;
+.crows .advancement .adv-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.1;
   color: var(--crows-gold);
-  font-weight: 600;
+}
+
+.crows .advancement .adv-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--crows-muted);
+  text-align: center;
+}
+
+/* XP is the one you come to this tab to spend. */
+.crows .advancement .adv-stat.xp {
+  border-color: var(--crows-gold);
+}
+
+.crows .advancement .adv-stat.xp .adv-value {
+  font-size: 1.3rem;
 }
 
 /* -------------------------------------------- */
@@ -1691,19 +1757,32 @@
 }
 
 /**
- * The blood running out of the header.
+ * The blood running off the tab bar.
  *
- * Droplets of irregular size and spacing, so it reads as run rather than as a
- * pattern. Opacity and length both scale with --crows-blood; at 0 wounds the
- * whole thing is invisible and costs nothing.
+ * This is NOT decoration: length and opacity both scale with --crows-blood,
+ * the fraction of wound slots actually filled, so a healthy crow's sheet is
+ * merely dark and a nearly-dead one is visibly bleeding.
+ *
+ * It hangs from the TAB BAR rather than the header. Under the header it fell
+ * into the few pixels between the action buttons and the tabs, where a reader
+ * takes it for a divider artefact; below the tabs it has open content to run
+ * into and reads as what it is.
+ *
+ * Droplets are irregular in width, length and spacing so it looks like a run
+ * rather than a repeating pattern.
  */
-.crows .crow-header::after {
+.crows.crow > .window-content > nav.sheet-tabs {
+  position: relative;
+  overflow: visible;
+}
+
+.crows.crow > .window-content > nav.sheet-tabs::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
-  height: calc(5px + var(--crows-blood, 0) * 30px);
+  top: 100%;
+  height: calc(4px + var(--crows-blood, 0) * 46px);
   pointer-events: none;
   z-index: 3;
   /**
@@ -1712,22 +1791,31 @@
    * (blood 0) still shows nothing at all.
    */
   opacity: calc(var(--crows-blood, 0) * 1.9);
-  transition: height 400ms ease, opacity 400ms ease;
+  /**
+   * NO transition here, deliberately.
+   *
+   * Both height and opacity are calc()s over --crows-blood, and Chrome
+   * transitions those against the STALE variable value: the drip settles on
+   * the previous wound count and stays there until some other style change
+   * kicks it. Verified in-world — healing to 0 wounds left a 22.4px drip,
+   * then going to 7 wounds showed 4px. It was showing the wound count from
+   * one update ago the whole time.
+   */
   background:
-    radial-gradient(3px 11px at 6% 0%, #7d1414 65%, transparent 68%),
-    radial-gradient(2px 6px at 11% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(4px 16px at 19% 0%, #6e1010 65%, transparent 68%),
-    radial-gradient(2px 8px at 27% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(3px 13px at 34% 0%, #7d1414 65%, transparent 68%),
-    radial-gradient(2px 5px at 43% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(4px 18px at 51% 0%, #6e1010 65%, transparent 68%),
-    radial-gradient(2px 7px at 58% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(3px 12px at 67% 0%, #7d1414 65%, transparent 68%),
-    radial-gradient(2px 6px at 74% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(4px 15px at 82% 0%, #6e1010 65%, transparent 68%),
-    radial-gradient(2px 9px at 89% 0%, #8f1a1a 65%, transparent 68%),
-    radial-gradient(3px 10px at 95% 0%, #7d1414 65%, transparent 68%),
-    linear-gradient(180deg, rgba(125, 20, 20, 0.85) 0 2px, transparent 2px);
+    radial-gradient(6px 17px at 6% 0%, #7d1414 70%, transparent 73%),
+    radial-gradient(4px 9px at 12% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(8px 26px at 19% 0%, #6e1010 70%, transparent 73%),
+    radial-gradient(5px 12px at 28% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(7px 21px at 35% 0%, #7d1414 70%, transparent 73%),
+    radial-gradient(4px 8px at 44% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(9px 30px at 51% 0%, #6e1010 70%, transparent 73%),
+    radial-gradient(5px 11px at 59% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(7px 19px at 67% 0%, #7d1414 70%, transparent 73%),
+    radial-gradient(4px 10px at 75% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(8px 24px at 82% 0%, #6e1010 70%, transparent 73%),
+    radial-gradient(5px 14px at 90% 0%, #8f1a1a 70%, transparent 73%),
+    radial-gradient(6px 16px at 96% 0%, #7d1414 70%, transparent 73%),
+    linear-gradient(180deg, rgba(125, 20, 20, 0.9) 0 4px, transparent 4px);
 }
 
 /* Near death the whole page takes a red cast and the name goes with it. */
@@ -1782,33 +1870,22 @@
   gap: 0.2rem 0.4rem;
 }
 
+/**
+ * Name, pips, count — one line. The pips absorbed the "spent" field, so the
+ * row no longer needs a second line to hold two number boxes.
+ */
 .crows .expertise-row {
-  grid-template-columns: 1fr auto;
-  grid-template-areas: "name pips" "inputs inputs";
-  row-gap: 0.15rem;
-}
-
-.crows .expertise-row .exp-name {
-  grid-area: name;
-}
-
-.crows .expertise-row .exp-pips {
-  grid-area: pips;
-}
-
-.crows .expertise-row .exp-uses,
-.crows .expertise-row .exp-spent {
-  width: 100%;
-}
-
-/* Editable mode needs the two number fields on their own row. */
-.crows .expertise-row:has(.exp-uses) {
   grid-template-columns: 1fr auto auto;
-  grid-template-areas: "name pips pips" "inputs inputs inputs";
+  align-items: center;
+  column-gap: 0.35rem;
 }
 
-.crows .expertise-row .exp-count {
-  grid-area: pips;
+/* Pips wrap rather than shove the count off the row on a narrow column. */
+.crows .expertise-row .exp-pips {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  max-width: 5.5rem;
+  row-gap: 2px;
 }
 
 /* -------------------------------------------- */

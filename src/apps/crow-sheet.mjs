@@ -28,6 +28,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       toggleWound: CrowSheet.#onToggleWound,
       drawFromPack: CrowSheet.#onDrawFromPack,
       rollUsageDice: CrowSheet.#onRollUsageDice,
+      toggleExpertiseUse: CrowSheet.#onToggleExpertiseUse,
       wearArmor: CrowSheet.#onWearArmor,
       repairArmor: CrowSheet.#onRepairArmor,
       rest: CrowSheet.#onRest,
@@ -229,6 +230,21 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
         overloaded: items.length > 1
       };
     });
+  }
+
+  /**
+   * Spend or restore one expertise use by clicking its pip.
+   *
+   * Pips fill left to right, so clicking pip i means "spend through i" when it
+   * is still full and "give i back" when it is already spent — one control for
+   * both directions, which is what let the row drop to a single number.
+   */
+  static async #onToggleExpertiseUse(event, target) {
+    const key = target.dataset.expertise;
+    const index = Number(target.dataset.index);
+    const entry = this.actor.system.expertises[key];
+    const spent = index < entry.spent ? index : index + 1;
+    return this.actor.update({ [`system.expertises.${key}.spent`]: spent });
   }
 
   #prepareExpertises() {

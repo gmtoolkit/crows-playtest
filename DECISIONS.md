@@ -1,5 +1,44 @@
 # Decisions — crows-playtest
 
+## 2026-08-23 — The sheet's state readouts, and a drip that was a whole update behind
+
+**Decision:** Three changes to how the crow sheet reports state.
+
+1. An expertise row shows one reading, "left / trained", and its pips became
+   the spend control: click a full pip to spend it, click a spent one to take
+   it back. The separate `spent` number field is gone.
+2. Advancement moved from the foot of the Expertises tab to a strip at its
+   top, with XP available given the most weight.
+3. The wound drip hangs off the tab bar instead of the header, with thicker
+   droplets, and **no CSS transition**.
+
+**Why:** Cliff could not tell what the two unlabelled number boxes on an
+expertise row were, could not find advancement without scrolling past thirty
+expertises, and read the drip as decoration.
+
+The drip being unreadable turned out to be a real bug, not a styling
+complaint. Both its height and opacity are `calc()`s over `--crows-blood`, and
+Chrome transitions custom-property-derived values against the STALE variable:
+the drip settled on the PREVIOUS wound count and stayed there. Measured
+in-world — healing to 0 wounds left the 4-wound drip at 22.4px; then going to
+7 wounds showed the healed 4px. It had never once shown the current state.
+
+**Alternatives:** Labelling the two number boxes was the smaller change, but
+`spent` is a play-time counter and `uses` an advancement stat; they only sat
+side by side because both were numbers. Folding `spent` into the pips removed
+the question instead of answering it, and dropped the row to one line, which
+is what let the columns stay tight.
+
+Keeping the transition and forcing a reflow was possible, but the drip is
+redrawn on a sheet re-render anyway, so there is no animation worth the
+fragility.
+
+**Consequences:** The drip now depends on `.window-content > nav.sheet-tabs`,
+Foundry's generic tab navigation — if that markup changes, the selector goes
+with it. Note it carries no `data-group` attribute despite the tabs being a
+named group, which is why the first selector missed. Any future `calc()` over
+a live custom property on this sheet must stay untransitioned.
+
 Newest first.
 
 ## 2026-08-22 — Standalone system, not a module on an existing one
