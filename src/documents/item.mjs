@@ -47,9 +47,30 @@ export class CrowsItem extends Item {
   }
 
   async #useGear() {
+    const ud = this.system.ud;
+
+    /**
+     * Say when the thing is spent.
+     *
+     * A torch with 0 UD is "useless" by its own card, so the light derivation
+     * correctly refuses to light the token — but using it still posted a chat
+     * card and did nothing else, which reads as the button being broken rather
+     * than the torch being dead. Spellbooks already warned; gear did not.
+     *
+     * Only for pools that CANNOT come back: a lantern at 0 UD is refuelled with
+     * oil and is not useless, so it must not be reported as such.
+     */
+    if (ud?.max > 0 && ud.value <= 0 && ud.restore === "useless") {
+      ui.notifications.warn(game.i18n.format("CROWS.ItemSpent", { name: this.name }));
+    } else if (ud?.max > 0 && ud.value <= 0 && ud.restore === "refuel") {
+      ui.notifications.warn(
+        game.i18n.format("CROWS.ItemNeedsRefuel", { name: this.name, fuel: ud.refuelWith || game.i18n.localize("CROWS.Fuel") })
+      );
+    }
+
     await this.toChat();
     // An "activate" pool is rolled on use, after the item's effect resolves.
-    if (this.system.ud?.trigger === "activate" && this.system.ud.value > 0) {
+    if (ud?.trigger === "activate" && ud.value > 0) {
       await this.actor.rollItemUsageDice(this, { reason: "activate" });
     }
     return this;

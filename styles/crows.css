@@ -75,13 +75,28 @@
   outline: none;
 }
 
+/**
+ * NOT `.crows button` — the exclusion is load-bearing.
+ *
+ * Foundry puts the icon class on the BUTTON ITSELF for window chrome:
+ * `<button class="header-control icon fa-solid fa-xmark">` with the glyph in
+ * `::before`. Styling every button with `font-family: inherit` therefore
+ * overrode Font Awesome on the window header, and the close, copy-UUID and
+ * controls buttons rendered as three tofu boxes. Verified: the close button
+ * computed `font-family: Signika` with the correct glyph and weight behind it.
+ *
+ * Our own buttons keep their icons in a child `<i>`, which this never touched.
+ */
+.crows button:not([class*="fa-"]) {
+  font-family: inherit;
+}
+
 .crows button {
   background: var(--crows-stone-2);
   border: 1px solid var(--crows-edge);
   border-radius: var(--crows-radius);
   color: var(--crows-bone);
   cursor: pointer;
-  font-family: inherit;
   transition: border-color 120ms, background 120ms;
   /**
    * Foundry v14 gives every button a fixed height. Several of ours are
@@ -91,6 +106,25 @@
    */
   height: auto;
   min-height: 0;
+}
+
+/**
+ * The window frame is Foundry's, not ours.
+ *
+ * `.crows` sits on the application root, so every rule above also hit the title
+ * bar's controls and dressed them in our stone-and-gold button chrome. They are
+ * part of the window, not part of the sheet, and should look like every other
+ * window in the world.
+ */
+.crows .window-header button.header-control {
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+.crows .window-header button.header-control:hover {
+  background: none;
+  border: none;
 }
 
 .crows button:hover {
