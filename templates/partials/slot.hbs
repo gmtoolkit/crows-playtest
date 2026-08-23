@@ -1,0 +1,35 @@
+{{!-- One grid cell. A multi-slot item spans several columns but is still ONE
+      cell; its wound checkboxes are laid along it, one per slot covered, which
+      is how the printed sheet behaves when a card lies across the backpack. --}}
+<div class="crows-slot {{#if cell.item}}filled{{else}}empty{{/if}}"
+     style="grid-column: span {{cell.span}};"
+     data-container="{{cell.container}}"
+     data-index="{{cell.index}}"
+     {{#if cell.item}}data-item-id="{{cell.item.id}}"{{/if}}>
+
+  <div class="slot-labels">
+    {{#each cell.wounds}}
+      <span class="slot-number">{{this.number}}</span>
+    {{/each}}
+  </div>
+
+  {{#if cell.item}}
+    {{> "systems/crows/templates/partials/card-face.hbs" item=cell.item container=cell.container}}
+  {{else}}
+    <div class="slot-placeholder"><i class="fa-regular fa-square-dashed"></i></div>
+  {{/if}}
+
+  {{#if cell.wounds.0.woundable}}
+    <div class="slot-wounds">
+      {{#each cell.wounds}}
+        <button type="button"
+                class="wound-box {{#if this.wounded}}wounded kind-{{this.kind}}{{/if}}"
+                data-action="toggleWound"
+                data-index="{{this.index}}"
+                data-tooltip="{{#if this.wounded}}{{localize 'CROWS.WoundedSlot'}}{{else}}{{localize 'CROWS.MarkWound'}}{{/if}}">
+          {{#if this.wounded}}<i class="fa-solid fa-droplet"></i>{{/if}}
+        </button>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

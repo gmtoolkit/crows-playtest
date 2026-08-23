@@ -1,0 +1,103 @@
+import { CROWS } from "../config.mjs";
+
+/** World and client settings. */
+export function registerSettings() {
+  const id = CROWS.id;
+
+  /**
+   * The wording of the wound speed penalty (R p12) genuinely parses two ways —
+   * see DECISIONS.md. Default to the strict reading, which is the only one that
+   * does not floor a fresh crow at speed 0 the moment they pack their bag.
+   */
+  game.settings.register(id, "woundSpeedRule", {
+    name: "CROWS.Settings.WoundSpeedRule",
+    hint: "CROWS.Settings.WoundSpeedRuleHint",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "both",
+    choices: {
+      both: "CROWS.Settings.WoundSpeedBoth",
+      either: "CROWS.Settings.WoundSpeedEither"
+    },
+    onChange: () => {
+      // Speed is derived from this, so every crow needs re-preparing.
+      for (const actor of game.actors) if (actor.type === "crow") actor.prepareData();
+      Object.values(ui.windows ?? {}).forEach((w) => w.render?.(false));
+    }
+  });
+
+  /** Dungeon turn length. The rules offer 20, 30 (default), or 60 minutes. */
+  game.settings.register(id, "dungeonTurnMinutes", {
+    name: "CROWS.Settings.DungeonTurnMinutes",
+    hint: "CROWS.Settings.DungeonTurnMinutesHint",
+    scope: "world",
+    config: true,
+    type: Number,
+    default: CROWS.dungeonTurn.defaultMinutes,
+    range: { min: 5, max: 120, step: 5 }
+  });
+
+  /**
+   * Persistent dungeon-turn state. Stored as a world setting rather than
+   * broadcast over a socket so late-joining clients see the correct clock and
+   * a browser refresh does not lose the turn.
+   */
+  game.settings.register(id, "dungeonTurnState", {
+    scope: "world",
+    config: false,
+    type: Object,
+    default: {
+      active: false,
+      paused: false,
+      startedAt: 0,
+      pausedAt: 0,
+      turn: 0,
+      en: CROWS.encounter.dungeonDefaultEN,
+      label: ""
+    }
+  });
+
+  /** Show the dungeon-turn clock to players, not just the Ref. */
+  game.settings.register(id, "showTurnClockToPlayers", {
+    name: "CROWS.Settings.ShowClock",
+    hint: "CROWS.Settings.ShowClockHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
+  });
+
+  /**
+   * Whether ending a dungeon turn rolls the encounter check automatically.
+   * Some Refs prefer to roll it themselves, in the open, at the table.
+   */
+  game.settings.register(id, "autoEncounterCheck", {
+    name: "CROWS.Settings.AutoEncounterCheck",
+    hint: "CROWS.Settings.AutoEncounterCheckHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
+  });
+
+  /** Whether ending a dungeon turn rolls every DT-triggered usage-dice pool. */
+  game.settings.register(id, "autoUsageDice", {
+    name: "CROWS.Settings.AutoUsageDice",
+    hint: "CROWS.Settings.AutoUsageDiceHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
+  });
+
+  /** Play a sound when a dungeon turn ends. Torches going out should sting. */
+  game.settings.register(id, "turnEndSound", {
+    name: "CROWS.Settings.TurnEndSound",
+    hint: "CROWS.Settings.TurnEndSoundHint",
+    scope: "client",
+    config: true,
+    type: Boolean,
+    default: true
+  });
+}

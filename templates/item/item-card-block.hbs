@@ -1,0 +1,124 @@
+{{!-- The block every inventory card prints: slots, stack, usage dice, price,
+      and the crafting requirements line ("Blacksmithing 1 | 1 iron bar | 10"). --}}
+<section class="tab item-card-block" data-tab="card" data-group="sheet">
+
+  <fieldset>
+    <legend>{{localize "CROWS.Inventory"}}</legend>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.SlotsUsed"}}</label>
+      <input type="number" name="system.slots" value="{{system.slots}}" min="0">
+      <p class="hint">{{localize "CROWS.SlotsHint"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.StackSize"}}</label>
+      <input type="number" name="system.stack" value="{{system.stack}}" min="1">
+      <p class="hint">{{localize "CROWS.StackHint"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.Quantity"}}</label>
+      <input type="number" name="system.quantity" value="{{system.quantity}}" min="0">
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" min="0"> gc
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.XPValue"}}</label>
+      <input type="number" name="system.xpValue" value="{{system.xpValue}}" min="0"
+             placeholder="{{localize 'CROWS.UniqueOnly'}}">
+      <p class="hint">{{localize "CROWS.XPValueHint"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.Magic"}}</label>
+      <input type="checkbox" name="system.magic" {{checked system.magic}}>
+    </div>
+
+    {{#if system.magic}}
+      <div class="form-group">
+        <label>{{localize "CROWS.Identified"}}</label>
+        <input type="checkbox" name="system.identified" {{checked system.identified}}>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.RequiresMagicSlot"}}</label>
+        <select name="system.magicSlot">
+          <option value="">&mdash;</option>
+          {{selectOptions choices.magicSlots selected=system.magicSlot localize=true}}
+        </select>
+      </div>
+    {{/if}}
+  </fieldset>
+
+  <fieldset>
+    <legend>
+      {{localize "CROWS.UsageDice"}}
+      <button type="button" class="icon" data-action="restoreUD" data-tooltip="{{localize 'CROWS.RestoreUD'}}">
+        <i class="fa-solid fa-rotate-left"></i>
+      </button>
+    </legend>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.Current"}}</label>
+      <input type="number" name="system.ud.value" value="{{system.ud.value}}" min="0">
+      <span class="sep">/</span>
+      <input type="number" name="system.ud.max" value="{{system.ud.max}}" min="0">
+      <span class="ud-preview">{{{crowsUsagePips system.ud.value system.ud.max}}}</span>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.UDTrigger"}}</label>
+      <select name="system.ud.trigger">{{selectOptions choices.udTriggers selected=system.ud.trigger localize=true}}</select>
+      <p class="hint">{{localize "CROWS.UDTriggerHint"}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.UDRestore"}}</label>
+      <select name="system.ud.restore">{{selectOptions choices.udRestore selected=system.ud.restore localize=true}}</select>
+    </div>
+
+    {{#if (crowsEq system.ud.restore "refuel")}}
+      <div class="form-group">
+        <label>{{localize "CROWS.RefuelWith"}}</label>
+        <input type="text" name="system.ud.refuelWith" value="{{system.ud.refuelWith}}" placeholder="1 oil flask">
+      </div>
+    {{/if}}
+  </fieldset>
+
+  <fieldset>
+    <legend>{{localize "CROWS.Crafting"}}</legend>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.CraftExpertise"}}</label>
+      <select name="system.crafting.expertise">
+        <option value="">&mdash;</option>
+        {{selectOptions choices.expertises selected=system.crafting.expertise localize=true labelAttr="label"}}
+      </select>
+      <input type="number" name="system.crafting.uses" value="{{system.crafting.uses}}" min="0"
+             data-tooltip="{{localize 'CROWS.CraftUsesHint'}}">
+    </div>
+
+    <div class="form-group full">
+      <label>{{localize "CROWS.Materials"}}</label>
+      <input type="text" name="system.crafting.materials" value="{{system.crafting.materials}}" placeholder="1 iron bar">
+    </div>
+
+    <div class="form-group">
+      <label>{{localize "CROWS.CraftingGoal"}}</label>
+      <input type="number" name="system.crafting.goal" value="{{system.crafting.goal}}" min="0">
+      <p class="hint">{{localize "CROWS.CraftingGoalHint"}}</p>
+    </div>
+
+    {{#if system.crafting.goal}}
+      <div class="form-group">
+        <label>{{localize "CROWS.CraftingProgress"}}</label>
+        <input type="number" name="system.crafting.progress" value="{{system.crafting.progress}}" min="0">
+        <span class="of">/ {{system.crafting.goal}}</span>
+      </div>
+    {{/if}}
+  </fieldset>
+</section>

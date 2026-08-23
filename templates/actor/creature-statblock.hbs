@@ -1,0 +1,71 @@
+{{!-- The attack table and named features, in stat-block order. --}}
+<section class="tab creature-statblock" data-tab="statblock" data-group="sheet">
+
+  <div class="block attacks">
+    <header>
+      <h3>{{localize "CROWS.Attacks"}}</h3>
+      <button type="button" class="icon" data-action="addAttack"><i class="fa-solid fa-plus"></i></button>
+    </header>
+
+    {{#if attacks.length}}
+      <ul class="attack-table">
+        <li class="attack-head">
+          <span>{{localize "CROWS.Attack"}}</span>
+          <span>{{localize "CROWS.Range"}}</span>
+          <span>12&ndash;16</span>
+          <span>17+</span>
+          <span></span>
+        </li>
+        {{#each attacks}}
+          {{> "systems/crows/templates/partials/attack-row.hbs" item=this}}
+        {{/each}}
+      </ul>
+    {{else}}
+      <p class="empty">{{localize "CROWS.NoAttacks"}}</p>
+    {{/if}}
+  </div>
+
+  <div class="block features">
+    <header>
+      <h3>{{localize "CROWS.Features"}}</h3>
+      <button type="button" class="icon" data-action="addFeature"><i class="fa-solid fa-plus"></i></button>
+    </header>
+
+    {{#each features}}
+      <div class="feature" data-item-id="{{this.id}}">
+        <header>
+          <span class="feature-name">{{this.name}}</span>
+          {{#if this.system.uses.max}}
+            <span class="feature-uses">{{this.system.uses.value}}/{{this.system.uses.max}} {{localize "CROWS.Per"}} {{this.system.uses.per}}</span>
+          {{/if}}
+          <span class="feature-controls">
+            <button type="button" class="icon" data-action="editItem"><i class="fa-solid fa-pen"></i></button>
+            <button type="button" class="icon danger" data-action="deleteItem"><i class="fa-solid fa-trash"></i></button>
+          </span>
+        </header>
+        <div class="feature-desc">{{{this.system.description}}}</div>
+      </div>
+    {{else}}
+      <p class="empty">{{localize "CROWS.NoFeatures"}}</p>
+    {{/each}}
+  </div>
+
+  {{#if gear.length}}
+    <div class="block gear">
+      <h3>{{localize "CROWS.Equipment"}}</h3>
+      <ul class="gear-list">
+        {{#each gear}}
+          <li data-item-id="{{this.id}}">
+            <button type="button" class="gear-name" data-action="useItem">
+              <img src="{{this.img}}" alt=""> {{this.name}}
+            </button>
+            <span class="gear-controls">
+              <button type="button" class="icon" data-action="editItem"><i class="fa-solid fa-pen"></i></button>
+              <button type="button" class="icon danger" data-action="deleteItem"><i class="fa-solid fa-trash"></i></button>
+            </span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+</section>

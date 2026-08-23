@@ -1,0 +1,46 @@
+{{!-- The clock the whole table watches. A dungeon turn is thirty minutes of
+      REAL time; the pressure is the mechanic. --}}
+<div class="dungeon-turn {{#if urgent}}urgent{{/if}} {{#if state.paused}}paused{{/if}}">
+
+  {{#if state.active}}
+    <div class="dt-turn">
+      <span class="dt-label">{{localize "CROWS.Turn"}}</span>
+      <span class="dt-number">{{state.turn}}</span>
+      {{#if state.label}}<span class="dt-place">{{state.label}}</span>{{/if}}
+    </div>
+
+    <div class="dt-clock">{{remainingText}}</div>
+    <div class="dt-bar"><div class="dt-fill" style="width: {{progress}}%;"></div></div>
+
+    {{#if greed}}
+      <div class="dt-greed" data-tooltip="{{localize 'CROWS.GreedHint'}}">
+        <i class="fa-solid fa-coins"></i> {{localize "CROWS.GreedBonus"}} +{{greed}}%
+      </div>
+    {{/if}}
+
+    <div class="dt-en" data-tooltip="{{localize 'CROWS.ENHint'}}">
+      <span>{{localize "CROWS.EncounterNumber"}}</span>
+      {{#if isGM}}<button type="button" class="icon" data-action="enDown"><i class="fa-solid fa-minus"></i></button>{{/if}}
+      <strong>{{state.en}}+</strong>
+      {{#if isGM}}<button type="button" class="icon" data-action="enUp"><i class="fa-solid fa-plus"></i></button>{{/if}}
+    </div>
+
+    {{#if isGM}}
+      <div class="dt-controls">
+        <button type="button" data-action="pause">
+          <i class="fa-solid {{#if state.paused}}fa-play{{else}}fa-pause{{/if}}"></i>
+          {{#if state.paused}}{{localize "CROWS.Resume"}}{{else}}{{localize "CROWS.Pause"}}{{/if}}
+        </button>
+        <button type="button" data-action="endTurn"><i class="fa-solid fa-forward"></i> {{localize "CROWS.EndTurn"}}</button>
+        <button type="button" data-action="encounter"><i class="fa-solid fa-dice-d10"></i> {{localize "CROWS.Check"}}</button>
+        <button type="button" class="danger" data-action="stop"><i class="fa-solid fa-stop"></i> {{localize "CROWS.Stop"}}</button>
+      </div>
+    {{/if}}
+
+  {{else}}
+    <p class="dt-idle">{{localize "CROWS.NoDungeonTurn"}}</p>
+    {{#if isGM}}
+      <button type="button" data-action="start"><i class="fa-solid fa-play"></i> {{localize "CROWS.StartDungeonTurn"}}</button>
+    {{/if}}
+  {{/if}}
+</div>

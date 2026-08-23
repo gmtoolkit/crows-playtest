@@ -1,0 +1,115 @@
+{{!-- Crow creation, following the book's four steps (C p1). --}}
+<div class="crow-builder">
+
+  {{#if (crowsEq state.step "background")}}
+    <section class="step">
+      <h3>{{localize "CROWS.Step1"}}</h3>
+
+      {{#unless hasBackgrounds}}
+        <p class="empty">{{localize "CROWS.NoBackgrounds"}}</p>
+      {{/unless}}
+
+      <div class="builder-actions">
+        <button type="button" data-action="rollBackground">
+          <i class="fa-solid fa-dice"></i> {{localize "CROWS.RollBackground"}}
+        </button>
+        <span class="hint">{{localize "CROWS.OrPickHint"}}</span>
+      </div>
+
+      <ul class="background-list">
+        {{#each backgrounds}}
+          <li>
+            <button type="button" data-action="pickBackground" data-background-id="{{this.id}}">
+              <span class="bg-roll">{{this.system.roll.first}}&ndash;{{this.system.roll.second}}</span>
+              <span class="bg-name">{{this.name}}</span>
+              <span class="bg-stamina">{{localize "CROWS.Stamina"}} {{this.system.stamina}}</span>
+            </button>
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+
+  {{else}}
+    <section class="step">
+      <header class="chosen-head">
+        <h3>{{chosen.doc.name}}</h3>
+        <button type="button" data-action="back"><i class="fa-solid fa-arrow-left"></i> {{localize "CROWS.Back"}}</button>
+      </header>
+
+      <div class="chosen-desc">{{{chosen.doc.system.description}}}</div>
+
+      <div class="chosen-grid">
+        <div class="panel">
+          <h4>{{localize "CROWS.CharacteristicAt2"}}</h4>
+          {{#if chosen.at2Fixed}}
+            <p class="fixed">{{#each chosen.at2Options}}{{this.label}}{{/each}}</p>
+          {{else}}
+            <div class="choice-row">
+              {{#each chosen.at2Options}}
+                <button type="button" data-action="chooseAt2" data-characteristic="{{this.key}}"
+                        class="{{#if (crowsEq this.key ../state.at2)}}selected{{/if}}">{{this.label}}</button>
+              {{/each}}
+            </div>
+          {{/if}}
+
+          <h4>{{localize "CROWS.RemainingSpread"}}</h4>
+          <div class="choice-row">
+            {{#each spreads}}
+              <button type="button" data-action="chooseSpread" data-spread-index="{{this.index}}"
+                      class="{{#if this.selected}}selected{{/if}}">{{this.label}}</button>
+            {{/each}}
+          </div>
+
+          {{#if remaining}}
+            <p class="hint">{{localize "CROWS.WhoGetsHigher"}}</p>
+            <div class="choice-row">
+              {{#each remaining}}
+                <button type="button" data-action="chooseSpread" data-first="{{this.key}}"
+                        class="{{#if (crowsEq this.key ../state.spreadOrder)}}selected{{/if}}">{{this.label}}</button>
+              {{/each}}
+            </div>
+          {{/if}}
+
+          <div class="preview">
+            <span><strong>A</strong> {{crowsSigned preview.agility}}</span>
+            <span><strong>M</strong> {{crowsSigned preview.mind}}</span>
+            <span><strong>S</strong> {{crowsSigned preview.strength}}</span>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>{{localize "CROWS.YouGet"}}</h4>
+          <dl class="grants">
+            <dt>{{localize "CROWS.Stamina"}}</dt><dd>{{chosen.stamina}}</dd>
+            <dt>{{localize "CROWS.StartingTrait"}}</dt><dd>{{chosen.trait}}</dd>
+            {{#if chosen.bonusGold}}<dt>{{localize "CROWS.BonusGold"}}</dt><dd>{{chosen.bonusGold}} gc</dd>{{/if}}
+          </dl>
+
+          <h4>{{localize "CROWS.Expertises"}}</h4>
+          <ul class="grant-list">
+            {{#each chosen.expertises}}
+              <li>{{this.label}}{{#if (crowsGt this.uses 1)}} <span class="uses">({{this.uses}})</span>{{/if}}</li>
+            {{/each}}
+          </ul>
+
+          <h4>{{localize "CROWS.Equipment"}}</h4>
+          <ul class="grant-list">
+            {{#each chosen.equipment}}
+              <li>{{this.name}}{{#if (crowsGt this.quantity 1)}} &times;{{this.quantity}}{{/if}}</li>
+            {{/each}}
+            {{#each chosen.spellbooks}}
+              <li class="spellbook"><i class="fa-solid fa-book"></i> {{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+      <footer class="builder-footer">
+        <p class="hint">{{localize "CROWS.BuilderFooterHint"}}</p>
+        <button type="button" class="apply" data-action="apply">
+          <i class="fa-solid fa-check"></i> {{localize "CROWS.ApplyBackground"}}
+        </button>
+      </footer>
+    </section>
+  {{/if}}
+</div>

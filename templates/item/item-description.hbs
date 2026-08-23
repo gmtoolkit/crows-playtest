@@ -1,0 +1,29 @@
+<section class="tab item-description" data-tab="description" data-group="sheet">
+  <div class="prose">{{{enrichedDescription}}}</div>
+  {{#if editable}}
+    <textarea name="system.description" rows="12">{{system.description}}</textarea>
+  {{/if}}
+
+  {{#if system.enchantments}}
+    <div class="list-editor">
+      <header>
+        <h4>{{localize "CROWS.Enchantments"}}</h4>
+        <button type="button" class="icon" data-action="addEnchantment"><i class="fa-solid fa-plus"></i></button>
+      </header>
+      {{#each system.enchantments}}
+        <div class="list-row column">
+          <input type="text" name="system.enchantments.{{@index}}.name" value="{{this.name}}" placeholder="{{localize 'CROWS.Name'}}">
+          <textarea name="system.enchantments.{{@index}}.description" rows="2">{{this.description}}</textarea>
+          <button type="button" class="icon danger" data-action="removeEnchantment" data-index="{{@index}}">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      {{/each}}
+    </div>
+  {{/if}}
+
+  <div class="form-group full">
+    <label>{{localize "CROWS.Source"}}</label>
+    <input type="text" name="system.source" value="{{system.source}}">
+  </div>
+</section>

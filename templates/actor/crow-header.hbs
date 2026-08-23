@@ -1,0 +1,89 @@
+{{!-- The stat block the Characters book tells you to scribble on paper.
+      Deliberately thin: the slot grid below is the real sheet. --}}
+<header class="crow-header">
+
+  <div class="identity">
+    <img class="portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
+    <div class="names">
+      <input class="crow-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'CROWS.Name'}}">
+      <div class="sub">
+        <input type="text" name="system.biography.background" value="{{system.biography.background}}"
+               placeholder="{{localize 'CROWS.Background'}}">
+        <input type="text" name="system.biography.feature" value="{{system.biography.feature}}"
+               placeholder="{{localize 'CROWS.Feature'}}">
+      </div>
+    </div>
+  </div>
+
+  <div class="characteristics">
+    {{#each characteristics}}
+      <button type="button" class="characteristic" data-action="rollCharacteristic" data-characteristic="{{this.key}}"
+              data-tooltip="{{localize 'CROWS.RollHint'}}">
+        <span class="abbr">{{this.abbr}}</span>
+        <span class="value">{{crowsSigned this.value}}</span>
+        <span class="label">{{this.label}}</span>
+      </button>
+    {{/each}}
+  </div>
+
+  <div class="vitals">
+    <div class="vital stamina">
+      <label>{{localize "CROWS.Stamina"}}</label>
+      <div class="pair">
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}">
+        <span class="sep">/</span>
+        <input type="number" name="system.stamina.max" value="{{system.stamina.max}}">
+      </div>
+    </div>
+
+    <div class="vital armor" data-tooltip="{{localize 'CROWS.ADHint'}}">
+      <label>{{localize "CROWS.ArmorDefense"}}</label>
+      <span class="derived">{{system.armor.value}}<span class="sep">/</span>{{system.armor.max}}</span>
+    </div>
+
+    <div class="vital speed" data-tooltip="{{localize 'CROWS.SpeedHint'}}">
+      <label>{{localize "CROWS.Speed"}}</label>
+      <span class="derived {{#if system.speedPenalty}}penalised{{/if}}">{{system.speed.value}}</span>
+      {{#if system.speedPenalty}}<span class="penalty">&minus;{{system.speedPenalty}}</span>{{/if}}
+    </div>
+
+    <div class="vital wounds {{#if system.dead}}dead{{/if}}">
+      <label>{{localize "CROWS.Wounds"}}</label>
+      <span class="derived">{{system.woundCount}}<span class="sep">/</span>{{CROWS.containers.backpack.size}}</span>
+    </div>
+  </div>
+
+  <div class="ledger">
+    <div class="field">
+      <label>{{localize "CROWS.TotalXP"}}</label>
+      <input type="number" name="system.xp.total" value="{{system.xp.total}}">
+    </div>
+    <div class="field">
+      <label>{{localize "CROWS.SpentXP"}}</label>
+      <input type="number" name="system.xp.spent" value="{{system.xp.spent}}">
+    </div>
+    <div class="field">
+      <label>{{localize "CROWS.Coin"}}</label>
+      <input type="number" name="system.coin" value="{{system.coin}}">
+    </div>
+    {{#if system.cruelty}}
+      <div class="field cruelty" data-tooltip="{{localize 'CROWS.CrueltyHint'}}">
+        <label>{{localize "CROWS.Cruelty"}}</label>
+        <input type="number" name="system.cruelty" value="{{system.cruelty}}">
+      </div>
+    {{/if}}
+  </div>
+
+  <nav class="header-actions">
+    <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "CROWS.Rest"}}</button>
+    <button type="button" data-action="openBuilder"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "CROWS.Builder"}}</button>
+    <button type="button" data-action="openTurnPanel"><i class="fa-solid fa-hourglass-half"></i> {{localize "CROWS.DungeonTurn"}}</button>
+  </nav>
+
+  {{#if system.dead}}
+    <div class="dead-banner">{{localize "CROWS.DeadBanner"}}</div>
+  {{/if}}
+  {{#if system.magicSlotOverload.length}}
+    <div class="warning-banner">{{localize "CROWS.MagicOverloadWarning"}}</div>
+  {{/if}}
+</header>

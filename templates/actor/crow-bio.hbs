@@ -1,0 +1,45 @@
+{{!-- Village, connections, Miasma state, and free notes. --}}
+<section class="tab crow-bio" data-tab="bio" data-group="sheet">
+
+  <div class="bio-fields">
+    <div class="field">
+      <label>{{localize "CROWS.Village"}}</label>
+      <input type="text" name="system.biography.village" value="{{system.biography.village}}">
+    </div>
+    <div class="field">
+      <label>{{localize "CROWS.Connection"}}</label>
+      <input type="text" name="system.biography.connection" value="{{system.biography.connection}}">
+    </div>
+    <div class="field">
+      <label>{{localize "CROWS.Cruelty"}}</label>
+      <input type="number" name="system.cruelty" value="{{system.cruelty}}" min="0"
+             data-tooltip="{{localize 'CROWS.CrueltyHint'}}">
+    </div>
+    <div class="field">
+      <label>{{localize "CROWS.PreparedTask"}}</label>
+      <input type="text" name="system.prepared.task" value="{{system.prepared.task}}"
+             data-tooltip="{{localize 'CROWS.PreparedHint'}}">
+    </div>
+  </div>
+
+  {{#if system.miasmaEffects.length}}
+    <div class="miasma-effects">
+      <h3>{{localize "CROWS.MiasmaEffects"}}</h3>
+      <ul>
+        {{#each system.miasmaEffects}}
+          <li>
+            <span class="roll">{{this.roll}}</span>
+            <span class="first">{{this.first}}</span>
+            <span class="second">{{this.second}}</span>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  <div class="notes">
+    <h3>{{localize "CROWS.Notes"}}</h3>
+    {{{enrichedNotes}}}
+    <textarea name="system.biography.notes" rows="10">{{system.biography.notes}}</textarea>
+  </div>
+</section>

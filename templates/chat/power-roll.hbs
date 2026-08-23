@@ -1,0 +1,73 @@
+{{!-- A resolved power roll. Leads with the TIER, because the tier is the
+      result — the total is just how you got there. --}}
+<div class="crows-chat power-roll tier-{{result.tier}} {{#if result.crit}}crit{{/if}} {{#if result.doom}}doom{{/if}}">
+
+  <header class="pr-head">
+    {{#if item}}<img src="{{item.img}}" alt="">{{/if}}
+    <div class="pr-titles">
+      <span class="pr-label">{{label}}</span>
+      {{#if characteristicLabel}}<span class="pr-char">{{characteristicLabel}}</span>{{/if}}
+    </div>
+  </header>
+
+  <div class="pr-result">
+    <div class="pr-tier">
+      {{#if result.crit}}
+        <span class="badge crit">{{localize "CROWS.Crit"}}</span>
+      {{else if result.doom}}
+        <span class="badge doom">{{localize "CROWS.Doom"}}</span>
+      {{/if}}
+      <span class="tier-name">{{localize (concat "CROWS.Tier" result.tier)}}</span>
+      {{#if expertiseApplied}}
+        <span class="badge expertise">{{localize "CROWS.ExpertiseApplied"}}</span>
+      {{/if}}
+    </div>
+
+    <div class="pr-total" data-tooltip="{{formula}}">
+      <span class="dice">{{#each faces}}<span class="d10">{{this}}</span>{{/each}}</span>
+      <span class="eq">=</span>
+      <span class="total">{{result.total}}</span>
+    </div>
+  </div>
+
+  {{#if result.tierShift}}
+    <p class="pr-note">
+      {{#if (crowsGt result.tierShift 0)}}{{localize "CROWS.DoubleEdgeApplied"}}{{else}}{{localize "CROWS.DoubleBaneApplied"}}{{/if}}
+    </p>
+  {{/if}}
+  {{#if result.modifier}}
+    <p class="pr-note">{{localize "CROWS.EdgeBaneModifier"}}: {{crowsSigned result.modifier}}</p>
+  {{/if}}
+
+  {{#if tierText}}
+    <div class="pr-outcome">{{{tierText}}}</div>
+  {{/if}}
+
+  {{#if item.system.note}}
+    <div class="pr-rider">{{{item.system.note}}}</div>
+  {{/if}}
+
+  <footer class="pr-actions">
+    {{#if canApplyExpertise}}
+      <button type="button" data-crows-action="applyExpertise">
+        <i class="fa-solid fa-hand-fist"></i>
+        {{localize "CROWS.ApplyExpertise"}}: {{expertiseLabel}} ({{expertiseRemaining}})
+      </button>
+    {{/if}}
+
+    {{#if tierText}}
+      <button type="button" data-crows-action="applyDamage"
+              data-amount="{{result.damage}}"
+              data-piercing="{{item.system.piercing}}">
+        <i class="fa-solid fa-droplet"></i> {{localize "CROWS.ApplyDamage"}}
+      </button>
+    {{/if}}
+  </footer>
+
+  {{#if result.doom}}
+    <p class="pr-warning">{{localize "CROWS.DoomHint"}}</p>
+  {{/if}}
+  {{#if result.crit}}
+    <p class="pr-warning good">{{localize "CROWS.CritHint"}}</p>
+  {{/if}}
+</div>

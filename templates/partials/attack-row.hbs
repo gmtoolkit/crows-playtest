@@ -1,0 +1,22 @@
+{{!-- A creature attack line, laid out like the printed stat block:
+      Name (+bonus) | Range | 12-16 | 17+ --}}
+<li class="attack-row" data-item-id="{{item.id}}">
+  <button type="button" class="attack-name" data-action="useItem">
+    {{item.name}}
+    {{#if item.system.bonus}}<span class="atk-bonus">({{crowsSigned item.system.bonus}})</span>{{/if}}
+  </button>
+
+  <span class="atk-range">
+    {{#if (crowsEq item.system.range.type "ranged")}}{{localize "CROWS.Ranged"}}{{else}}{{localize "CROWS.Melee"}}{{/if}}
+    {{item.system.range.value}}
+    {{#if (crowsGt item.system.targets 1)}}<span class="atk-targets">({{item.system.targets}} {{localize "CROWS.Targets"}})</span>{{/if}}
+  </span>
+
+  <span class="atk-t2">{{item.system.tier2}}</span>
+  <span class="atk-t3">{{item.system.tier3}}</span>
+
+  <span class="atk-controls">
+    <button type="button" class="icon" data-action="editItem"><i class="fa-solid fa-pen"></i></button>
+    <button type="button" class="icon danger" data-action="deleteItem"><i class="fa-solid fa-trash"></i></button>
+  </span>
+</li>

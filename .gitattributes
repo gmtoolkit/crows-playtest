@@ -1,0 +1,8 @@
+# Normalise to LF in the repo; Windows checkouts still get CRLF for text.
+* text=auto eol=lf
+
+# Binary content
+*.webp binary
+*.jpg binary
+*.png binary
+*.ogg binary

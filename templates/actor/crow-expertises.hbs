@@ -1,0 +1,33 @@
+{{!-- Expertise uses. Each pip is one use; a spent pip returns on a completed
+      rest, unless the rest happened inside the Miasma (R p27). --}}
+<section class="tab crow-expertises" data-tab="expertises" data-group="sheet">
+
+  <p class="tab-hint">{{localize "CROWS.ExpertiseHint"}}</p>
+
+  {{#each expertiseGroups}}
+    <div class="expertise-group">
+      <h3>{{this.label}}</h3>
+      <ul class="expertise-list">
+        {{#each this.rows}}
+          {{> "systems/crows/templates/partials/expertise-row.hbs" row=this editable=../../editable}}
+        {{/each}}
+      </ul>
+    </div>
+  {{else}}
+    <p class="empty">{{localize "CROWS.NoExpertises"}}</p>
+  {{/each}}
+
+  <footer class="advancement">
+    <h3>{{localize "CROWS.Advancement"}}</h3>
+    <dl>
+      <dt>{{localize "CROWS.ExpertiseBonuses"}}</dt>
+      <dd>{{system.advancement.expertiseBonuses}}</dd>
+      <dt>{{localize "CROWS.CharacteristicBonuses"}}</dt>
+      <dd>{{system.advancement.characteristicBonuses}}</dd>
+      <dt>{{localize "CROWS.MaxUses"}}</dt>
+      <dd>{{system.advancement.maxUses}}</dd>
+      <dt>{{localize "CROWS.AvailableXP"}}</dt>
+      <dd>{{system.xp.available}}</dd>
+    </dl>
+  </footer>
+</section>

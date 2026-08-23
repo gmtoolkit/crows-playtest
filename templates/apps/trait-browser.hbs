@@ -1,0 +1,54 @@
+<div class="trait-browser-body">
+
+  <header class="tb-head">
+    <span class="tb-xp">{{localize "CROWS.AvailableXP"}}: <strong>{{available}}</strong></span>
+  </header>
+
+  {{#unless hasTraits}}
+    <p class="empty">{{localize "CROWS.NoTraitPack"}}</p>
+  {{/unless}}
+
+  <div class="tb-layout">
+    <nav class="tree-list">
+      {{#each trees}}
+        <button type="button" data-action="selectTree" data-tree="{{this.key}}"
+                class="{{#if this.active}}active{{/if}}">
+          <span class="tree-name">{{this.label}}</span>
+          <span class="tree-count">{{this.ownedCount}}/{{this.count}}</span>
+        </button>
+      {{/each}}
+    </nav>
+
+    <section class="tree-body">
+      {{#if tree}}
+        <h3>{{treeLabel}}</h3>
+        <ul class="trait-options">
+          {{#each rows}}
+            <li class="trait-option {{#if this.owned}}owned{{/if}} {{#unless this.unlocked}}locked{{/unless}}">
+              <header>
+                <span class="to-name">{{this.name}}</span>
+                {{#if this.starting}}<span class="to-tag">{{localize "CROWS.Starting"}}</span>{{/if}}
+                <span class="to-cost {{#unless this.affordable}}unaffordable{{/unless}}">{{this.cost}} XP</span>
+                {{#if this.owned}}
+                  <span class="to-state"><i class="fa-solid fa-check"></i> {{localize "CROWS.Owned"}}</span>
+                {{else if this.canBuy}}
+                  <button type="button" data-action="buy" data-uuid="{{this.uuid}}">{{localize "CROWS.Buy"}}</button>
+                {{else if this.unlocked}}
+                  <span class="to-state">{{localize "CROWS.NotEnoughXP"}}</span>
+                {{else}}
+                  <span class="to-state"><i class="fa-solid fa-lock"></i> {{localize "CROWS.Locked"}}</span>
+                {{/if}}
+              </header>
+              <div class="to-desc">{{{this.description}}}</div>
+              {{#unless this.unlocked}}
+                <p class="to-prereq">{{localize "CROWS.Requires"}}: {{#each this.prerequisites}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
+              {{/unless}}
+            </li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p class="empty">{{localize "CROWS.PickATree"}}</p>
+      {{/if}}
+    </section>
+  </div>
+</div>

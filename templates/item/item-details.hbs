@@ -1,0 +1,259 @@
+<section class="tab item-details" data-tab="details" data-group="sheet">
+
+  {{#if hasAttack}}
+    <fieldset>
+      <legend>{{localize "CROWS.AttackProfile"}}</legend>
+
+      <div class="form-group">
+        <label>{{localize "CROWS.Characteristic"}}</label>
+        <select name="system.characteristic">{{selectOptions choices.characteristics selected=system.characteristic localize=true}}</select>
+      </div>
+
+      {{#if isAttack}}
+        <div class="form-group">
+          <label>{{localize "CROWS.AttackBonus"}}</label>
+          <input type="number" name="system.bonus" value="{{system.bonus}}">
+        </div>
+      {{/if}}
+
+      <div class="form-group">
+        <label>{{localize "CROWS.RangeType"}}</label>
+        <select name="system.range.type">{{selectOptions choices.rangeTypes selected=system.range.type localize=true}}</select>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "CROWS.RangeValue"}}</label>
+        <input type="number" name="system.range.value" value="{{system.range.value}}" min="0">
+      </div>
+
+      {{#if (crowsEq system.range.type "both")}}
+        <div class="form-group">
+          <label>{{localize "CROWS.ThrownRange"}}</label>
+          <input type="number" name="system.range.thrownValue" value="{{system.range.thrownValue}}" min="0">
+        </div>
+      {{/if}}
+
+      <div class="form-group">
+        <label>{{localize "CROWS.Targets"}}</label>
+        <input type="number" name="system.targets" value="{{system.targets}}" min="1">
+      </div>
+
+      <div class="tier-grid">
+        <div class="form-group">
+          <label>{{localize "CROWS.Tier1"}}</label>
+          <input type="text" name="system.tier1" value="{{system.tier1}}" placeholder="{{localize 'CROWS.Miss'}}">
+        </div>
+        <div class="form-group">
+          <label>12&ndash;16</label>
+          <input type="text" name="system.tier2" value="{{system.tier2}}" placeholder="3 + @mod">
+        </div>
+        <div class="form-group">
+          <label>17+</label>
+          <input type="text" name="system.tier3" value="{{system.tier3}}" placeholder="6 + @mod">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "CROWS.Piercing"}}</label>
+        <input type="checkbox" name="system.piercing" {{checked system.piercing}}>
+        <p class="hint">{{localize "CROWS.PiercingHint"}}</p>
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isWeapon}}
+    <fieldset>
+      <legend>{{localize "CROWS.WeaponGroup"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Group"}}</label>
+        <select name="system.group">{{selectOptions choices.weaponGroups selected=system.group localize=true}}</select>
+        <p class="hint">{{localize "CROWS.GroupHint"}}</p>
+      </div>
+
+      <div class="form-group">
+        <label>{{localize "CROWS.Ammunition"}}</label>
+        <input type="text" name="system.ammunition" value="{{system.ammunition}}">
+      </div>
+
+      <div class="list-editor">
+        <header>
+          <h4>{{localize "CROWS.Properties"}}</h4>
+          <button type="button" class="icon" data-action="addProperty"><i class="fa-solid fa-plus"></i></button>
+        </header>
+        {{#each system.properties}}
+          <div class="list-row">
+            <select name="system.properties.{{@index}}.key">{{selectOptions ../choices.weaponProperties selected=this.key localize=true}}</select>
+            <input type="number" name="system.properties.{{@index}}.value" value="{{this.value}}" placeholder="{{localize 'CROWS.Value'}}">
+            <button type="button" class="icon danger" data-action="removeProperty" data-index="{{@index}}"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        {{/each}}
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isArmor}}
+    <fieldset>
+      <legend>{{localize "CROWS.Armor"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Category"}}</label>
+        <select name="system.category">{{selectOptions choices.armorCategories selected=system.category localize=true}}</select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.ArmorDefense"}}</label>
+        <input type="number" name="system.ad.value" value="{{system.ad.value}}" min="0">
+        <span class="sep">/</span>
+        <input type="number" name="system.ad.max" value="{{system.ad.max}}" min="0">
+        <p class="hint">{{localize "CROWS.ADHint"}}</p>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Worn"}}</label>
+        <input type="checkbox" name="system.worn" {{checked system.worn}}>
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isSpellbook}}
+    <fieldset>
+      <legend>{{localize "CROWS.Spell"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Rank"}}</label>
+        <input type="number" name="system.rank" value="{{system.rank}}" min="0" max="5">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Discipline"}}</label>
+        <select name="system.discipline">{{selectOptions choices.disciplines selected=system.discipline localize=true}}</select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.CastingTime"}}</label>
+        <select name="system.castingTime">{{selectOptions choices.castingTimes selected=system.castingTime localize=true}}</select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Target"}}</label>
+        <input type="text" name="system.target" value="{{system.target}}" placeholder="1 ally">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Area"}}</label>
+        <select name="system.area.type">{{selectOptions choices.areaTypes selected=system.area.type localize=true}}</select>
+        <input type="number" name="system.area.size" value="{{system.area.size}}" min="0">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Duration"}}</label>
+        <select name="system.duration.type">{{selectOptions choices.durations selected=system.duration.type localize=true}}</select>
+        {{#if (crowsEq system.duration.type "ud")}}
+          <input type="number" name="system.duration.ud" value="{{system.duration.ud}}" min="0"
+                 data-tooltip="{{localize 'CROWS.EffectUDHint'}}">
+        {{/if}}
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.IsAttack"}}</label>
+        <input type="checkbox" name="system.isAttack" {{checked system.isAttack}}>
+      </div>
+
+      {{#unless system.isAttack}}
+        <div class="tier-grid">
+          <div class="form-group"><label>{{localize "CROWS.Tier1"}}</label><textarea name="system.effects.tier1" rows="2">{{system.effects.tier1}}</textarea></div>
+          <div class="form-group"><label>12&ndash;16</label><textarea name="system.effects.tier2" rows="2">{{system.effects.tier2}}</textarea></div>
+          <div class="form-group"><label>17+</label><textarea name="system.effects.tier3" rows="2">{{system.effects.tier3}}</textarea></div>
+        </div>
+      {{/unless}}
+    </fieldset>
+  {{/if}}
+
+  {{#if isGear}}
+    <fieldset>
+      <legend>{{localize "CROWS.Gear"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Light"}}</label>
+        <input type="number" name="system.light.bright" value="{{system.light.bright}}" min="0" data-tooltip="{{localize 'CROWS.Bright'}}">
+        <span class="sep">/</span>
+        <input type="number" name="system.light.dim" value="{{system.light.dim}}" min="0" data-tooltip="{{localize 'CROWS.Dim'}}">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Activation"}}</label>
+        <select name="system.activation.type">{{selectOptions choices.activation selected=system.activation.type localize=true}}</select>
+      </div>
+      <div class="form-group full">
+        <textarea name="system.activation.description" rows="3" placeholder="{{localize 'CROWS.ActivationDescription'}}">{{system.activation.description}}</textarea>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.ToolFor"}}</label>
+        <select name="system.tool.expertise">
+          <option value="">&mdash;</option>
+          {{selectOptions choices.expertises selected=system.tool.expertise localize=true labelAttr="label"}}
+        </select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.CraftingMaterial"}}</label>
+        <input type="checkbox" name="system.material" {{checked system.material}}>
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isTrait}}
+    <fieldset>
+      <legend>{{localize "CROWS.Trait"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Tree"}}</label>
+        <select name="system.tree">{{selectOptions choices.traitTrees selected=system.tree localize=true}}</select>
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.XPCost"}}</label>
+        <input type="number" name="system.cost" value="{{system.cost}}" min="0" step="500">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.StartingTrait"}}</label>
+        <input type="checkbox" name="system.starting" {{checked system.starting}}>
+      </div>
+      <div class="form-group full">
+        <label>{{localize "CROWS.Prerequisites"}}</label>
+        <input type="text" name="system.prerequisites" value="{{system.prerequisites}}"
+               data-tooltip="{{localize 'CROWS.PrerequisitesHint'}}">
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isFeature}}
+    <fieldset>
+      <legend>{{localize "CROWS.Feature"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.Uses"}}</label>
+        <input type="number" name="system.uses.value" value="{{system.uses.value}}" min="0">
+        <span class="sep">/</span>
+        <input type="number" name="system.uses.max" value="{{system.uses.max}}" min="0">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.Per"}}</label>
+        <select name="system.uses.per">
+          <option value="rest" {{#if (crowsEq system.uses.per "rest")}}selected{{/if}}>{{localize "CROWS.Rest"}}</option>
+          <option value="dt" {{#if (crowsEq system.uses.per "dt")}}selected{{/if}}>{{localize "CROWS.DungeonTurn"}}</option>
+          <option value="round" {{#if (crowsEq system.uses.per "round")}}selected{{/if}}>{{localize "CROWS.Round"}}</option>
+          <option value="encounter" {{#if (crowsEq system.uses.per "encounter")}}selected{{/if}}>{{localize "CROWS.Encounter"}}</option>
+          <option value="day" {{#if (crowsEq system.uses.per "day")}}selected{{/if}}>{{localize "CROWS.Day"}}</option>
+        </select>
+      </div>
+    </fieldset>
+  {{/if}}
+
+  {{#if isBackground}}
+    <fieldset>
+      <legend>{{localize "CROWS.Background"}}</legend>
+      <div class="form-group">
+        <label>{{localize "CROWS.TableRoll"}}</label>
+        <input type="number" name="system.roll.first" value="{{system.roll.first}}" min="1" max="6">
+        <input type="number" name="system.roll.second" value="{{system.roll.second}}" min="1" max="6">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.StartingStamina"}}</label>
+        <input type="number" name="system.stamina" value="{{system.stamina}}" min="1">
+      </div>
+      <div class="form-group full">
+        <label>{{localize "CROWS.StartingTrait"}}</label>
+        <input type="text" name="system.trait" value="{{system.trait}}">
+      </div>
+      <div class="form-group">
+        <label>{{localize "CROWS.BonusGold"}}</label>
+        <input type="number" name="system.bonusGold" value="{{system.bonusGold}}" min="0">
+      </div>
+    </fieldset>
+  {{/if}}
+</section>

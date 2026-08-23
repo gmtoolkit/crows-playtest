@@ -1,0 +1,85 @@
+{{!-- One inventory card. Mirrors the printed card layout: name, then the
+      stat line that matters for its type, then usage dice as pips. --}}
+<div class="card-face type-{{item.type}} {{#if item.system.magic}}magic{{/if}}" data-item-id="{{item.id}}" draggable="true">
+
+  <header class="card-head">
+    <img class="card-img" src="{{item.img}}" alt="{{item.name}}">
+    <span class="card-name">{{item.name}}</span>
+    {{#if (crowsGt item.system.quantity 1)}}<span class="card-qty">&times;{{item.system.quantity}}</span>{{/if}}
+  </header>
+
+  <div class="card-body">
+    {{#if (crowsEq item.type "weapon")}}
+      <div class="card-line">
+        {{#if (crowsEq item.system.range.type "ranged")}}
+          <i class="fa-solid fa-bullseye"></i> {{item.system.range.value}}
+        {{else}}
+          <i class="fa-solid fa-hand-fist"></i> {{item.system.range.value}}
+        {{/if}}
+        <span class="card-group">{{crowsLabel "weaponGroups" item.system.group}}</span>
+      </div>
+      <div class="card-dmg">
+        <span class="t2">{{item.system.tier2}}</span>
+        <span class="t3">{{item.system.tier3}}</span>
+      </div>
+    {{/if}}
+
+    {{#if (crowsEq item.type "armor")}}
+      <div class="card-line">
+        <span class="card-group">{{crowsLabel "armorCategories" item.system.category}}</span>
+      </div>
+      <div class="card-ad {{#if item.system.depleted}}depleted{{/if}}">
+        <i class="fa-solid fa-shield"></i>
+        <span>{{item.system.ad.value}}/{{item.system.ad.max}}</span>
+        {{#if item.system.worn}}<i class="fa-solid fa-user-shield" title="{{localize 'CROWS.Worn'}}"></i>{{/if}}
+      </div>
+    {{/if}}
+
+    {{#if (crowsEq item.type "spellbook")}}
+      <div class="card-line">
+        <span class="card-rank">R{{item.system.rank}}</span>
+        <span class="card-group">{{crowsLabel "disciplines" item.system.discipline}}</span>
+      </div>
+      {{#if item.system.isAttack}}
+        <div class="card-dmg">
+          <span class="t2">{{item.system.tier2}}</span>
+          <span class="t3">{{item.system.tier3}}</span>
+        </div>
+      {{/if}}
+    {{/if}}
+
+    {{#if (crowsEq item.type "gear")}}
+      {{#if (crowsGt item.system.light.bright 0)}}
+        <div class="card-line"><i class="fa-solid fa-fire"></i> {{item.system.light.bright}}/{{item.system.light.dim}}</div>
+      {{/if}}
+    {{/if}}
+  </div>
+
+  {{#if item.system.ud.max}}
+    <div class="card-ud" data-action="rollUsageDice" data-tooltip="{{localize 'CROWS.RollUsageDice'}}">
+      {{{crowsUsagePips item.system.ud.value item.system.ud.max}}}
+    </div>
+  {{/if}}
+
+  <div class="card-actions">
+    <button type="button" class="icon" data-action="useItem" data-tooltip="{{localize 'CROWS.Use'}}">
+      <i class="fa-solid fa-dice-d10"></i>
+    </button>
+    <button type="button" class="icon" data-action="editItem" data-tooltip="{{localize 'CROWS.Edit'}}">
+      <i class="fa-solid fa-pen"></i>
+    </button>
+    {{#if (crowsEq item.type "armor")}}
+      <button type="button" class="icon" data-action="wearArmor" data-tooltip="{{localize 'CROWS.Wear'}}">
+        <i class="fa-solid fa-user-shield"></i>
+      </button>
+    {{/if}}
+    {{#if (crowsEq container "backpack")}}
+      <button type="button" class="icon" data-action="drawFromPack" data-tooltip="{{localize 'CROWS.DrawFromPack'}}">
+        <i class="fa-solid fa-hand"></i>
+      </button>
+    {{/if}}
+    <button type="button" class="icon danger" data-action="deleteItem" data-tooltip="{{localize 'CROWS.Delete'}}">
+      <i class="fa-solid fa-trash"></i>
+    </button>
+  </div>
+</div>

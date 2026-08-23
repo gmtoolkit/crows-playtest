@@ -1,0 +1,23 @@
+<div class="crows-chat item-card">
+  <header class="ic-head">
+    <img src="{{item.img}}" alt="">
+    <span class="ic-name">{{item.name}}</span>
+  </header>
+
+  {{#if system.activation.description}}
+    <div class="ic-activation">
+      <span class="ic-cost">{{localize (concat "CROWS.Activation" system.activation.type)}}</span>
+      {{{system.activation.description}}}
+    </div>
+  {{/if}}
+
+  {{#if system.description}}
+    <div class="ic-desc">{{{system.description}}}</div>
+  {{/if}}
+
+  {{#if system.ud.max}}
+    <div class="ic-ud">
+      {{localize "CROWS.UsageDice"}}: {{{crowsUsagePips system.ud.value system.ud.max}}}
+    </div>
+  {{/if}}
+</div>

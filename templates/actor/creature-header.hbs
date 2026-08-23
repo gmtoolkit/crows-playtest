@@ -1,0 +1,97 @@
+{{!-- Identity line, exactly as the stat blocks print it:
+      Size / Power / Type, then Stamina, Speed, and the three characteristics. --}}
+<header class="creature-header">
+
+  <div class="identity">
+    <img class="portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
+    <div class="names">
+      <input class="creature-name" type="text" name="name" value="{{actor.name}}">
+      {{#if system.colloquialNames}}
+        <span class="colloquial">{{localize "CROWS.ColloquialNames"}}: {{system.colloquialNames}}</span>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="statline">
+    <div class="stat">
+      <label>{{localize "CROWS.Size"}}</label>
+      <select name="system.size">
+        {{#each CROWS.sizes as |cfg key|}}
+          <option value="{{key}}" {{#if (crowsEq key ../system.size)}}selected{{/if}}>{{localize cfg.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="stat">
+      <label>{{localize "CROWS.Power"}}</label>
+      <input type="number" name="system.power" value="{{system.power}}">
+    </div>
+    <div class="stat">
+      <label>{{localize "CROWS.Type"}}</label>
+      <select name="system.monsterType">
+        <option value="">&mdash;</option>
+        {{#each CROWS.monsterTypes as |cfg key|}}
+          <option value="{{key}}" {{#if (crowsEq key ../system.monsterType)}}selected{{/if}}>{{localize cfg.label}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="stat">
+      <label>{{localize "CROWS.Category"}}</label>
+      <select name="system.category">
+        {{#each CROWS.creatureCategories as |label key|}}
+          <option value="{{key}}" {{#if (crowsEq key ../system.category)}}selected{{/if}}>{{localize label}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="vitals">
+    <div class="vital">
+      <label>{{localize "CROWS.Stamina"}}</label>
+      <div class="pair">
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}">
+        <span class="sep">/</span>
+        <input type="number" name="system.stamina.max" value="{{system.stamina.max}}">
+      </div>
+    </div>
+    <div class="vital">
+      <label>{{localize "CROWS.Speed"}}</label>
+      <span class="derived">{{speedLine}}</span>
+    </div>
+    <div class="vital">
+      <label>{{localize "CROWS.Reactions"}}</label>
+      <input type="number" name="system.reactions" value="{{system.reactions}}">
+    </div>
+    {{#if system.usesWounds}}
+      <div class="vital">
+        <label>{{localize "CROWS.Wounds"}}</label>
+        <div class="pair">
+          <input type="number" name="system.wounds.value" value="{{system.wounds.value}}">
+          <span class="sep">/</span>
+          <input type="number" name="system.wounds.max" value="{{system.wounds.max}}">
+        </div>
+      </div>
+    {{/if}}
+  </div>
+
+  <div class="characteristics">
+    {{#each characteristics}}
+      {{> "systems/crows/templates/partials/characteristic.hbs" key=this.key label=this.label abbr=this.abbr value=this.value}}
+    {{/each}}
+  </div>
+
+  <div class="derived-flags">
+    <span data-tooltip="{{localize 'CROWS.SpaceHint'}}">{{localize "CROWS.Space"}} {{system.space}}&times;{{system.space}}</span>
+    <span data-tooltip="{{localize 'CROWS.ReachHint'}}">{{localize "CROWS.Reach"}} {{system.reach}}</span>
+    {{#if system.ignoresDarkness}}
+      <span class="flag" data-tooltip="{{localize 'CROWS.IgnoresDarknessHint'}}">
+        <i class="fa-solid fa-eye"></i> {{localize "CROWS.IgnoresDarkness"}}
+      </span>
+    {{/if}}
+    {{#if system.isWeak}}
+      <span class="flag weak" data-tooltip="{{localize 'CROWS.WeakHint'}}">{{localize "CROWS.Weak"}}</span>
+    {{/if}}
+    <button type="button" data-action="harvest" data-tooltip="{{localize 'CROWS.HarvestHint'}}">
+      <i class="fa-solid fa-flask"></i> {{localize "CROWS.Harvest"}} ({{system.harvestDice}})
+    </button>
+  </div>
+</header>

@@ -1,0 +1,47 @@
+{{!-- Likes and hates are the tactical lever: bait them, or avoid becoming
+      the thing they hunt (F p30). Inherited from the monster type unless
+      overridden on this creature. --}}
+<section class="tab creature-lore" data-tab="lore" data-group="sheet">
+
+  <div class="drives">
+    <div class="drive likes">
+      <h3><i class="fa-solid fa-heart"></i> {{localize "CROWS.Likes"}}</h3>
+      <p class="inherited">{{system.effectiveLikes}}</p>
+      <p class="universal">{{universal.likes}}</p>
+      {{#if editable}}
+        <textarea name="system.likes" rows="2" placeholder="{{localize 'CROWS.OverrideLikes'}}">{{system.likes}}</textarea>
+      {{/if}}
+    </div>
+
+    <div class="drive hates">
+      <h3><i class="fa-solid fa-fire"></i> {{localize "CROWS.Hates"}}</h3>
+      <p class="inherited">{{system.effectiveHates}}</p>
+      <p class="universal">{{universal.hates}}</p>
+      {{#if editable}}
+        <textarea name="system.hates" rows="2" placeholder="{{localize 'CROWS.OverrideHates'}}">{{system.hates}}</textarea>
+      {{/if}}
+    </div>
+  </div>
+
+  <div class="field">
+    <label>{{localize "CROWS.ColloquialNames"}}</label>
+    <input type="text" name="system.colloquialNames" value="{{system.colloquialNames}}">
+  </div>
+
+  <div class="prose">
+    <h3>{{localize "CROWS.Description"}}</h3>
+    {{{enrichedDescription}}}
+    {{#if editable}}<textarea name="system.description" rows="6">{{system.description}}</textarea>{{/if}}
+  </div>
+
+  <div class="prose secrets">
+    <h3><i class="fa-solid fa-user-secret"></i> {{localize "CROWS.RefNotes"}}</h3>
+    {{{enrichedSecrets}}}
+    {{#if editable}}<textarea name="system.secrets" rows="6">{{system.secrets}}</textarea>{{/if}}
+  </div>
+
+  <div class="field">
+    <label>{{localize "CROWS.Source"}}</label>
+    <input type="text" name="system.source" value="{{system.source}}">
+  </div>
+</section>

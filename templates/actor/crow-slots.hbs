@@ -1,0 +1,67 @@
+{{!-- The inventory sheet. This IS the character sheet: MCDM ships no other. --}}
+<section class="tab crow-slots" data-tab="slots" data-group="sheet">
+
+  {{#with containers.hand}}
+    <div class="slot-group hands">
+      <h3>{{this.label}} <span class="hint">{{localize "CROWS.HandsHint"}}</span></h3>
+      <div class="slot-grid" style="--cols: {{this.columns}};">
+        {{#each this.cells}}{{> "systems/crows/templates/partials/slot.hbs" cell=this}}{{/each}}
+      </div>
+    </div>
+  {{/with}}
+
+  {{#with containers.belt}}
+    <div class="slot-group belt">
+      <h3>{{this.label}}</h3>
+      <div class="slot-grid" style="--cols: {{this.columns}};">
+        {{#each this.cells}}{{> "systems/crows/templates/partials/slot.hbs" cell=this}}{{/each}}
+      </div>
+    </div>
+  {{/with}}
+
+  {{#with containers.backpack}}
+    <div class="slot-group backpack">
+      <h3>
+        {{this.label}}
+        <span class="hint">{{localize "CROWS.BackpackHint"}}</span>
+      </h3>
+      <div class="slot-grid" style="--cols: {{this.columns}};">
+        {{#each this.cells}}{{> "systems/crows/templates/partials/slot.hbs" cell=this}}{{/each}}
+      </div>
+    </div>
+  {{/with}}
+
+  <div class="slot-group magic">
+    <h3>{{localize "CROWS.MagicItems"}} <span class="hint">{{localize "CROWS.MagicHint"}}</span></h3>
+    <div class="magic-grid">
+      {{#each magicSlots}}
+        <div class="crows-slot magic-slot {{#if this.overloaded}}overloaded{{/if}} {{#if this.item}}filled{{else}}empty{{/if}}"
+             data-container="magic" data-magic-slot="{{this.key}}"
+             {{#if this.item}}data-item-id="{{this.item.id}}"{{/if}}>
+          <span class="slot-number">{{this.label}}</span>
+          {{#if this.item}}
+            {{> "systems/crows/templates/partials/card-face.hbs" item=this.item container="magic"}}
+          {{else}}
+            <div class="slot-placeholder"><i class="fa-regular fa-gem"></i></div>
+          {{/if}}
+          {{#if this.overloaded}}
+            <div class="overload-flag" data-tooltip="{{localize 'CROWS.MagicOverloadWarning'}}">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  {{#if unplaced.length}}
+    <div class="slot-group unplaced">
+      <h3>{{localize "CROWS.Unplaced"}} <span class="hint">{{localize "CROWS.UnplacedHint"}}</span></h3>
+      <div class="unplaced-list">
+        {{#each unplaced}}
+          {{> "systems/crows/templates/partials/card-face.hbs" item=this container="none"}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+</section>

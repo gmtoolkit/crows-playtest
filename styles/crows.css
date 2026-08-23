@@ -1,0 +1,1495 @@
+/**
+ * Crows — system styles.
+ *
+ * Visual language: torchlight on damp stone. Dark grounds, bone text, gold for
+ * value and blood for harm. The slot grid is the centrepiece and everything
+ * else stays quiet around it.
+ */
+
+.crows {
+  --crows-ink: #17130f;
+  --crows-stone: #241d17;
+  --crows-stone-2: #2f2620;
+  --crows-edge: #4a3c30;
+  --crows-bone: #e6dcc8;
+  --crows-parchment: #cfc2a8;
+  --crows-muted: #94866f;
+  --crows-gold: #c9a227;
+  --crows-blood: #9d2222;
+  --crows-blood-bright: #d33a3a;
+  --crows-green: #6d8f4a;
+
+  --crows-radius: 3px;
+  --crows-slot-h: 104px;
+
+  color: var(--crows-bone);
+  font-family: "Signika", system-ui, sans-serif;
+}
+
+.crows .window-content {
+  background: linear-gradient(180deg, var(--crows-stone) 0%, var(--crows-ink) 100%);
+  color: var(--crows-bone);
+  padding: 0;
+}
+
+.crows h3 {
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--crows-gold);
+  border-bottom: 1px solid var(--crows-edge);
+  margin: 0 0 0.4rem;
+  padding-bottom: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crows h3 .hint,
+.crows .tab-hint,
+.crows .hint {
+  font-size: 0.68rem;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--crows-muted);
+  font-weight: 400;
+}
+
+.crows input,
+.crows select,
+.crows textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  color: var(--crows-bone);
+  font-family: inherit;
+}
+
+.crows input:focus,
+.crows select:focus,
+.crows textarea:focus {
+  border-color: var(--crows-gold);
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.3);
+  outline: none;
+}
+
+.crows button {
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  color: var(--crows-bone);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 120ms, background 120ms;
+}
+
+.crows button:hover {
+  border-color: var(--crows-gold);
+  background: #3a2f26;
+}
+
+.crows button.danger:hover {
+  border-color: var(--crows-blood-bright);
+  color: var(--crows-blood-bright);
+}
+
+.crows button.icon {
+  padding: 0.15rem 0.3rem;
+  line-height: 1;
+  font-size: 0.72rem;
+}
+
+.crows .empty {
+  color: var(--crows-muted);
+  font-style: italic;
+  padding: 0.6rem;
+}
+
+/* -------------------------------------------- */
+/*  Crow header                                 */
+/* -------------------------------------------- */
+
+.crows .crow-header,
+.crows .creature-header {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.6rem 0.7rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--crows-edge);
+}
+
+.crows .identity {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.crows .portrait {
+  width: 62px;
+  height: 62px;
+  object-fit: cover;
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  flex: 0 0 auto;
+}
+
+.crows .names {
+  flex: 1;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.crows .crow-name,
+.crows .creature-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--crows-bone);
+}
+
+.crows .crow-name:hover,
+.crows .creature-name:hover {
+  border-bottom-color: var(--crows-edge);
+}
+
+.crows .names .sub {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.crows .names .sub input {
+  font-size: 0.72rem;
+  padding: 0.1rem 0.3rem;
+}
+
+/* Characteristics */
+
+.crows .characteristics {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crows .characteristic {
+  flex: 1;
+  display: grid;
+  gap: 0.05rem;
+  padding: 0.3rem;
+  text-align: center;
+  background: var(--crows-stone-2);
+}
+
+.crows .characteristic .abbr {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--crows-muted);
+}
+
+.crows .characteristic .value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--crows-gold);
+  line-height: 1;
+}
+
+.crows .characteristic .label {
+  font-size: 0.6rem;
+  color: var(--crows-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Vitals */
+
+.crows .vitals {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.crows .vital {
+  flex: 1;
+  min-width: 84px;
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+}
+
+.crows .vital label {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--crows-muted);
+}
+
+.crows .vital .pair {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.crows .vital input {
+  width: 2.6rem;
+  text-align: center;
+  padding: 0.1rem;
+  font-size: 0.95rem;
+}
+
+.crows .vital .derived {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.crows .vital .sep {
+  color: var(--crows-muted);
+}
+
+.crows .vital.stamina .pair input {
+  color: var(--crows-blood-bright);
+}
+
+.crows .vital.speed .derived.penalised {
+  color: var(--crows-blood-bright);
+}
+
+.crows .vital.speed .penalty {
+  font-size: 0.65rem;
+  color: var(--crows-blood-bright);
+  margin-left: 0.2rem;
+}
+
+.crows .vital.wounds.dead .derived {
+  color: var(--crows-blood-bright);
+}
+
+/* Ledger + header actions */
+
+.crows .ledger {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crows .ledger .field {
+  flex: 1;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.crows .ledger label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--crows-muted);
+}
+
+.crows .ledger input {
+  padding: 0.15rem 0.3rem;
+  text-align: right;
+}
+
+.crows .header-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crows .header-actions button {
+  flex: 1;
+  padding: 0.3rem;
+  font-size: 0.72rem;
+}
+
+.crows .dead-banner,
+.crows .warning-banner {
+  padding: 0.3rem;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--crows-radius);
+}
+
+.crows .dead-banner {
+  background: var(--crows-blood);
+  color: #fff;
+}
+
+.crows .warning-banner {
+  background: #6b4a12;
+  color: var(--crows-bone);
+}
+
+/* -------------------------------------------- */
+/*  Slot grid — the heart of the sheet          */
+/* -------------------------------------------- */
+
+.crows .crow-slots {
+  padding: 0.7rem;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.crows .slot-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.crows .crows-slot {
+  position: relative;
+  min-height: var(--crows-slot-h);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px dashed var(--crows-edge);
+  border-radius: var(--crows-radius);
+  display: flex;
+  flex-direction: column;
+  transition: border-color 120ms, background 120ms;
+}
+
+.crows .crows-slot.filled {
+  border-style: solid;
+  background: var(--crows-stone-2);
+}
+
+.crows .crows-slot.empty:hover {
+  border-color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.06);
+}
+
+.crows .slot-labels {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.12rem 0.25rem 0;
+  pointer-events: none;
+}
+
+.crows .slot-number {
+  font-size: 0.56rem;
+  color: var(--crows-muted);
+  letter-spacing: 0.06em;
+}
+
+.crows .slot-placeholder {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  color: var(--crows-edge);
+  font-size: 1.1rem;
+}
+
+/* Wound checkboxes — one per slot the cell covers */
+
+.crows .slot-wounds {
+  display: flex;
+  gap: 0.1rem;
+  padding: 0.15rem;
+  border-top: 1px solid var(--crows-edge);
+}
+
+.crows .wound-box {
+  flex: 1;
+  height: 15px;
+  padding: 0;
+  font-size: 0.6rem;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--crows-edge);
+  color: transparent;
+}
+
+.crows .wound-box:hover {
+  border-color: var(--crows-blood-bright);
+}
+
+.crows .wound-box.wounded {
+  background: var(--crows-blood);
+  border-color: var(--crows-blood-bright);
+  color: #fff;
+}
+
+.crows .wound-box.wounded.kind-starvation {
+  background: #6b5312;
+  border-color: #a8841f;
+}
+
+.crows .wound-box.wounded.kind-special {
+  background: #4a2a6b;
+  border-color: #7d4bb5;
+}
+
+/* -------------------------------------------- */
+/*  Card faces                                  */
+/* -------------------------------------------- */
+
+.crows .card-face {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.2rem 0.25rem;
+  min-width: 0;
+  cursor: grab;
+}
+
+.crows .card-face.magic {
+  box-shadow: inset 0 0 0 1px rgba(125, 75, 181, 0.5);
+  border-radius: var(--crows-radius);
+}
+
+.crows .card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.crows .card-img {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border: none;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.crows .card-name {
+  font-size: 0.66rem;
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.crows .card-qty {
+  margin-left: auto;
+  font-size: 0.62rem;
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+.crows .card-body {
+  font-size: 0.6rem;
+  color: var(--crows-parchment);
+  display: grid;
+  gap: 0.1rem;
+}
+
+.crows .card-line {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  color: var(--crows-muted);
+}
+
+.crows .card-group,
+.crows .card-rank {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.55rem;
+}
+
+.crows .card-dmg {
+  display: flex;
+  gap: 0.25rem;
+  font-weight: 600;
+}
+
+.crows .card-dmg .t2 {
+  color: var(--crows-parchment);
+}
+
+.crows .card-dmg .t3 {
+  color: var(--crows-gold);
+}
+
+.crows .card-ad.depleted {
+  color: var(--crows-blood-bright);
+}
+
+.crows .card-ud {
+  display: flex;
+  gap: 2px;
+  cursor: pointer;
+  padding: 0.1rem 0;
+}
+
+.crows .ud-pip {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1px solid var(--crows-edge);
+  display: inline-block;
+}
+
+.crows .ud-pip.filled {
+  background: var(--crows-gold);
+  border-color: var(--crows-gold);
+}
+
+.crows .card-actions {
+  display: none;
+  gap: 0.1rem;
+  position: absolute;
+  right: 2px;
+  bottom: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: var(--crows-radius);
+  padding: 1px;
+}
+
+.crows .crows-slot:hover .card-actions,
+.crows .unplaced-list .card-face:hover .card-actions {
+  display: flex;
+}
+
+/* Magic slots */
+
+.crows .magic-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.crows .magic-slot {
+  min-height: 84px;
+}
+
+.crows .magic-slot .slot-number {
+  padding: 0.15rem 0.25rem 0;
+  text-transform: uppercase;
+}
+
+.crows .magic-slot.overloaded {
+  border-color: var(--crows-blood-bright);
+}
+
+.crows .overload-flag {
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  color: var(--crows-blood-bright);
+  font-size: 0.7rem;
+}
+
+.crows .unplaced-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 0.35rem;
+}
+
+.crows .unplaced-list .card-face {
+  position: relative;
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  min-height: 60px;
+}
+
+/* -------------------------------------------- */
+/*  Expertises                                  */
+/* -------------------------------------------- */
+
+.crows .crow-expertises,
+.crows .crow-traits,
+.crows .crow-bio,
+.crows .creature-statblock,
+.crows .creature-lore {
+  padding: 0.7rem;
+  display: grid;
+  gap: 0.8rem;
+  align-content: start;
+}
+
+.crows .expertise-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.crows .expertise-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.2rem 0.35rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  font-size: 0.76rem;
+}
+
+.crows .expertise-row.exhausted .exp-name {
+  color: var(--crows-muted);
+  text-decoration: line-through;
+}
+
+.crows .exp-pips {
+  display: flex;
+  gap: 2px;
+}
+
+.crows .exp-pip {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--crows-gold);
+}
+
+.crows .exp-pip.spent {
+  background: transparent;
+  border: 1px solid var(--crows-edge);
+}
+
+.crows .exp-uses,
+.crows .exp-spent {
+  width: 2.6rem;
+  text-align: center;
+  padding: 0.05rem;
+  font-size: 0.7rem;
+}
+
+.crows .advancement dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.7rem;
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.crows .advancement dt {
+  color: var(--crows-muted);
+}
+
+.crows .advancement dd {
+  margin: 0;
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+/* -------------------------------------------- */
+/*  Traits                                      */
+/* -------------------------------------------- */
+
+.crows .trait-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.crows .trait-actions button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+}
+
+.crows .xp-available {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: var(--crows-muted);
+}
+
+.crows .xp-available strong {
+  color: var(--crows-gold);
+}
+
+.crows .trait-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.crows .trait {
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.35rem 0.5rem;
+}
+
+.crows .trait header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.crows .trait-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+}
+
+.crows .trait-cost {
+  font-size: 0.68rem;
+  color: var(--crows-gold);
+}
+
+.crows .trait-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.crows .trait-desc {
+  font-size: 0.75rem;
+  color: var(--crows-parchment);
+  margin-top: 0.2rem;
+}
+
+/* -------------------------------------------- */
+/*  Creature stat block                         */
+/* -------------------------------------------- */
+
+.crows .statline {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.crows .statline .stat {
+  flex: 1;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.crows .statline label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--crows-muted);
+}
+
+.crows .statline input,
+.crows .statline select {
+  padding: 0.15rem 0.25rem;
+  font-size: 0.75rem;
+}
+
+.crows .colloquial {
+  font-size: 0.68rem;
+  color: var(--crows-muted);
+  font-style: italic;
+}
+
+.crows .derived-flags {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.68rem;
+  color: var(--crows-muted);
+}
+
+.crows .derived-flags .flag {
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--crows-edge);
+  border-radius: 999px;
+}
+
+.crows .derived-flags .flag.weak {
+  color: var(--crows-green);
+  border-color: var(--crows-green);
+}
+
+.crows .derived-flags button {
+  margin-left: auto;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+.crows .block header {
+  display: flex;
+  align-items: center;
+}
+
+.crows .block header h3 {
+  flex: 1;
+}
+
+.crows .attack-table {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.crows .attack-row,
+.crows .attack-head {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 0.8fr 0.8fr auto;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.2rem 0.35rem;
+  font-size: 0.76rem;
+}
+
+.crows .attack-head {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--crows-muted);
+  border-bottom: 1px solid var(--crows-edge);
+}
+
+.crows .attack-row {
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+}
+
+.crows .attack-name {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0;
+  color: var(--crows-bone);
+  font-weight: 600;
+}
+
+.crows .attack-name:hover {
+  color: var(--crows-gold);
+  background: transparent;
+}
+
+.crows .atk-bonus {
+  color: var(--crows-gold);
+}
+
+.crows .atk-range,
+.crows .atk-targets {
+  color: var(--crows-muted);
+  font-size: 0.7rem;
+}
+
+.crows .atk-t3 {
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+.crows .attack-row .atk-controls {
+  display: flex;
+  gap: 0.15rem;
+}
+
+.crows .feature {
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.35rem 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.crows .feature header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.crows .feature-name {
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.crows .feature-uses {
+  font-size: 0.66rem;
+  color: var(--crows-gold);
+}
+
+.crows .feature-controls {
+  margin-left: auto;
+  display: flex;
+  gap: 0.15rem;
+}
+
+.crows .feature-desc {
+  font-size: 0.75rem;
+  color: var(--crows-parchment);
+}
+
+.crows .gear-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.crows .gear-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  padding: 0.15rem 0.35rem;
+}
+
+.crows .gear-name {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  color: var(--crows-bone);
+  font-size: 0.78rem;
+}
+
+.crows .gear-name img {
+  width: 18px;
+  height: 18px;
+  border: none;
+  border-radius: 2px;
+}
+
+.crows .gear-controls {
+  display: flex;
+  gap: 0.15rem;
+}
+
+/* Likes / hates */
+
+.crows .drives {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.crows .drive {
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.4rem 0.5rem;
+}
+
+.crows .drive.likes h3 {
+  color: var(--crows-green);
+  border-color: rgba(109, 143, 74, 0.4);
+}
+
+.crows .drive.hates h3 {
+  color: var(--crows-blood-bright);
+  border-color: rgba(211, 58, 58, 0.4);
+}
+
+.crows .drive p {
+  font-size: 0.74rem;
+  margin: 0 0 0.3rem;
+}
+
+.crows .drive .universal {
+  color: var(--crows-muted);
+  font-style: italic;
+  font-size: 0.68rem;
+}
+
+.crows .prose {
+  font-size: 0.8rem;
+  color: var(--crows-parchment);
+}
+
+.crows .prose.secrets h3 {
+  color: #a97fd6;
+  border-color: rgba(169, 127, 214, 0.4);
+}
+
+/* -------------------------------------------- */
+/*  Item sheet                                  */
+/* -------------------------------------------- */
+
+.crows .item-header {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.6rem 0.7rem;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--crows-edge);
+}
+
+.crows .item-img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+}
+
+.crows .item-titles {
+  flex: 1;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.crows .item-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+}
+
+.crows .item-type {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--crows-muted);
+}
+
+.crows .item-details,
+.crows .item-card-block,
+.crows .item-description {
+  padding: 0.7rem;
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+
+.crows fieldset {
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.5rem 0.6rem;
+  margin: 0;
+}
+
+.crows legend {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--crows-gold);
+  padding: 0 0.3rem;
+}
+
+.crows .form-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.crows .form-group > label {
+  flex: 0 0 34%;
+  font-size: 0.72rem;
+  color: var(--crows-parchment);
+}
+
+.crows .form-group input[type="text"],
+.crows .form-group input[type="number"],
+.crows .form-group select,
+.crows .form-group textarea {
+  flex: 1;
+  min-width: 0;
+  padding: 0.2rem 0.35rem;
+  font-size: 0.78rem;
+}
+
+.crows .form-group input[type="checkbox"] {
+  flex: 0 0 auto;
+}
+
+.crows .form-group.full {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.crows .form-group .hint {
+  flex: 1 0 100%;
+  margin: 0;
+}
+
+.crows .tier-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+
+.crows .tier-grid .form-group {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.15rem;
+}
+
+.crows .tier-grid label {
+  flex: none;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--crows-muted);
+}
+
+.crows .list-editor header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.3rem 0;
+}
+
+.crows .list-editor h4 {
+  flex: 1;
+  margin: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--crows-muted);
+}
+
+.crows .list-row {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.25rem;
+  align-items: center;
+}
+
+.crows .list-row.column {
+  flex-direction: column;
+  align-items: stretch;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 0.3rem;
+  border-radius: var(--crows-radius);
+}
+
+/* -------------------------------------------- */
+/*  Dungeon turn panel                          */
+/* -------------------------------------------- */
+
+.crows.dungeon-turn-panel .window-content {
+  padding: 0.6rem;
+}
+
+.crows .dungeon-turn {
+  display: grid;
+  gap: 0.45rem;
+  text-align: center;
+}
+
+.crows .dt-turn {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.crows .dt-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--crows-muted);
+}
+
+.crows .dt-number {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--crows-gold);
+}
+
+.crows .dt-place {
+  font-size: 0.72rem;
+  color: var(--crows-parchment);
+  font-style: italic;
+}
+
+.crows .dt-clock {
+  font-size: 2.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--crows-bone);
+}
+
+.crows .dungeon-turn.urgent .dt-clock {
+  color: var(--crows-blood-bright);
+  animation: crows-pulse 1.4s ease-in-out infinite;
+}
+
+.crows .dungeon-turn.paused .dt-clock {
+  color: var(--crows-muted);
+}
+
+@keyframes crows-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.crows .dt-bar {
+  height: 5px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.crows .dt-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--crows-blood) 0%, var(--crows-gold) 100%);
+  transition: width 1s linear;
+}
+
+.crows .dt-greed {
+  font-size: 0.72rem;
+  color: var(--crows-gold);
+}
+
+.crows .dt-en {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--crows-muted);
+}
+
+.crows .dt-en strong {
+  color: var(--crows-bone);
+  font-size: 0.9rem;
+}
+
+.crows .dt-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+}
+
+.crows .dt-controls button {
+  padding: 0.28rem;
+  font-size: 0.7rem;
+}
+
+.crows .dt-idle {
+  color: var(--crows-muted);
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+/* -------------------------------------------- */
+/*  Chat cards                                  */
+/* -------------------------------------------- */
+
+.crows-chat {
+  border: 1px solid #4a3c30;
+  border-left-width: 4px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #241d17 0%, #17130f 100%);
+  color: #e6dcc8;
+  padding: 0.45rem 0.55rem;
+  font-family: "Signika", system-ui, sans-serif;
+}
+
+.crows-chat.tier-1 { border-left-color: #6b5f52; }
+.crows-chat.tier-2 { border-left-color: #c9a227; }
+.crows-chat.tier-3 { border-left-color: #6d8f4a; }
+.crows-chat.crit { border-left-color: #f0d060; box-shadow: inset 0 0 18px rgba(240, 208, 96, 0.14); }
+.crows-chat.doom { border-left-color: #9d2222; box-shadow: inset 0 0 18px rgba(157, 34, 34, 0.18); }
+
+.crows-chat .pr-head,
+.crows-chat .ic-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.crows-chat .pr-head img,
+.crows-chat .ic-head img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border: none;
+  border-radius: 2px;
+}
+
+.crows-chat .pr-label,
+.crows-chat .ic-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.crows-chat .pr-char {
+  display: block;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94866f;
+}
+
+.crows-chat .pr-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  border-top: 1px solid #4a3c30;
+  border-bottom: 1px solid #4a3c30;
+}
+
+.crows-chat .tier-name {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.crows-chat.tier-1 .tier-name { color: #94866f; }
+.crows-chat.tier-2 .tier-name { color: #c9a227; }
+.crows-chat.tier-3 .tier-name { color: #8fbf5f; }
+
+.crows-chat .badge {
+  display: inline-block;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.08rem 0.3rem;
+  border-radius: 2px;
+  margin-right: 0.3rem;
+}
+
+.crows-chat .badge.crit { background: #f0d060; color: #17130f; }
+.crows-chat .badge.doom { background: #9d2222; color: #fff; }
+.crows-chat .badge.expertise { background: #4a3c30; color: #e6dcc8; }
+
+.crows-chat .pr-total {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.crows-chat .d10 {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid #4a3c30;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  margin-right: 2px;
+}
+
+.crows-chat .eq { color: #94866f; }
+
+.crows-chat .total {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e6dcc8;
+}
+
+.crows-chat .pr-note {
+  font-size: 0.68rem;
+  color: #94866f;
+  margin: 0.2rem 0 0;
+}
+
+.crows-chat .pr-outcome {
+  margin-top: 0.35rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.crows-chat .pr-rider {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #cfc2a8;
+  font-style: italic;
+}
+
+.crows-chat .pr-actions {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.crows-chat .pr-actions button {
+  flex: 1;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.7rem;
+  background: #2f2620;
+  border: 1px solid #4a3c30;
+  border-radius: 3px;
+  color: #e6dcc8;
+  cursor: pointer;
+}
+
+.crows-chat .pr-actions button:hover {
+  border-color: #c9a227;
+}
+
+.crows-chat .pr-warning {
+  margin: 0.35rem 0 0;
+  font-size: 0.7rem;
+  color: #d33a3a;
+  font-style: italic;
+}
+
+.crows-chat .pr-warning.good { color: #8fbf5f; }
+
+.crows-chat .ic-activation {
+  font-size: 0.78rem;
+  margin-bottom: 0.3rem;
+}
+
+.crows-chat .ic-cost {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c9a227;
+  margin-right: 0.3rem;
+}
+
+.crows-chat .ic-desc {
+  font-size: 0.78rem;
+  color: #cfc2a8;
+}
+
+.crows-chat .ic-ud {
+  margin-top: 0.3rem;
+  font-size: 0.68rem;
+  color: #94866f;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.crows-dt-banner {
+  text-align: center;
+  padding: 0.4rem;
+  border: 1px solid #4a3c30;
+  border-radius: 3px;
+  background: #17130f;
+  color: #e6dcc8;
+}
+
+.crows-dt-banner h3 {
+  margin: 0 0 0.2rem;
+  color: #c9a227;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+}
+
+.crows-dt-banner ul {
+  text-align: left;
+  font-size: 0.75rem;
+  margin: 0.3rem 0;
+  padding-left: 1.1rem;
+}
+
+.crows-dt-banner .dt-next {
+  font-size: 0.7rem;
+  color: #94866f;
+  margin: 0;
+}
+
+.crows-damage,
+.crows-rest {
+  font-size: 0.82rem;
+  padding: 0.3rem 0.4rem;
+  border-left: 3px solid #9d2222;
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.crows-rest {
+  border-left-color: #6d8f4a;
+}
