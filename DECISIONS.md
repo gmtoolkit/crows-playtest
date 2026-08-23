@@ -1,5 +1,70 @@
 # Decisions — crows-playtest
 
+## 2026-08-23 — The rest gate, and three rulings from Cliff
+
+**Decision:** Advancement is gated on a rest, reachable from both directions.
+
+- A crow records `advancement.txpAtLastRest` whenever it finishes a rest.
+- Finishing a rest offers the advancement screen if anything is owed.
+- Opening advancement or the trait browser with XP earned since the last rest
+  warns, names the exact amount, spells out what a rest will do, and offers to
+  finish one there and then. Cancel and the screen does not open.
+
+**Why:** "You can only spend XP or gain bonuses from TXP when you finish a rest
+after earning the XP" (C p6). Nothing enforced that, and nothing pointed at the
+rest as the moment to spend — bonuses had sat unspendable on the sheet for
+months.
+
+The rule is about ORDER, not about having rested at all: the XP must predate
+the rest. A boolean "has rested" cannot express that, so the rest stamps the
+TXP it settles and anything above that mark has not been slept on. `-1` means
+never recorded and reports no debt, so a crow that predates this bookkeeping is
+assumed caught up rather than retroactively locked out.
+
+Cliff asked for this shape specifically: "when someone takes the rest prompt the
+wizard to spend the points. when someone clicks into those areas warn that it
+will trigger rest." Offering the rest rather than refusing is the point — a
+player who opened the advancement screen has already decided they want to
+spend, and making them close it, find Rest and come back teaches nothing. But a
+rest is a real event (Stamina refills, a wound closes, expertise uses return,
+Prepare for Task expires) so it asks first, and asks the Miasma question the
+same way the Rest button does rather than quietly assuming shelter.
+
+**Three rulings recorded where the code will need them:**
+
+1. **The hybrid bonus ships as printed** (1 use + 1 Stamina), even though it is
+   strictly the worst pick against 3 uses or 2 Stamina and looks like a number
+   edited down. Raised on the playtest survey instead of silently fixed.
+   Recorded in `config.mjs` at `expertiseBonusOptions`.
+2. **Replacement crows get full catch-up.** C p7's "starts with XP equal to the
+   lowest TXP of a crow already in the party" confers the advancement bonuses
+   that TXP earns, not merely trait XP. The book says XP, not TXP, and never
+   settles it. Recorded in `builder.mjs`.
+3. **The raw expertise `uses` box becomes read-only for everyone** once the
+   backgrounds pack ships and the builder can set starting uses. It exists
+   today only because there is no other way to enter what a background granted.
+   Recorded in `expertise-row.hbs`.
+
+**Alternatives:** Gating the numbers themselves — computing bonuses from
+settled TXP so unslept XP simply pays nothing — was rejected. It is arguably
+more faithful, but it makes counts drop without explanation, which is the exact
+failure the advancement work was fixing.
+
+Resting silently when the player opens the screen was rejected: a rest
+irreversibly changes wounds, Stamina and expertise uses.
+
+**Consequences:** `rest()` now writes `system.advancement.txpAtLastRest`, so any
+future caller of `rest()` settles XP as a side effect. Every door into
+advancement must call `ensureRested` — there are two today (`buyTrait` and
+`openAdvancement`), and a third that deliberately does not, the post-rest offer,
+because a rest just happened.
+
+**Also fixed this session:** advancement could raise a characteristic to 5. The
+rules give two limits — the field's -5..5 range, and "the highest score a PC can
+have in a characteristic without magic help is 4" (R p5) — and `pcCap: 4` was in
+config but referenced nowhere. See the previous entry for the same class of bug
+in CSS.
+
 ## 2026-08-23 — Training is a ledger, not a text box; and the blood is gone
 
 **Decision:** Three things.

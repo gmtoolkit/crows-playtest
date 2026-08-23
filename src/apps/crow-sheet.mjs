@@ -393,7 +393,48 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       yes: { label: game.i18n.localize("CROWS.InTheMiasma") },
       no: { label: game.i18n.localize("CROWS.Sheltered") }
     });
-    return this.actor.rest({ inMiasma: !!inMiasma });
+    await this.actor.rest({ inMiasma: !!inMiasma });
+    return CrowSheet.#offerAdvancement(this.actor);
+  }
+
+  /**
+   * A rest is when advancement becomes spendable, so a rest is when to offer it.
+   *
+   * Left to the player to remember, bonuses go untaken for sessions — the
+   * number sat on the sheet for months doing nothing before there was even a
+   * way to spend it. The rest is the one moment the rules point at.
+   */
+  static async #offerAdvancement(actor) {
+    const { DialogV2 } = foundry.applications.api;
+    const adv = actor.system.advancement;
+    const owedBonuses = adv.available + adv.charAvailable;
+    const spendableXP = actor.system.xp.available;
+    if (!owedBonuses && spendableXP < CROWS.traitStartingCost) return;
+
+    const lines = [];
+    if (adv.available) lines.push(game.i18n.format("CROWS.OwedBonuses", { n: adv.available }));
+    if (adv.charAvailable) lines.push(game.i18n.format("CROWS.OwedCharBonuses", { n: adv.charAvailable }));
+    if (spendableXP >= CROWS.traitStartingCost) {
+      lines.push(game.i18n.format("CROWS.OwedTraitXP", { xp: spendableXP }));
+    }
+
+    const open = await DialogV2.confirm({
+      window: { title: game.i18n.localize("CROWS.Advancement") },
+      content: `<p>${game.i18n.localize("CROWS.RestUnlocksAdvancement")}</p><ul><li>${lines.join(
+        "</li><li>"
+      )}</li></ul>`,
+      yes: { label: game.i18n.localize(owedBonuses ? "CROWS.OpenAdvancement" : "CROWS.BrowseTraits") },
+      no: { label: game.i18n.localize("CROWS.Later") },
+      rejectClose: false
+    });
+    if (!open) return;
+
+    if (owedBonuses) {
+      const { AdvancementApp } = await import("./advancement.mjs");
+      return new AdvancementApp({ actor }).render({ force: true });
+    }
+    const { TraitBrowser } = await import("./trait-browser.mjs");
+    return new TraitBrowser({ actor }).render({ force: true });
   }
 
   static async #onEat() {
@@ -401,11 +442,15 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   }
 
   static async #onBuyTrait() {
+    const { ensureRested } = await import("./rest-gate.mjs");
+    if (!(await ensureRested(this.actor))) return;
     const { TraitBrowser } = await import("./trait-browser.mjs");
     return new TraitBrowser({ actor: this.actor }).render({ force: true });
   }
 
   static async #onOpenAdvancement() {
+    const { ensureRested } = await import("./rest-gate.mjs");
+    if (!(await ensureRested(this.actor))) return;
     const { AdvancementApp } = await import("./advancement.mjs");
     return new AdvancementApp({ actor: this.actor }).render({ force: true });
   }

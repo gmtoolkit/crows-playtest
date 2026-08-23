@@ -87,6 +87,34 @@ export function backgroundUses(expertises = {}, bonuses = []) {
 }
 
 /* -------------------------------------------- */
+/*  The rest gate (C p6)                        */
+/* -------------------------------------------- */
+
+/**
+ * Whether this crow owes a rest before it may spend.
+ *
+ * "You can only spend XP or gain bonuses from TXP when you finish a rest after
+ * earning the XP." The condition is about ORDER — the XP has to predate the
+ * rest — so a boolean "has rested" cannot express it. Marking the TXP at each
+ * rest can: any TXP above that mark was earned since, and has not been slept
+ * on yet.
+ *
+ * `txpAtLastRest` of -1 means never recorded, and reports no debt: an existing
+ * crow should not be locked out of bonuses because the system started keeping
+ * this book today.
+ */
+export function restOwed(txp, txpAtLastRest) {
+  if (txpAtLastRest < 0) return false;
+  return txp > txpAtLastRest;
+}
+
+/** TXP earned since the last rest, and therefore not yet spendable. */
+export function unsettledTxp(txp, txpAtLastRest) {
+  if (txpAtLastRest < 0) return 0;
+  return Math.max(0, txp - txpAtLastRest);
+}
+
+/* -------------------------------------------- */
 /*  Characteristics (C p7)                      */
 /* -------------------------------------------- */
 

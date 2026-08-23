@@ -408,7 +408,18 @@ CROWS.expertiseAdvancement = [
 CROWS.expertiseAdvancementStep = 30000;
 CROWS.expertiseMaxUsesCap = 4;
 
-/** Each bonus grants 3 expertise uses, or +2 max Stamina, or 1 use and +1 Stamina. */
+/**
+ * Each bonus grants 3 expertise uses, or +2 max Stamina, or 1 use and +1 Stamina.
+ *
+ * The third option is printed as "Gain one expertise uses as described above,
+ * and increase your Stamina maximum by 1" — singular "one" against plural
+ * "uses", and against the other two packages (3 uses, or 2 Stamina) it is
+ * strictly the worst pick on the menu, so nobody should ever take it. It looks
+ * like a number edited down and not fully corrected.
+ *
+ * CLIFF'S RULING (2026-08-23): implement it AS PRINTED and raise it on the
+ * MCDM playtest survey. Do not quietly "fix" a printed rule.
+ */
 CROWS.expertiseBonusOptions = {
   expertise: { uses: 3, stamina: 0 },
   stamina: { uses: 0, stamina: 2 },

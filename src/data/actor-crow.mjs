@@ -3,7 +3,9 @@ import {
   earnedBonuses,
   earnedCharacteristicBonuses,
   grantedTotals,
-  backgroundUses
+  backgroundUses,
+  restOwed,
+  unsettledTxp
 } from "../system/advancement.mjs";
 
 const fields = foundry.data.fields;
@@ -122,7 +124,26 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
         characteristics: new fields.ArrayField(
           new fields.StringField({ required: true, blank: true, initial: "" }),
           { required: true, initial: [] }
-        )
+        ),
+
+        /**
+         * Total XP as of the last completed rest.
+         *
+         * "You can only spend XP or gain bonuses from TXP when you finish a
+         * rest after earning the XP" (C p6) — so what matters is whether the
+         * XP predates a rest, which needs a mark at the rest, not a flag.
+         *
+         * -1 means never recorded: an imported or pre-existing crow is assumed
+         * caught up rather than retroactively locked out of bonuses it may
+         * already have been playing with.
+         */
+        txpAtLastRest: new fields.NumberField({
+          required: true,
+          nullable: false,
+          integer: true,
+          initial: -1,
+          min: -1
+        })
       }),
 
       coin: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
@@ -332,7 +353,9 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
       grantedUses: granted.usesTotal,
       grantedStamina: granted.stamina,
       grantedByExpertise: granted.uses,
-      backgroundUses: backgroundUses(this.expertises, bonuses)
+      backgroundUses: backgroundUses(this.expertises, bonuses),
+      restOwed: restOwed(txp, this.advancement?.txpAtLastRest ?? -1),
+      unsettledTxp: unsettledTxp(txp, this.advancement?.txpAtLastRest ?? -1)
     };
   }
 

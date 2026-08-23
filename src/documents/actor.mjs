@@ -438,6 +438,15 @@ export class CrowsActor extends Actor {
       // Prepare for Task lasts only until the next rest.
       updates["system.prepared.task"] = "";
       updates["system.prepared.bonus"] = 0;
+
+      /**
+       * Mark the TXP this rest settles.
+       *
+       * A rest is what makes earned XP spendable (C p6), so the rest is where
+       * the mark belongs — not the advancement screen, which would let a crow
+       * spend XP earned five minutes ago by opening a window.
+       */
+      updates["system.advancement.txpAtLastRest"] = this.system.xp.total;
     } else {
       updates["system.wounds.value"] = Math.max(0, this.system.wounds.value - woundsHealed);
     }

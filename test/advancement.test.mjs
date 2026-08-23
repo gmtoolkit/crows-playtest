@@ -15,7 +15,9 @@ import {
   canRaiseCharacteristic,
   allCharacteristicsMaxed,
   raiseCharacteristic,
-  undoCharacteristic
+  undoCharacteristic,
+  restOwed,
+  unsettledTxp
 } from "../src/system/advancement.mjs";
 
 /** A sheet's worth of expertises, defaulting everything else to zero uses. */
@@ -73,6 +75,34 @@ describe("Expertise & Stamina advancement (C p6)", () => {
     for (const txp of [5000, 30000]) {
       assert.ok(earnedBonuses(txp).count > 0 && earnedCharacteristicBonuses(txp) > 0, `${txp} pays both`);
     }
+  });
+});
+
+describe("the rest gate (C p6)", () => {
+  test("XP earned since the last rest has not been slept on", () => {
+    // The rule is about ORDER: the XP has to predate the rest.
+    assert.equal(restOwed(1400, 1400), false, "rested at this exact total: nothing owed");
+    assert.equal(restOwed(1600, 1400), true, "200 XP earned since the rest");
+    assert.equal(unsettledTxp(1600, 1400), 200);
+    assert.equal(unsettledTxp(1400, 1400), 0);
+  });
+
+  test("a crow who has never been marked is assumed caught up, not locked out", () => {
+    // -1 is "the system started keeping this book today". Reporting a debt
+    // would strip existing crows of bonuses they may already be playing with.
+    assert.equal(restOwed(5000, -1), false);
+    assert.equal(unsettledTxp(5000, -1), 0);
+  });
+
+  test("a mark ahead of current TXP never reports a negative debt", () => {
+    // Can happen if a Ref lowers total XP after a rest.
+    assert.equal(restOwed(1000, 1400), false);
+    assert.equal(unsettledTxp(1000, 1400), 0);
+  });
+
+  test("the gate is about the mark, not about having any XP at all", () => {
+    assert.equal(restOwed(0, 0), false);
+    assert.equal(restOwed(1, 0), true, "the very first XP still needs a rest");
   });
 });
 

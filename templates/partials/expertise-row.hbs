@@ -18,6 +18,12 @@
   <span class="exp-count" data-tooltip="{{localize 'CROWS.ExpertiseCountHint'}}">
     <span class="exp-remaining">{{row.remaining}}</span>
     <span class="exp-sep">/</span>
+    {{!-- TEMPORARY. Uses come from the background at creation plus advancement
+          bonuses, and the bonus half is tracked properly now — but the
+          backgrounds compendium does not exist yet, so this box is the only
+          way to enter what a background granted. Cliff's ruling (2026-08-23):
+          once the backgrounds pack ships and the builder can set these, this
+          becomes READ-ONLY FOR EVERYONE, GM included. --}}
     {{#if editable}}
       <input class="exp-uses" type="number" min="0" name="system.expertises.{{row.key}}.uses" value="{{row.uses}}">
     {{else}}

@@ -12,6 +12,18 @@ const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
  *
  * Backgrounds are read from the `crows.backgrounds` compendium, falling back to
  * world items so a Ref can author their own.
+ *
+ * TWO RULINGS STILL TO IMPLEMENT HERE, both waiting on that compendium:
+ *
+ * 1. Once backgrounds set starting expertise uses, the raw `uses` box on the
+ *    sheet becomes read-only for everyone (see expertise-row.hbs).
+ * 2. REPLACEMENT CROWS GET FULL CATCH-UP. C p7 lets the Ref rule that a new PC
+ *    after a death "starts with XP equal to the lowest TXP of a crow already in
+ *    the party". The book says XP, not TXP, and never says whether that
+ *    confers the advancement bonuses that much TXP would have earned. Cliff
+ *    ruled 2026-08-23 that it does: the replacement arrives a peer of the
+ *    party, with the expertise/Stamina and characteristic bonuses already owed
+ *    to them, not merely trait XP to spend.
  */
 export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
