@@ -22,8 +22,15 @@ import { readFileSync } from "node:fs";
 /** Items whose baselines are within this many points are the same line. */
 const LINE_TOLERANCE = 3;
 
-/** Footer text (crafting requirements, price) is set smaller than the body. */
-const FOOTER_MAX_FONT = 9;
+/**
+ * Footer text (crafting requirements, price) is set smaller than the body.
+ *
+ * Measured across the whole deck: body runs 8-11pt because cards shrink their
+ * text to fit a long description, and footers are 6.5-7.5pt. A threshold of 9
+ * therefore swallowed real body lines, which split rows mid-card and turned
+ * 108 cards into 315 fragments. 7.6 sits in the gap with room for float error.
+ */
+const FOOTER_MAX_FONT = 7.6;
 
 /**
  * Extract a card-grid PDF into an array of cards.
@@ -62,59 +69,41 @@ export async function extractCards(path, { minPeak = 20 } = {}) {
     );
   }
 
-  const all = pages.flat();
-  const columns = detectColumns(all, minPeak);
-  if (columns.length < 2) throw new Error(`could not detect card columns in ${path}`);
-
-  const colPitch = columns[1] - columns[0];
-
   /**
-   * Cards are segmented by the FOOTER, not by a row grid.
+   * Segment by ROW first, then detect the column pitch within each row.
    *
-   * A fixed row pitch looked right on the opening pages and then fell apart:
-   * later spreads carry taller cards (tables, two-slot weapons), their content
-   * crosses the assumed band, and text lands in the neighbouring card. Card
-   * height is simply not constant across the deck.
+   * The grid is not fixed per document, and not even per page. Page 6 carries
+   * rows of five narrow cards AND a row of three wide ones (the two-slot
+   * weapons), so one pitch for the page cuts the wide cards in half and loses
+   * their 17+ damage column.
    *
-   * What IS structural: every card ends with a small-set block (crafting
-   * requirements, price). So walking one column top to bottom, a transition
-   * from footer-size text back to body-size text is a new card — regardless of
-   * how tall either card happens to be.
+   * What IS reliably uniform is a ROW: every card in it has the same width and
+   * ends with the same small-set footer band. Those footer bands run as
+   * horizontal stripes across the page, so the regions between them are
+   * exactly the card rows — found without knowing anything about columns.
    */
   const cards = [];
   for (const [pageIndex, items] of pages.entries()) {
-    for (let c = 0; c < columns.length; c++) {
-      const x0 = columns[c] - 4; // slack: some glyphs start left of the edge
-      const x1 = columns[c] + colPitch - 4;
+    for (const region of rowRegions(items)) {
+      const columns = detectColumns(region, Math.max(2, Math.round(minPeak / 8)));
+      if (!columns.length) continue;
 
-      const column = items.filter((i) => i.x >= x0 && i.x < x1).sort((a, b) => a.y - b.y);
-      if (!column.length) continue;
+      for (let c = 0; c < columns.length; c++) {
+        const x0 = columns[c] - 4; // slack: some glyphs start left of the edge
+        const x1 = c === columns.length - 1 ? Infinity : columns[c + 1] - 4;
 
-      // Group into lines first, so the font test is per line, not per glyph.
-      const lines = cellToLines(column, { keepOrder: true });
+        const cell = region.filter((i) => i.x >= x0 && i.x < x1);
+        if (!cell.length) continue;
 
-      let current = null;
-      let sawFooter = false;
-      for (const line of lines) {
-        if (line.isFooter) {
-          if (current) current.footer.push(line.text);
-          sawFooter = true;
-          continue;
-        }
-        // Body text after a footer (or at the very top) starts a new card.
-        if (!current || sawFooter) {
-          current = { page: pageIndex + 1, col: c, lines: [], footer: [] };
-          cards.push(current);
-          sawFooter = false;
-        }
-        current.lines.push(line.text);
+        const { lines, footer } = cellToLines(cell);
+        if (!lines.length && !footer.length) continue;
+
+        cards.push({ page: pageIndex + 1, col: c, lines, footer });
       }
     }
   }
-
   await doc.cleanup?.();
-  // Reading order: page, then down each column, then across.
-  return cards.filter((c) => c.lines.length || c.footer.length);
+  return cards;
 }
 
 /* -------------------------------------------- */
@@ -126,39 +115,60 @@ export async function extractCards(path, { minPeak = 20 } = {}) {
  * inside a card also produces a peak, but it will not sit on the card pitch.
  */
 function detectColumns(items, minPeak) {
+  /**
+   * Histogram every text run's x, not the leftmost run per row.
+   *
+   * "Line starts" sounds more precise and is wrong here: a row of cards is one
+   * row of text spanning every column, so taking the minimum x per row records
+   * only the FIRST column and leaves the other four with no votes at all.
+   */
   const hist = new Map();
   for (const i of items) {
     const bucket = Math.round(i.x / 2) * 2;
     hist.set(bucket, (hist.get(bucket) ?? 0) + 1);
   }
+  if (!hist.size) return [];
 
-  const peaks = [...hist.entries()]
-    .filter(([, n]) => n >= minPeak)
-    .map(([x]) => x)
-    .sort((a, b) => a - b);
-  if (peaks.length < 2) return peaks;
+  /**
+   * Find the card PITCH by autocorrelation, then anchor at the left margin.
+   *
+   * No count threshold can isolate card edges here. On a weapons page the
+   * interior positions ("Attack", "2d10 + S") repeat once per card, so they
+   * are just as numerous as the edges AND sit on exactly the same pitch —
+   * picking peaks by count or by even spacing selects them just as happily,
+   * which clipped the wide cards and lost their 17+ damage column.
+   *
+   * But that same repetition makes the pitch itself unambiguous: the whole
+   * page correlates with itself at one card width. And the first card always
+   * begins at the left margin, so the leftmost text anchors the grid. Neither
+   * step needs to know which peaks are edges.
+   */
+  const xs = [...hist.keys()].sort((a, b) => a - b);
+  const minX = xs[0];
+  const maxX = xs.at(-1);
+  const span = maxX - minX;
+  if (span < 60) return [minX];
 
-  // The card pitch is the most common spacing between peaks.
-  const diffs = new Map();
-  for (let i = 1; i < peaks.length; i++) {
-    const d = peaks[i] - peaks[i - 1];
-    if (d < 40) continue; // too close to be a card boundary
-    diffs.set(d, (diffs.get(d) ?? 0) + 1);
+  let bestScore = 0;
+  const scores = new Map();
+  for (let pitch = 60; pitch <= Math.max(60, span); pitch += 2) {
+    let score = 0;
+    for (const [x, n] of hist) score += Math.min(n, hist.get(x + pitch) ?? 0);
+    scores.set(pitch, score);
+    if (score > bestScore) bestScore = score;
   }
-  if (!diffs.size) return peaks;
+  if (!bestScore) return [minX];
 
-  const pitch = [...diffs.entries()].sort((a, b) => b[1] - a[1])[0][0];
+  // Prefer the SMALLEST pitch that explains the page nearly as well as the
+  // best one: a 2-column reading also correlates on a 4-column page, and
+  // taking the larger period would merge every second pair of cards.
+  const pitch = [...scores.entries()]
+    .filter(([, s]) => s >= bestScore * 0.9)
+    .sort((a, b) => a[0] - b[0])[0][0];
 
-  // Keep the longest run of peaks separated by that pitch.
-  let best = [];
-  for (let start = 0; start < peaks.length; start++) {
-    const run = [peaks[start]];
-    for (let i = start + 1; i < peaks.length; i++) {
-      if (Math.abs(peaks[i] - run.at(-1) - pitch) <= 3) run.push(peaks[i]);
-    }
-    if (run.length > best.length) best = run;
-  }
-  return best;
+  const columns = [];
+  for (let x = minX; x <= maxX + 4; x += pitch) columns.push(x);
+  return columns;
 }
 
 /* -------------------------------------------- */
@@ -210,4 +220,61 @@ function cellToLines(cell, { keepOrder = false } = {}) {
     lines: ordered.filter((l) => !l.isFooter).map((l) => l.text),
     footer: ordered.filter((l) => l.isFooter).map((l) => l.text)
   };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Split a page into card rows using the footer bands as delimiters.
+ *
+ * Every card ends with a small-set block (crafting requirements, price), and
+ * every card in a row ends at roughly the same height, so those blocks form
+ * horizontal stripes across the page. A row region is therefore "body lines up
+ * to and including the footer stripe that closes them".
+ *
+ * This is the one segmentation that survives the deck's real variability: card
+ * WIDTH changes between rows (five narrow cards, then three wide ones) and card
+ * HEIGHT changes between rows, but a row is internally uniform in both.
+ *
+ * @param {Array<{x:number,y:number,font:number}>} items  One page's items.
+ * @returns {Array<Array<object>>} Items grouped by card row.
+ */
+function rowRegions(items) {
+  if (!items.length) return [];
+
+  // Cluster into lines across the full page width, so a footer stripe is seen
+  // as one thing rather than as five separate cards' footers.
+  const sorted = [...items].sort((a, b) => a.y - b.y);
+  const lines = [];
+  let line = null;
+  for (const item of sorted) {
+    if (line && Math.abs(item.y - line.y) <= LINE_TOLERANCE) line.items.push(item);
+    else {
+      line = { y: item.y, items: [item] };
+      lines.push(line);
+    }
+  }
+  for (const l of lines) l.isFooter = Math.min(...l.items.map((i) => i.font)) <= FOOTER_MAX_FONT;
+
+  const regions = [];
+  let current = [];
+  let inFooter = false;
+
+  for (const l of lines) {
+    if (l.isFooter) {
+      current.push(...l.items);
+      inFooter = true;
+      continue;
+    }
+    // First body line after a footer stripe closes the previous row.
+    if (inFooter) {
+      if (current.length) regions.push(current);
+      current = [];
+      inFooter = false;
+    }
+    current.push(...l.items);
+  }
+  if (current.length) regions.push(current);
+
+  return regions;
 }
