@@ -1,5 +1,6 @@
 import { CROWS } from "../config.mjs";
 import { DungeonTurn } from "../system/dungeon-turn.mjs";
+import { placedTokenFor, documentControlContext } from "./token-controls.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -14,7 +15,9 @@ const { ActorSheetV2 } = foundry.applications.sheets;
 export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) {
   static DEFAULT_OPTIONS = {
     classes: ["crows", "sheet", "crow"],
-    position: { width: 760, height: 820 },
+    // Wide enough that ten backpack slots fit without a horizontal scrollbar
+    // at the default size; narrower windows scroll rather than crush them.
+    position: { width: 900, height: 840 },
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
@@ -31,7 +34,8 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       eat: CrowSheet.#onEat,
       buyTrait: CrowSheet.#onBuyTrait,
       openBuilder: CrowSheet.#onOpenBuilder,
-      openTurnPanel: CrowSheet.#onOpenTurnPanel
+      openTurnPanel: CrowSheet.#onOpenTurnPanel,
+      openPlacedToken: CrowSheet.#onOpenPlacedToken
     },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: ".crows-slot" }]
   };
@@ -92,6 +96,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     });
 
     context.dungeonTurn = DungeonTurn.state;
+    Object.assign(context, documentControlContext(actor));
     return context;
   }
 
@@ -99,6 +104,24 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     context = await super._preparePartContext(partId, context, options);
     if (partId in context.tabs) context.tab = context.tabs[partId];
     return context;
+  }
+
+  /**
+   * Bleed the sheet in proportion to the wounds taken.
+   *
+   * Wounds already occupy the backpack slots, so the cost is legible — but the
+   * sheet as a whole should feel it too. This publishes a 0..1 ratio the
+   * stylesheet uses to grow the blood running down from the header, so a
+   * healthy crow's sheet is merely dark and a nearly-dead one is visibly
+   * bleeding without a number having to be read.
+   */
+  _onRender(context, options) {
+    super._onRender(context, options);
+    const sys = this.actor.system;
+    const ratio = sys.wounds.length ? sys.woundCount / sys.wounds.length : 0;
+    this.element.style.setProperty("--crows-blood", ratio.toFixed(3));
+    this.element.classList.toggle("bleeding", ratio > 0);
+    this.element.classList.toggle("dying", ratio >= 0.7);
   }
 
   /* -------------------------------------------- */
@@ -365,6 +388,20 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   static async #onOpenTurnPanel() {
     const { DungeonTurnPanel } = await import("../system/dungeon-turn.mjs");
     return DungeonTurnPanel.show();
+  }
+
+  /**
+   * Configure this actor's token ON THE CANVAS, as distinct from the prototype.
+   *
+   * The prototype is the template new tokens are stamped from; the placed token
+   * is the thing actually standing in the dungeon. Editing one and expecting
+   * the other to change is a standing Foundry trap, so both are offered
+   * separately and only when they exist.
+   */
+  static async #onOpenPlacedToken() {
+    const token = placedTokenFor(this.actor);
+    if (!token) return ui.notifications.warn(game.i18n.localize("CROWS.NoPlacedToken"));
+    return token.sheet.render(true);
   }
 
   /* -------------------------------------------- */

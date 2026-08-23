@@ -1,4 +1,4 @@
-<section class="tab item-description" data-tab="description" data-group="sheet">
+<section class="tab item-description {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">
   <div class="prose">{{{enrichedDescription}}}</div>
   {{#if editable}}
     <textarea name="system.description" rows="12">{{system.description}}</textarea>

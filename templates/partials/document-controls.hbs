@@ -1,0 +1,53 @@
+{{!-- Document controls, surfaced as real buttons.
+
+     Foundry v13+ hides configureToken / configurePrototypeToken / ownership
+     behind the window header's overflow menu, which is a lot of clicks for
+     things a Ref touches constantly. These bind to the action names
+     ActorSheetV2 and DocumentSheetV2 already register, so they need no
+     handler code of their own — except openPlacedToken, which targets the
+     token on the canvas rather than this actor's prototype. --}}
+<nav class="document-controls">
+
+  {{#unless isToken}}
+    <button type="button" class="icon" data-action="configurePrototypeToken"
+            data-tooltip="{{localize 'TOKEN.TitlePrototype'}}">
+      <i class="fa-solid fa-circle-user"></i>
+    </button>
+  {{/unless}}
+
+  {{#if isToken}}
+    <button type="button" class="icon" data-action="configureToken"
+            data-tooltip="{{localize 'DOCUMENT.Token'}}">
+      <i class="fa-regular fa-circle-user"></i>
+    </button>
+  {{/if}}
+
+  {{#if hasPlacedToken}}
+    <button type="button" class="icon" data-action="openPlacedToken"
+            data-tooltip="{{localize 'CROWS.EditPlacedToken'}}">
+      <i class="fa-solid fa-location-crosshairs"></i>
+    </button>
+  {{/if}}
+
+  <button type="button" class="icon" data-action="showPortraitArtwork"
+          data-tooltip="{{localize 'SIDEBAR.CharArt'}}">
+    <i class="fa-solid fa-image"></i>
+  </button>
+
+  <button type="button" class="icon" data-action="showTokenArtwork"
+          data-tooltip="{{localize 'SIDEBAR.TokenArt'}}">
+    <i class="fa-solid fa-image-portrait"></i>
+  </button>
+
+  {{#if isGM}}
+    <button type="button" class="icon" data-action="configureOwnership"
+            data-tooltip="{{localize 'OWNERSHIP.Configure'}}">
+      <i class="fa-solid fa-user-lock"></i>
+    </button>
+  {{/if}}
+
+  <button type="button" class="icon" data-action="configureSheet"
+          data-tooltip="{{localize 'CROWS.ConfigureSheet'}}">
+    <i class="fa-solid fa-sliders"></i>
+  </button>
+</nav>

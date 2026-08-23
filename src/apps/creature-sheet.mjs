@@ -1,4 +1,5 @@
 import { CROWS } from "../config.mjs";
+import { placedTokenFor, documentControlContext } from "./token-controls.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -23,7 +24,8 @@ export default class CreatureSheet extends HandlebarsApplicationMixin(ActorSheet
       deleteItem: CreatureSheet.#onDeleteItem,
       addAttack: CreatureSheet.#onAddAttack,
       addFeature: CreatureSheet.#onAddFeature,
-      harvest: CreatureSheet.#onHarvest
+      harvest: CreatureSheet.#onHarvest,
+      openPlacedToken: CreatureSheet.#onOpenPlacedToken
     },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: null }]
   };
@@ -79,6 +81,7 @@ export default class CreatureSheet extends HandlebarsApplicationMixin(ActorSheet
       : game.i18n.localize(CROWS.creatureCategories[sys.category]);
 
     context.universal = CROWS.universalMonsterDrives;
+    Object.assign(context, documentControlContext(actor));
 
     context.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(sys.description, {
       relativeTo: actor
@@ -149,6 +152,17 @@ export default class CreatureSheet extends HandlebarsApplicationMixin(ActorSheet
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
       flavor: game.i18n.format("CROWS.HarvestedParts", { name: this.actor.name })
     });
+  }
+
+  /**
+   * Configure this actor's token ON THE CANVAS, as distinct from the prototype.
+   * Editing one and expecting the other to change is a standing Foundry trap,
+   * so they are offered as separate buttons.
+   */
+  static async #onOpenPlacedToken() {
+    const token = placedTokenFor(this.actor);
+    if (!token) return ui.notifications.warn(game.i18n.localize("CROWS.NoPlacedToken"));
+    return token.sheet.render(true);
   }
 
   #itemFor(target) {

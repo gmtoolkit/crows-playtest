@@ -495,5 +495,8 @@
   "CROWS.DTWarning": "{minutes} minutes left in this dungeon turn.",
   "CROWS.Settings.TurnWarnings": "Warn as the dungeon turn runs down",
   "CROWS.Settings.TurnWarningsHint": "A notification and a soft chime at 10, 5 and 1 minutes remaining, so the table can spend the last of the turn deliberately.",
-  "CROWS.DTWarningOne": "One minute left in this dungeon turn."
+  "CROWS.DTWarningOne": "One minute left in this dungeon turn.",
+  "CROWS.EditPlacedToken": "Configure the token on the canvas",
+  "CROWS.NoPlacedToken": "This actor has no token on the current scene.",
+  "CROWS.ConfigureSheet": "Sheet configuration"
 }

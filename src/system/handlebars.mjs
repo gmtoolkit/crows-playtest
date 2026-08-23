@@ -6,7 +6,8 @@ const PARTIALS = [
   "systems/crows/templates/partials/card-face.hbs",
   "systems/crows/templates/partials/characteristic.hbs",
   "systems/crows/templates/partials/expertise-row.hbs",
-  "systems/crows/templates/partials/attack-row.hbs"
+  "systems/crows/templates/partials/attack-row.hbs",
+  "systems/crows/templates/partials/document-controls.hbs"
 ];
 
 export function registerHandlebars() {

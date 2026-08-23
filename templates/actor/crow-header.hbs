@@ -74,11 +74,14 @@
     {{/if}}
   </div>
 
-  <nav class="header-actions">
-    <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "CROWS.Rest"}}</button>
-    <button type="button" data-action="openBuilder"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "CROWS.Builder"}}</button>
-    <button type="button" data-action="openTurnPanel"><i class="fa-solid fa-hourglass-half"></i> {{localize "CROWS.DungeonTurn"}}</button>
-  </nav>
+  <div class="action-bar">
+    <nav class="header-actions">
+      <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "CROWS.Rest"}}</button>
+      <button type="button" data-action="openBuilder"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "CROWS.Builder"}}</button>
+      <button type="button" data-action="openTurnPanel"><i class="fa-solid fa-hourglass-half"></i> {{localize "CROWS.DungeonTurn"}}</button>
+    </nav>
+    {{> "systems/crows/templates/partials/document-controls.hbs"}}
+  </div>
 
   {{#if system.dead}}
     <div class="dead-banner">{{localize "CROWS.DeadBanner"}}</div>
