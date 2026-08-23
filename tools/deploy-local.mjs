@@ -10,7 +10,7 @@
  * (Learned the hard way in foundryvtt-golarion-maps; see its DECISIONS.md
  * 2026-07-17.) The copy also mirrors the release zip layout exactly.
  */
-import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { targetFromArgs } from "./packages.mjs";
@@ -45,6 +45,41 @@ for (const entry of target.ship) {
     console.warn(`skip (absent): ${entry}`);
     continue;
   }
+  /**
+   * `packs` is copied PACK BY PACK, not as one directory.
+   *
+   * Foundry locks the LevelDB of every compendium it has actually loaded, and
+   * only those. Wiping and replacing the whole `packs/` directory therefore
+   * failed on the two or three packs a running world happens to hold open, and
+   * took every other pack down with it — so a brand new compendium, which
+   * nothing could possibly have open, could not be deployed while Foundry ran.
+   * That is the normal state during development, and it made new content look
+   * like it had not built.
+   */
+  if (entry === "packs" && existsSync(src)) {
+    mkdirSync(join(dest, entry), { recursive: true });
+    const lockedPacks = [];
+    for (const pack of readdirSync(src)) {
+      try {
+        rmSync(join(dest, entry, pack), { recursive: true, force: true });
+        cpSync(join(src, pack), join(dest, entry, pack), { recursive: true });
+      } catch (err) {
+        if (err.code === "EPERM" || err.code === "EBUSY") {
+          lockedPacks.push(pack);
+          continue;
+        }
+        throw err;
+      }
+    }
+    const done = readdirSync(src).length - lockedPacks.length;
+    console.log(`copied packs (${done} of ${readdirSync(src).length})`);
+    if (lockedPacks.length) {
+      locked.push(`packs: ${lockedPacks.join(", ")}`);
+      console.warn(`  LOCKED, still open in Foundry: ${lockedPacks.join(", ")}`);
+    }
+    continue;
+  }
+
   try {
     rmSync(join(dest, entry), { recursive: true, force: true });
     cpSync(src, join(dest, entry), { recursive: true });

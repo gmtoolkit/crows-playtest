@@ -93,4 +93,26 @@ export default class GearData extends foundry.abstract.TypeDataModel {
     // Pets are led, not packed: they cost no inventory slots.
     if (this.pet?.isPet) this.slots = 0;
   }
+
+  /**
+   * Whether this thing is actually burning right now.
+   *
+   * Three conditions, and the card was showing none of them: it must emit
+   * light, it must have fuel left, and it must be IN A HAND — a torch in the
+   * backpack lights nothing, which is the whole point of hand slots being
+   * scarce.
+   *
+   * The card previously printed the light radii as a bare "5/5", which reads
+   * as five fuel of five, and sat unchanged next to a torch with zero usage
+   * dice left. "How the heck do I use this torch" was the fair response.
+   */
+  prepareDerivedData() {
+    const emits = (this.light?.bright ?? 0) > 0 || (this.light?.dim ?? 0) > 0;
+    const hasFuel = !this.ud?.max || this.ud.value > 0;
+    const inHand = this.carried?.container === "hand";
+    this.lit = emits && hasFuel && inHand;
+    // Distinguish "not in your hand" from "burnt out" — the fixes differ.
+    this.outOfFuel = emits && !!this.ud?.max && this.ud.value <= 0;
+    this.stowed = emits && hasFuel && !inHand;
+  }
 }

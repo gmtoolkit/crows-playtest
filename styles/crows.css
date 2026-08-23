@@ -2621,3 +2621,53 @@
   stroke: var(--crows-gold);
   stroke-width: 0.06;
 }
+
+/* -------------------------------------------- */
+/*  Light sources                               */
+/* -------------------------------------------- */
+
+/**
+ * A card has to say whether the thing is burning.
+ *
+ * The radii alone ("5/5") read as a fuel gauge, and sat unchanged on a torch
+ * with none left. The state word is the fix; the colour just makes it findable
+ * at slot size.
+ */
+.crows .card-line.light {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.62rem;
+}
+
+.crows .card-line.light .light-radii {
+  color: var(--crows-muted);
+}
+
+.crows .card-line.light .light-state {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.crows .card-line.light.lit {
+  color: var(--crows-gold);
+}
+
+.crows .card-line.light.lit i {
+  animation: crows-flicker 2.4s ease-in-out infinite;
+}
+
+.crows .card-line.light.out {
+  color: var(--crows-muted);
+}
+
+.crows .card-line.light.out i {
+  opacity: 0.45;
+}
+
+@keyframes crows-flicker {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 0.68; }
+  70% { opacity: 0.9; }
+}

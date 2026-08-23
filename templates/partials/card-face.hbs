@@ -52,7 +52,21 @@
 
     {{#if (crowsEq item.type "gear")}}
       {{#if (crowsGt item.system.light.bright 0)}}
-        <div class="card-line"><i class="fa-solid fa-fire"></i> {{item.system.light.bright}}/{{item.system.light.dim}}</div>
+        {{!-- "5/5" alone was read as five fuel of five. It is the light RADII,
+              bright over dim, and it sat next to a torch with zero fuel left
+              looking like a full one. It says what it is now, and whether the
+              thing is actually burning. --}}
+        <div class="card-line light {{#if item.system.lit}}lit{{else}}out{{/if}}"
+             data-tooltip="{{#if item.system.lit}}{{localize 'CROWS.LitHint'}}{{else}}{{localize 'CROWS.OutHint'}}{{/if}}">
+          <i class="fa-solid {{#if item.system.lit}}fa-fire{{else}}fa-fire-flame-simple{{/if}}"></i>
+          <span class="light-radii">{{item.system.light.bright}}/{{item.system.light.dim}}</span>
+          <span class="light-state">
+            {{~#if item.system.lit}}{{localize "CROWS.Lit"}}
+            {{~else if item.system.outOfFuel}}{{localize "CROWS.Out"}}
+            {{~else if item.system.stowed}}{{localize "CROWS.Stowed"}}
+            {{~else}}{{localize "CROWS.Out"}}{{/if~}}
+          </span>
+        </div>
       {{/if}}
     {{/if}}
   </div>
