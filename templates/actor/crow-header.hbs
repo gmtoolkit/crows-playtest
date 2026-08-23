@@ -39,12 +39,11 @@
             </button>
           </div>
         </div>
-        <div class="field">
-          <label>{{localize "CROWS.Feature"}}</label>
-          <input type="text" name="system.biography.feature" value="{{system.biography.feature}}"
-                 placeholder="{{localize 'CROWS.FeaturePlaceholder'}}"
-                 data-tooltip="{{localize 'CROWS.FeatureHint'}}">
-        </div>
+        {{!-- No Feature field. It is pure flavour with nothing derived from it
+              (C p1: "a tattoo, distinct body odor, unique voice"), and it was
+              taking half the identity row to hold a sentence that belongs in
+              Bio. The schema keeps the field so no existing text is destroyed;
+              it is simply not on the header any more. --}}
       </div>
     </div>
   </div>

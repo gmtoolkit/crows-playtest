@@ -49,7 +49,17 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
   constructor(options = {}) {
     super(options);
     this.actor = options.actor;
-    this.state = {
+    /**
+     * The crow being built, NOT called `state`.
+     *
+     * ApplicationV2 defines `state` as a read-only getter, so `this.state = {}`
+     * threw in the constructor and the builder simply never opened — the button
+     * did nothing, with the error swallowed as an unhandled rejection. Third
+     * name collision of this kind in this system; the others were
+     * `--crows-blood` (a palette colour overwritten with a number) and
+     * `advancement` (a stored field replaced by a derived object).
+     */
+    this.draft = {
       step: "background",
       background: null,
       /** Which characteristic the background raises to 2. */
@@ -81,11 +91,11 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
 
   async _prepareContext() {
     const backgrounds = await this.backgrounds();
-    const bg = this.state.background;
+    const bg = this.draft.background;
 
     const context = {
       actor: this.actor,
-      state: this.state,
+      draft: this.draft,
       backgrounds,
       hasBackgrounds: backgrounds.length > 0,
       CROWS
@@ -117,11 +127,11 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
         index,
         label: `${pair[0] >= 0 ? "+" : ""}${pair[0]} / ${pair[1] >= 0 ? "+" : ""}${pair[1]}`,
         pair,
-        selected: this.state.spreadIndex === index
+        selected: this.draft.spreadIndex === index
       }));
 
       context.remaining = Object.keys(CROWS.characteristics)
-        .filter((k) => k !== this.state.at2)
+        .filter((k) => k !== this.draft.at2)
         .map((key) => ({ key, label: game.i18n.localize(CROWS.characteristics[key].label) }));
 
       context.preview = this.#previewCharacteristics();
@@ -136,14 +146,14 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
    */
   #previewCharacteristics() {
     const values = { agility: 0, mind: 0, strength: 0 };
-    if (!this.state.at2) return values;
+    if (!this.draft.at2) return values;
 
-    values[this.state.at2] = 2;
-    const others = Object.keys(CROWS.characteristics).filter((k) => k !== this.state.at2);
-    const pair = CROWS.creation.characteristicSpreads[this.state.spreadIndex];
+    values[this.draft.at2] = 2;
+    const others = Object.keys(CROWS.characteristics).filter((k) => k !== this.draft.at2);
+    const pair = CROWS.creation.characteristicSpreads[this.draft.spreadIndex];
 
     // spreadOrder names which of the two remaining gets the FIRST (higher) value.
-    const first = this.state.spreadOrder ?? others[0];
+    const first = this.draft.spreadOrder ?? others[0];
     const second = others.find((k) => k !== first);
     values[first] = pair[0];
     values[second] = pair[1];
@@ -162,7 +172,7 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
     await roll.toMessage({ flavor: game.i18n.localize("CROWS.RollingBackground") });
 
     const match = backgrounds.find((b) => b.system.roll.first === first && b.system.roll.second === second);
-    this.state.rolled = { first, second };
+    this.draft.rolled = { first, second };
     if (match) this.#selectBackground(match);
     else ui.notifications.warn(game.i18n.format("CROWS.NoBackgroundAt", { first, second }));
     return this.render();
@@ -176,28 +186,28 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
   }
 
   #selectBackground(bg) {
-    this.state.background = bg;
-    this.state.step = "characteristics";
+    this.draft.background = bg;
+    this.draft.step = "characteristics";
     // Backgrounds with no choice preselect themselves.
-    this.state.at2 = bg.system.characteristicAt2.length === 1 ? bg.system.characteristicAt2[0] : null;
-    this.state.spreadOrder = null;
+    this.draft.at2 = bg.system.characteristicAt2.length === 1 ? bg.system.characteristicAt2[0] : null;
+    this.draft.spreadOrder = null;
   }
 
   static async #onChooseAt2(event, target) {
-    this.state.at2 = target.dataset.characteristic;
-    this.state.spreadOrder = null;
+    this.draft.at2 = target.dataset.characteristic;
+    this.draft.spreadOrder = null;
     return this.render();
   }
 
   static async #onChooseSpread(event, target) {
-    if (target.dataset.spreadIndex !== undefined) this.state.spreadIndex = Number(target.dataset.spreadIndex);
-    if (target.dataset.first) this.state.spreadOrder = target.dataset.first;
+    if (target.dataset.spreadIndex !== undefined) this.draft.spreadIndex = Number(target.dataset.spreadIndex);
+    if (target.dataset.first) this.draft.spreadOrder = target.dataset.first;
     return this.render();
   }
 
   static async #onBack() {
-    this.state.step = "background";
-    this.state.background = null;
+    this.draft.step = "background";
+    this.draft.background = null;
     return this.render();
   }
 
@@ -205,9 +215,9 @@ export class CrowBuilder extends HandlebarsApplicationMixin(ApplicationV2) {
 
   /** Write the background onto the actor and place its starting kit. */
   static async #onApply() {
-    const bg = this.state.background;
+    const bg = this.draft.background;
     if (!bg) return;
-    if (!this.state.at2) return ui.notifications.warn(game.i18n.localize("CROWS.PickCharacteristic"));
+    if (!this.draft.at2) return ui.notifications.warn(game.i18n.localize("CROWS.PickCharacteristic"));
 
     const sys = bg.system;
     const chars = this.#previewCharacteristics();

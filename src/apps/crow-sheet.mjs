@@ -41,8 +41,16 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       pickBackground: CrowSheet.#onPickBackground,
       browseItems: CrowSheet.#onBrowseItems,
       openPlacedToken: CrowSheet.#onOpenPlacedToken
-    },
-    dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: ".crows-slot" }]
+    }
+    /**
+     * There is deliberately NO `dragDrop` option here.
+     *
+     * That is a v1 Application thing and ActorSheetV2 ignores it: it builds
+     * ONE DragDrop with `dragSelector: ".draggable"`. A card is made draggable
+     * by carrying that CLASS, which `card-face.hbs` now does. The option that
+     * used to sit here was read into `sheet.options` and did nothing at all,
+     * so cards could be picked up by the browser and dropped nowhere.
+     */
   };
 
   static PARTS = {

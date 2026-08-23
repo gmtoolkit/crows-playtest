@@ -1,7 +1,7 @@
 {{!-- Crow creation, following the book's four steps (C p1). --}}
 <div class="crow-builder">
 
-  {{#if (crowsEq state.step "background")}}
+  {{#if (crowsEq draft.step "background")}}
     <section class="step">
       <h3>{{localize "CROWS.Step1"}}</h3>
 
@@ -47,7 +47,7 @@
             <div class="choice-row">
               {{#each chosen.at2Options}}
                 <button type="button" data-action="chooseAt2" data-characteristic="{{this.key}}"
-                        class="{{#if (crowsEq this.key ../state.at2)}}selected{{/if}}">{{this.label}}</button>
+                        class="{{#if (crowsEq this.key ../draft.at2)}}selected{{/if}}">{{this.label}}</button>
               {{/each}}
             </div>
           {{/if}}
@@ -65,7 +65,7 @@
             <div class="choice-row">
               {{#each remaining}}
                 <button type="button" data-action="chooseSpread" data-first="{{this.key}}"
-                        class="{{#if (crowsEq this.key ../state.spreadOrder)}}selected{{/if}}">{{this.label}}</button>
+                        class="{{#if (crowsEq this.key ../draft.spreadOrder)}}selected{{/if}}">{{this.label}}</button>
               {{/each}}
             </div>
           {{/if}}

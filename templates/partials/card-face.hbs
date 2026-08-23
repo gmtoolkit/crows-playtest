@@ -1,6 +1,13 @@
 {{!-- One inventory card. Mirrors the printed card layout: name, then the
       stat line that matters for its type, then usage dice as pips. --}}
-<div class="card-face type-{{item.type}} {{#if item.system.magic}}magic{{/if}}" data-item-id="{{item.id}}" draggable="true">
+{{!-- The CLASS `draggable` is what makes this draggable, not the attribute.
+      ActorSheetV2 builds one DragDrop with `dragSelector: ".draggable"` and
+      ignores DEFAULT_OPTIONS.dragDrop entirely — that option is a v1
+      Application thing. So the cards carried draggable="true", the browser let
+      you pick them up, and Foundry's handler was never bound to them: nothing
+      could be dragged to the hotbar, or anywhere else off the sheet. --}}
+<div class="card-face draggable type-{{item.type}} {{#if item.system.magic}}magic{{/if}}"
+     data-item-id="{{item.id}}" draggable="true">
 
   <header class="card-head">
     <img class="card-img" src="{{item.img}}" alt="{{item.name}}">
