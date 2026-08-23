@@ -21,12 +21,44 @@
   "environment": {
     "darknessLevel": 0,
     "globalLight": {
-      "enabled": true
+      "enabled": true,
+      "alpha": 0.5,
+      "bright": false,
+      "color": null,
+      "coloration": 1,
+      "luminosity": 0,
+      "saturation": 0,
+      "contrast": 0,
+      "shadows": 0,
+      "darkness": {
+        "min": 0,
+        "max": 1
+      }
+    },
+    "darknessLock": false,
+    "cycle": true,
+    "base": {
+      "hue": 0,
+      "intensity": 0,
+      "luminosity": 0,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "dark": {
+      "hue": 0.7138888888888889,
+      "intensity": 0,
+      "luminosity": -0.25,
+      "saturation": 0,
+      "shadows": 0
     }
   },
   "tokenVision": false,
   "fog": {
-    "mode": 2
+    "mode": 2,
+    "colors": {
+      "explored": null,
+      "unexplored": null
+    }
   },
   "levels": [
     {
@@ -53,5 +85,10 @@
   },
   "ownership": {
     "default": 0
+  },
+  "initial": {
+    "x": null,
+    "y": null,
+    "scale": null
   }
 }

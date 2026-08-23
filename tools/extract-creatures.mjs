@@ -429,7 +429,13 @@ async function main() {
         height: sizeKey === "large" ? 2 : sizeKey === "huge" ? 3 : sizeKey === "holyShit" ? 4 : 1,
         disposition: typeInfo?.category === "monster" ? -1 : 0,
         actorLink: false,
-        sight: { enabled: false }
+        sight: {
+          enabled: true,
+          // Monsters take no penalty from darkness (F p30); humans and animals
+          // need light like a crow does.
+          range: typeInfo?.category === "monster" ? 60 : 0,
+          visionMode: "basic"
+        }
       },
       system: {
         category: typeInfo?.category ?? "monster",

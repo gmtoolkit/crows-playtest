@@ -12,6 +12,101 @@ import { resolveUsageDice } from "../dice/tiers.mjs";
  */
 export class CrowsActor extends Actor {
   /* -------------------------------------------- */
+  /*  Creation defaults                           */
+  /* -------------------------------------------- */
+
+  /**
+   * Give new actors a prototype token that matches how Crows actually works.
+   *
+   * Foundry defaults `sight.enabled` to false, so a freshly made crow walks
+   * through walls' vision as if they were not there — the scene's token vision
+   * and the walls are both correct, and nothing happens, because the TOKEN is
+   * not computing vision at all.
+   *
+   * The important part is `range: 0` for crows. They have no darkvision:
+   * "Without a proper light source, a crow can't effectively navigate their
+   * environment, unlike dungeon denizens" (R p15). Range 0 does not mean blind
+   * — Foundry shows a token whatever is lit within its line of sight — it
+   * means a crow sees exactly as far as their torch reaches and no further,
+   * which is the whole torch economy.
+   *
+   * Monsters are the stated exception: "Monsters have special senses that mean
+   * darkness and dim light impose no penalties on them" (F p30), so they get
+   * sight that does not depend on light.
+   */
+  async _preCreate(data, options, user) {
+    const allowed = await super._preCreate(data, options, user);
+    if (allowed === false) return false;
+
+    // Respect anything the incoming data already specifies (compendium
+    // imports, duplicates) rather than stamping over an authored token.
+    const authored = data.prototypeToken ?? {};
+    const proto = { sight: {}, ...foundry.utils.deepClone(authored) };
+
+    if (this.type === "crow") {
+      proto.actorLink ??= true;
+      proto.disposition ??= CONST.TOKEN_DISPOSITIONS.FRIENDLY;
+      proto.sight.enabled ??= true;
+      proto.sight.range ??= 0; // no darkvision: they see only what is lit
+      proto.sight.visionMode ??= "basic";
+    } else if (this.type === "creature") {
+      proto.actorLink ??= false;
+      proto.disposition ??= this.system?.category === "monster"
+        ? CONST.TOKEN_DISPOSITIONS.HOSTILE
+        : CONST.TOKEN_DISPOSITIONS.NEUTRAL;
+      proto.sight.enabled ??= true;
+      // Monsters ignore darkness entirely; humans and animals need light like
+      // a crow does.
+      proto.sight.range ??= this.system?.category === "monster" ? CROWS.monsterSightRange : 0;
+      proto.sight.visionMode ??= "basic";
+    }
+
+    this.updateSource({ prototypeToken: proto });
+    return allowed;
+  }
+
+  /* -------------------------------------------- */
+  /*  Carried light                               */
+  /* -------------------------------------------- */
+
+  /**
+   * Push the crow's carried light onto their token(s).
+   *
+   * Crows have no darkvision, so the torch in your hand IS your vision. Making
+   * the token's light follow the equipped light source means the torch economy
+   * plays itself: draw a torch and the dark opens up, let its usage dice run
+   * out at the end of a dungeon turn and it closes again, with no one having to
+   * remember to edit a token.
+   */
+  async syncCarriedLight() {
+    if (this.type !== "crow") return;
+
+    const source = this.system.lightSource;
+    const config = source
+      ? {
+          bright: source.bright,
+          dim: source.dim,
+          color: "#ff9d5c",
+          alpha: 0.35,
+          animation: { type: "torch", speed: 2, intensity: 2 }
+        }
+      : { bright: 0, dim: 0, animation: { type: null } };
+
+    // The prototype carries it forward to tokens placed later.
+    if (!foundry.utils.objectsEqual(this.prototypeToken.light.toObject?.() ?? {}, config)) {
+      await this.update({ prototypeToken: { light: config } }, { render: false });
+    }
+
+    // Unlinked tokens keep their own copy, so update the placed ones too.
+    for (const scene of game.scenes) {
+      const updates = scene.tokens
+        .filter((t) => t.actorId === this.id)
+        .map((t) => ({ _id: t.id, light: config }));
+      if (updates.length) await scene.updateEmbeddedDocuments("Token", updates);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Rolling                                     */
   /* -------------------------------------------- */
 

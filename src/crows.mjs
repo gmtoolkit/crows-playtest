@@ -154,6 +154,25 @@ Hooks.on("getSceneControlButtons", (controls) => {
 });
 
 /* -------------------------------------------- */
+/*  Carried light                               */
+/* -------------------------------------------- */
+
+/**
+ * A crow's token light follows whatever light source is in their hands, so
+ * drawing a torch opens the dark and letting it burn out closes it again.
+ * Item hooks cover every route: equipping, moving between slots, spending
+ * usage dice at the end of a dungeon turn, and dropping it.
+ */
+for (const hook of [createItem, updateItem, deleteItem]) {
+  Hooks.on(hook, (item) => {
+    const actor = item.parent;
+    if (!(actor instanceof Actor) || actor.type !== crow) return;
+    if (!actor.isOwner) return;
+    actor.syncCarriedLight();
+  });
+}
+
+/* -------------------------------------------- */
 /*  Chat card interactions                      */
 /* -------------------------------------------- */
 

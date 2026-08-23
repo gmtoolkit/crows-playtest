@@ -14,7 +14,9 @@
     "disposition": 0,
     "actorLink": false,
     "sight": {
-      "enabled": false
+      "enabled": true,
+      "range": 0,
+      "visionMode": "basic"
     }
   },
   "system": {

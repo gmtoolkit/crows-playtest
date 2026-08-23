@@ -372,6 +372,13 @@ CROWS.universalMonsterDrives = {
 CROWS.monstersIgnoreDarkness = true;
 
 /**
+ * Token sight range for monsters, in feet. Generous rather than infinite: it
+ * expresses "darkness is no penalty" (F p30) without revealing the far side of
+ * a dungeon the moment a monster token is dropped.
+ */
+CROWS.monsterSightRange = 60;
+
+/**
  * A monster with power <= this may flee rather than engage something it hates
  * when confronted with an overwhelming amount of it (F p30).
  */
@@ -617,6 +624,8 @@ CROWS.armorCategories = {
 /* -------------------------------------------- */
 
 CROWS.combat = {
+  /** Each square on the grid is 5 feet across (R p18). */
+  feetPerSquare: 5,
   /** Side-based initiative: one player rolls 1d10 at the start of every round. */
   initiativeFormula: "1d10",
   /** On this result or higher the crows act first. */

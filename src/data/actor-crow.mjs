@@ -201,6 +201,45 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
     this.xp.available = Math.max(0, this.xp.total - this.xp.spent);
     this.advancement = this.#deriveAdvancement();
 
+    /* --- Carried light ---------------------------------------------------- */
+
+    /**
+     * The light this crow is actually casting.
+     *
+     * Only a source held in a HAND counts: a torch in the backpack lights
+     * nothing, which is the point of hand slots being scarce. An exhausted
+     * source (usage dice all spent) has burned out and is dark.
+     *
+     * Card notation is "X/Y" — X squares of bright light, then Y MORE squares
+     * of dim (R p15). Foundry's `dim` radius INCLUDES the bright part, so the
+     * two have to be summed rather than passed through, or every torch would
+     * light half as far as it should.
+     */
+    const feetPerSquare = CROWS.combat.feetPerSquare;
+    let best = null;
+    for (const item of this.parent?.items ?? []) {
+      if (item.system?.carried?.container !== "hand") continue;
+      const light = item.system?.light;
+      if (!light || (!light.bright && !light.dim)) continue;
+      if (item.system.ud?.max > 0 && item.system.ud.value <= 0) continue; // burned out
+
+      const reach = light.bright + light.dim;
+      if (!best || reach > best.reach) {
+        best = { item, reach, bright: light.bright, dim: light.dim };
+      }
+    }
+
+    this.lightSource = best
+      ? {
+          name: best.item.name,
+          brightSquares: best.bright,
+          dimSquares: best.dim,
+          // Foundry radii, in scene distance units.
+          bright: best.bright * feetPerSquare,
+          dim: (best.bright + best.dim) * feetPerSquare
+        }
+      : null;
+
     /* --- Magic slot overload --------------------------------------------- */
 
     // Two items in one magic slot means no rest and 1d6 wounds per DT (R p11).
