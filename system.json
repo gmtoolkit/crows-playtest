@@ -42,6 +42,17 @@
   "secondaryTokenAttribute": "armor",
   "packs": [
     {
+      "name": "creatures",
+      "label": "Crows: Creatures",
+      "path": "packs/creatures",
+      "type": "Actor",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
       "name": "scenes",
       "label": "Crows: Maps",
       "path": "packs/scenes",

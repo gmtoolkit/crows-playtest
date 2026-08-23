@@ -1,0 +1,129 @@
+{
+  "__key": "spider-giant",
+  "__folder": "Animals",
+  "name": "Spider, Giant",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Spider, Giant",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 3,
+    "height": 3,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "animal",
+    "monsterType": "",
+    "size": "huge",
+    "power": 10,
+    "stamina": {
+      "value": 30,
+      "max": 30
+    },
+    "speed": {
+      "walk": 8,
+      "climb": 8,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": true
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": -4
+      },
+      "strength": {
+        "value": 3
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 20
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Bite",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "5 dam",
+        "tier3": "9 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Highly Venomous",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the spider gets a tier 2 result with their bite, the target is weakened, or vulnerable and weakened on a tier 3 result.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Web",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the spider showers a 3 square area within 1 square of them with web. The web has 10 Stamina. Each creature in the area must make an Agility RR. 1 The creature is grabbed by the web. 2 The creature’s speed is halved until the end of their next turn. 3 No effect.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Vibration Sense",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The spider is aware of the exact location of any creature within 2 squares and suffers no penalties on attacks against or tests made to observe them.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

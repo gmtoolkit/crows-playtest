@@ -1,0 +1,99 @@
+{
+  "__key": "sage-power-6",
+  "__folder": "Humans",
+  "name": "Sage (Power 6)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Sage (Power 6)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 6,
+    "stamina": {
+      "value": 20,
+      "max": 20
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 1
+      },
+      "mind": {
+        "value": 3
+      },
+      "strength": {
+        "value": 0
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Expertises:</strong> Historical Lore (2 uses), Magic Lore</p><p><strong>Equipment:</strong> Journal, lore book (4; Historical</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Fire Lance",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "ranged",
+          "value": 10
+        },
+        "targets": 1,
+        "tier2": "5 dam",
+        "tier3": "7 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Lecture",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the sage reads a lore book as a rest activity, they can choose up to two other humans resting with them who also gains the activity’s benefits.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "__key": "undead-creature-f",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature F",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-f.webp",
+  "prototypeToken": {
+    "name": "Undead Creature F",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-f-token.webp"
+    },
+    "width": 2,
+    "height": 2,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "large",
+    "power": 15,
+    "stamina": {
+      "value": 75,
+      "max": 75
+    },
+    "speed": {
+      "walk": 4,
+      "climb": 4,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 3,
+    "characteristics": {
+      "agility": {
+        "value": -2
+      },
+      "mind": {
+        "value": 1
+      },
+      "strength": {
+        "value": 4
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "gore beast, rot pile, sludge",
+    "description": "<p>Formed from the muscle, sinew, and jagged bones of humans, this moving pile of gore can form weapons out of their bones and hurl toxic chunks of its own flesh at their enemies.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Exploding Mote (2/Day)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the undead hurls a chunk of their flesh that explodes into gas in a 4 cube within 10 squares of them. Each non-undead creature in the area must make an Strength RR. 1 15 dam 2 7 dam 3 No effect</p>",
+        "uses": {
+          "value": 2,
+          "max": 2,
+          "per": "day"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Glorp Through (3/Day)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As a maneuver, the undead moves their speed without provoking opportunity attacks and while entering other creature’s spaces at no speed penalty. Each creature’s space they enter takes 1d6 dam. If they end this movement in another creature’s space, the undead slides the creature into the nearest unoccupied space of their choice.</p>",
+        "uses": {
+          "value": 3,
+          "max": 3,
+          "per": "day"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Liquid Death",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead is reduced to 0 Stamina, their body explodes in a fountain of acidic gore. Each creature within 2 squares of them takes 1d10 dam.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

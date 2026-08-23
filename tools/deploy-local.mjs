@@ -33,8 +33,23 @@ for (const entry of SHIP) {
     console.warn(`skip (absent): ${entry}`);
     continue;
   }
-  rmSync(join(target, entry), { recursive: true, force: true });
-  cpSync(src, join(target, entry), { recursive: true });
+  try {
+    rmSync(join(target, entry), { recursive: true, force: true });
+    cpSync(src, join(target, entry), { recursive: true });
+  } catch (err) {
+    // Foundry holds an exclusive lock on every open compendium LevelDB, so a
+    // running world makes `packs` undeletable. The error itself says only
+    // EPERM, which sends you looking for a permissions problem that is not
+    // there.
+    if (err.code === "EPERM" && entry === "packs") {
+      console.error(
+        `\nCannot replace ${entry}: Foundry has the compendium databases open.\n` +
+          `Return to the setup screen (or close Foundry) and run this again.\n`
+      );
+      process.exit(1);
+    }
+    throw err;
+  }
   console.log(`copied ${entry}`);
 }
 

@@ -1,0 +1,159 @@
+{
+  "__key": "undead-creature-h",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature H",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-h.webp",
+  "prototypeToken": {
+    "name": "Undead Creature H",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-h-token.webp"
+    },
+    "width": 3,
+    "height": 3,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "huge",
+    "power": 25,
+    "stamina": {
+      "value": 120,
+      "max": 120
+    },
+    "speed": {
+      "walk": 7,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 4,
+    "characteristics": {
+      "agility": {
+        "value": 3
+      },
+      "mind": {
+        "value": 4
+      },
+      "strength": {
+        "value": 5
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "flayer of souls, spinecruncher",
+    "description": "<p>A massive tower of bone, muscle, mouths, and thinly stretched skin, this undead hoards the remains of their kills, forming them into new undead once enough have been gathered. They can also grow swords made of human spines instantaneously from their hands.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Bites",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 5,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 2,
+        "tier2": "5 dam",
+        "tier3": "10 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Vorpal Bite",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Weakening Blade",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead damages a creature with their spineswords, the creature is weakened.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Vorpal Bite",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead scores a crit with their bite attack against a Large or smaller creature, the creature’s head is removed.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Extra Action",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The undead can take one additional action or maneuver on their combat turn.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": true,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Whirlwind (3/day; only once per turn)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the undead moves up to their speed without provoking opportunity attacks. Each enemy they come within 2 squares of at the start of, end of, and during the move takes 1d10 dam.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Damned Shriek (2/day; only once per turn)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As a maneuver, the undead’s many mouths open in a hideous, discordant scream. Each enemy within 5 squares of the undead must make a Mind RR. 1 Prone and vulnerable 2 Prone 3 No effect</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

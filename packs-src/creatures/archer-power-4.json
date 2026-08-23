@@ -1,0 +1,84 @@
+{
+  "__key": "archer-power-4",
+  "__folder": "Humans",
+  "name": "Archer (Power 4)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Archer (Power 4)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 4,
+    "stamina": {
+      "value": 10,
+      "max": 10
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 1
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 0
+      }
+    },
+    "ad": {
+      "value": 2,
+      "max": 2
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Armor Defense:</strong> 2 (from knife)</p><p><strong>Expertises:</strong> Athletics, Stealth, Bow</p><p><strong>Equipment:</strong> Quiver of 20 arrows, shortbow</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Shortbow",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "ranged",
+          "value": 12
+        },
+        "targets": 1,
+        "tier2": "3 dam",
+        "tier3": "5 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

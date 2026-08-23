@@ -1,0 +1,94 @@
+{
+  "__key": "thief-power-9",
+  "__folder": "Humans",
+  "name": "Thief (Power 9)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Thief (Power 9)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 6,
+    "stamina": {
+      "value": 35,
+      "max": 35
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 3
+      },
+      "mind": {
+        "value": 1
+      },
+      "strength": {
+        "value": 1
+      }
+    },
+    "ad": {
+      "value": 2,
+      "max": 2
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Armor Defense:</strong> 2 (from knife)</p><p><strong>Expertises:</strong> Stealth (4 uses), Thievery (4 uses)</p><p><strong>Equipment:</strong> Crowbar, knife, lock pick set (fine)</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Disengage",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the thief uses the Shift maneuver while wielding a knife, they can shift 1 additional square.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Master Thief",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the thief makes an Agility RR or a test to hide or sneak or pick a lock while not wearing armor, they can roll twice and choose either result.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

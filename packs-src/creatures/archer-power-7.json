@@ -1,0 +1,99 @@
+{
+  "__key": "archer-power-7",
+  "__folder": "Humans",
+  "name": "Archer (Power 7)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Archer (Power 7)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 7,
+    "stamina": {
+      "value": 25,
+      "max": 25
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": 1
+      },
+      "strength": {
+        "value": 0
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Expertises:</strong> Athletics, Stealth, Bow (2 uses)</p><p><strong>Equipment:</strong> longbow, quiver of 20 arrows</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Longbow",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 4,
+        "range": {
+          "type": "ranged",
+          "value": 22
+        },
+        "targets": 1,
+        "tier2": "5 dam",
+        "tier3": "8 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Walls Cannot Save You",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Walls Cannot Save You",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The archer’s longbow attacks ignore cover.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

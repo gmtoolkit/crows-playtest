@@ -1,0 +1,151 @@
+{
+  "__key": "undead-creature-c",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature C",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-c.webp",
+  "prototypeToken": {
+    "name": "Undead Creature C",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-c-token.webp"
+    },
+    "width": 2,
+    "height": 2,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "large",
+    "power": 6,
+    "stamina": {
+      "value": 30,
+      "max": 30
+    },
+    "speed": {
+      "walk": 6,
+      "climb": 6,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": true
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 2
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "gray death, rotting breath",
+    "description": "<p>The many limbs of this horse-sized undead make them an agile, quick predator that can squeeze the breath and break the ribs of a victim as they up a wall and into the dark to avoid other threats.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Crush",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 2
+        },
+        "targets": 1,
+        "tier2": "4 dam",
+        "tier3": "6 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Bite",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "4 dam",
+        "tier3": "6 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Big Bite",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Grabber",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead gets a tier 3 result with a Crush attack against a Medium or smaller creature, the creature is grabbed. There is no limit to the number of creatures they can grab.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Big Bite",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>While they have a target grabbed, the undead’s bite deals an additional 2 dam.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Squeeze",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As a maneuver, the undead deals 2 P dam to each creature they have grabbed.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

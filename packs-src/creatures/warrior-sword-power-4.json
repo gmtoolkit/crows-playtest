@@ -1,0 +1,99 @@
+{
+  "__key": "warrior-sword-power-4",
+  "__folder": "Humans",
+  "name": "Warrior, Sword (Power 4)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Warrior, Sword (Power 4)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 4,
+    "stamina": {
+      "value": 10,
+      "max": 10
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 1
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 1
+      }
+    },
+    "ad": {
+      "value": 14,
+      "max": 14
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Armor Defense:</strong> 14 (light armor, shield, sword)</p><p><strong>Expertises:</strong> Endurance, Lift, Slashing</p><p><strong>Equipment:</strong> Light armor, shield, sword</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Sword",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "4 dam",
+        "tier3": "7 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Disengage",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the warrior uses the Shift maneuver while wielding a sword, they can shift 2 additional squares.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

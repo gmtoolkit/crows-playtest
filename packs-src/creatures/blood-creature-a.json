@@ -1,0 +1,99 @@
+{
+  "__key": "blood-creature-a",
+  "__folder": "Blood Creatures",
+  "name": "Blood Creature A",
+  "type": "creature",
+  "img": "systems/crows/assets/art/blood-creature-a.webp",
+  "prototypeToken": {
+    "name": "Blood Creature A",
+    "texture": {
+      "src": "systems/crows/assets/art/blood-creature-a-token.webp"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "blood",
+    "size": "small",
+    "power": 1,
+    "stamina": {
+      "value": 5,
+      "max": 5
+    },
+    "speed": {
+      "walk": 6,
+      "climb": 6,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": -2
+      },
+      "strength": {
+        "value": 0
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "creep, red drool, spindleclaw",
+    "description": "<p>These blood creatures hunt in packs, dropping from above onto prey. They drool bright red saliva when food is near.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Claws",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "2 dam",
+        "tier3": "3 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Drop Attack",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>This blood creature treats falls as 10 squares shorter when calculating fall damage. After falling and taking no damage, they gain an edge on attacks and damage until the end of the turn.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

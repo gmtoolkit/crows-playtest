@@ -1,0 +1,99 @@
+{
+  "__key": "spider",
+  "__folder": "Animals",
+  "name": "Spider",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Spider",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "animal",
+    "monsterType": "",
+    "size": "tiny",
+    "power": 0,
+    "stamina": {
+      "value": 2,
+      "max": 2
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 5,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": true
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 1
+      },
+      "mind": {
+        "value": -4
+      },
+      "strength": {
+        "value": -5
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 0
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Bite",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 1,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "1 dam",
+        "tier3": "2 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Vibration Sense",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The spider is aware of the exact location of any creature within 2 squares and suffers no penalties on attacks against or tests made to observe them.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

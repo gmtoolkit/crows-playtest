@@ -1,0 +1,149 @@
+{
+  "__key": "undead-b",
+  "__folder": "Undead Creatures",
+  "name": "Undead B",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-b.webp",
+  "prototypeToken": {
+    "name": "Undead B",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-b-token.webp"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "medium",
+    "power": 4,
+    "stamina": {
+      "value": 20,
+      "max": 20
+    },
+    "speed": {
+      "walk": 6,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": -2
+      },
+      "strength": {
+        "value": 2
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "longclaw, spined one",
+    "description": "<p>When an undead A devours enough flesh, their body evolves, growing more and longer spines one their rotting form. Many groups of undead A have one or two of these creatures among their ranks, though the most successful packs consist almost entirely of undead B.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Claws",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "3 dam",
+        "tier3": "5 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Lacerate",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Spine",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "ranged",
+          "value": 10
+        },
+        "targets": 1,
+        "tier2": "2 dam",
+        "tier3": "4 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Lacerate",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead hits with their claws against a creature and damages their Stamina or gives them a wound, the target gains a laceration until they regain Stamina. When the target takes a maneuver and an action on their turn, they take 1 P dam for each laceration they have.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Leap",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The undead can jump a distance equal to their speed as a maneuver.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Spiked Counter",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead counters, they deal 5 dam.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

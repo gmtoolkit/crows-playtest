@@ -1,0 +1,134 @@
+{
+  "__key": "undead-creature-d",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature D",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-d.webp",
+  "prototypeToken": {
+    "name": "Undead Creature D",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-d-token.webp"
+    },
+    "width": 3,
+    "height": 3,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "huge",
+    "power": 10,
+    "stamina": {
+      "value": 50,
+      "max": 50
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 2,
+    "characteristics": {
+      "agility": {
+        "value": -2
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 3
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "fire belly, skull mountain",
+    "description": "<p>A pile of skulls atop a mound of gelatinous flesh, a literal fire caused by the tormented souls trapped inside the undead burns in belly of this creature.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Claws",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 2
+        },
+        "targets": 2,
+        "tier2": "3 dam",
+        "tier3": "5 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Rend",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 2
+        },
+        "targets": 1,
+        "tier2": "5 dam",
+        "tier3": "9 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Fire Beam (1/Day)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the undead shoots fire in a 10 x 2 line within 1 square of them. Each creature in the area must make an Agility RR. 1 10 dam 2 5 dam 3 No effect</p>",
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Absorb",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As a maneuver, the undead can grab the corpse of a human who has died within the last 24 hours that is within 2 squares of them and incorporate it into their form. The corpse and any mundane equipment it carries are destroyed, and the undead regains 10 Stamina.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

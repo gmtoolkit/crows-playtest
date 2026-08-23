@@ -1,0 +1,124 @@
+{
+  "__key": "blood-creature-b",
+  "__folder": "Blood Creatures",
+  "name": "Blood Creature B",
+  "type": "creature",
+  "img": "systems/crows/assets/art/blood-creature-b.webp",
+  "prototypeToken": {
+    "name": "Blood Creature B",
+    "texture": {
+      "src": "systems/crows/assets/art/blood-creature-b-token.webp"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "blood",
+    "size": "small",
+    "power": 3,
+    "stamina": {
+      "value": 15,
+      "max": 15
+    },
+    "speed": {
+      "walk": 6,
+      "climb": 6,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": true
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": -1
+      },
+      "strength": {
+        "value": 1
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "blood spider, mouth eyes",
+    "description": "<p>An orb of tendrils split by a toothy maw that parts to reveal glowing red eyes, this blood creature clings to surfaces and their enemies.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Bite",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "3 dam",
+        "tier3": "4 dam",
+        "piercing": false,
+        "riderTiers": [
+          2,
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Tendril",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "3 dam",
+        "tier3": "4 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Tendril Snare",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When this creature gets a tier 3 result on a tendril attack against a Medium or smaller target, the target is grabbed. While the target is grabbed this way, this creature’s bite attack deals an additional 2 dam to them, and this creature can use a maneuver to deal 2 dam to the target.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "__key": "undead-creature-g",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature G",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-g.webp",
+  "prototypeToken": {
+    "name": "Undead Creature G",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-g-token.webp"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "medium",
+    "power": 20,
+    "stamina": {
+      "value": 100,
+      "max": 100
+    },
+    "speed": {
+      "walk": 6,
+      "climb": 0,
+      "fly": 6,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 4,
+    "characteristics": {
+      "agility": {
+        "value": 2
+      },
+      "mind": {
+        "value": 5
+      },
+      "strength": {
+        "value": 5
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "fallen knight, rusted one",
+    "description": "<p>The souls of powerful warriors and mages are fused into a single corpse and suit of armor to create this undead, who is a master of magic and swordplay. They take great delight in crushing their toughest opponent in front of an audience of weaklings.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Rustswords",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 5,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "8 dam",
+        "tier3": "16 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Rust",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Begone",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 5,
+        "range": {
+          "type": "ranged",
+          "value": 10
+        },
+        "targets": 1,
+        "tier2": "8 dam",
+        "tier3": "14 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Hurl Away",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Rust",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead deals damage to a creature wearing metal armor or wielding a sword or a shield with Rustswords, each item has its AD reduced by 5 after the attack.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Hurl Away",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead hits with Begone, they can vertically slide the target 3 squares on a tier 2 result, or 5 squares on a tier 3.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Extra Action",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The undead can take one additional action or maneuver on their combat turn.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": true,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Insect Breath (3/day; only once per turn)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the undead breathes a plague of stinging insects in a 5 cube within 1 square of them. Each enemy in the cube must make an Agility RR. 1 20 dam 2 10 dam 3 No effect</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Rise!",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>A human killed by this undead rises as an undead creature A 1d6 rounds after death.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "__key": "blacksmith",
+  "__folder": "Humans",
+  "name": "Blacksmith",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Blacksmith",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 3,
+    "stamina": {
+      "value": 5,
+      "max": 5
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 0
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 1
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Expertises:</strong> Blacksmithing (3 uses), Bashing</p><p><strong>Equipment:</strong> Blacksmith’s tools, hammer</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Pummeling",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the blacksmith gets a tier 3 result on a hammer attack against a Medium or smaller target, the target is pushed 1 square. If the blacksmith gets a crit on a hammer attacks against a Medium or smaller creature, the target is knocked prone.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

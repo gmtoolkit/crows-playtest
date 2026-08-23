@@ -1,0 +1,114 @@
+{
+  "__key": "warrior-pike-power-10",
+  "__folder": "Humans",
+  "name": "Warrior, Pike (Power 10)",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Warrior, Pike (Power 10)",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "human",
+    "monsterType": "",
+    "size": "medium",
+    "power": 10,
+    "stamina": {
+      "value": 40,
+      "max": 40
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 1
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 3
+      }
+    },
+    "ad": {
+      "value": 15,
+      "max": 15
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "<p><strong>Armor Defense:</strong> 15 (heavy armor)</p><p><strong>Expertises:</strong> Athletics, Lift, Stabbing</p><p><strong>Equipment:</strong> Heavy armor, pike</p>",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Pike",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 5,
+        "range": {
+          "type": "melee",
+          "value": 2
+        },
+        "targets": 1,
+        "tier2": "6 dam",
+        "tier3": "10 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Brutal",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Brutal",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>The warrior scores a crit with a pike attack when the dice total 18, 19, or 20 without modifiers. When the warrior scores a crit with a pike attack, it deals 20 dam.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Spinning Shaft",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the warrior gets a tier 3 result with a pike attack, they can deal 3 dam to another target within range.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

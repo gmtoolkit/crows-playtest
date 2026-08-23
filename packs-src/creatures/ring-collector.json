@@ -1,0 +1,203 @@
+{
+  "__key": "ring-collector",
+  "__folder": "Uniques",
+  "name": "Ring Collector",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Ring Collector",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 1,
+    "height": 1,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "unique",
+    "size": "medium",
+    "power": 20,
+    "stamina": {
+      "value": 100,
+      "max": 100
+    },
+    "speed": {
+      "walk": 7,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 4,
+    "characteristics": {
+      "agility": {
+        "value": 4
+      },
+      "mind": {
+        "value": 5
+      },
+      "strength": {
+        "value": 4
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "",
+    "description": "<p>The Ring Collector is a creature gifted with supernatural strength and speed who is obsessed with finding and collecting magic rings. They invaded and wiped out several villages during the Necromancer War in pursuit of rings. The Ring Collector is Craelin’s advisor, Namlin. Namlin stayed loyal to the archmage after he became a nercromancer even after all others left Craelin’s side. As a gift, Craelin warped Namlin’s flesh and turned them into a hunter of magic rings, ones meant to eventually adorn the necromancer’s fingers. Namlin became too covetous of their rings and refused to give them over to Craelin. The necromancer stripped the Ring Collector of their collection and imprisoned them in this crystal for insolence a short time before disappearing.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Kneel",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 5,
+        "range": {
+          "type": "ranged",
+          "value": 10
+        },
+        "targets": 1,
+        "tier2": "8 dam",
+        "tier3": "14 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Sword",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 4,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "7 dam",
+        "tier3": "12 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "Exploding Sword",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Punches",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 4,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 2,
+        "tier2": "4 dam",
+        "tier3": "8 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Literally Kneel",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When this creature gets a tier 3 result with a Kneel attack, the target falls prone.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Exploding Sword",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When this creature’s sword attack kills a creature, the target explodes and deals 1d6 dam to each creature within 1 square.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Extra Action",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>This creature can take one additional action or maneuver on their combat turn.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": true,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Vanish (1/Rest)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>This creature can teleport up to 50 miles to a location they have visited before regardless of line of effect.</p>",
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Ring Sense",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>This creature knows the exact location of any magic ring within 20 squares of them regardless of line of effect.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

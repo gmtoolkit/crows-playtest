@@ -1,0 +1,86 @@
+{
+  "__key": "elephant",
+  "__folder": "Animals",
+  "name": "Elephant",
+  "type": "creature",
+  "img": "icons/svg/mystery-man.svg",
+  "prototypeToken": {
+    "name": "Elephant",
+    "texture": {
+      "src": "icons/svg/mystery-man.svg"
+    },
+    "width": 3,
+    "height": 3,
+    "disposition": 0,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "animal",
+    "monsterType": "",
+    "size": "huge",
+    "power": 10,
+    "stamina": {
+      "value": 25,
+      "max": 25
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": -1
+      },
+      "mind": {
+        "value": -2
+      },
+      "strength": {
+        "value": 3
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 25
+    },
+    "colloquialNames": "",
+    "description": "",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Stomp",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "5 dam",
+        "tier3": "9 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

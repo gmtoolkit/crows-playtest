@@ -33,13 +33,22 @@ compendium content are in progress.
 
 | Area | State |
 |---|---|
-| Power roll (tiers, edges/banes, crit/doom, expertise) | Done, 46 tests |
-| Damage cascade (AD → Stamina → wounds), rest recovery | Done, 29 tests |
+| Power roll (tiers, edges/banes, crit/doom, expertise) | Done, verified in-world |
+| Damage cascade (AD → Stamina → wounds), rest recovery | Done, verified in-world |
 | Actor + item data models | Done |
-| Character sheet (slot grid) | In progress |
-| Compendium content (backgrounds, traits, gear, monsters) | In progress |
-| Dungeon-turn engine | In progress |
-| Maps and scenes | In progress |
+| Crow sheet (slot grid, wound slots, magic slots) | Done |
+| Creature sheet (stat block, attacks, likes/hates) | Done |
+| Dungeon-turn engine (clock, usage dice, encounter checks) | Done, verified in-world |
+| Side-based initiative | Done |
+| Maps and scenes | Done — 7 scenes, grid verified exact |
+| Creatures compendium | Done — all 71 stat blocks |
+| Character builder wizard | Built, needs the backgrounds pack |
+| Trait tree browser | Built, needs the traits pack |
+| Gear / weapons / armor / spellbooks compendia | Next |
+| Backgrounds and traits compendia | Next |
+| Dungeon journals (Blood Library, Floating Manor, POIs) | Next |
+| Overland travel + Miasma | Planned |
+| Village + crafting economy | Planned |
 
 ## Requirements
 

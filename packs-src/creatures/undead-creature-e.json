@@ -1,0 +1,151 @@
+{
+  "__key": "undead-creature-e",
+  "__folder": "Undead Creatures",
+  "name": "Undead Creature E",
+  "type": "creature",
+  "img": "systems/crows/assets/art/undead-e.webp",
+  "prototypeToken": {
+    "name": "Undead Creature E",
+    "texture": {
+      "src": "systems/crows/assets/art/undead-e-token.webp"
+    },
+    "width": 2,
+    "height": 2,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "undead",
+    "size": "large",
+    "power": 12,
+    "stamina": {
+      "value": 60,
+      "max": 60
+    },
+    "speed": {
+      "walk": 4,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 2,
+    "characteristics": {
+      "agility": {
+        "value": -2
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 3
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "babbling death, hideous choir",
+    "description": "<p>This lumbering pile of flesh seems to be two smaller humans fused to the back of a giant. All three of the heads are equipped with razor share teeth and babble nonsense as they stalk prey with heavy, tireless steps.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Fist",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 2,
+        "tier2": "3 dam",
+        "tier3": "5 dam",
+        "piercing": false,
+        "riderTiers": [
+          3
+        ],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Bite",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 3,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "6 dam",
+        "tier3": "10 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Grabbing Fist",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When the undead gets a tier 3 result with their fist against a Medium or smaller target, the target is grabbed. The undead can grab up to two targets at a time, and deals an additional 3 damage to targets they have grabbed with melee attacks.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Bite Frenzy (1/Day)",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>As an action, the undead makes a bite attack that targets against each enemy within 1 square of them.</p>",
+        "uses": {
+          "value": 1,
+          "max": 1,
+          "per": "day"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Horrid Gnashing",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>When a non-undead creature with a Mind score of 1 or lower starts their turn within 1 square of the undead, they take a bane on all tests until the start of their next turn.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}

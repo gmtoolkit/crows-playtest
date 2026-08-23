@@ -1,0 +1,119 @@
+{
+  "__key": "blood-creature-c",
+  "__folder": "Blood Creatures",
+  "name": "Blood Creature C",
+  "type": "creature",
+  "img": "systems/crows/assets/art/blood-creature-c.webp",
+  "prototypeToken": {
+    "name": "Blood Creature C",
+    "texture": {
+      "src": "systems/crows/assets/art/blood-creature-c-token.webp"
+    },
+    "width": 2,
+    "height": 2,
+    "disposition": -1,
+    "actorLink": false,
+    "sight": {
+      "enabled": false
+    }
+  },
+  "system": {
+    "category": "monster",
+    "monsterType": "blood",
+    "size": "large",
+    "power": 8,
+    "stamina": {
+      "value": 40,
+      "max": 40
+    },
+    "speed": {
+      "walk": 5,
+      "climb": 0,
+      "fly": 0,
+      "swim": 0,
+      "burrow": 0,
+      "upsideDown": false
+    },
+    "reactions": 1,
+    "characteristics": {
+      "agility": {
+        "value": 0
+      },
+      "mind": {
+        "value": 0
+      },
+      "strength": {
+        "value": 2
+      }
+    },
+    "ad": {
+      "value": 0,
+      "max": 0
+    },
+    "wounds": {
+      "value": 0,
+      "max": 10
+    },
+    "colloquialNames": "blood brute, tiny arms",
+    "description": "<p>A malleable creature that most often resides in somewhat humanoid form, this monster has the power to knock down doors to get at prey but prefers to flow through them.</p>",
+    "secrets": "",
+    "source": "Crows Playtest 2, The Ref Book"
+  },
+  "items": [
+    {
+      "name": "Punch",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "melee",
+          "value": 1
+        },
+        "targets": 1,
+        "tier2": "4 dam",
+        "tier3": "8 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Clot",
+      "type": "attack",
+      "img": "icons/svg/sword.svg",
+      "system": {
+        "characteristic": "none",
+        "bonus": 2,
+        "range": {
+          "type": "ranged",
+          "value": 10
+        },
+        "targets": 1,
+        "tier2": "3 dam",
+        "tier3": "7 dam",
+        "piercing": false,
+        "riderTiers": [],
+        "noteRef": "",
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    },
+    {
+      "name": "Malleable",
+      "type": "feature",
+      "img": "icons/svg/aura.svg",
+      "system": {
+        "description": "<p>This blood creature can fit through spaces as small as 1 inch wide and never needs to squeeze. They can’t be grabbed or knocked prone.</p>",
+        "uses": {
+          "value": 0,
+          "max": 0,
+          "per": "rest"
+        },
+        "affectsTurnEconomy": false,
+        "source": "Crows Playtest 2, The Ref Book"
+      }
+    }
+  ]
+}
