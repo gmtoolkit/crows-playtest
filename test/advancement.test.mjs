@@ -10,7 +10,12 @@ import {
   validateAllocation,
   claimBonus,
   undoBonus,
-  undoWouldStrand
+  undoWouldStrand,
+  characteristicCap,
+  canRaiseCharacteristic,
+  allCharacteristicsMaxed,
+  raiseCharacteristic,
+  undoCharacteristic
 } from "../src/system/advancement.mjs";
 
 /** A sheet's worth of expertises, defaulting everything else to zero uses. */
@@ -68,6 +73,84 @@ describe("Expertise & Stamina advancement (C p6)", () => {
     for (const txp of [5000, 30000]) {
       assert.ok(earnedBonuses(txp).count > 0 && earnedCharacteristicBonuses(txp) > 0, `${txp} pays both`);
     }
+  });
+});
+
+describe("the characteristic cap is 4, not the field's bound of 5", () => {
+  const chars = (a, m, s) => ({ agility: { value: a }, mind: { value: m }, strength: { value: s } });
+
+  test("advancement stops at 4 even though the score field allows 5", () => {
+    // Two different limits in two sentences. "Each characteristic has a score
+    // between -5 and 5" bounds the FIELD; "the highest score a PC can have in a
+    // characteristic without magic help is 4" (R p5) bounds ADVANCEMENT. Magic
+    // may push a crow to 5; buying your way there may not.
+    assert.equal(characteristicCap(), 4);
+    assert.notEqual(characteristicCap(), CROWS.characteristicRange.max, "reading the field bound here is the bug");
+    assert.equal(canRaiseCharacteristic(3), true);
+    assert.equal(canRaiseCharacteristic(4), false);
+  });
+
+  test("raising a characteristic at the cap is refused, not silently clamped", () => {
+    const result = raiseCharacteristic({ key: "agility", characteristics: chars(4, 1, 1) });
+    assert.equal(result.update, null);
+    assert.match(result.error, /already at 4/);
+  });
+
+  test("raising below the cap adds exactly one", () => {
+    const result = raiseCharacteristic({ key: "mind", characteristics: chars(4, 1, 0) });
+    assert.deepEqual(result.update, { "system.characteristics.mind.value": 2 });
+    assert.equal(result.entry, "mind");
+    assert.equal(result.overflowed, false);
+  });
+
+  test("a magically-boosted 5 does not make advancement think it can go further", () => {
+    assert.equal(canRaiseCharacteristic(5), false);
+    assert.equal(allCharacteristicsMaxed(chars(5, 4, 4)), true);
+  });
+
+  test("with every characteristic at 4 the bonus becomes +2 Stamina, automatically", () => {
+    // The book offers no choice here, unlike the Expertise & Stamina bonus.
+    assert.equal(allCharacteristicsMaxed(chars(4, 4, 4)), true);
+    const result = raiseCharacteristic({
+      key: "agility",
+      characteristics: chars(4, 4, 4),
+      staminaMax: 9,
+      staminaValue: 6
+    });
+    assert.equal(result.overflowed, true);
+    assert.equal(result.entry, "");
+    assert.equal(result.update["system.stamina.max"], 11);
+    assert.equal(result.update["system.stamina.value"], 8);
+    assert.ok(!Object.keys(result.update).some((k) => k.includes("characteristics")));
+  });
+
+  test("one characteristic short of 4 is NOT the overflow case", () => {
+    assert.equal(allCharacteristicsMaxed(chars(4, 4, 3)), false);
+    const result = raiseCharacteristic({ key: "strength", characteristics: chars(4, 4, 3) });
+    assert.equal(result.overflowed, false);
+    assert.deepEqual(result.update, { "system.characteristics.strength.value": 4 });
+  });
+
+  test("undo reverses both branches", () => {
+    assert.deepEqual(undoCharacteristic({ entry: "mind", characteristics: chars(1, 2, 1) }), {
+      "system.characteristics.mind.value": 1
+    });
+    // An overflow bonus is recorded as "" and gives the Stamina back instead.
+    assert.deepEqual(undoCharacteristic({ entry: "", staminaMax: 11, staminaValue: 11 }), {
+      "system.stamina.max": 9,
+      "system.stamina.value": 9
+    });
+  });
+
+  test("undo never drives a score below the absolute floor", () => {
+    const update = undoCharacteristic({ entry: "agility", characteristics: chars(-5, 0, 0) });
+    assert.equal(update["system.characteristics.agility.value"], CROWS.characteristicRange.min);
+  });
+
+  test("an unknown characteristic is refused rather than creating one", () => {
+    const result = raiseCharacteristic({ key: "charisma", characteristics: chars(1, 1, 1) });
+    assert.equal(result.update, null);
+    assert.match(result.error, /unknown characteristic/);
   });
 });
 

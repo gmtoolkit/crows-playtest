@@ -1,5 +1,15 @@
 import { CROWS } from "../config.mjs";
-import { validateAllocation, claimBonus, undoBonus, undoWouldStrand } from "../system/advancement.mjs";
+import {
+  validateAllocation,
+  claimBonus,
+  undoBonus,
+  undoWouldStrand,
+  characteristicCap,
+  canRaiseCharacteristic,
+  allCharacteristicsMaxed,
+  raiseCharacteristic,
+  undoCharacteristic
+} from "../system/advancement.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 
@@ -119,17 +129,17 @@ export class AdvancementApp extends HandlebarsApplicationMixin(ApplicationV2) {
         key,
         label: game.i18n.localize(cfg.label ?? key),
         value: sys.characteristics[key].value,
-        atCap: sys.characteristics[key].value >= CROWS.characteristicRange.max,
-        canRaise: adv.charAvailable > 0 && sys.characteristics[key].value < CROWS.characteristicRange.max
+        atCap: !canRaiseCharacteristic(sys.characteristics[key].value),
+        canRaise: adv.charAvailable > 0 && canRaiseCharacteristic(sys.characteristics[key].value)
       })),
+      characteristicCap: characteristicCap(),
       charTaken: (adv.characteristics ?? []).map((key, i) => ({
         index: i,
         label: key ? game.i18n.localize(CROWS.characteristics[key]?.label ?? key) : game.i18n.localize("CROWS.StaminaInstead")
       })),
-      // If every characteristic is already 4, the bonus converts automatically.
-      allCharsMaxed: Object.values(sys.characteristics).every(
-        (c) => c.value >= CROWS.characteristicRange.max
-      )
+      // If every characteristic is already at the cap, the bonus converts
+      // automatically — the book gives no choice, so this is not offered as one.
+      allCharsMaxed: allCharacteristicsMaxed(sys.characteristics)
     };
   }
 
@@ -244,20 +254,20 @@ export class AdvancementApp extends HandlebarsApplicationMixin(ApplicationV2) {
       return ui.notifications.warn(game.i18n.localize("CROWS.NoCharacteristicBonusOwed"));
     }
 
-    const update = {};
-    const maxed = Object.values(sys.characteristics).every((c) => c.value >= CROWS.characteristicRange.max);
-    if (maxed) {
-      // "If all of your characteristics are 4 when you get this bonus, your
-      // Stamina maximum increases by 2 instead." Automatic, not a choice.
-      update["system.stamina.max"] = sys.stamina.max + 2;
-      update["system.advancement.characteristics"] = [...sys.advancement.characteristics, ""];
-    } else {
-      if (sys.characteristics[key].value >= CROWS.characteristicRange.max) {
-        return ui.notifications.warn(game.i18n.localize("CROWS.CharacteristicAtCap"));
-      }
-      update[`system.characteristics.${key}.value`] = sys.characteristics[key].value + 1;
-      update["system.advancement.characteristics"] = [...sys.advancement.characteristics, key];
+    const result = raiseCharacteristic({
+      key,
+      characteristics: sys.characteristics,
+      staminaMax: sys.stamina.max,
+      staminaValue: sys.stamina.value
+    });
+    if (result.error) {
+      return ui.notifications.warn(
+        game.i18n.format("CROWS.CharacteristicAtCap", { cap: characteristicCap() })
+      );
     }
+
+    const update = { ...result.update };
+    update["system.advancement.characteristics"] = [...sys.advancement.characteristics, result.entry];
 
     await this.actor.update(update);
     this.actor.sheet?.render(false);
@@ -267,17 +277,13 @@ export class AdvancementApp extends HandlebarsApplicationMixin(ApplicationV2) {
   static async #onUndoCharacteristic(event, target) {
     const index = Number(target.dataset.index);
     const sys = this.actor.system;
-    const key = sys.advancement.characteristics[index];
-    const update = {};
-    if (key) {
-      update[`system.characteristics.${key}.value`] = Math.max(
-        CROWS.characteristicRange.min,
-        sys.characteristics[key].value - 1
-      );
-    } else {
-      update["system.stamina.max"] = Math.max(0, sys.stamina.max - 2);
-      update["system.stamina.value"] = Math.min(sys.stamina.value, Math.max(0, sys.stamina.max - 2));
-    }
+    const entry = sys.advancement.characteristics[index];
+    const update = undoCharacteristic({
+      entry,
+      characteristics: sys.characteristics,
+      staminaMax: sys.stamina.max,
+      staminaValue: sys.stamina.value
+    });
     update["system.advancement.characteristics"] = sys.advancement.characteristics.filter((_, i) => i !== index);
     await this.actor.update(update);
     this.actor.sheet?.render(false);

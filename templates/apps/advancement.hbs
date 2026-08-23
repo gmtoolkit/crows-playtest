@@ -110,7 +110,7 @@
             <span class="char-value">{{crowsSigned this.value}}</span>
             <button type="button" data-action="raiseCharacteristic" data-characteristic="{{this.key}}"
                     {{#unless this.canRaise}}disabled{{/unless}}
-                    data-tooltip="{{#if this.atCap}}{{localize 'CROWS.CharacteristicAtCap'}}{{else}}{{localize 'CROWS.RaiseByOne'}}{{/if}}">+1</button>
+                    data-tooltip="{{#if this.atCap}}{{localize 'CROWS.CharacteristicAtCap' cap=../characteristicCap}}{{else}}{{localize 'CROWS.RaiseByOne'}}{{/if}}">+1</button>
           </li>
         {{/each}}
       </ul>

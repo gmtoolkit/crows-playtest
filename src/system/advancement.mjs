@@ -86,6 +86,84 @@ export function backgroundUses(expertises = {}, bonuses = []) {
   return out;
 }
 
+/* -------------------------------------------- */
+/*  Characteristics (C p7)                      */
+/* -------------------------------------------- */
+
+/**
+ * The ceiling ADVANCEMENT may raise a characteristic to.
+ *
+ * NOT the same number as the field's bound, and the difference is the whole
+ * point. The rules give two limits in two sentences: "Each characteristic has
+ * a score between -5 and 5" is the absolute range a score may hold, while "the
+ * highest score a PC can have in a characteristic without magic help is 4"
+ * (R p5) is what a crow can reach unaided — and advancement says "increase one
+ * of their characteristics by 1, to a maximum of 4" (C p7).
+ *
+ * So magic may push a crow to 5; buying your way there may not. Reading the
+ * field's `max` here instead of `pcCap` looks obviously correct and silently
+ * hands out a fourth point nobody earned.
+ */
+export function characteristicCap() {
+  return CROWS.characteristicRange.pcCap;
+}
+
+export function canRaiseCharacteristic(value) {
+  return value < characteristicCap();
+}
+
+/** True when no characteristic can be raised any further by advancement. */
+export function allCharacteristicsMaxed(characteristics = {}) {
+  const values = Object.values(characteristics);
+  return values.length > 0 && values.every((c) => (c?.value ?? 0) >= characteristicCap());
+}
+
+/**
+ * The update a claimed characteristic bonus produces.
+ *
+ * "If all of your characteristics are 4 when you get this bonus, your Stamina
+ * maximum increases by 2 instead." Automatic — the book offers no choice here,
+ * unlike the Expertise & Stamina bonus, so this must not be presented as one.
+ */
+export function raiseCharacteristic({ key, characteristics = {}, staminaMax = 0, staminaValue = 0 }) {
+  if (allCharacteristicsMaxed(characteristics)) {
+    return {
+      overflowed: true,
+      entry: "",
+      update: {
+        "system.stamina.max": staminaMax + 2,
+        "system.stamina.value": Math.min(staminaValue + 2, staminaMax + 2)
+      }
+    };
+  }
+
+  const current = characteristics[key]?.value;
+  if (current === undefined) return { overflowed: false, entry: null, update: null, error: `unknown characteristic "${key}"` };
+  if (!canRaiseCharacteristic(current)) {
+    return { overflowed: false, entry: null, update: null, error: `${key} is already at ${characteristicCap()}` };
+  }
+
+  return {
+    overflowed: false,
+    entry: key,
+    update: { [`system.characteristics.${key}.value`]: current + 1 }
+  };
+}
+
+/** Give a claimed characteristic bonus back. `entry` is "" for an overflow. */
+export function undoCharacteristic({ entry, characteristics = {}, staminaMax = 0, staminaValue = 0 }) {
+  if (!entry) {
+    const max = Math.max(0, staminaMax - 2);
+    return { "system.stamina.max": max, "system.stamina.value": Math.min(staminaValue, max) };
+  }
+  const current = characteristics[entry]?.value ?? 0;
+  return {
+    [`system.characteristics.${entry}.value`]: Math.max(CROWS.characteristicRange.min, current - 1)
+  };
+}
+
+/* -------------------------------------------- */
+
 /**
  * Check an allocation of a bonus's expertise uses.
  *
