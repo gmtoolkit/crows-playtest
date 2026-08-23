@@ -1,0 +1,59 @@
+{
+  "__key": "acolyte-of-the-healer",
+  "__folder": "Backgrounds",
+  "name": "Acolyte of the Healer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You served the god of healing.</p>",
+    "roll": {
+      "first": 1,
+      "second": 2
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Benefaction: Enhanced Healing",
+    "traitTree": "benefaction",
+    "traitName": "Enhanced Healing",
+    "expertises": [
+      {
+        "key": "alchemy",
+        "uses": 1
+      },
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "religiousLore",
+        "uses": 2
+      },
+      {
+        "key": "benefaction",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "holy symbol",
+        "quantity": 1
+      },
+      {
+        "name": "surgical kit",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "minor blessing",
+      "minor healing"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

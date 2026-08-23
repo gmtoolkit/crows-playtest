@@ -1,0 +1,72 @@
+{
+  "__key": "entertainer",
+  "__folder": "Backgrounds",
+  "name": "Entertainer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You were an acrobat, dancer, and/or musician.</p>",
+    "roll": {
+      "first": 3,
+      "second": 5
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 5,
+    "trait": "Camping: Song of Rest",
+    "traitTree": "camping",
+    "traitName": "Song of Rest",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 2
+      },
+      {
+        "key": "endurance",
+        "uses": 1
+      },
+      {
+        "key": "gymnastics",
+        "uses": 2
+      },
+      {
+        "key": "handlePet",
+        "uses": 1
+      },
+      {
+        "key": "historicalLore",
+        "uses": 1
+      },
+      {
+        "key": "thievery",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "11-foot pole",
+        "quantity": 1
+      },
+      {
+        "name": "mirror",
+        "quantity": 1
+      },
+      {
+        "name": "musical instrument (lute)",
+        "quantity": 1
+      },
+      {
+        "name": "smoke bomb",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "__key": "duelist",
+  "__folder": "Backgrounds",
+  "name": "Duelist",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You dedicated your youth to fencing in noble courts.</p>",
+    "roll": {
+      "first": 3,
+      "second": 4
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 9,
+    "trait": "Slashing: Finesse the Blade",
+    "traitTree": "slashing",
+    "traitName": "Finesse the Blade",
+    "expertises": [
+      {
+        "key": "gymnastics",
+        "uses": 1
+      },
+      {
+        "key": "historicalLore",
+        "uses": 1
+      },
+      {
+        "key": "slashing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "lore book (Historical Lore)",
+        "quantity": 1
+      },
+      {
+        "name": "mirror",
+        "quantity": 1
+      },
+      {
+        "name": "sword",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

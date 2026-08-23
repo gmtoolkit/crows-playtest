@@ -1,0 +1,64 @@
+{
+  "__key": "archer",
+  "__folder": "Backgrounds",
+  "name": "Archer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You served as a soldier or member of the watch who was specially trained with a bow.</p>",
+    "roll": {
+      "first": 2,
+      "second": 2
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 7,
+    "trait": "Archery: Point Blank",
+    "traitTree": "archery",
+    "traitName": "Point Blank",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "stealth",
+        "uses": 2
+      },
+      {
+        "key": "bow",
+        "uses": 2
+      },
+      {
+        "key": "unarmed",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "bear trap",
+        "quantity": 1
+      },
+      {
+        "name": "quiver of arrows",
+        "quantity": 1
+      },
+      {
+        "name": "shortbow",
+        "quantity": 1
+      },
+      {
+        "name": "spyglass",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

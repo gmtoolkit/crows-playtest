@@ -691,13 +691,52 @@
   text-align: right;
 }
 
-.crows .exp-uses {
+/* The editable one is the transient one. */
+.crows .exp-remaining-input {
   width: 2.1rem;
   text-align: center;
   padding: 0.05rem;
   font-size: 0.7rem;
   min-height: 0;
   height: auto;
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+/* Trained is a readout, so it must not look like a field. */
+.crows .exp-trained {
+  color: var(--crows-parchment);
+  font-weight: 600;
+  min-width: 0.8rem;
+  text-align: left;
+}
+
+/* An untrained expertise is a row of zeroes; keep it quiet. */
+.crows .expertise-row:not(.trained) .exp-count {
+  opacity: 0.5;
+}
+
+/* Background is chosen, not typed: the field reads, the magnifier acts. */
+.crows .names .sub .lookup {
+  display: flex;
+  flex: 1;
+  gap: 0.15rem;
+}
+
+.crows .names .sub .lookup input[readonly] {
+  flex: 1;
+  cursor: default;
+  background: rgba(0, 0, 0, 0.22);
+}
+
+.crows .names .sub .lookup button {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.68rem;
+  color: var(--crows-muted);
+}
+
+.crows .names .sub .lookup button:hover {
+  color: var(--crows-gold);
 }
 
 /**

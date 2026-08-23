@@ -1,0 +1,63 @@
+{
+  "__key": "keraunomancer",
+  "__folder": "Backgrounds",
+  "name": "Keraunomancer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You learned how to cast elemental spells that create and harness lightning and thunder.</p>",
+    "roll": {
+      "first": 4,
+      "second": 6
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Elemental: Hurl the Storm",
+    "traitTree": "elemental",
+    "traitName": "Hurl the Storm",
+    "expertises": [
+      {
+        "key": "blacksmithing",
+        "uses": 1
+      },
+      {
+        "key": "enchanting",
+        "uses": 1
+      },
+      {
+        "key": "magicLore",
+        "uses": 2
+      },
+      {
+        "key": "elemental",
+        "uses": 2
+      },
+      {
+        "key": "bashing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "mace",
+        "quantity": 1
+      },
+      {
+        "name": "net",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "spark",
+      "thunder"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

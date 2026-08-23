@@ -1,0 +1,80 @@
+{
+  "__key": "sage",
+  "__folder": "Backgrounds",
+  "name": "Sage",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You studied all subjects with a tutor or by burying your nose in many books (likely both).</p>",
+    "roll": {
+      "first": 6,
+      "second": 1
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Knowledge: Cram",
+    "traitTree": "knowledge",
+    "traitName": "Cram",
+    "expertises": [
+      {
+        "key": "historicalLore",
+        "uses": 2
+      },
+      {
+        "key": "magicLore",
+        "uses": 1
+      },
+      {
+        "key": "monsterLore",
+        "uses": 2
+      },
+      {
+        "key": "natureLore",
+        "uses": 1
+      },
+      {
+        "key": "navigate",
+        "uses": 1
+      },
+      {
+        "key": "religiousLore",
+        "uses": 1
+      },
+      {
+        "key": "thievery",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "ball bearings",
+        "quantity": 1
+      },
+      {
+        "name": "journal",
+        "quantity": 1
+      },
+      {
+        "name": "lore book (Monster Lore)",
+        "quantity": 1
+      },
+      {
+        "name": "lore book (Nature Lore)",
+        "quantity": 1
+      },
+      {
+        "name": "quill and ink pot",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

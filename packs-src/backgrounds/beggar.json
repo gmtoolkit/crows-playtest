@@ -1,0 +1,70 @@
+{
+  "__key": "beggar",
+  "__folder": "Backgrounds",
+  "name": "Beggar",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You relied on the kindness of strangers to scrape together enough coins to live.</p>",
+    "roll": {
+      "first": 2,
+      "second": 4
+    },
+    "characteristicAt2": [
+      "agility",
+      "mind",
+      "strength"
+    ],
+    "stamina": 7,
+    "trait": "Leverage: More for Less",
+    "traitTree": "leverage",
+    "traitName": "More for Less",
+    "expertises": [
+      {
+        "key": "endurance",
+        "uses": 1
+      },
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 2
+      },
+      {
+        "key": "stealth",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "gluepot",
+        "quantity": 1
+      },
+      {
+        "name": "padlock",
+        "quantity": 1
+      },
+      {
+        "name": "pot",
+        "quantity": 1
+      },
+      {
+        "name": "string",
+        "quantity": 1
+      },
+      {
+        "name": "tent",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

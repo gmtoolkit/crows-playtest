@@ -1,0 +1,65 @@
+{
+  "__key": "transmuter",
+  "__folder": "Backgrounds",
+  "name": "Transmuter",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You studied alteration magic.</p>",
+    "roll": {
+      "first": 6,
+      "second": 5
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Alteration: Lasting Alteration",
+    "traitTree": "alteration",
+    "traitName": "Lasting Alteration",
+    "expertises": [
+      {
+        "key": "alchemy",
+        "uses": 1
+      },
+      {
+        "key": "blacksmithing",
+        "uses": 1
+      },
+      {
+        "key": "enchanting",
+        "uses": 2
+      },
+      {
+        "key": "magicLore",
+        "uses": 2
+      },
+      {
+        "key": "thievery",
+        "uses": 1
+      },
+      {
+        "key": "alteration",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chalk",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "jaunt",
+      "animal form",
+      "repair",
+      "take shape"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "__key": "assassin",
+  "__folder": "Backgrounds",
+  "name": "Assassin",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You were a killer who either worked paid contracts or served a higher purpose in a shady organization.</p>",
+    "roll": {
+      "first": 2,
+      "second": 3
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 5,
+    "trait": "Thievery: Sieze the Advantage",
+    "traitTree": "thievery",
+    "traitName": "Sieze the Advantage",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "gymnastics",
+        "uses": 1
+      },
+      {
+        "key": "stealth",
+        "uses": 2
+      },
+      {
+        "key": "thievery",
+        "uses": 1
+      },
+      {
+        "key": "bow",
+        "uses": 2
+      },
+      {
+        "key": "slashing",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "extra knife",
+        "quantity": 1
+      },
+      {
+        "name": "poison vial",
+        "quantity": 1
+      },
+      {
+        "name": "quiver of arrows",
+        "quantity": 1
+      },
+      {
+        "name": "shortbow",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

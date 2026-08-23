@@ -1,0 +1,72 @@
+{
+  "__key": "miner",
+  "__folder": "Backgrounds",
+  "name": "Miner",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You worked in mines, digging and hauling ore.</p>",
+    "roll": {
+      "first": 5,
+      "second": 3
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 7,
+    "trait": "Leverage: Lasting Light",
+    "traitTree": "leverage",
+    "traitName": "Lasting Light",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "endurance",
+        "uses": 2
+      },
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "navigate",
+        "uses": 1
+      },
+      {
+        "key": "stabbing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chalk",
+        "quantity": 1
+      },
+      {
+        "name": "grappling hook",
+        "quantity": 1
+      },
+      {
+        "name": "lantern",
+        "quantity": 1
+      },
+      {
+        "name": "oil flask",
+        "quantity": 1
+      },
+      {
+        "name": "shovel",
+        "quantity": 1
+      },
+      {
+        "name": "warpick",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

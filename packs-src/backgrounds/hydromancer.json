@@ -1,0 +1,67 @@
+{
+  "__key": "hydromancer",
+  "__folder": "Backgrounds",
+  "name": "Hydromancer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You learned how to cast elemental spells that create and harness water.</p>",
+    "roll": {
+      "first": 4,
+      "second": 4
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Elemental: Water Shield",
+    "traitTree": "elemental",
+    "traitName": "Water Shield",
+    "expertises": [
+      {
+        "key": "alchemy",
+        "uses": 1
+      },
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "enchanting",
+        "uses": 1
+      },
+      {
+        "key": "magicLore",
+        "uses": 1
+      },
+      {
+        "key": "elemental",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "gluepot",
+        "quantity": 1
+      },
+      {
+        "name": "journal",
+        "quantity": 1
+      },
+      {
+        "name": "quill and inkpot",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "create water",
+      "stream"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

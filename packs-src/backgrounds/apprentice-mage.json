@@ -1,0 +1,66 @@
+{
+  "__key": "apprentice-mage",
+  "__folder": "Backgrounds",
+  "name": "Apprentice Mage",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You studied several magic disciplines under a more experienced tutor.</p>",
+    "roll": {
+      "first": 2,
+      "second": 1
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Alteration: Alteration Stone",
+    "traitTree": "alteration",
+    "traitName": "Alteration Stone",
+    "expertises": [
+      {
+        "key": "enchanting",
+        "uses": 1
+      },
+      {
+        "key": "magicLore",
+        "uses": 1
+      },
+      {
+        "key": "monsterLore",
+        "uses": 1
+      },
+      {
+        "key": "alteration",
+        "uses": 2
+      },
+      {
+        "key": "conjuration",
+        "uses": 1
+      },
+      {
+        "key": "elemental",
+        "uses": 2
+      },
+      {
+        "key": "illusion",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "alteration stone",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "jaunt",
+      "light",
+      "spark",
+      "take shape",
+      "thunder"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

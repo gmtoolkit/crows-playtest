@@ -1,0 +1,69 @@
+{
+  "__key": "noble",
+  "__folder": "Backgrounds",
+  "name": "Noble",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You grew up in a family that had wealth and power.</p>",
+    "roll": {
+      "first": 5,
+      "second": 4
+    },
+    "characteristicAt2": [
+      "agility",
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Reputation: Call Daddy",
+    "traitTree": "reputation",
+    "traitName": "Call Daddy",
+    "expertises": [
+      {
+        "key": "handlePet",
+        "uses": 1
+      },
+      {
+        "key": "historicalLore",
+        "uses": 2
+      },
+      {
+        "key": "religiousLore",
+        "uses": 1
+      },
+      {
+        "key": "stealth",
+        "uses": 1
+      },
+      {
+        "key": "bow",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "animal feed",
+        "quantity": 6
+      },
+      {
+        "name": "lantern",
+        "quantity": 1
+      },
+      {
+        "name": "lore book (Historical Lore)",
+        "quantity": 1
+      },
+      {
+        "name": "oil flask",
+        "quantity": 1
+      },
+      {
+        "name": "riding horse (pet)",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 50,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "__key": "knight",
+  "__folder": "Backgrounds",
+  "name": "Knight",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You were a knight in the service of a noble or a hedge knight in service to no one other than yourself.</p>",
+    "roll": {
+      "first": 5,
+      "second": 1
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Slashing: Swordplay",
+    "traitTree": "slashing",
+    "traitName": "Swordplay",
+    "expertises": [
+      {
+        "key": "handlePet",
+        "uses": 1
+      },
+      {
+        "key": "historicalLore",
+        "uses": 1
+      },
+      {
+        "key": "slashing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "animal feed",
+        "quantity": 6
+      },
+      {
+        "name": "greatsword",
+        "quantity": 1
+      },
+      {
+        "name": "lantern",
+        "quantity": 1
+      },
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "oil flask",
+        "quantity": 1
+      },
+      {
+        "name": "riding horse (pet)",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "__key": "bodyguard",
+  "__folder": "Backgrounds",
+  "name": "Bodyguard",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You protected a person of importance.</p>",
+    "roll": {
+      "first": 2,
+      "second": 6
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Armor: Interposing Arm",
+    "traitTree": "armor",
+    "traitName": "Interposing Arm",
+    "expertises": [
+      {
+        "key": "endurance",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 1
+      },
+      {
+        "key": "slashing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "ball bearings",
+        "quantity": 1
+      },
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "shield",
+        "quantity": 1
+      },
+      {
+        "name": "sword",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

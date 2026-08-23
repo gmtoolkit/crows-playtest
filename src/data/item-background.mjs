@@ -36,6 +36,23 @@ export default class BackgroundData extends foundry.abstract.TypeDataModel {
       /** Name of the starting trait granted, e.g. "Enchantment: Material Transfer". */
       trait: new fields.StringField({ required: false, blank: true, initial: "" }),
 
+      /**
+       * The same trait, split into its tree and its name.
+       *
+       * DECLARED BECAUSE AN UNDECLARED FIELD IS SILENTLY DROPPED. The extractor
+       * emits both, and without them here a TypeDataModel discards them on
+       * import with no error — the pack would build clean and the builder would
+       * find nothing to place the starting trait against.
+       *
+       * They are not merely `trait` re-split at runtime: the extractor applies
+       * the book's own spelling corrections on the way through (Blacksmith
+       * prints its tree as "Smithing", and the tree title itself is printed
+       * "Blackmsithing"), so the split carries fixes the display string does
+       * not.
+       */
+      traitTree: new fields.StringField({ required: false, blank: true, initial: "" }),
+      traitName: new fields.StringField({ required: false, blank: true, initial: "" }),
+
       /** Expertise uses seeded at creation. Most are 1; some backgrounds give 2. */
       expertises: new fields.ArrayField(
         new fields.SchemaField({

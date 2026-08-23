@@ -1,0 +1,76 @@
+{
+  "__key": "tinkerer",
+  "__folder": "Backgrounds",
+  "name": "Tinkerer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You created magic and mechanical inventions.</p>",
+    "roll": {
+      "first": 6,
+      "second": 4
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Knowledge: Improvised Equipment",
+    "traitTree": "knowledge",
+    "traitName": "Improvised Equipment",
+    "expertises": [
+      {
+        "key": "alchemy",
+        "uses": 2
+      },
+      {
+        "key": "blacksmithing",
+        "uses": 2
+      },
+      {
+        "key": "enchanting",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 1
+      },
+      {
+        "key": "thievery",
+        "uses": 2
+      },
+      {
+        "key": "chopping",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "alchemist’s tools",
+        "quantity": 1
+      },
+      {
+        "name": "blacksmith’s tools",
+        "quantity": 1
+      },
+      {
+        "name": "handaxe",
+        "quantity": 1
+      },
+      {
+        "name": "lockpick set",
+        "quantity": 1
+      },
+      {
+        "name": "soap",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

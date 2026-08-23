@@ -62,6 +62,17 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "backgrounds",
+      "label": "Crows: Backgrounds",
+      "path": "packs/backgrounds",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [],

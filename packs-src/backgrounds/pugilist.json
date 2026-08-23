@@ -1,0 +1,61 @@
+{
+  "__key": "pugilist",
+  "__folder": "Backgrounds",
+  "name": "Pugilist",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You made a living battling it out with bare knuckles.</p>",
+    "roll": {
+      "first": 5,
+      "second": 5
+    },
+    "characteristicAt2": [
+      "agility",
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Unarmed: Pack a Punch",
+    "traitTree": "unarmed",
+    "traitName": "Pack a Punch",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "unarmed",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chalk",
+        "quantity": 1
+      },
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "lore book (Monster Lore)",
+        "quantity": 1
+      },
+      {
+        "name": "net",
+        "quantity": 1
+      },
+      {
+        "name": "rage potion",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

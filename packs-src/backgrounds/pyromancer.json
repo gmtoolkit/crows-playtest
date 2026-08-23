@@ -1,0 +1,67 @@
+{
+  "__key": "pyromancer",
+  "__folder": "Backgrounds",
+  "name": "Pyromancer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You learned how to cast elemental spells that create and harness fire.</p>",
+    "roll": {
+      "first": 5,
+      "second": 6
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Elemental: Burn Baby",
+    "traitTree": "elemental",
+    "traitName": "Burn Baby",
+    "expertises": [
+      {
+        "key": "alchemy",
+        "uses": 1
+      },
+      {
+        "key": "enchanting",
+        "uses": 1
+      },
+      {
+        "key": "historicalLore",
+        "uses": 1
+      },
+      {
+        "key": "magicLore",
+        "uses": 2
+      },
+      {
+        "key": "elemental",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "magnifying glass",
+        "quantity": 1
+      },
+      {
+        "name": "smoke bomb",
+        "quantity": 1
+      },
+      {
+        "name": "string",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "fire hands",
+      "fire lance"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

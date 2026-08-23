@@ -1,0 +1,76 @@
+{
+  "__key": "hunter",
+  "__folder": "Backgrounds",
+  "name": "Hunter",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You tracked animals in the wild and foraged for food.</p>",
+    "roll": {
+      "first": 4,
+      "second": 3
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 5,
+    "trait": "Travel: Foraging Expert",
+    "traitTree": "travel",
+    "traitName": "Foraging Expert",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "handlePet",
+        "uses": 2
+      },
+      {
+        "key": "natureLore",
+        "uses": 2
+      },
+      {
+        "key": "navigate",
+        "uses": 1
+      },
+      {
+        "key": "stealth",
+        "uses": 1
+      },
+      {
+        "key": "bow",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "animal feed",
+        "quantity": 6
+      },
+      {
+        "name": "bear trap",
+        "quantity": 1
+      },
+      {
+        "name": "dog (pet)",
+        "quantity": 1
+      },
+      {
+        "name": "quiver of arrows",
+        "quantity": 1
+      },
+      {
+        "name": "shortbow",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

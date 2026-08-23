@@ -1,0 +1,60 @@
+{
+  "__key": "gladiator",
+  "__folder": "Backgrounds",
+  "name": "Gladiator",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You fought deadly battles for entertainment of others.</p>",
+    "roll": {
+      "first": 4,
+      "second": 2
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Stabbing: Bury the Point",
+    "traitTree": "stabbing",
+    "traitName": "Bury the Point",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "stabbing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "mirror",
+        "quantity": 1
+      },
+      {
+        "name": "pike",
+        "quantity": 1
+      },
+      {
+        "name": "rage potion",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

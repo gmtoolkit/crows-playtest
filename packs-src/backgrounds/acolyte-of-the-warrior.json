@@ -1,0 +1,56 @@
+{
+  "__key": "acolyte-of-the-warrior",
+  "__folder": "Backgrounds",
+  "name": "Acolyte of the Warrior",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You served the god of war.</p>",
+    "roll": {
+      "first": 1,
+      "second": 5
+    },
+    "characteristicAt2": [
+      "mind",
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Benefaction: First Responder",
+    "traitTree": "benefaction",
+    "traitName": "First Responder",
+    "expertises": [
+      {
+        "key": "religiousLore",
+        "uses": 1
+      },
+      {
+        "key": "benefaction",
+        "uses": 1
+      },
+      {
+        "key": "chopping",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "axe",
+        "quantity": 1
+      },
+      {
+        "name": "holy symbol",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "minor healing",
+      "minor ward"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "__key": "thief",
+  "__folder": "Backgrounds",
+  "name": "Thief",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You burgled places for money, either on your own or as part of a guild.</p>",
+    "roll": {
+      "first": 6,
+      "second": 3
+    },
+    "characteristicAt2": [
+      "agility"
+    ],
+    "stamina": 5,
+    "trait": "Thievery: Stealthy",
+    "traitTree": "thievery",
+    "traitName": "Stealthy",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "gymnastics",
+        "uses": 2
+      },
+      {
+        "key": "search",
+        "uses": 2
+      },
+      {
+        "key": "stealth",
+        "uses": 2
+      },
+      {
+        "key": "thievery",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "crowbar",
+        "quantity": 1
+      },
+      {
+        "name": "extra knife",
+        "quantity": 1
+      },
+      {
+        "name": "grappling hook",
+        "quantity": 1
+      },
+      {
+        "name": "lockpick set",
+        "quantity": 1
+      },
+      {
+        "name": "smoke bomb",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

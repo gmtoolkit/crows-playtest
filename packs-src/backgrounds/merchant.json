@@ -1,0 +1,68 @@
+{
+  "__key": "merchant",
+  "__folder": "Backgrounds",
+  "name": "Merchant",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You were a merchant who traveled from village to village, trading your wares.</p>",
+    "roll": {
+      "first": 5,
+      "second": 2
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Camping: Plotting",
+    "traitTree": "camping",
+    "traitName": "Plotting",
+    "expertises": [
+      {
+        "key": "historicalLore",
+        "uses": 2
+      },
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "navigate",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 1
+      },
+      {
+        "key": "thievery",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "journal",
+        "quantity": 1
+      },
+      {
+        "name": "lantern",
+        "quantity": 1
+      },
+      {
+        "name": "merchant’s scales",
+        "quantity": 1
+      },
+      {
+        "name": "oil flask",
+        "quantity": 1
+      },
+      {
+        "name": "quill and ink pot",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 50,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

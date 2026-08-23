@@ -14,10 +14,27 @@
     <div class="names">
       <input class="crow-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'CROWS.Name'}}">
       <div class="sub">
-        <input type="text" name="system.biography.background" value="{{system.biography.background}}"
-               placeholder="{{localize 'CROWS.Background'}}">
+        {{!-- Background is STRUCTURED: one of 36 rolled on a 2d6 table, and it
+              decides characteristics, Stamina, a starting trait, expertise uses
+              and a kit. It gets a lookup, not a text box.
+
+              Feature is NOT. The book says "give your PC a name and a
+              distinguishing feature ... a tattoo, distinct body odor, unique
+              voice, strong personality trait, or the like" (C p1) — no table,
+              nothing derives from it. Free text is the correct shape there, and
+              making it a picker would invent a list MCDM did not print. --}}
+        <div class="lookup">
+          <input type="text" name="system.biography.background" value="{{system.biography.background}}"
+                 placeholder="{{localize 'CROWS.Background'}}" readonly
+                 data-tooltip="{{localize 'CROWS.BackgroundHint'}}">
+          <button type="button" class="icon" data-action="pickBackground"
+                  data-tooltip="{{localize 'CROWS.PickBackground'}}">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
         <input type="text" name="system.biography.feature" value="{{system.biography.feature}}"
-               placeholder="{{localize 'CROWS.Feature'}}">
+               placeholder="{{localize 'CROWS.Feature'}}"
+               data-tooltip="{{localize 'CROWS.FeatureHint'}}">
       </div>
     </div>
   </div>

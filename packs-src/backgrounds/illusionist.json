@@ -1,0 +1,68 @@
+{
+  "__key": "illusionist",
+  "__folder": "Backgrounds",
+  "name": "Illusionist",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You studied illusion magic.</p>",
+    "roll": {
+      "first": 4,
+      "second": 5
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 5,
+    "trait": "Illusion: Lasting Illusion",
+    "traitTree": "illusion",
+    "traitName": "Lasting Illusion",
+    "expertises": [
+      {
+        "key": "magicLore",
+        "uses": 2
+      },
+      {
+        "key": "monsterLore",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 1
+      },
+      {
+        "key": "stealth",
+        "uses": 2
+      },
+      {
+        "key": "thievery",
+        "uses": 1
+      },
+      {
+        "key": "illusion",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "card deck",
+        "quantity": 1
+      },
+      {
+        "name": "smoke bomb",
+        "quantity": 1
+      },
+      {
+        "name": "whistle",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "cacophony",
+      "light",
+      "minor phantasm"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

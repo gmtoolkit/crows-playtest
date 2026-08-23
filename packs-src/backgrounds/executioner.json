@@ -1,0 +1,60 @@
+{
+  "__key": "executioner",
+  "__folder": "Backgrounds",
+  "name": "Executioner",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You carried out capital punishment.</p>",
+    "roll": {
+      "first": 3,
+      "second": 6
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Chopping: Chop ‘Em Down",
+    "traitTree": "chopping",
+    "traitName": "Chop ‘Em Down",
+    "expertises": [
+      {
+        "key": "lift",
+        "uses": 1
+      },
+      {
+        "key": "chopping",
+        "uses": 1
+      },
+      {
+        "key": "unarmed",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chain",
+        "quantity": 1
+      },
+      {
+        "name": "greataxe",
+        "quantity": 1
+      },
+      {
+        "name": "ladder",
+        "quantity": 1
+      },
+      {
+        "name": "padlock",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -38,6 +38,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       openBuilder: CrowSheet.#onOpenBuilder,
       openTurnPanel: CrowSheet.#onOpenTurnPanel,
       changeTokenArt: CrowSheet.#onChangeTokenArt,
+      pickBackground: CrowSheet.#onPickBackground,
       openPlacedToken: CrowSheet.#onOpenPlacedToken
     },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: ".crows-slot" }]
@@ -101,6 +102,40 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     context.dungeonTurn = DungeonTurn.state;
     Object.assign(context, documentControlContext(actor));
     return context;
+  }
+
+  /**
+   * Translate the editable "uses left" back into what is actually stored.
+   *
+   * The row shows `left / trained`, and LEFT is the editable one — it is the
+   * transient number, and the permanent one has no business being a text box.
+   * But `remaining` is derived (`uses - spent`), so it cannot be written to.
+   * The input carries a name the schema does not have, and this converts it.
+   *
+   * Without this the form would post `system.expertises.x.remainingInput`, and
+   * a TypeDataModel drops undeclared fields in silence: the box would accept a
+   * number, look saved, and change nothing.
+   *
+   * IT HAS TO BE `_processFormData`, NOT `_prepareSubmitData`. Traced live:
+   * `_processFormData` returns `{remainingInput: 0}`, and by the time
+   * `_prepareSubmitData` finishes it is `{}` — the undeclared field is stripped
+   * between them, so an override that runs after super() never sees it and the
+   * input silently does nothing.
+   */
+  _processFormData(event, form, formData) {
+    const data = super._processFormData(event, form, formData);
+    const expertises = data?.system?.expertises;
+    if (!expertises) return data;
+
+    for (const [key, entry] of Object.entries(expertises)) {
+      if (!(entry && typeof entry === "object" && "remainingInput" in entry)) continue;
+      const left = Math.max(0, Number(entry.remainingInput) || 0);
+      const uses = this.actor.system.expertises[key]?.uses ?? 0;
+      // Clamp: you cannot have more left than you have trained.
+      entry.spent = Math.max(0, uses - Math.min(left, uses));
+      delete entry.remainingInput;
+    }
+    return data;
   }
 
   async _preparePartContext(partId, context, options) {
@@ -468,6 +503,59 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
    * has no reason to reach for it — but a macro or a module may still call
    * this action, and it should expand the HUD rather than throw.
    */
+  /**
+   * Choose a background from the compendium.
+   *
+   * A background is not a label. It is one of 36 rolled on a 2d6 table and it
+   * decides a characteristic, Stamina, a starting trait, expertise uses and a
+   * kit — so it is looked up, never typed. Typing it meant the name on the
+   * sheet could say "Thief" while nothing behind it did.
+   *
+   * This sets the NAME only, and deliberately does not apply the statistics:
+   * re-applying a background to a played crow would overwrite Stamina and
+   * expertise uses they have since advanced. Applying it is character
+   * creation's job, and that is the builder.
+   */
+  static async #onPickBackground() {
+    const { DialogV2 } = foundry.applications.api;
+    const docs = await CrowSheet.#backgrounds();
+    if (!docs.length) return ui.notifications.warn(game.i18n.localize("CROWS.NoBackgrounds"));
+
+    const current = this.actor.system.biography.background;
+    const options = docs
+      .map((d) => {
+        const r = d.system.roll;
+        const selected = d.name === current ? " selected" : "";
+        return `<option value="${d.name}"${selected}>${d.name} &mdash; ${r.first}${r.second}</option>`;
+      })
+      .join("");
+
+    const picked = await DialogV2.prompt({
+      window: { title: game.i18n.localize("CROWS.PickBackground") },
+      content:
+        `<div class="form-group"><label>${game.i18n.localize("CROWS.Background")}</label>` +
+        `<select name="background" autofocus>${options}</select></div>` +
+        `<p class="hint">${game.i18n.localize("CROWS.PickBackgroundHint")}</p>`,
+      ok: {
+        label: game.i18n.localize("CROWS.Choose"),
+        callback: (_e, button) => new FormDataExtended(button.form).object.background
+      },
+      rejectClose: false
+    });
+
+    if (!picked) return;
+    return this.actor.update({ "system.biography.background": picked });
+  }
+
+  /** Backgrounds from the compendium plus any the Ref authored in-world. */
+  static async #backgrounds() {
+    const docs = [];
+    const pack = game.packs.get("crows.backgrounds");
+    if (pack) docs.push(...(await pack.getDocuments()));
+    docs.push(...game.items.filter((i) => i.type === "background"));
+    return docs.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
   /**
    * Pick a new token image, in one click from the sheet.
    *

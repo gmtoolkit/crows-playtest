@@ -1,0 +1,60 @@
+{
+  "__key": "conjurer",
+  "__folder": "Backgrounds",
+  "name": "Conjurer",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You studied conjuration magic.</p>",
+    "roll": {
+      "first": 3,
+      "second": 2
+    },
+    "characteristicAt2": [
+      "mind"
+    ],
+    "stamina": 7,
+    "trait": "Conjuration: Jumper",
+    "traitTree": "conjuration",
+    "traitName": "Jumper",
+    "expertises": [
+      {
+        "key": "handlePet",
+        "uses": 1
+      },
+      {
+        "key": "magicLore",
+        "uses": 1
+      },
+      {
+        "key": "monsterLore",
+        "uses": 1
+      },
+      {
+        "key": "navigate",
+        "uses": 1
+      },
+      {
+        "key": "conjuration",
+        "uses": 2
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chain",
+        "quantity": 1
+      },
+      {
+        "name": "torch",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [
+      "jaunt",
+      "summon object",
+      "teleport object"
+    ],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "__key": "village-watch",
+  "__folder": "Backgrounds",
+  "name": "Village Watch",
+  "type": "background",
+  "img": "icons/svg/mystery-man.svg",
+  "system": {
+    "description": "<p>You kept a settlement safe.</p>",
+    "roll": {
+      "first": 6,
+      "second": 6
+    },
+    "characteristicAt2": [
+      "strength"
+    ],
+    "stamina": 9,
+    "trait": "Armor: Stand Strong",
+    "traitTree": "armor",
+    "traitName": "Stand Strong",
+    "expertises": [
+      {
+        "key": "athletics",
+        "uses": 1
+      },
+      {
+        "key": "search",
+        "uses": 1
+      },
+      {
+        "key": "stabbing",
+        "uses": 1
+      }
+    ],
+    "equipment": [
+      {
+        "name": "chain",
+        "quantity": 1
+      },
+      {
+        "name": "lantern",
+        "quantity": 1
+      },
+      {
+        "name": "light armor",
+        "quantity": 1
+      },
+      {
+        "name": "oil flask",
+        "quantity": 1
+      },
+      {
+        "name": "padlock",
+        "quantity": 1
+      },
+      {
+        "name": "pike",
+        "quantity": 1
+      },
+      {
+        "name": "whistle",
+        "quantity": 1
+      }
+    ],
+    "spellbooks": [],
+    "bonusGold": 0,
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,10 +1,19 @@
 {{!-- One expertise: name, spendable use pips, and "left / trained".
 
-      The pips ARE the spend control — clicking a full one spends a use and
-      clicking a spent one gives it back. That leaves a single reading on the
-      row, because two unlabelled number boxes side by side never said which
-      was which. --}}
-<li class="expertise-row {{#unless row.remaining}}exhausted{{/unless}}" data-expertise="{{row.key}}">
+      WHICH NUMBER IS EDITABLE IS THE POINT.
+
+      The denominator is TRAINED USES: background plus advancement bonuses. It
+      is permanent, it is system-owned, and it is not a thing you type. It used
+      to be the free-text box on this row purely because backgrounds were not
+      modelled and nothing else could enter a crow's starting uses — a data
+      entry hole, never a design. Now that backgrounds exist, it is a readout.
+
+      The numerator is USES LEFT, which is transient and resets every rest. If
+      anything on this row is hand-adjustable it is this one, so it is: the
+      pips spend and restore, and the number itself takes a direct edit for the
+      cases pips are clumsy for. --}}
+<li class="expertise-row {{#unless row.remaining}}exhausted{{/unless}} {{#if row.uses}}trained{{/if}}"
+    data-expertise="{{row.key}}">
   <span class="exp-name">{{row.label}}</span>
 
   <span class="exp-pips">
@@ -16,18 +25,14 @@
   </span>
 
   <span class="exp-count" data-tooltip="{{localize 'CROWS.ExpertiseCountHint'}}">
-    <span class="exp-remaining">{{row.remaining}}</span>
-    <span class="exp-sep">/</span>
-    {{!-- TEMPORARY. Uses come from the background at creation plus advancement
-          bonuses, and the bonus half is tracked properly now — but the
-          backgrounds compendium does not exist yet, so this box is the only
-          way to enter what a background granted. Cliff's ruling (2026-08-23):
-          once the backgrounds pack ships and the builder can set these, this
-          becomes READ-ONLY FOR EVERYONE, GM included. --}}
     {{#if editable}}
-      <input class="exp-uses" type="number" min="0" name="system.expertises.{{row.key}}.uses" value="{{row.uses}}">
+      <input class="exp-remaining-input" type="number" min="0" max="{{row.uses}}"
+             name="system.expertises.{{row.key}}.remainingInput" value="{{row.remaining}}"
+             data-tooltip="{{localize 'CROWS.UsesLeftHint'}}">
     {{else}}
-      <span class="exp-trained">{{row.uses}}</span>
+      <span class="exp-remaining">{{row.remaining}}</span>
     {{/if}}
+    <span class="exp-sep">/</span>
+    <span class="exp-trained" data-tooltip="{{localize 'CROWS.TrainedHint'}}">{{row.uses}}</span>
   </span>
 </li>
