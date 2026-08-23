@@ -2,25 +2,44 @@
 
      Foundry v13+ hides configureToken / configurePrototypeToken / ownership
      behind the window header's overflow menu, which is a lot of clicks for
-     things a Ref touches constantly. These bind to the action names
-     ActorSheetV2 and DocumentSheetV2 already register, so they need no
-     handler code of their own — except openPlacedToken, which targets the
-     token on the canvas rather than this actor's prototype. --}}
+     things a Ref touches constantly. Most of these bind to action names
+     ActorSheetV2 and DocumentSheetV2 already register, so they need no handler
+     of their own.
+
+     TWO THINGS WERE MISSING AND BOTH BLOCKED CHANGING ART:
+     `showPortraitArtwork` / `showTokenArtwork` only DISPLAY the image — there
+     was no "change it" control anywhere on the sheet — and the portrait itself
+     carried `data-edit="img"` without `data-action="editImage"`, which in
+     ApplicationV2 means clicking it does nothing at all. So the only route to
+     token art was the prototype-token dialog's Appearance tab, four clicks in
+     and behind an unlabelled icon.
+
+     They are labelled now. An icon-only row of seven is not discoverable, and
+     "I can't edit token art" is what that costs. --}}
 <nav class="document-controls">
 
   {{#unless isToken}}
-    <button type="button" class="icon" data-action="configurePrototypeToken"
-            data-tooltip="{{localize 'TOKEN.TitlePrototype'}}">
-      <i class="fa-solid fa-circle-user"></i>
+    <button type="button" data-action="configurePrototypeToken"
+            data-tooltip="{{localize 'CROWS.PrototypeTokenHint'}}">
+      <i class="fa-solid fa-circle-user"></i> <span>{{localize "TOKEN.TitlePrototype"}}</span>
+    </button>
+  {{else}}
+    <button type="button" data-action="configureToken"
+            data-tooltip="{{localize 'CROWS.ThisTokenHint'}}">
+      <i class="fa-regular fa-circle-user"></i> <span>{{localize "DOCUMENT.Token"}}</span>
     </button>
   {{/unless}}
 
-  {{#if isToken}}
-    <button type="button" class="icon" data-action="configureToken"
-            data-tooltip="{{localize 'DOCUMENT.Token'}}">
-      <i class="fa-regular fa-circle-user"></i>
-    </button>
-  {{/if}}
+  {{!-- The one that was missing: pick a new token image directly. --}}
+  <button type="button" data-action="changeTokenArt"
+          data-tooltip="{{localize 'CROWS.ChangeTokenArtHint'}}">
+    <i class="fa-solid fa-image-portrait"></i> <span>{{localize "CROWS.ChangeTokenArt"}}</span>
+  </button>
+
+  <button type="button" data-action="editImage" data-edit="img"
+          data-tooltip="{{localize 'CROWS.ChangePortraitHint'}}">
+    <i class="fa-solid fa-image"></i> <span>{{localize "CROWS.ChangePortrait"}}</span>
+  </button>
 
   {{#if hasPlacedToken}}
     <button type="button" class="icon" data-action="openPlacedToken"
@@ -28,16 +47,6 @@
       <i class="fa-solid fa-location-crosshairs"></i>
     </button>
   {{/if}}
-
-  <button type="button" class="icon" data-action="showPortraitArtwork"
-          data-tooltip="{{localize 'SIDEBAR.CharArt'}}">
-    <i class="fa-solid fa-image"></i>
-  </button>
-
-  <button type="button" class="icon" data-action="showTokenArtwork"
-          data-tooltip="{{localize 'SIDEBAR.TokenArt'}}">
-    <i class="fa-solid fa-image-portrait"></i>
-  </button>
 
   {{#if isGM}}
     <button type="button" class="icon" data-action="configureOwnership"

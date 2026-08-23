@@ -44,6 +44,27 @@ export function earnedBonuses(txp) {
   return { count, maxUses };
 }
 
+/**
+ * The next TXP threshold that pays out, or null once the printed table ends.
+ *
+ * Shown so the pacing is visible. Bonuses are a CAREER's worth — nine printed
+ * thresholds, the last at 30,000 — and without seeing the next one it is easy
+ * to read the rest gate as "a rest hands you a bonus", which would make this a
+ * per-session refresh rather than a permanent advance.
+ */
+export function nextBonusThreshold(txp) {
+  const row = CROWS.expertiseAdvancement.find((r) => txp < r.txp);
+  if (row) return row.txp;
+  const last = CROWS.expertiseAdvancement.at(-1).txp;
+  const step = CROWS.expertiseAdvancementStep;
+  return last + Math.floor((txp - last) / step + 1) * step;
+}
+
+/** Whether `txp` has passed every printed row. */
+export function pastPrintedTable(txp) {
+  return txp >= CROWS.expertiseAdvancement.at(-1).txp;
+}
+
 /** Characteristic bonuses unlocked by lifetime TXP. */
 export function earnedCharacteristicBonuses(txp) {
   const table = CROWS.characteristicAdvancement;

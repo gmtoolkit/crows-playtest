@@ -7,6 +7,15 @@
     <div class="adv-stat" data-tooltip="{{localize 'CROWS.TXPHint'}}">
       <span class="adv-value">{{txp}}</span>
       <span class="adv-label">{{localize "CROWS.TotalXP"}}</span>
+      {{!-- The next threshold, so a bonus reads as a career milestone rather
+            than something a rest hands out. --}}
+      <span class="adv-next">
+        {{#if pastTable}}
+          {{localize "CROWS.NoMoreThresholds" step=thresholdStep}}
+        {{else}}
+          {{localize "CROWS.NextBonusAt" txp=nextThreshold}}
+        {{/if}}
+      </span>
     </div>
     <div class="adv-stat {{#if adv.available}}owed{{/if}}">
       <span class="adv-value">{{adv.available}}</span>

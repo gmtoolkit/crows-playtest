@@ -1231,14 +1231,116 @@
 /*  Dungeon turn panel                          */
 /* -------------------------------------------- */
 
-.crows.dungeon-turn-panel .window-content {
-  padding: 0.6rem;
+/**
+ * The clock is docked furniture, not a window.
+ *
+ * It is inserted as a sibling immediately before `#players` inside Foundry's
+ * bottom-anchored left flex column, so it rides above the player list and
+ * moves with it. Nothing here positions it — doing that by coordinates would
+ * need a resize observer and would still drift when the list grows.
+ */
+.crows.crows-turn-hud {
+  width: 220px;
+  flex: 0 0 auto;
+  pointer-events: auto;
 }
 
-.crows .dungeon-turn {
+.crows .turn-hud {
   display: grid;
   gap: 0.45rem;
   text-align: center;
+  background: linear-gradient(180deg, rgba(36, 29, 23, 0.96), rgba(23, 19, 15, 0.96));
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.4rem;
+  backdrop-filter: blur(2px);
+}
+
+/* The one control rendered in BOTH states: this is how you get back. */
+.crows .hud-toggle {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.15rem 0.3rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+}
+
+.crows .hud-toggle:hover {
+  background: rgba(201, 162, 39, 0.12);
+}
+
+.crows .hud-icon {
+  color: var(--crows-gold);
+  font-size: 0.8rem;
+}
+
+.crows .hud-summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.crows .hud-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--crows-bone);
+}
+
+.crows .hud-clock.idle {
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--crows-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.crows .hud-turn {
+  font-size: 0.62rem;
+  color: var(--crows-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.crows .hud-chevron {
+  font-size: 0.62rem;
+  color: var(--crows-muted);
+}
+
+/* Collapsed: the bar alone, and the big clock below it is not rendered. */
+.crows .turn-hud.collapsed {
+  gap: 0;
+  padding: 0.2rem;
+}
+
+.crows .hud-body {
+  display: grid;
+  gap: 0.45rem;
+}
+
+/* Urgency has to read from the collapsed bar too, or collapsing hides it. */
+.crows .turn-hud.urgent .hud-clock {
+  color: var(--crows-blood-bright);
+  animation: crows-pulse 1.4s ease-in-out infinite;
+}
+
+.crows .turn-hud.paused .hud-clock {
+  color: var(--crows-muted);
+}
+
+.crows .turn-hud.idle {
+  opacity: 0.82;
+}
+
+.crows .dt-start {
+  font-size: 0.72rem;
+  padding: 0.3rem;
 }
 
 .crows .dt-turn {
@@ -1275,12 +1377,12 @@
   color: var(--crows-bone);
 }
 
-.crows .dungeon-turn.urgent .dt-clock {
+.crows .turn-hud.urgent .dt-clock {
   color: var(--crows-blood-bright);
   animation: crows-pulse 1.4s ease-in-out infinite;
 }
 
-.crows .dungeon-turn.paused .dt-clock {
+.crows .turn-hud.paused .dt-clock {
   color: var(--crows-muted);
 }
 
@@ -1628,16 +1730,44 @@
   align-items: center;
   padding-left: 0.4rem;
   border-left: 1px solid var(--crows-edge);
+  flex-wrap: wrap;
+}
+
+/**
+ * The art controls carry LABELS.
+ *
+ * A row of seven unlabelled icons is not a menu, it is a guessing game — and
+ * the cost of that was a whole session where token art could not be changed
+ * because the only two image icons said "show", not "change".
+ */
+.crows .document-controls button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.45rem;
+  font-size: 0.7rem;
+  color: var(--crows-muted);
+  white-space: nowrap;
+}
+
+.crows .document-controls button:hover {
+  color: var(--crows-gold);
 }
 
 .crows .document-controls button.icon {
   padding: 0.3rem 0.4rem;
   font-size: 0.78rem;
-  color: var(--crows-muted);
 }
 
-.crows .document-controls button.icon:hover {
-  color: var(--crows-gold);
+/* The portrait is a control, so it should look like one. */
+.crows .portrait[data-action] {
+  cursor: pointer;
+  transition: border-color 120ms, filter 120ms;
+}
+
+.crows .portrait[data-action]:hover {
+  border-color: var(--crows-gold);
+  filter: brightness(1.15);
 }
 
 .crows .creature-header .document-controls {
@@ -1833,6 +1963,115 @@
 }
 
 /* -------------------------------------------- */
+/*  Treasure award                              */
+/* -------------------------------------------- */
+
+.crows .treasure-body {
+  display: grid;
+  gap: 0.7rem;
+  padding: 0.7rem;
+}
+
+.crows .treasure-body fieldset {
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.5rem 0.6rem;
+  margin: 0;
+}
+
+.crows .treasure-body legend {
+  color: var(--crows-gold);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 0.3rem;
+}
+
+.crows .treasure-body legend .count {
+  color: var(--crows-bone);
+}
+
+.crows .treasure-body .check {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.74rem;
+  padding: 0.1rem 0;
+}
+
+.crows .crow-list {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.crows .crow-toggle {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.76rem;
+  opacity: 0.45;
+}
+
+/* Included is the loud state: leaving someone out should be visible. */
+.crows .crow-toggle.on {
+  opacity: 1;
+  border-color: var(--crows-gold);
+}
+
+.crows .crow-toggle img {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: var(--crows-radius);
+  border: 1px solid var(--crows-edge);
+}
+
+.crows .crow-toggle .crow-txp {
+  color: var(--crows-muted);
+  font-size: 0.66rem;
+}
+
+.crows .treasure-body footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.crows .treasure-body footer button {
+  padding: 0.35rem 0.9rem;
+  border-color: var(--crows-gold);
+  color: var(--crows-gold);
+}
+
+/* The threshold crossing is the level-up, so it is the loud line in chat. */
+.crows-treasure .levelled,
+.chat-message .crows-treasure .levelled {
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+.crows-treasure .muted {
+  color: var(--crows-muted);
+  font-size: 0.85em;
+}
+
+.crows-treasure ul {
+  margin: 0.3rem 0;
+  padding-left: 1.1rem;
+}
+
+.crows-treasure .hint {
+  font-size: 0.8em;
+  font-style: italic;
+  color: var(--crows-muted);
+}
+
+/* -------------------------------------------- */
 /*  Advancement                                 */
 /* -------------------------------------------- */
 
@@ -1862,6 +2101,14 @@
   display: flex;
   gap: 0.4rem;
   flex-wrap: wrap;
+}
+
+.crows .adv-next {
+  font-size: 0.58rem;
+  color: var(--crows-muted);
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 0.15rem;
 }
 
 .crows .adv-head .adv-stat {

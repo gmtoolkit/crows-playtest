@@ -6,7 +6,11 @@
     {{!-- Decorative only; the class is what resolves the glyph, never a
           hardcoded codepoint. --}}
     <i class="fa-solid fa-crow crow-watermark" aria-hidden="true"></i>
-    <img class="portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
+    {{!-- data-action is REQUIRED alongside data-edit: ApplicationV2 routes the
+         file picker off the ACTION, so data-edit alone made this look clickable
+         and do nothing at all. --}}
+    <img class="portrait" src="{{actor.img}}" data-action="editImage" data-edit="img"
+         alt="{{actor.name}}" data-tooltip="{{localize 'CROWS.ChangePortraitHint'}}">
     <div class="names">
       <input class="crow-name" type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'CROWS.Name'}}">
       <div class="sub">
@@ -81,7 +85,9 @@
     <nav class="header-actions">
       <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "CROWS.Rest"}}</button>
       <button type="button" data-action="openBuilder"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "CROWS.Builder"}}</button>
-      <button type="button" data-action="openTurnPanel"><i class="fa-solid fa-hourglass-half"></i> {{localize "CROWS.DungeonTurn"}}</button>
+      {{!-- No dungeon-turn button here. The clock is the table's, not one
+            crow's, and it now lives permanently above the player list where
+            everyone can see it without opening a sheet. --}}
     </nav>
     {{> "systems/crows/templates/partials/document-controls.hbs"}}
   </div>

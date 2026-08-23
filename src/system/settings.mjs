@@ -65,7 +65,26 @@ export function registerSettings() {
     scope: "world",
     config: true,
     type: Boolean,
-    default: true
+    default: true,
+    onChange: async () => {
+      const { DungeonTurnPanel } = await import("./dungeon-turn.mjs");
+      if (DungeonTurnPanel.visibleToUser) DungeonTurnPanel.show();
+      else await DungeonTurnPanel.teardown();
+    }
+  });
+
+  /**
+   * Whether this client has the turn clock collapsed to a bar.
+   *
+   * Client-scoped and hidden from the settings sheet: it is a UI state the
+   * user sets by clicking the thing, not a preference they go looking for. A
+   * player collapsing their clock must not collapse the Ref's.
+   */
+  game.settings.register(id, "turnHudCollapsed", {
+    scope: "client",
+    config: false,
+    type: Boolean,
+    default: false
   });
 
   /**

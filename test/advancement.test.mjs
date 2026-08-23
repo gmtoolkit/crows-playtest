@@ -17,7 +17,9 @@ import {
   raiseCharacteristic,
   undoCharacteristic,
   restOwed,
-  unsettledTxp
+  unsettledTxp,
+  nextBonusThreshold,
+  pastPrintedTable
 } from "../src/system/advancement.mjs";
 
 /** A sheet's worth of expertises, defaulting everything else to zero uses. */
@@ -75,6 +77,45 @@ describe("Expertise & Stamina advancement (C p6)", () => {
     for (const txp of [5000, 30000]) {
       assert.ok(earnedBonuses(txp).count > 0 && earnedCharacteristicBonuses(txp) > 0, `${txp} pays both`);
     }
+  });
+});
+
+describe("a bonus is a career milestone, not a per-rest refresh", () => {
+  test("the next threshold walks the printed table", () => {
+    assert.equal(nextBonusThreshold(0), 100);
+    assert.equal(nextBonusThreshold(100), 500);
+    assert.equal(nextBonusThreshold(1400), 2250);
+    assert.equal(nextBonusThreshold(29999), 30000);
+  });
+
+  test("past the table it keeps stepping by 30,000", () => {
+    assert.equal(pastPrintedTable(29999), false);
+    assert.equal(pastPrintedTable(30000), true);
+    assert.equal(nextBonusThreshold(30000), 60000);
+    assert.equal(nextBonusThreshold(59999), 60000);
+    assert.equal(nextBonusThreshold(60000), 90000);
+  });
+
+  test("nine bonuses is the whole printed career", () => {
+    // Nine, not one per rest. A party resting nightly for a year still gets
+    // nine unless they earn the XP for them.
+    assert.equal(CROWS.expertiseAdvancement.length, 9);
+    assert.equal(earnedBonuses(30000).count, 9);
+  });
+
+  test("the pure Stamina option is +2, so one bonus can never be +6", () => {
+    // Each bonus is ONE pick from three fixed packages, not three points.
+    const options = Object.values(CROWS.expertiseBonusOptions);
+    assert.equal(Math.max(...options.map((o) => o.stamina)), 2);
+    assert.equal(Math.max(...options.map((o) => o.uses)), 3);
+    // And no package gives both maxima at once.
+    assert.ok(!options.some((o) => o.uses === 3 && o.stamina === 2));
+  });
+
+  test("banked bonuses can all be taken at one rest, which is not the same thing", () => {
+    // Crossing several thresholds without resting leaves several owed, so one
+    // rest CAN pay out a lot. That is a backlog, not a per-rest rate.
+    assert.equal(earnedBonuses(5000).count, 6);
   });
 });
 

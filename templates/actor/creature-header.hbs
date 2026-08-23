@@ -3,7 +3,11 @@
 <header class="creature-header">
 
   <div class="identity">
-    <img class="portrait" src="{{actor.img}}" data-edit="img" alt="{{actor.name}}">
+    {{!-- data-action is REQUIRED alongside data-edit: ApplicationV2 routes the
+         file picker off the ACTION, so data-edit alone made this look clickable
+         and do nothing at all. --}}
+    <img class="portrait" src="{{actor.img}}" data-action="editImage" data-edit="img"
+         alt="{{actor.name}}" data-tooltip="{{localize 'CROWS.ChangePortraitHint'}}">
     <div class="names">
       <input class="creature-name" type="text" name="name" value="{{actor.name}}">
       {{#if system.colloquialNames}}

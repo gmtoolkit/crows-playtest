@@ -124,7 +124,17 @@ function registerSheets() {
 
 Hooks.once("ready", () => {
   DungeonTurn.initialise();
+  // The clock is permanent furniture, so it goes up on load rather than
+  // waiting for someone to think to open it.
+  DungeonTurnPanel.show();
 });
+
+/**
+ * Foundry re-rendering the player list replaces the node the HUD docks against,
+ * which can leave the HUD stranded above the scene controls instead. Putting it
+ * back is cheaper than watching for it.
+ */
+Hooks.on("renderPlayers", () => DungeonTurnPanel.reinsert());
 
 /* -------------------------------------------- */
 /*  Scene controls                              */
@@ -133,9 +143,10 @@ Hooks.once("ready", () => {
 /**
  * A dungeon-turn button on the token toolbar.
  *
- * The clock is the game's central mechanic, so reaching it should not require
- * opening a character sheet first. In v14 `controls` and `tools` are Records
- * keyed by name, not arrays.
+ * The clock now lives permanently above the player list, so this no longer
+ * opens anything — it expands the HUD for someone who collapsed it and then
+ * forgot where the bar went. In v14 `controls` and `tools` are Records keyed by
+ * name, not arrays.
  */
 Hooks.on("getSceneControlButtons", (controls) => {
   const tokens = controls.tokens;
@@ -144,12 +155,35 @@ Hooks.on("getSceneControlButtons", (controls) => {
   tokens.tools.crowsDungeonTurn = {
     name: "crowsDungeonTurn",
     order: 100,
-    title: "CROWS.DungeonTurn",
+    title: "CROWS.ExpandClock",
     icon: "fa-solid fa-hourglass-half",
     button: true,
     // Players get the button only when the world lets them watch the clock.
     visible: game.user.isGM || game.settings.get(CROWS.id, "showTurnClockToPlayers"),
-    onChange: () => DungeonTurnPanel.show()
+    onChange: async () => {
+      await game.settings.set(CROWS.id, "turnHudCollapsed", false);
+      DungeonTurnPanel.show();
+    }
+  };
+
+  /**
+   * Awarding treasure, which is the ONLY thing that earns XP (C p6).
+   *
+   * It needs a home the Ref can reach mid-delve without opening a sheet,
+   * because it fires the moment the party hauls something out — that is the
+   * level-up event, and until it existed nothing marked one.
+   */
+  tokens.tools.crowsAwardTreasure = {
+    name: "crowsAwardTreasure",
+    order: 101,
+    title: "CROWS.AwardTreasure",
+    icon: "fa-solid fa-sack-dollar",
+    button: true,
+    visible: game.user.isGM,
+    onChange: async () => {
+      const { TreasureAward } = await import("./apps/treasure-award.mjs");
+      return new TreasureAward().render({ force: true });
+    }
   };
 });
 

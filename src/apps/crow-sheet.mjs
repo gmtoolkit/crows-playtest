@@ -37,6 +37,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       buyTrait: CrowSheet.#onBuyTrait,
       openBuilder: CrowSheet.#onOpenBuilder,
       openTurnPanel: CrowSheet.#onOpenTurnPanel,
+      changeTokenArt: CrowSheet.#onChangeTokenArt,
       openPlacedToken: CrowSheet.#onOpenPlacedToken
     },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: ".crows-slot" }]
@@ -460,8 +461,47 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     return new CrowBuilder({ actor: this.actor }).render({ force: true });
   }
 
+  /**
+   * Kept as an action, without a button on the sheet.
+   *
+   * The clock is permanent furniture above the player list now, so the sheet
+   * has no reason to reach for it — but a macro or a module may still call
+   * this action, and it should expand the HUD rather than throw.
+   */
+  /**
+   * Pick a new token image, in one click from the sheet.
+   *
+   * There was no control for this anywhere: `showTokenArtwork` only displays
+   * the current image, so changing it meant opening the prototype-token
+   * dialog and finding the Appearance tab. Writes the prototype AND any placed
+   * token, because changing "my token art" and then finding the figure on the
+   * map unchanged is the same bug from the player's side.
+   */
+  static async #onChangeTokenArt() {
+    const current = this.actor.prototypeToken?.texture?.src ?? this.actor.img;
+    const picker = new foundry.applications.apps.FilePicker.implementation({
+      type: "image",
+      current,
+      callback: async (path) => {
+        await this.actor.update({ "prototypeToken.texture.src": path });
+        // Linked tokens inherit; unlinked ones need telling.
+        const placed = this.actor.getActiveTokens?.() ?? [];
+        const stale = placed.filter((t) => !t.document.actorLink);
+        if (stale.length) {
+          await canvas.scene?.updateEmbeddedDocuments(
+            "Token",
+            stale.map((t) => ({ _id: t.id, "texture.src": path }))
+          );
+        }
+        this.render(false);
+      }
+    });
+    return picker.browse();
+  }
+
   static async #onOpenTurnPanel() {
     const { DungeonTurnPanel } = await import("../system/dungeon-turn.mjs");
+    await game.settings.set(CROWS.id, "turnHudCollapsed", false);
     return DungeonTurnPanel.show();
   }
 

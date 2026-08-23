@@ -295,16 +295,30 @@ export class DungeonTurn {
 /* -------------------------------------------- */
 
 /**
- * The clock the whole table watches. Shown to players when
- * `showTurnClockToPlayers` is on, GM-only otherwise.
+ * The clock the whole table watches — a permanent fixture, not a window.
+ *
+ * A dungeon turn is thirty minutes of REAL time and the pressure IS the
+ * mechanic, so the clock cannot be something you open, drag somewhere and
+ * lose behind a character sheet. It docks into Foundry's left column directly
+ * above the player list and stays there.
+ *
+ * DOCKING BY DOM ORDER, NOT BY COORDINATES. `#ui-left-column-1` is a
+ * bottom-anchored flex column holding the scene controls and then `#players`,
+ * so inserting this element immediately before `#players` puts it above the
+ * list and keeps it there as the list grows and shrinks. Positioning it by
+ * pixel offset would need a resize observer and would still drift.
+ *
+ * It can be collapsed to a single bar but never closed: the expand control is
+ * always present. Players see it only when `showTurnClockToPlayers` is on; the
+ * GM always does.
  */
 export class DungeonTurnPanel extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "crows-dungeon-turn",
-    classes: ["crows", "dungeon-turn-panel"],
+    classes: ["crows", "crows-turn-hud"],
     tag: "aside",
-    window: { title: "CROWS.DungeonTurn", icon: "fa-solid fa-hourglass-half", minimizable: true },
-    position: { width: 280, height: "auto" },
+    // Frameless: no title bar, no close button, no drag. It is furniture.
+    window: { frame: false, positioned: false },
     actions: {
       start: DungeonTurnPanel.#onStart,
       stop: DungeonTurnPanel.#onStop,
@@ -312,7 +326,8 @@ export class DungeonTurnPanel extends HandlebarsApplicationMixin(ApplicationV2) 
       endTurn: DungeonTurnPanel.#onEndTurn,
       encounter: DungeonTurnPanel.#onEncounter,
       enUp: DungeonTurnPanel.#onENUp,
-      enDown: DungeonTurnPanel.#onENDown
+      enDown: DungeonTurnPanel.#onENDown,
+      toggleHud: DungeonTurnPanel.#onToggleHud
     }
   };
 
@@ -322,15 +337,56 @@ export class DungeonTurnPanel extends HandlebarsApplicationMixin(ApplicationV2) 
 
   static #instance = null;
 
-  /** Open (or focus) the panel. */
+  /** Whether this client may see the clock at all. */
+  static get visibleToUser() {
+    return game.user.isGM || game.settings.get(CROWS.id, "showTurnClockToPlayers");
+  }
+
+  /** Put the HUD on screen. Idempotent; safe to call on every ready and relog. */
   static show() {
+    if (!this.visibleToUser) return null;
     this.#instance ??= new DungeonTurnPanel();
     return this.#instance.render({ force: true });
   }
 
-  /** Re-render if open. Called every tick and on every state change. */
+  /** Re-render if present. Called every tick and on every state change. */
   static refresh() {
     if (this.#instance?.rendered) this.#instance.render(false);
+  }
+
+  /** Take it off screen entirely — only when the world revokes player access. */
+  static async teardown() {
+    if (!this.#instance) return;
+    await this.#instance.close();
+    this.#instance = null;
+  }
+
+  /**
+   * Dock into the left column rather than the body.
+   *
+   * ApplicationV2 appends to `document.body` by default, which would float the
+   * HUD over the canvas at the top-left. Inserting before `#players` is what
+   * makes it ride above the player list without any coordinate maths.
+   */
+  _insertElement(element) {
+    const column = document.getElementById("ui-left-column-1");
+    const players = document.getElementById("players");
+    if (column && players?.parentElement === column) column.insertBefore(element, players);
+    else if (column) column.appendChild(element);
+    else document.body.appendChild(element);
+    return element;
+  }
+
+  /** Foundry rebuilding the player list can orphan the HUD; put it back. */
+  static reinsert() {
+    const el = this.#instance?.element;
+    const players = document.getElementById("players");
+    if (!el || !players) return;
+    if (el.nextElementSibling !== players) players.parentElement?.insertBefore(el, players);
+  }
+
+  static get collapsed() {
+    return game.settings.get(CROWS.id, "turnHudCollapsed");
   }
 
   /* -------------------------------------------- */
@@ -343,6 +399,7 @@ export class DungeonTurnPanel extends HandlebarsApplicationMixin(ApplicationV2) 
     return {
       state: s,
       isGM: game.user.isGM,
+      collapsed: DungeonTurnPanel.collapsed,
       minutes: DungeonTurn.minutes,
       remainingText: formatClock(remaining),
       elapsedText: formatClock(DungeonTurn.elapsed),
@@ -351,6 +408,17 @@ export class DungeonTurnPanel extends HandlebarsApplicationMixin(ApplicationV2) 
       urgent: remaining > 0 && remaining < 5 * 60_000,
       greed: CROWS.greedBonus[s.turn] ? Math.round(CROWS.greedBonus[s.turn] * 100) : 0
     };
+  }
+
+  /**
+   * Collapse to a single bar, or open back up.
+   *
+   * Stored per client, because whether you want the clock in your face is a
+   * personal call and a player minimising it should not minimise the Ref's.
+   */
+  static async #onToggleHud() {
+    await game.settings.set(CROWS.id, "turnHudCollapsed", !DungeonTurnPanel.collapsed);
+    return this.render(false);
   }
 
   /* -------------------------------------------- */

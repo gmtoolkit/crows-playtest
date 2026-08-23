@@ -1,0 +1,52 @@
+{{!-- Recovering treasure is what earns XP (C p6). The exclusions are all about
+      PROVENANCE, which no item field records, so the Ref ticks them. --}}
+<div class="treasure-body">
+
+  <p class="tab-hint">{{localize "CROWS.AwardTreasureHint"}}</p>
+
+  <div class="form-group">
+    <label>{{localize "CROWS.HaulValue"}}</label>
+    <input type="number" name="value" min="0" step="1" autofocus placeholder="0">
+    <p class="hint">{{localize "CROWS.HaulValueHint"}}</p>
+  </div>
+
+  <div class="form-group">
+    <label>{{localize "CROWS.HaulLabel"}}</label>
+    <input type="text" name="label" placeholder="{{localize 'CROWS.HaulLabelPlaceholder'}}">
+  </div>
+
+  <fieldset class="exclusions">
+    <legend>{{localize "CROWS.Exclusions"}}</legend>
+    <p class="hint">{{localize "CROWS.ExclusionsHint"}}</p>
+    {{#each exclusions}}
+      <label class="check">
+        <input type="checkbox" name="{{this.key}}">
+        <span>{{localize this.label}}</span>
+      </label>
+    {{/each}}
+  </fieldset>
+
+  <fieldset class="party">
+    <legend>{{localize "CROWS.SharingCrows"}} <span class="count">{{partySize}}</span></legend>
+    <p class="hint">{{localize "CROWS.SharingHint"}}</p>
+    <ul class="crow-list">
+      {{#each crows}}
+        <li>
+          <button type="button" class="crow-toggle {{#if this.included}}on{{/if}}"
+                  data-action="toggleCrow" data-actor-id="{{this.id}}">
+            <img src="{{this.img}}" alt="">
+            <span class="crow-name">{{this.name}}</span>
+            <span class="crow-txp">{{this.txp}} {{localize "CROWS.TXPShort"}}</span>
+            <i class="fa-solid {{#if this.included}}fa-check{{else}}fa-xmark{{/if}}"></i>
+          </button>
+        </li>
+      {{else}}
+        <li class="empty">{{localize "CROWS.NoPlayerCrows"}}</li>
+      {{/each}}
+    </ul>
+  </fieldset>
+
+  <footer>
+    <button type="submit"><i class="fa-solid fa-sack-dollar"></i> {{localize "CROWS.AwardXP"}}</button>
+  </footer>
+</div>

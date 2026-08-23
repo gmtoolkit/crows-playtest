@@ -49,6 +49,24 @@ export class CrowsActor extends Actor {
       proto.sight.enabled ??= true;
       proto.sight.range ??= 0; // no darkvision: they see only what is lit
       proto.sight.visionMode ??= "basic";
+
+      /**
+       * Default art with its own contrast.
+       *
+       * Foundry's stock `mystery-man.svg` is a PALE figure on transparency,
+       * so with the room lights on it washes into a lit dungeon floor and a
+       * player cannot find their own token. Ours carries a dark disc behind
+       * the figure, so the contrast travels with the token instead of
+       * depending on what it is standing on.
+       *
+       * Only applied when nothing else has been chosen — an import or a
+       * duplicate keeps its own art.
+       */
+      if (!data.img || data.img === CONST.DEFAULT_TOKEN) this.updateSource({ img: CROWS.art.crowToken });
+      proto.texture ??= {};
+      if (!proto.texture.src || proto.texture.src === CONST.DEFAULT_TOKEN) {
+        proto.texture.src = CROWS.art.crowToken;
+      }
     } else if (this.type === "creature") {
       proto.actorLink ??= false;
       proto.disposition ??= this.system?.category === "monster"

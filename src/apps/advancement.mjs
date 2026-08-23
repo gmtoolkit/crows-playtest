@@ -8,7 +8,9 @@ import {
   canRaiseCharacteristic,
   allCharacteristicsMaxed,
   raiseCharacteristic,
-  undoCharacteristic
+  undoCharacteristic,
+  nextBonusThreshold,
+  pastPrintedTable
 } from "../system/advancement.mjs";
 
 const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
@@ -133,6 +135,9 @@ export class AdvancementApp extends HandlebarsApplicationMixin(ApplicationV2) {
         canRaise: adv.charAvailable > 0 && canRaiseCharacteristic(sys.characteristics[key].value)
       })),
       characteristicCap: characteristicCap(),
+      nextThreshold: nextBonusThreshold(sys.xp.total),
+      pastTable: pastPrintedTable(sys.xp.total),
+      thresholdStep: CROWS.expertiseAdvancementStep,
       charTaken: (adv.characteristics ?? []).map((key, i) => ({
         index: i,
         label: key ? game.i18n.localize(CROWS.characteristics[key]?.label ?? key) : game.i18n.localize("CROWS.StaminaInstead")
