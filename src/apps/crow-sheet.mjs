@@ -39,6 +39,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       openTurnPanel: CrowSheet.#onOpenTurnPanel,
       changeTokenArt: CrowSheet.#onChangeTokenArt,
       pickBackground: CrowSheet.#onPickBackground,
+      browseItems: CrowSheet.#onBrowseItems,
       openPlacedToken: CrowSheet.#onOpenPlacedToken
     },
     dragDrop: [{ dragSelector: "[data-item-id]", dropSelector: ".crows-slot" }]
@@ -503,6 +504,23 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
    * has no reason to reach for it — but a macro or a module may still call
    * this action, and it should expand the HUD rather than throw.
    */
+  /**
+   * Open the equipment catalogue on the slot that was clicked.
+   *
+   * Passing the slot through means a take lands where the player pointed,
+   * rather than in the first hole the fitter happens to find.
+   */
+  static async #onBrowseItems(event, target) {
+    const { ItemBrowser } = await import("./item-browser.mjs");
+    return new ItemBrowser({
+      actor: this.actor,
+      target: {
+        container: target.dataset.container,
+        index: Number(target.dataset.index)
+      }
+    }).render({ force: true });
+  }
+
   /**
    * Choose a background from the compendium.
    *

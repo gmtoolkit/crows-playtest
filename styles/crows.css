@@ -2671,3 +2671,157 @@
   45% { opacity: 0.68; }
   70% { opacity: 0.9; }
 }
+
+/* -------------------------------------------- */
+/*  Equipment catalogue                         */
+/* -------------------------------------------- */
+
+/* An empty slot is a button now, so it has to look clickable. */
+.crows button.slot-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: var(--crows-slot-h);
+  background: none;
+  border: none;
+  color: var(--crows-edge);
+  font-size: 0.9rem;
+  opacity: 0.5;
+  transition: opacity 120ms, color 120ms;
+}
+
+.crows button.slot-placeholder:hover {
+  opacity: 1;
+  color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.06);
+}
+
+.crows .browser-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 0.6rem;
+  gap: 0.5rem;
+}
+
+.crows .browser-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.crows .browser-head .search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  color: var(--crows-muted);
+}
+
+.crows .browser-head .search input {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.15rem 0;
+}
+
+.crows .browser-head .purse {
+  color: var(--crows-gold);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.crows .type-filter {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.crows .type-filter button {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+}
+
+.crows .type-filter button.active {
+  border-color: var(--crows-gold);
+  color: var(--crows-gold);
+}
+
+.crows .type-filter .count {
+  margin-left: auto;
+  font-size: 0.66rem;
+  color: var(--crows-muted);
+}
+
+.crows .catalogue {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+  align-content: start;
+}
+
+.crows .cat-row {
+  display: grid;
+  grid-template-columns: 28px 1fr auto auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  font-size: 0.76rem;
+}
+
+.crows .cat-row img {
+  width: 26px;
+  height: 26px;
+  object-fit: cover;
+  border-radius: var(--crows-radius);
+  border: 1px solid var(--crows-edge);
+}
+
+.crows .cat-main {
+  display: grid;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.crows .cat-meta {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.64rem;
+  color: var(--crows-muted);
+}
+
+.crows .cat-price {
+  color: var(--crows-gold);
+  white-space: nowrap;
+}
+
+.crows .cat-row .take {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.7rem;
+  border-color: var(--crows-gold);
+  color: var(--crows-gold);
+  white-space: nowrap;
+}
+
+/* A refusal is dimmed, never hidden: you can still read what you cannot have. */
+.crows .cat-blocked {
+  color: var(--crows-muted);
+  opacity: 0.6;
+  padding: 0.2rem 0.4rem;
+  cursor: help;
+}

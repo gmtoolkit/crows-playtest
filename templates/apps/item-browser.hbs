@@ -1,0 +1,68 @@
+{{!-- The equipment catalogue, opened by clicking the empty slot you want to
+      fill. A player can ALWAYS browse; whether they can take is what the
+      world's acquisition mode decides. --}}
+<div class="browser-body">
+
+  <header class="browser-head">
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" name="query" value="{{query}}" autofocus
+             placeholder="{{localize 'CROWS.SearchCatalogue'}}">
+    </div>
+    <div class="purse" data-tooltip="{{localize 'CROWS.YourPurse'}}">
+      <i class="fa-solid fa-coins"></i> {{coin}}
+    </div>
+  </header>
+
+  <nav class="type-filter">
+    {{#each types}}
+      <button type="button" class="{{#if (crowsEq this.key ../type)}}active{{/if}}"
+              data-action="setType" data-type="{{this.key}}">{{this.label}}</button>
+    {{/each}}
+    <span class="count">{{localize "CROWS.ShowingCount" shown=shown total=total}}</span>
+  </nav>
+
+  {{#unless modeIsPurchase}}
+    {{#unless isGM}}
+      <p class="tab-hint warn">{{localize "CROWS.BrowseOnlyNotice"}}</p>
+    {{/unless}}
+  {{/unless}}
+
+  {{#if targetLabel}}
+    <p class="tab-hint">{{localize "CROWS.Catalogue"}} &mdash; {{targetLabel}}</p>
+  {{/if}}
+
+  <ul class="catalogue">
+    {{#each rows}}
+      <li class="cat-row" data-uuid="{{this.uuid}}">
+        <img src="{{this.img}}" alt="">
+        <div class="cat-main">
+          <span class="cat-name">{{this.name}}</span>
+          <span class="cat-meta">
+            <span class="cat-type">{{this.typeLabel}}</span>
+            {{#if this.summary}}<span class="cat-summary">{{this.summary}}</span>{{/if}}
+          </span>
+        </div>
+        <span class="cat-price">{{this.price}} gc</span>
+
+        {{!-- Reading a card is never gated, so this is always here. --}}
+        <button type="button" class="icon" data-action="inspect"
+                data-tooltip="{{localize 'CROWS.Inspect'}}">
+          <i class="fa-solid fa-book-open"></i>
+        </button>
+
+        {{#if this.canTake}}
+          <button type="button" class="take" data-action="take">{{this.takeLabel}}</button>
+        {{else}}
+          {{!-- Say WHICH refusal it is. Each one has a different fix, and
+                "nothing happened" has none. --}}
+          <span class="cat-blocked" data-tooltip="{{this.blockedLabel}}">
+            <i class="fa-solid {{#if (crowsEq this.reason 'tooExpensive')}}fa-coins{{else if (crowsEq this.reason 'noRoom')}}fa-box{{else}}fa-lock{{/if}}"></i>
+          </span>
+        {{/if}}
+      </li>
+    {{else}}
+      <li class="empty">{{localize "CROWS.NoMatches"}}</li>
+    {{/each}}
+  </ul>
+</div>

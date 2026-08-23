@@ -7,6 +7,7 @@
 import "../styles/crows.css";
 
 import { CROWS } from "./config.mjs";
+import { resolveDamageRecipients } from "./system/damage-math.mjs";
 
 import CrowData from "./data/actor-crow.mjs";
 import CreatureData from "./data/actor-creature.mjs";
@@ -223,9 +224,41 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
         case "applyDamage": {
           const amount = Number(el.dataset.amount) || 0;
           const piercing = el.dataset.piercing === "true";
-          const targets = canvas.tokens?.controlled ?? [];
-          if (!targets.length) return ui.notifications.warn(game.i18n.localize("CROWS.SelectTargets"));
-          for (const token of targets) await token.actor?.applyDamage(amount, { piercing });
+
+          /**
+           * Targets first, selection second.
+           *
+           * This used to read `canvas.tokens.controlled` alone, so a crow who
+           * had targeted a monster while their own token was still selected
+           * applied their own axe crit to themselves.
+           */
+          const { tokens, usedTargets, selfHit, empty } = resolveDamageRecipients({
+            targets: Array.from(game.user?.targets ?? []),
+            controlled: canvas.tokens?.controlled ?? [],
+            sourceActorId: message.speaker?.actor ?? null
+          });
+
+          if (empty) return ui.notifications.warn(game.i18n.localize("CROWS.SelectTargets"));
+
+          // Damaging only the roll's own actor is legal but rarely intended.
+          if (selfHit) {
+            const ok = await foundry.applications.api.DialogV2.confirm({
+              window: { title: game.i18n.localize("CROWS.ConfirmSelfDamage") },
+              content: `<p>${game.i18n.format("CROWS.ConfirmSelfDamageHint", {
+                name: tokens[0]?.name ?? "", amount
+              })}</p>`,
+              rejectClose: false
+            });
+            if (!ok) return;
+          }
+
+          for (const token of tokens) await token.actor?.applyDamage(amount, { piercing });
+
+          ui.notifications.info(
+            game.i18n.format(usedTargets ? "CROWS.DamagedTargets" : "CROWS.DamagedSelected", {
+              n: tokens.length, amount, names: tokens.map((t) => t.name).join(", ")
+            })
+          );
           return;
         }
 

@@ -8,7 +8,7 @@ import {
   speedPenalty,
   restRecovery,
   clearStarvation
-} from "../src/system/damage-math.mjs";
+, resolveDamageRecipients } from "../src/system/damage-math.mjs";
 
 const clean = (n = 10) => Array(n).fill("");
 
@@ -233,5 +233,73 @@ describe("creature damage (R p12)", () => {
   test("creature armor absorbs before Stamina, and piercing skips it", () => {
     assert.equal(applyCreatureDamage({ damage: 4, ad: 5, stamina: 10 }).staminaAfter, 10);
     assert.equal(applyCreatureDamage({ damage: 4, ad: 5, stamina: 10, piercing: true }).staminaAfter, 6);
+  });
+});
+
+describe("who takes the damage from a chat card", () => {
+  const tok = (id, name) => ({ name, actor: { id } });
+
+  test("a target beats a selection, which is the bug that hurt a player", () => {
+    // Vess targeted a monster but still had her own token selected, and the
+    // card read only the selection, so her axe crit landed on herself.
+    const r = resolveDamageRecipients({
+      targets: [tok("monster", "Undead C")],
+      controlled: [tok("vess", "Vess Harrow")],
+      sourceActorId: "vess"
+    });
+    assert.deepEqual(r.tokens.map((t) => t.name), ["Undead C"]);
+    assert.equal(r.usedTargets, true);
+    assert.equal(r.selfHit, false);
+  });
+
+  test("selection is used when nothing is targeted", () => {
+    const r = resolveDamageRecipients({
+      targets: [],
+      controlled: [tok("monster", "Undead C")],
+      sourceActorId: "vess"
+    });
+    assert.deepEqual(r.tokens.map((t) => t.name), ["Undead C"]);
+    assert.equal(r.usedTargets, false);
+  });
+
+  test("nothing targeted and nothing selected is reported, not silently ignored", () => {
+    const r = resolveDamageRecipients({ targets: [], controlled: [], sourceActorId: "vess" });
+    assert.equal(r.empty, true);
+    assert.equal(r.tokens.length, 0);
+  });
+
+  test("damaging only yourself is flagged, because it is legal but rarely meant", () => {
+    const r = resolveDamageRecipients({
+      targets: [tok("vess", "Vess Harrow")],
+      controlled: [],
+      sourceActorId: "vess"
+    });
+    assert.equal(r.selfHit, true, "a backlash or a trap is real; it just needs confirming");
+  });
+
+  test("a mixed group including yourself is NOT flagged as self-damage", () => {
+    // A fireball catching you and two enemies is an ordinary outcome.
+    const r = resolveDamageRecipients({
+      targets: [tok("vess", "Vess"), tok("monster", "Undead C")],
+      controlled: [],
+      sourceActorId: "vess"
+    });
+    assert.equal(r.selfHit, false);
+    assert.equal(r.tokens.length, 2);
+  });
+
+  test("multiple targets all take it", () => {
+    const r = resolveDamageRecipients({
+      targets: [tok("a", "A"), tok("b", "B"), tok("c", "C")],
+      controlled: [tok("vess", "Vess")],
+      sourceActorId: "vess"
+    });
+    assert.equal(r.tokens.length, 3);
+    assert.equal(r.usedTargets, true);
+  });
+
+  test("with no source actor, nothing is ever called self-damage", () => {
+    const r = resolveDamageRecipients({ targets: [tok("x", "X")], controlled: [], sourceActorId: null });
+    assert.equal(r.selfHit, false);
   });
 });

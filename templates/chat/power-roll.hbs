@@ -68,9 +68,13 @@
     {{!-- Only offered when this outcome actually deals damage. A button that
           silently applies 0 is worse than no button. --}}
     {{#if damage}}
+      {{!-- Targets first, selection second. The old label said "to selected"
+            and the handler read only the selection, so a crow who targeted a
+            monster with their own token still selected hit themselves. --}}
       <button type="button" data-crows-action="applyDamage"
               data-amount="{{damage.value}}"
-              data-piercing="{{damage.piercing}}">
+              data-piercing="{{damage.piercing}}"
+              data-tooltip="{{localize 'CROWS.ApplyDamageHint'}}">
         <i class="fa-solid fa-droplet"></i>
         {{localize "CROWS.ApplyDamage"}} ({{damage.value}})
       </button>

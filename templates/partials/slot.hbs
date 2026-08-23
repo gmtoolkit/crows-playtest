@@ -16,7 +16,14 @@
   {{#if cell.item}}
     {{> "systems/crows/templates/partials/card-face.hbs" item=cell.item container=cell.container}}
   {{else}}
-    <div class="slot-placeholder"><i class="fa-regular fa-square-dashed"></i></div>
+    {{!-- An empty slot IS the button. Clicking the hole you want to fill is the
+          obvious gesture, and it beats knowing which of four compendia holds a
+          torch. Opens for players too: browsing is never gated, only taking. --}}
+    <button type="button" class="slot-placeholder" data-action="browseItems"
+            data-container="{{cell.container}}" data-index="{{cell.index}}"
+            data-tooltip="{{localize 'CROWS.BrowseSlotHint'}}">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
   {{/if}}
 
   {{#if cell.wounds.0.woundable}}

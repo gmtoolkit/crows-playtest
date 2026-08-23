@@ -4,6 +4,8 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { CROWS } from "../src/config.mjs";
+
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const lang = JSON.parse(readFileSync(join(root, "lang", "en.json"), "utf8"));
 
@@ -17,7 +19,16 @@ const DYNAMIC_PREFIXES = [
   "CROWS.Activation",
   "CROWS.SlotError.",
   // ApplicationV2 `labelPrefix`: resolved as `${prefix}.${tabId}`.
-  "CROWS.Tabs"
+  "CROWS.Tabs",
+  // The catalogue builds its refusal key from the reason canTake() returned,
+  // so each refusal can carry its own numbers. The family is checked below.
+  "CROWS.CannotTake.",
+  // Container names, resolved from a slot's own container key.
+  "CROWS.Container.",
+  // Advancement bonus packages, keyed by the option chosen.
+  "CROWS.BonusOption.",
+  // Treasure exclusions, keyed by the flag ticked.
+  "CROWS.Exclusion."
 ];
 
 function walk(dir, exts, out = []) {
@@ -82,5 +93,33 @@ describe("localisation coverage", () => {
 
     const missing = [...new Set(labels)].filter((k) => !(k in lang));
     assert.deepEqual(missing, [], `Config labels with no translation:\n  ${missing.join("\n  ")}`);
+  });
+});
+
+/**
+ * A dynamic prefix hides every key in its family from the coverage check, so
+ * each family is pinned explicitly. Otherwise adding a refusal reason with no
+ * string would render the raw key at the player, silently.
+ */
+describe("dynamic key families are complete", () => {
+  const has = (k) => Object.prototype.hasOwnProperty.call(lang, k);
+
+  test("every canTake() refusal reason has a message", () => {
+    // These are the reasons src/system/acquisition.mjs can return.
+    for (const reason of ["gmOnly", "tooExpensive", "noRoom", "notYours"]) {
+      assert.ok(has(`CROWS.CannotTake.${reason}`), `missing CROWS.CannotTake.${reason}`);
+    }
+  });
+
+  test("every container a slot can be has a name", () => {
+    for (const c of ["hand", "belt", "backpack", "magic"]) {
+      assert.ok(has(`CROWS.Container.${c}`), `missing CROWS.Container.${c}`);
+    }
+  });
+
+  test("every advancement bonus package has a label", () => {
+    for (const o of Object.keys(CROWS.expertiseBonusOptions)) {
+      assert.ok(has(`CROWS.BonusOption.${o}`), `missing CROWS.BonusOption.${o}`);
+    }
   });
 });

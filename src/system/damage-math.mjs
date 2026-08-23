@@ -102,6 +102,40 @@ export function applyDamage({
 }
 
 /**
+ * Who should take the damage from a chat card.
+ *
+ * TARGETS BEAT SELECTION, and getting this backwards hurt a real player: the
+ * card read `canvas.tokens.controlled`, so a crow who had targeted a monster
+ * but still had their OWN token selected applied their axe crit to themselves.
+ *
+ * Targeting is the deliberate "I am attacking that" gesture and selection is
+ * usually just "this is my guy", so targets are the honest reading of intent.
+ * Selection stays as a fallback because a Ref applying environmental damage
+ * tends to select rather than target.
+ *
+ * `selfHit` is reported rather than blocked: hitting yourself is legal (a
+ * backlash, a trap, a botched throw), it is just almost never what you meant
+ * from an attack card, so the caller can ask first.
+ *
+ * @param {object} args
+ * @param {Array} args.targets       Tokens under the targeting reticle.
+ * @param {Array} args.controlled    Tokens currently selected.
+ * @param {string|null} args.sourceActorId  Whoever made the roll.
+ * @returns {{tokens: Array, usedTargets: boolean, selfHit: boolean, empty: boolean}}
+ */
+export function resolveDamageRecipients({ targets = [], controlled = [], sourceActorId = null }) {
+  const tokens = targets.length ? targets : controlled;
+  const selfHit =
+    !!sourceActorId && tokens.length > 0 && tokens.every((t) => t?.actor?.id === sourceActorId);
+  return {
+    tokens,
+    usedTargets: targets.length > 0,
+    selfHit,
+    empty: tokens.length === 0
+  };
+}
+
+/**
  * Damage against a Ref-controlled creature.
  *
  * Monsters simply die at 0 Stamina. Humans and animals take wounds like a crow,

@@ -120,6 +120,28 @@ export function registerSettings() {
     default: true
   });
 
+  /**
+   * How equipment reaches a crow.
+   *
+   * Note what this does NOT gate: browsing. A player can always open the
+   * catalogue and read every card, in either mode. Hiding the catalogue would
+   * stop them planning, saving up, or asking the Ref for anything by name, and
+   * "you cannot see it" is a much worse table experience than "you cannot
+   * afford it yet".
+   */
+  game.settings.register(id, "itemAcquisition", {
+    name: "CROWS.Settings.ItemAcquisition",
+    hint: "CROWS.Settings.ItemAcquisitionHint",
+    scope: "world",
+    config: true,
+    type: String,
+    default: "purchase",
+    choices: {
+      purchase: "CROWS.Settings.AcquisitionPurchase",
+      gm: "CROWS.Settings.AcquisitionGM"
+    }
+  });
+
   /** Play a sound when a dungeon turn ends. Torches going out should sting. */
   game.settings.register(id, "turnEndSound", {
     name: "CROWS.Settings.TurnEndSound",
