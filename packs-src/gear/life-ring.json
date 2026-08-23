@@ -1,0 +1,32 @@
+{
+  "__key": "life-ring",
+  "name": "Life Ring",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You regain 1d6 Stamina, end a condition affecting you, or heal 1 wound.</p>",
+    "slots": 1,
+    "stack": 10,
+    "price": 500,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "crafting": {
+      "expertise": "enchanting",
+      "uses": 2,
+      "materials": "gem worth 100 gc",
+      "goal": 100
+    },
+    "magicSlot": "finger",
+    "magic": true,
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You regain 1d6 Stamina, end a condition affecting you, or heal 1 wound."
+    }
+  }
+}

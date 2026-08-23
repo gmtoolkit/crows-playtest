@@ -1,0 +1,19 @@
+{
+  "__key": "shovel",
+  "name": "Shovel",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Use this to dig holes! Can also make a decent crowbar in a pinch, but might break.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 10,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 5
+    },
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

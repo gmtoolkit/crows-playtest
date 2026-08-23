@@ -1,0 +1,21 @@
+{
+  "__key": "necklace-of-teeth",
+  "name": "Necklace of Teeth",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>While you wear this ring, your unarmed strikes deal an additional 1 dam.</p>",
+    "slots": 1,
+    "stack": 3,
+    "price": 500,
+    "crafting": {
+      "expertise": "enchanting",
+      "uses": 2,
+      "materials": "gem worth 100 gc",
+      "goal": 100
+    },
+    "magicSlot": "neck",
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

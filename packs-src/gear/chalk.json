@@ -1,0 +1,20 @@
+{
+  "__key": "chalk",
+  "name": "Chalk",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A piece of chalk, available in blue, white, and yellow. Use it to mark your way or leave messages on stone.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 1,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "useless",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

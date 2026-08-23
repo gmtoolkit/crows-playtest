@@ -1,0 +1,13 @@
+{
+  "__key": "magnifying-glass",
+  "name": "Magnifying Glass",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Can be used to better inspect the minute visual details of nearby creatures and objects.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 100,
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}

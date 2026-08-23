@@ -1,0 +1,31 @@
+{
+  "__key": "block-tackle",
+  "name": "Block & Tackle",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Set of 2 hooked pulleys that can be used to lift up to 500 lbs. Rope sold separately.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 100,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "2 iron bars",
+      "goal": 20
+    },
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 500,
+        "effect": "Lifts up to 1,000 lbs."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1000,
+        "effect": "Lifts up to 1,500 lbs."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards (13 Aug draft)"
+  }
+}

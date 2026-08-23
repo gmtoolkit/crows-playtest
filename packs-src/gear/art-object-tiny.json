@@ -1,0 +1,13 @@
+{
+  "__key": "art-object-tiny",
+  "name": "Art Object, Tiny",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A valuable treasure. Specific work of art and value are determined by the Ref.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

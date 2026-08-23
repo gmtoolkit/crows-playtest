@@ -1,0 +1,31 @@
+{
+  "__key": "padlock",
+  "name": "Padlock",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Iron padlock. Includes a key.</p>",
+    "slots": 1,
+    "stack": 3,
+    "price": 25,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 10
+    },
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 750,
+        "effect": "Tests to pick or break the lock take a -1 penalty."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1500,
+        "effect": "Tests to pick or break the lock take a -2 penalty."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

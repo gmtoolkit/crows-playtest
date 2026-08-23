@@ -1,0 +1,17 @@
+{
+  "__key": "whistle",
+  "name": "Whistle",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You create a loud noise that can be heard from 20 squares away.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 5,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You create a loud noise that can be heard from 20 squares away."
+    }
+  }
+}

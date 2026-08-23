@@ -1,0 +1,13 @@
+{
+  "__key": "merchant-s-scales",
+  "name": "Merchant’s Scales",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Used to determine the weight of Tiny objects and Tiny creatures that sit still.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 50,
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}

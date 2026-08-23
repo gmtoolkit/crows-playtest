@@ -1,0 +1,46 @@
+{
+  "__key": "torch",
+  "name": "Torch",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "",
+    "slots": 1,
+    "stack": 2,
+    "price": 2,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "dt",
+      "restore": "useless",
+      "refuelWith": ""
+    },
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "1 hickory log",
+      "goal": 5
+    },
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 100,
+        "effect": "2 UD"
+      },
+      {
+        "tier": "masterwork",
+        "price": 200,
+        "effect": "3 UD"
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards",
+    "light": {
+      "bright": 5,
+      "dim": 5
+    },
+    "activation": {
+      "type": "maneuver",
+      "description": "Light 5/5"
+    }
+  }
+}

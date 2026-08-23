@@ -1,0 +1,14 @@
+{
+  "__key": "magic-wand",
+  "name": "Magic Wand",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>What does it do? C’mon just activate it. You know you wanna.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 0,
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "__key": "flail",
+  "name": "Flail",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 2,
+    "stack": 1,
+    "price": 15,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "characteristic": "strength",
+    "range": {
+      "type": "melee",
+      "value": 2
+    },
+    "tier2": "3 + @mod",
+    "tier3": "6 + @mod",
+    "properties": [
+      {
+        "key": "pummeling"
+      }
+    ],
+    "group": "bashing"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "__key": "group-healing",
+  "name": "Group Healing",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>Target regains Stamina based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 500,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "rank": 1,
+    "isAttack": false,
+    "discipline": "benefaction",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "ranged",
+      "value": 3
+    },
+    "target": "3 creat.",
+    "targets": 3,
+    "duration": {
+      "type": "instant",
+      "ud": 0
+    },
+    "effects": {
+      "tier1": "<p>1+M</p>",
+      "tier2": "<p>2+M</p>",
+      "tier3": "<p>4+M</p>"
+    }
+  }
+}

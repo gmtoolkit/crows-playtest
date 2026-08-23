@@ -1,0 +1,32 @@
+{
+  "__key": "crossbow",
+  "name": "Crossbow",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 2,
+    "stack": 1,
+    "price": 15,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 hickory log",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "characteristic": "agility",
+    "range": {
+      "type": "ranged",
+      "value": 15
+    },
+    "tier2": "4 + @mod",
+    "tier3": "8 + @mod",
+    "properties": [
+      {
+        "key": "loading"
+      }
+    ],
+    "group": "bow"
+  }
+}

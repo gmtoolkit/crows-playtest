@@ -1,0 +1,14 @@
+{
+  "__key": "crafting-material-bar",
+  "name": "Crafting Material, Bar",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A metal bar used in crafting. The Ref determines the nature of the crafting material.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "material": true
+  }
+}

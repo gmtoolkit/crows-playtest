@@ -15,10 +15,17 @@ export default class ArmorData extends foundry.abstract.TypeDataModel {
     return {
       ...cardFields(),
 
+      /**
+       * MEDIUM WAS MISSING and the deck proves it should not have been: the
+       * cards print Light Armor (AD 5), Medium Armor (AD 10) and Heavy Armor
+       * (AD 15). Without the choice the extractor could not emit a category for
+       * the medium suit at all, and a StringField with `choices` silently falls
+       * back to its initial — so medium armour would have imported as light.
+       */
       category: new fields.StringField({
         required: true,
         initial: "light",
-        choices: ["light", "heavy", "shield"]
+        choices: ["light", "medium", "heavy", "shield"]
       }),
 
       /** Armor Defense: `value` depletes as damage lands, `max` is restored by repair. */

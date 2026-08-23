@@ -1,0 +1,24 @@
+{
+  "__key": "shield",
+  "name": "Shield",
+  "type": "armor",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "description": "",
+    "slots": 1,
+    "stack": 1,
+    "price": 15,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "2 iron bars",
+      "goal": 15
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "ad": {
+      "value": 5,
+      "max": 5
+    },
+    "category": "shield"
+  }
+}

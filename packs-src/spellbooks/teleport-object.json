@@ -1,0 +1,39 @@
+{
+  "__key": "teleport-object",
+  "name": "Teleport Object",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You teleport the target a number of squares based on the casting. You can teleport it into a willing creature’s open hand slot, including yours.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "conjuration",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "ranged",
+      "value": 10
+    },
+    "target": "1 Tiny obj.",
+    "targets": 1,
+    "duration": {
+      "type": "instant",
+      "ud": 0
+    },
+    "effects": {
+      "tier1": "<p>No effect</p>",
+      "tier2": "<p>5+M</p>",
+      "tier3": "<p>10+M</p>"
+    }
+  }
+}

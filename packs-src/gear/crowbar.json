@@ -1,0 +1,25 @@
+{
+  "__key": "crowbar",
+  "name": "Crowbar",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>An iron bar that can be used in prying.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 10,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 750,
+        "effect": "Gives a +1 bonus on tests that use the crowbar."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1500,
+        "effect": "Gives a +2 bonus on tests that use the crowbar."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

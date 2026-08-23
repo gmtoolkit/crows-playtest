@@ -1,0 +1,24 @@
+{
+  "__key": "medium-armor",
+  "name": "Medium Armor",
+  "type": "armor",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "description": "",
+    "slots": 3,
+    "stack": 1,
+    "price": 150,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "4 iron bars",
+      "goal": 30
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "ad": {
+      "value": 10,
+      "max": 10
+    },
+    "category": "medium"
+  }
+}

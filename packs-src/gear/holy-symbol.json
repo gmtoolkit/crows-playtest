@@ -1,0 +1,13 @@
+{
+  "__key": "holy-symbol",
+  "name": "Holy Symbol",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A symbol of your god. Can be worn in the neck slot, but isn’t magic.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 15,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

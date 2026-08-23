@@ -1,0 +1,37 @@
+{
+  "__key": "minor-phantasm",
+  "name": "Minor Phantasm",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You create a silent phantom image of your choice for the duration within a space within range. The maximum size of the image is based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Profession Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "illusion",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "ranged",
+      "value": 10
+    },
+    "duration": {
+      "type": "ud",
+      "ud": 1
+    },
+    "effects": {
+      "tier1": "<p>Tiny</p>",
+      "tier2": "<p>Small</p>",
+      "tier3": "<p>Medium</p>"
+    }
+  }
+}

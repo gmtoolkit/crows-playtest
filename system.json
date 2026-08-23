@@ -53,6 +53,50 @@
       }
     },
     {
+      "name": "weapons",
+      "label": "Crows: Weapons",
+      "path": "packs/weapons",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "armor",
+      "label": "Crows: Armor",
+      "path": "packs/armor",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "gear",
+      "label": "Crows: Gear",
+      "path": "packs/gear",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "spellbooks",
+      "label": "Crows: Spellbooks",
+      "path": "packs/spellbooks",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
       "name": "traits",
       "label": "Crows: Traits",
       "path": "packs/traits",

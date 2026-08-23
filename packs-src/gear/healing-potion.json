@@ -1,0 +1,23 @@
+{
+  "__key": "healing-potion",
+  "name": "Healing Potion",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Consume to regain 1d6 Stamina or remove 1 wound if Stamina is already at maximum.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 100,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "1 monster part (any)",
+      "goal": 20
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Consume to regain 1d6 Stamina or remove 1 wound if Stamina is already at maximum."
+    }
+  }
+}

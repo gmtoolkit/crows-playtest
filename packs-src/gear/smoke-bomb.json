@@ -1,0 +1,23 @@
+{
+  "__key": "smoke-bomb",
+  "name": "Smoke Bomb",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You throw the bomb up to 10 squares. It explodes, creating a 3-cube area of heavy concealment. It becomes light concealment in d6 combat rounds, then dissipates in d6 rounds.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 50,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "1 demon part",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You throw the bomb up to 10 squares. It explodes, creating a 3-cube area of heavy concealment. It becomes light concealment in d6 combat rounds, then dissipates in d6 rounds."
+    }
+  }
+}

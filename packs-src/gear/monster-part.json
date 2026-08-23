@@ -1,0 +1,14 @@
+{
+  "__key": "monster-part",
+  "name": "Monster Part",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A piece of a monster.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "material": true
+  }
+}

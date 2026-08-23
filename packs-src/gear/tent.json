@@ -1,0 +1,13 @@
+{
+  "__key": "tent",
+  "name": "Tent",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>This waterproof canvas tent sleeps up to 4 humans comfortably. You can use this to wait out bad weather.</p>",
+    "slots": 2,
+    "stack": 1,
+    "price": 100,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

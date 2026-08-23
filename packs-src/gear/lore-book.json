@@ -1,0 +1,13 @@
+{
+  "__key": "lore-book",
+  "name": "Lore Book",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>This book relates to the Historical Lore expertise. Study this book as a rest activity and gain a 1 use of that expertise that lasts until your next rest.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 50,
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}

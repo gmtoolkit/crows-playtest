@@ -1,0 +1,13 @@
+{
+  "__key": "ration",
+  "name": "Ration",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A day’s worth of food. Can be consumed to avoid starvation and get the benefits of a rest.</p>",
+    "slots": 1,
+    "stack": 6,
+    "price": 2,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

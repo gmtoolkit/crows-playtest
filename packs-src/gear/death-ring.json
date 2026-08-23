@@ -1,0 +1,32 @@
+{
+  "__key": "death-ring",
+  "name": "Death Ring",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Choose an undead within 10 squares of you to make a M RR. ≤11 12-16 17+ The undead You You teleports control control next to you the the and then undead undead can counter. for 1 til the combat end of round. the DT.</p>",
+    "slots": 1,
+    "stack": 10,
+    "price": 1000,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "crafting": {
+      "expertise": "enchanting",
+      "uses": 2,
+      "materials": "gem worth 200 gc",
+      "goal": 200
+    },
+    "magicSlot": "finger",
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "action",
+      "description": "Choose an undead within 10 squares of you to make a M RR."
+    }
+  }
+}

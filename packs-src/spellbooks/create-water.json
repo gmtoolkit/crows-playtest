@@ -1,0 +1,37 @@
+{
+  "__key": "create-water",
+  "name": "Create Water",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You make water that fills a vessel or falls from the air. The amount you make is based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "elemental",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "ranged",
+      "value": 10
+    },
+    "duration": {
+      "type": "instant",
+      "ud": 0
+    },
+    "effects": {
+      "tier1": "<p>1 gal</p>",
+      "tier2": "<p>5 gals</p>",
+      "tier3": "<p>10 gals</p>"
+    }
+  }
+}

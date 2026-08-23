@@ -1,0 +1,39 @@
+{
+  "__key": "deadspeech",
+  "name": "Deadspeech",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>The target can speak and must answer a number of questions you ask based on the casting honestly. The target has the same intellect it had in life.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 500,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "rank": 1,
+    "isAttack": false,
+    "discipline": "necromancy",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "melee",
+      "value": 1
+    },
+    "target": "1 corpse",
+    "targets": 1,
+    "duration": {
+      "type": "dt",
+      "ud": 0
+    },
+    "effects": {
+      "tier1": "<p>1</p>",
+      "tier2": "<p>3</p>",
+      "tier3": "<p>5</p>"
+    }
+  }
+}

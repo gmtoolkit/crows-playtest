@@ -1,0 +1,14 @@
+{
+  "__key": "magic-ring",
+  "name": "Magic Ring",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Try it on. It’ll feel like your big day!</p>",
+    "slots": 1,
+    "stack": 10,
+    "price": 0,
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

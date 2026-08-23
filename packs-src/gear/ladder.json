@@ -1,0 +1,29 @@
+{
+  "__key": "ladder",
+  "name": "Ladder",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A collapsable ladder. The ladder expands 10 feet.</p>",
+    "slots": 2,
+    "stack": 1,
+    "price": 30,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 500,
+        "effect": "The ladder expands 20 feet."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1000,
+        "effect": "The ladder expands 30 feet."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "The ladder expands 10 feet."
+    }
+  }
+}

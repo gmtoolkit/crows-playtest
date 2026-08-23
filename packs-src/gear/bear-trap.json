@@ -1,0 +1,23 @@
+{
+  "__key": "bear-trap",
+  "name": "Bear Trap",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You can set this trap on the ground. When a creature steps on the set trap, they take 1d6 dam, and if they are Large or smaller, they are grabbed by the trap. It has 10 Stamina.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 2,
+      "materials": "2 iron bars",
+      "goal": 50
+    },
+    "source": "Crows Playtest 2, Profession Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You can set this trap on the ground. When a creature steps on the set trap, they take 1d6 dam, and if they are Large or smaller, they are grabbed by the trap. It has 10 Stamina."
+    }
+  }
+}

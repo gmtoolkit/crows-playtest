@@ -1,0 +1,13 @@
+{
+  "__key": "11-foot-pole",
+  "name": "11-Foot Pole",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>An 11-foot-long wooden pole. For poking. Also prodding! Tie some string on it to make a fishing rod!</p>",
+    "slots": 2,
+    "stack": 1,
+    "price": 5,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

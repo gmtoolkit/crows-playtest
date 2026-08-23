@@ -1,0 +1,13 @@
+{
+  "__key": "hearty-ration",
+  "name": "Hearty Ration",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>When you consume this ration during a rest, you remove 1 additional wound.</p>",
+    "slots": 1,
+    "stack": 6,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

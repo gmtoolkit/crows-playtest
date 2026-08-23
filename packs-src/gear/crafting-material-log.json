@@ -1,0 +1,14 @@
+{
+  "__key": "crafting-material-log",
+  "name": "Crafting Material, Log",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A wood log used in crafting. The Ref determines the nature of the crafting material.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "material": true
+  }
+}

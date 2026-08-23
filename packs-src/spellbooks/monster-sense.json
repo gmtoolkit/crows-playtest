@@ -1,0 +1,32 @@
+{
+  "__key": "monster-sense",
+  "name": "Monster Sense",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You know the exact location of creatures who aren’t humans or animals within a number of squares of you based on the casting. You can detect them through walls, floors, and ceilings.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 0,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "necromancy",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "melee",
+      "value": 0
+    },
+    "duration": {
+      "type": "ud",
+      "ud": 1
+    }
+  }
+}

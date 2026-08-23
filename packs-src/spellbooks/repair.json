@@ -1,0 +1,39 @@
+{
+  "__key": "repair",
+  "name": "Repair",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You touch a damaged object and cause it to regain Stamina based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "alteration",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "melee",
+      "value": 1
+    },
+    "target": "1 obj.",
+    "targets": 1,
+    "duration": {
+      "type": "instant",
+      "ud": 0
+    },
+    "effects": {
+      "tier1": "<p>1+M</p>",
+      "tier2": "<p>4+M</p>",
+      "tier3": "<p>8+M</p>"
+    }
+  }
+}

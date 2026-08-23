@@ -1,0 +1,13 @@
+{
+  "__key": "musical-instrument",
+  "name": "Musical Instrument",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>This is a portable musical instrument, like a lute, lyre, mandolin, drum, or fife. To play it, the instrument must occupy both your hand slots.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 100,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

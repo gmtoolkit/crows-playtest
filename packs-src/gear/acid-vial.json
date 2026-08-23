@@ -1,0 +1,23 @@
+{
+  "__key": "acid-vial",
+  "name": "Acid Vial",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Pouring the vial onto a surface destroys up to 1 cubic foot of mundane matter. You can make a attack with it using Agility. 12-16 17+ 4 + A 8 + A</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 10,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "1 monster part (any)",
+      "goal": 5
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Pouring the vial onto a surface destroys up to 1 cubic foot of mundane matter."
+    }
+  }
+}

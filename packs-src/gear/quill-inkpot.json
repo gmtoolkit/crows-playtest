@@ -1,0 +1,13 @@
+{
+  "__key": "quill-inkpot",
+  "name": "Quill & Inkpot",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>For writing stuff down!</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 5,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "__key": "corrupt",
+  "name": "Corrupt",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>vulnerable</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 500,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "rank": 1,
+    "isAttack": true,
+    "discipline": "necromancy",
+    "castingTime": "action",
+    "range": {
+      "type": "ranged",
+      "value": 5
+    },
+    "target": "1 creat.",
+    "targets": 1,
+    "tier2": "4 + @mod",
+    "tier3": "8 + @mod"
+  }
+}

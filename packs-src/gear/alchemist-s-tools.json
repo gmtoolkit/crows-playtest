@@ -1,0 +1,28 @@
+{
+  "__key": "alchemist-s-tools",
+  "name": "Alchemist’s Tools",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Required to make crafting rolls for alchemy items.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 15,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 500,
+        "effect": "Alchemy crafting rolls gain a +1 bonus."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1000,
+        "effect": "Alchemy crafting rolls gain a +2 bonus."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards",
+    "tool": {
+      "expertise": "alchemy"
+    }
+  }
+}

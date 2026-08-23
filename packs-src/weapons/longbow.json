@@ -1,0 +1,28 @@
+{
+  "__key": "longbow",
+  "name": "Longbow",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 2,
+    "stack": 1,
+    "price": 12,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 hickory log",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "characteristic": "agility",
+    "range": {
+      "type": "ranged",
+      "value": 20
+    },
+    "tier2": "3 + @mod",
+    "tier3": "6 + @mod",
+    "properties": [],
+    "group": "bow"
+  }
+}

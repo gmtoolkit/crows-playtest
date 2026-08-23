@@ -1,0 +1,13 @@
+{
+  "__key": "cook-s-utensils",
+  "name": "Cook’s Utensils",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Required for some special rest activities as part of the Travel trait tree. Lots of small knifes, forks, and the like.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 15,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "__key": "cacophony",
+  "name": "Cacophony",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You create a phantom noise of your choice for the duration that emanates from a square within range. The distance at which it can be heard in squares is based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "illusion",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "ranged",
+      "value": 10
+    },
+    "duration": {
+      "type": "ud",
+      "ud": 1
+    },
+    "effects": {
+      "tier1": "<p>No effect</p>",
+      "tier2": "<p>5+M</p>",
+      "tier3": "<p>10+M</p>"
+    }
+  }
+}

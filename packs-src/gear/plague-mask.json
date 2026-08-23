@@ -1,0 +1,21 @@
+{
+  "__key": "plague-mask",
+  "name": "Plague Mask",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>While you wear the mask, you have a +2 bonus on Mind RRs made to resist the effects of the Miasma.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 500,
+    "crafting": {
+      "expertise": "enchanting",
+      "uses": 1,
+      "materials": "gem worth 100 gc",
+      "goal": 100
+    },
+    "magicSlot": "head",
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

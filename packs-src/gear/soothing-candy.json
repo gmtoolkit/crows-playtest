@@ -1,0 +1,17 @@
+{
+  "__key": "soothing-candy",
+  "name": "Soothing Candy",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Consume a candy to remove 1 condition from yourself.</p>",
+    "slots": 1,
+    "stack": 10,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Consume a candy to remove 1 condition from yourself."
+    }
+  }
+}

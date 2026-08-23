@@ -1,0 +1,25 @@
+{
+  "__key": "coin-purse",
+  "name": "Coin Purse",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Holds up to 500 coins.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 1,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 500,
+        "effect": "Holds up to 750 gc."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1000,
+        "effect": "Holds up to 1,000 gc."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

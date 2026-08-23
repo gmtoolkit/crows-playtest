@@ -1,5 +1,88 @@
 # Decisions — crows-playtest
 
+## 2026-08-23 — Quality tiers are card data; a priced copy outranks a rich one
+
+**Decision:** Three repairs to `tools/extract-items.mjs`, plus one reordering
+of the dedup rule recorded in the entry below.
+
+1. `Fine (N gc): ...` / `Masterwork (N gc): ...` are consumed as a quality
+   ladder into `system.qualityTiers` (declared in `src/data/fields.mjs`) rather
+   than falling through to prose. Each rung swallows its continuation lines the
+   way an activation sentence does, so Torch's wrapped `"Masterwork (200 gc): 3"`
+   + `"UD"` reads as `"3 UD"` and not `"3"`.
+2. The activation branch now pushes its *leftover* into the description: what
+   remains after the structured part (the `Light N/N` spec) is lifted out. A
+   Healing Potion's only sentence is its activation, and consuming the line for
+   `activation` alone threw it away. Candle, Torch and Lantern reduce to nothing
+   and stay description-free, which is correct — those cards print no prose.
+3. `armorCategories` gained `medium`. `buildArmor` already derived `"medium"`
+   from the card name; it was rejected because `src/config.mjs` did not declare
+   the choice, so Medium Armor shipped with no category at all.
+
+**Why the dedup reorder:** emitting `qualityTiers` adds a populated field, and
+`richness()` counts fields equally, so deck 02 copies whose footer band was cut
+off by row spill began outscoring their priced twins — Lockpick Set, Lore Book
+and Spyglass each flipped to `price: 0`. Dedup now ranks "kept a price or an
+xpValue" ahead of richness. A missing price is not one absent field among many;
+it is the tell that the footer band was never read.
+
+**Alternatives:** field-level merging across duplicate copies would keep both
+the price and the ladder. Rejected as out of scope: deciding per field which
+deck wins is a content ruling, not an extraction one.
+
+**Consequences:** those three cards keep their prices and lose their ladders,
+so 12 documents carry `qualityTiers` rather than 15. Rope prints `Fine` twice
+and no `Masterwork`; the rungs are resolved by price (cheaper = fine) and
+reported by name, never by reading the effect text. `Cumbersome` is still not
+in `CROWS.weaponProperties`, so Shortbow silently drops it — that needs a rules
+hook, not an extractor fix, and is reported rather than emitted.
+
+## 2026-08-23 — Inventory cards: deck 02 is canonical, and dedup by richness
+
+**Decision:** `tools/extract-items.mjs` reads all four card decks, classifies
+each card from its own printed signature, and deduplicates by name — keeping
+the copy with the most populated fields, with deck order (02 > 03 > 04 > 05)
+only breaking ties. Deck 01 is excluded; it is the blank slot sheet, not a
+deck. Cards are written to `packs-src/{weapons,armor,gear,spellbooks}`.
+
+**Why:** Deck 05 looks authoritative because it is the annotated one, but its
+PDF metadata dates it 13 Aug against deck 02's 19 Aug — 05 is the older
+snapshot James marked up. Deck 02 carries the newer wording ("bane" for "-1
+penalty") and the normalised crafting rating ("Blacksmithing 1" for "+1").
+
+Richness before deck order, though, because the failure that actually costs
+data is not "wrong revision", it is "gutted copy": row spill loses the tail of
+15 cards in deck 02 and 12 in deck 05, and a Life Ring that lost its footer
+would otherwise beat the Life Ring that kept its price. Every disagreement is
+reported by name rather than resolved in silence.
+
+**Alternatives:** Extracting deck 02 alone. Rejected — Animal Form and Repair
+are swallowed by a merged cell there, and roughly a dozen cards lose their
+footer to row spill. The other decks are the repair, not extra noise.
+
+Guessing tier-table columns from wrapped rows. Rejected — `cellToLines`
+discards x, so a wrapped 3-column table comes back interleaved. Single-line
+rows are re-columnised by anchoring on the damage expressions; anything else is
+reported by name and kept verbatim in the description.
+
+**Consequences:**
+- 136 items: 23 weapons, 4 armor, 82 gear, 27 spellbooks. Every distinct card
+  name in decks 02-04 is accounted for.
+- `src/config.mjs` has two real gaps the cards need: `armorCategories` has no
+  `medium` (Medium Armor, AD 10, 3 slots) and `weaponProperties` has no
+  `cumbersome` (Shortbow). Both are reported, not emitted, so those two cards
+  currently ship without that one field.
+- `GearData` declares no tier fields, so a consumable's outcome table (Caltrops,
+  the vials, the wands, Death Ring) is preserved as description prose. Making
+  those rollable needs either tier fields on gear or an embedded attack item.
+- Names are matched across decks in an ASCII-apostrophe form, because deck 02
+  renamed `Death's Ring`; the stored `name` is converted back to the printed
+  typographic apostrophe on write, so `Alchemist’s Tools` reads the same as
+  `traits/necromancy-demon-s-sight.json`. The `__key` slug is unaffected.
+- `test/packs-src.test.mjs` now follows the `...cardFields()` / `...attackFields()`
+  spreads into `fields.mjs`. Without that the undeclared-field guard reports
+  every shared card field as undeclared and is useless on the item packs.
+
 ## 2026-08-23 — The rest gate, and three rulings from Cliff
 
 **Decision:** Advancement is gated on a rest, reachable from both directions.

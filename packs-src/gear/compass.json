@@ -1,0 +1,25 @@
+{
+  "__key": "compass",
+  "name": "Compass",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>When you make a test related to the guide travel role and carry a compass, the test gains a +1 bonus.</p>",
+    "slots": 1,
+    "stack": 3,
+    "price": 10,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 1000,
+        "effect": "The bonus rises to +2."
+      },
+      {
+        "tier": "masterwork",
+        "price": 2000,
+        "effect": "The bonus rises to +3."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

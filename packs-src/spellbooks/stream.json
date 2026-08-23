@@ -1,0 +1,37 @@
+{
+  "__key": "stream",
+  "name": "Stream",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>dam dam</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": true,
+    "discipline": "elemental",
+    "castingTime": "action",
+    "range": {
+      "type": "ranged",
+      "value": 1
+    },
+    "area": {
+      "type": "line",
+      "size": 5,
+      "width": 1
+    },
+    "target": "All creatures",
+    "tier2": "2 + @mod",
+    "tier3": "4 + @mod",
+    "tier1": "0 dam"
+  }
+}

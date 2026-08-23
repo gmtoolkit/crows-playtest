@@ -1,0 +1,13 @@
+{
+  "__key": "fine-coin-purse",
+  "name": "Fine Coin Purse",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Holds up to 750 coins.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 500,
+    "source": "Crows Playtest 2, POI and Dungeon Cards"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "__key": "alteration-stone",
+  "name": "Alteration Stone",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Choose one benefit when you make the stone. The creature carrying it gains it: ● You don’t need to eat or drink to live. ● You don’t need to breathe to live. ● The stone sheds light 5/5.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

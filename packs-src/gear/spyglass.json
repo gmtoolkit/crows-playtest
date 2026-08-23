@@ -1,0 +1,13 @@
+{
+  "__key": "spyglass",
+  "name": "Spyglass",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Can be used to make things appear 3 times closer.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 100,
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}

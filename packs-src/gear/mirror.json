@@ -1,0 +1,13 @@
+{
+  "__key": "mirror",
+  "name": "Mirror",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A hand mirror, useful for looking around corners and at your own mug.</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 100,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

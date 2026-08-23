@@ -1,0 +1,20 @@
+{
+  "__key": "surgical-kit",
+  "name": "Surgical Kit",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Scalpels, threads, needles, and bandages made for closing wounds. You can use this kit when you take the Tend Wounds rest activity to have the target lost 1 additional wound.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 100,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "useless",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}

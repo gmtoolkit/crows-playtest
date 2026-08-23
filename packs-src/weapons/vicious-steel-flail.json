@@ -1,0 +1,32 @@
+{
+  "__key": "vicious-steel-flail",
+  "name": "Vicious Steel Flail",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 2,
+    "stack": 1,
+    "price": 1015,
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "characteristic": "strength",
+    "range": {
+      "type": "melee",
+      "value": 2
+    },
+    "tier2": "4 + @mod",
+    "tier3": "7 + @mod",
+    "properties": [
+      {
+        "key": "pummeling"
+      }
+    ],
+    "group": "bashing",
+    "enchantments": [
+      {
+        "name": "Vicious"
+      }
+    ],
+    "magic": true
+  }
+}

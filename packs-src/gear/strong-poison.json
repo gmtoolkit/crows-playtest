@@ -1,0 +1,23 @@
+{
+  "__key": "strong-poison",
+  "name": "Strong Poison",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Apply to a weapon or 1 ammo. Next time it deals damage to a creature before DT’s end, they make a Strength RR. ≤11 12-16 17+ 10 P dam 10 P dam No effect and weakened</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 250,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 2,
+      "materials": "2 monster parts (any)",
+      "goal": 50
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Apply to a weapon or 1 ammo. Next time it deals damage to a creature before DT’s end, they make a Strength RR."
+    }
+  }
+}

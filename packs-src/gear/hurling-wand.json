@@ -1,0 +1,31 @@
+{
+  "__key": "hurling-wand",
+  "name": "Hurling Wand",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You target a creature within 15 squares of you. They make a Strength RR. ≤11 12-16 17+ 10 5 No vertical vertical effect slide slide</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 500,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "useless",
+      "refuelWith": ""
+    },
+    "crafting": {
+      "expertise": "enchanting",
+      "uses": 2,
+      "materials": "gem worth 100 gc",
+      "goal": 100
+    },
+    "magic": true,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You target a creature within 15 squares of you. They make a Strength RR."
+    }
+  }
+}

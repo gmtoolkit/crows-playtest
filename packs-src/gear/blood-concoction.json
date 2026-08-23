@@ -1,0 +1,18 @@
+{
+  "__key": "blood-concoction",
+  "name": "Blood Concoction",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>You consume the potion and must make a Strength RR. ≤11 12-16 17+ Your You Your eyes lower gain are body is both compound now a the tier and you slug tail. 1 and 3 can see in Your results. the dark. speed is reduced by 2.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 0,
+    "xpValue": 500,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "You consume the potion and must make a Strength RR."
+    }
+  }
+}

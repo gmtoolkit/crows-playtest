@@ -1,0 +1,13 @@
+{
+  "__key": "card-deck",
+  "name": "Card Deck",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Standard deck of 54 playing cards, including 2 jokers.</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 1,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

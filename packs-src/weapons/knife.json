@@ -1,0 +1,40 @@
+{
+  "__key": "knife",
+  "name": "Knife",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 1,
+    "stack": 2,
+    "price": 10,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 5
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "characteristic": "agilityOrStrength",
+    "range": {
+      "type": "both",
+      "value": 1,
+      "thrownValue": 5
+    },
+    "tier2": "2 + @mod",
+    "tier3": "4 + @mod",
+    "properties": [
+      {
+        "key": "light"
+      },
+      {
+        "key": "disengage"
+      },
+      {
+        "key": "parry",
+        "value": 2
+      }
+    ],
+    "group": "slashing"
+  }
+}

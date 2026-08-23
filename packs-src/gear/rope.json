@@ -1,0 +1,25 @@
+{
+  "__key": "rope",
+  "name": "Rope",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>50 feet of rope. If secured, no test is required to climb.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 2,
+    "qualityTiers": [
+      {
+        "tier": "fine",
+        "price": 500,
+        "effect": "100 feet of strong, light rope."
+      },
+      {
+        "tier": "masterwork",
+        "price": 1000,
+        "effect": "150 feet of strong, light rope."
+      }
+    ],
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

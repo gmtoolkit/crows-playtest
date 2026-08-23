@@ -1,0 +1,23 @@
+{
+  "__key": "glue-pot",
+  "name": "Glue Pot",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Glue for binding! Spread over a 2 x 2 area of ground. Creatures entering make a Strength RR. ≤11 12-16 17+ Grabbed Speed No effect by the halved glue for this turn</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 125,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "2 monster part (any)",
+      "goal": 25
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Spread over a 2 x 2 area of ground. Creatures entering make a Strength RR."
+    }
+  }
+}

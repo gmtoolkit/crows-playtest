@@ -1,0 +1,34 @@
+{
+  "__key": "stubborn-object",
+  "name": "Stubborn Object",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>The target is fixed in space, and can’t fall or be moved by any effect except a creature with a Strength equal to or higher than a number based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 0,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 1,
+    "isAttack": false,
+    "discipline": "alteration",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "melee",
+      "value": 1
+    },
+    "target": "1 object",
+    "targets": 1,
+    "duration": {
+      "type": "ud",
+      "ud": 1
+    }
+  }
+}

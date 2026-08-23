@@ -30,11 +30,34 @@ const read = (dir) =>
         .map((f) => JSON.parse(readFileSync(join(SRC, dir, f), "utf8")))
     : [];
 
-/** Field names a DataModel declares, read from its source rather than executed. */
+/**
+ * Field names declared by one of the shared schema fragments in fields.mjs.
+ *
+ * Keys inside `cardFields()` are one indent level shallower than a model's own,
+ * and some of them are built by a helper (`carried: carriedField()`) rather
+ * than by `new fields.X` — matching only the latter would silently report the
+ * helper-built fields as undeclared, which is the opposite of this file's job.
+ */
+function fragmentFields(fn) {
+  const text = readFileSync(join(root, "src", "data", "fields.mjs"), "utf8");
+  const start = text.indexOf(`export function ${fn}(`);
+  const body = text.slice(start, text.indexOf("\n}", start));
+  return [...body.matchAll(/^\s{4}(\w+):\s*(?:new fields\.|\w+\()/gm)].map((m) => m[1]);
+}
+
+/**
+ * Field names a DataModel declares, read from its source rather than executed.
+ *
+ * The item models COMPOSE their schema — `...cardFields(), ...attackFields()`
+ * — so reading only the model file reports every shared card field as
+ * undeclared. The spreads are followed into fields.mjs instead.
+ */
 function declaredFields(modelFile) {
   const text = readFileSync(join(root, "src", "data", modelFile), "utf8");
   const body = text.slice(text.indexOf("defineSchema"));
-  return new Set([...body.matchAll(/^\s{6}(\w+):\s*new fields\./gm)].map((m) => m[1]));
+  const own = [...body.matchAll(/^\s{6}(\w+):\s*new fields\./gm)].map((m) => m[1]);
+  const spread = [...body.matchAll(/\.\.\.(\w+)\(\)/g)].flatMap((m) => fragmentFields(m[1]));
+  return new Set([...own, ...spread]);
 }
 
 const backgrounds = read("backgrounds");
@@ -138,6 +161,219 @@ describe("extracted traits", { skip: traits.length === 0 && "no traits extracted
 
   test("every trait belongs to a tree config knows", () => {
     const bad = traits.filter((t) => !CROWS.traitTrees[t.system.tree]).map((t) => `${t.name}: ${t.system.tree}`);
+    assert.deepEqual(bad, []);
+  });
+});
+
+/* -------------------------------------------- */
+/*  Inventory cards (tools/extract-items.mjs)   */
+/* -------------------------------------------- */
+
+/**
+ * The card packs, and the model each one's documents are validated against.
+ * Kept as a table so a new item pack cannot be added without a guard.
+ */
+const ITEM_PACKS = [
+  { dir: "weapons", type: "weapon", model: "item-weapon.mjs" },
+  { dir: "armor", type: "armor", model: "item-armor.mjs" },
+  { dir: "gear", type: "gear", model: "item-gear.mjs" },
+  { dir: "spellbooks", type: "spellbook", model: "item-spellbook.mjs" }
+];
+
+for (const pack of ITEM_PACKS) {
+  const docs = read(pack.dir);
+
+  describe(`extracted ${pack.dir}`, { skip: docs.length === 0 && `no ${pack.dir} extracted` }, () => {
+    test("every field the extractor emits is DECLARED by the data model", () => {
+      // The same silent failure as the backgrounds: an undeclared field is
+      // dropped on import with no error, so a weapon can build clean, import
+      // clean, and carry no damage at all.
+      const declared = declaredFields(pack.model);
+      const emitted = new Set();
+      for (const d of docs) for (const k of Object.keys(d.system)) emitted.add(k);
+      const undeclared = [...emitted].filter((k) => !declared.has(k));
+      assert.deepEqual(undeclared, [], `these would be dropped on import: ${undeclared.join(", ")}`);
+    });
+
+    test("every document is the pack's own type and has a unique key", () => {
+      const keys = new Set();
+      for (const d of docs) {
+        assert.equal(d.type, pack.type, `${d.name} is a ${d.type} in the ${pack.dir} pack`);
+        assert.ok(d.name, "a document with no name cannot be found in a compendium");
+        assert.ok(!keys.has(d.__key), `duplicate key ${d.__key}`);
+        keys.add(d.__key);
+      }
+    });
+
+    test("card numbers are sane", () => {
+      for (const d of docs) {
+        assert.ok(d.system.stack >= 1, `${d.name} stacks ${d.system.stack}`);
+        assert.ok(d.system.slots >= 0, `${d.name} occupies ${d.system.slots} slots`);
+        assert.ok(d.system.price >= 0, `${d.name} costs ${d.system.price}`);
+        // A card prints one or the other, never both (C p6).
+        assert.ok(!(d.system.price > 0 && d.system.xpValue), `${d.name} carries both a price and an XP value`);
+      }
+    });
+
+    test("every crafting block names an expertise config knows", () => {
+      const bad = [];
+      for (const d of docs) {
+        const key = d.system.crafting?.expertise;
+        if (key && !CROWS.expertises[key]) bad.push(`${d.name}: ${key}`);
+      }
+      assert.deepEqual(bad, []);
+    });
+
+    test("every usage-dice pool is a legal pool", () => {
+      for (const d of docs) {
+        const ud = d.system.ud;
+        if (!ud) continue;
+        assert.ok(ud.max > 0, `${d.name} has a usage-dice block with no dice`);
+        assert.ok(CROWS.udTriggers[ud.trigger], `${d.name}: unknown UD trigger ${ud.trigger}`);
+        assert.ok(CROWS.udRestore[ud.restore], `${d.name}: unknown UD restore ${ud.restore}`);
+      }
+    });
+
+    test("every magic slot resolves against config", () => {
+      const bad = docs
+        .filter((d) => d.system.magicSlot && !CROWS.magicSlots[d.system.magicSlot])
+        .map((d) => `${d.name}: ${d.system.magicSlot}`);
+      assert.deepEqual(bad, []);
+    });
+  });
+}
+
+const weapons = read("weapons");
+
+describe("extracted weapons", { skip: weapons.length === 0 && "no weapons extracted" }, () => {
+  test("every weapon belongs to a group and carries only known properties", () => {
+    const bad = [];
+    for (const w of weapons) {
+      if (!CROWS.weaponGroups[w.system.group]) bad.push(`${w.name}: group ${w.system.group}`);
+      for (const p of w.system.properties ?? []) {
+        if (!CROWS.weaponProperties[p.key]) bad.push(`${w.name}: property ${p.key}`);
+      }
+    }
+    assert.deepEqual(bad, []);
+  });
+
+  test("every weapon deals damage on both hit tiers", () => {
+    // The failure this exists for: a weapon whose damage row was lost to a
+    // split row or a spilled cell still builds, still imports, and rolls
+    // nothing. Deduplication is supposed to keep the copy that has one.
+    const silent = weapons.filter((w) => !w.system.tier2 || !w.system.tier3).map((w) => w.name);
+    assert.deepEqual(silent, []);
+  });
+
+  test("tier damage is stored in the roller's notation", () => {
+    // The cards print "3 + S" and "2 + A or S"; the model stores the
+    // characteristic separately and the formula as "@mod" (see fields.mjs), so
+    // a stray printed letter here means the pair has come apart.
+    const bad = [];
+    for (const w of weapons) {
+      for (const tier of ["tier2", "tier3"]) {
+        if (/(?<![\w@])[AMS](?![\w])/.test(w.system[tier])) bad.push(`${w.name}.${tier}: ${w.system[tier]}`);
+      }
+    }
+    assert.deepEqual(bad, []);
+  });
+
+  test("every characteristic is one the attack profile allows", () => {
+    const allowed = new Set([
+      "agility",
+      "mind",
+      "strength",
+      "agilityOrStrength",
+      "agilityOrMind",
+      "mindOrStrength",
+      "none"
+    ]);
+    const bad = weapons.filter((w) => !allowed.has(w.system.characteristic)).map((w) => w.name);
+    assert.deepEqual(bad, []);
+  });
+
+  test("a thrown weapon carries both of its ranges", () => {
+    for (const w of weapons) {
+      if (w.system.range?.type !== "both") continue;
+      assert.ok(w.system.range.thrownValue > 0, `${w.name} prints a thrown range it did not keep`);
+    }
+  });
+});
+
+const armor = read("armor");
+
+describe("extracted armor", { skip: armor.length === 0 && "no armor extracted" }, () => {
+  test("every suit provides Armor Defense", () => {
+    for (const a of armor) {
+      assert.ok(a.system.ad?.max > 0, `${a.name} provides no AD`);
+      assert.equal(a.system.ad.value, a.system.ad.max, `${a.name} ships already depleted`);
+    }
+  });
+
+  test("every declared category resolves against config", () => {
+    // extract-items.mjs reports rather than emits an unknown category, so a
+    // category that IS present must be one config knows.
+    const bad = armor
+      .filter((a) => a.system.category && !CROWS.armorCategories[a.system.category])
+      .map((a) => `${a.name}: ${a.system.category}`);
+    assert.deepEqual(bad, []);
+  });
+});
+
+const spellbooks = read("spellbooks");
+
+describe("extracted spellbooks", { skip: spellbooks.length === 0 && "no spellbooks extracted" }, () => {
+  test("every spell has a discipline, a rank and a casting time config knows", () => {
+    const bad = [];
+    for (const b of spellbooks) {
+      if (!CROWS.disciplines[b.system.discipline]) bad.push(`${b.name}: discipline ${b.system.discipline}`);
+      if (!CROWS.castingTimes[b.system.castingTime]) bad.push(`${b.name}: casting ${b.system.castingTime}`);
+      if (!(b.system.rank >= 0 && b.system.rank <= 5)) bad.push(`${b.name}: rank ${b.system.rank}`);
+    }
+    assert.deepEqual(bad, []);
+  });
+
+  test("every duration and area type resolves against config", () => {
+    const bad = [];
+    for (const b of spellbooks) {
+      const duration = b.system.duration?.type;
+      if (duration && !CROWS.spellDurations[duration]) bad.push(`${b.name}: duration ${duration}`);
+      const area = b.system.area?.type;
+      if (area && !CROWS.areaTypes[area]) bad.push(`${b.name}: area ${area}`);
+    }
+    assert.deepEqual(bad, []);
+  });
+
+  test("an attack spell deals damage and a non-attack spell describes an outcome", () => {
+    const bad = [];
+    for (const b of spellbooks) {
+      if (b.system.isAttack && !b.system.tier3) bad.push(`${b.name}: attack spell with no tier 3 damage`);
+      if (!b.system.isAttack && b.system.tier2) bad.push(`${b.name}: non-attack spell carrying damage`);
+    }
+    assert.deepEqual(bad, []);
+  });
+});
+
+describe("the card packs together", { skip: read("gear").length === 0 && "no cards extracted" }, () => {
+  test("no name is claimed by two packs", () => {
+    // Gear is the fallback bucket, so a mis-parsed weapon lands there under the
+    // weapon's own name and the compendium ships the same card twice.
+    const seen = new Map();
+    const clashes = [];
+    for (const pack of ITEM_PACKS) {
+      for (const d of read(pack.dir)) {
+        if (seen.has(d.name)) clashes.push(`${d.name}: ${seen.get(d.name)} and ${pack.dir}`);
+        else seen.set(d.name, pack.dir);
+      }
+    }
+    assert.deepEqual(clashes, []);
+  });
+
+  test("every document names where it came from", () => {
+    const bad = [];
+    for (const pack of ITEM_PACKS) {
+      for (const d of read(pack.dir)) if (!d.system.source) bad.push(`${pack.dir}/${d.__key}`);
+    }
     assert.deepEqual(bad, []);
   });
 });

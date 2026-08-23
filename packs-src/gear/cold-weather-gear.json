@@ -1,0 +1,13 @@
+{
+  "__key": "cold-weather-gear",
+  "name": "Cold Weather Gear",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Used to survive in cold snaps and blizzards. Cold weather gear is considered worn if you want to wear it and it is in a backpack slot.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 10,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

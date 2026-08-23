@@ -1,0 +1,37 @@
+{
+  "__key": "animal-form",
+  "name": "Animal Form",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "<p>You gain the stats and form of an animal. Your gear is assumed by your form. If you die, you revert back. Your animal form’s maximum power is based on the casting.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": false,
+    "discipline": "alteration",
+    "castingTime": "maneuver",
+    "range": {
+      "type": "melee",
+      "value": 0
+    },
+    "duration": {
+      "type": "ud",
+      "ud": 1
+    },
+    "effects": {
+      "tier1": "<p>0</p>",
+      "tier2": "<p>2</p>",
+      "tier3": "<p>4</p>"
+    }
+  }
+}

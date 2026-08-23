@@ -1,0 +1,24 @@
+{
+  "__key": "heavy-armor",
+  "name": "Heavy Armor",
+  "type": "armor",
+  "img": "icons/svg/shield.svg",
+  "system": {
+    "description": "",
+    "slots": 4,
+    "stack": 1,
+    "price": 400,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "9 iron bars",
+      "goal": 80
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "ad": {
+      "value": 15,
+      "max": 15
+    },
+    "category": "heavy"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "caltrops",
+  "name": "Caltrops",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A bag of 1,000. Spread over a 2 x 2 area of ground. Creatures entering make an Agility RR. ≤11 12-16 17+ 4 dam 2 dam No and -2 effect speed until healed</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 5,
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Spread over a 2 x 2 area of ground. Creatures entering make an Agility RR."
+    }
+  }
+}

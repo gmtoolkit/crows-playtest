@@ -1,0 +1,23 @@
+{
+  "__key": "poison-vial",
+  "name": "Poison Vial",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Apply to a weapon or 1 ammo. Next time it deals damage to a creature before DT’s end, they make a Strength RR. ≤11 12-16 17+ 5 P dam 5 P dam No effect and weakened</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 10,
+    "crafting": {
+      "expertise": "alchemy",
+      "uses": 1,
+      "materials": "1 monster par (any)",
+      "goal": 5
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Apply to a weapon or 1 ammo. Next time it deals damage to a creature before DT’s end, they make a Strength RR."
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "__key": "steel-axe",
+  "name": "Steel Axe",
+  "type": "weapon",
+  "img": "icons/svg/sword.svg",
+  "system": {
+    "description": "",
+    "slots": 1,
+    "stack": 1,
+    "price": 512,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, POI and Dungeon Cards",
+    "characteristic": "strength",
+    "range": {
+      "type": "melee",
+      "value": 1
+    },
+    "tier2": "4 + @mod",
+    "tier3": "8 + @mod",
+    "properties": [
+      {
+        "key": "dismember"
+      }
+    ],
+    "group": "chopping"
+  }
+}

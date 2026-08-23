@@ -646,8 +646,15 @@ CROWS.weaponProperties = {
   loading: "CROWS.PropLoading"
 };
 
+/**
+ * The printed suits. `medium` was missing and the deck prints it: Light Armor
+ * (AD 5), Medium Armor (AD 10), Heavy Armor (AD 15). ArmorData now declares
+ * the choice, and the extractor reads the category off the card's own name, so
+ * a category config does not know is a card that ships with no category at all.
+ */
 CROWS.armorCategories = {
   light: "CROWS.ArmorLight",
+  medium: "CROWS.ArmorMedium",
   heavy: "CROWS.ArmorHeavy",
   shield: "CROWS.ArmorShield"
 };

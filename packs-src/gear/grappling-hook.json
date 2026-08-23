@@ -1,0 +1,13 @@
+{
+  "__key": "grappling-hook",
+  "name": "Grappling Hook",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Can be added to rope to create an item that takes up 2 slots. Makes hurling and securing rope easier.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 10,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

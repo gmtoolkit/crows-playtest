@@ -1,0 +1,26 @@
+{
+  "__key": "case-of-20-crossbow-bolts",
+  "name": "Case of 20 Crossbow Bolts",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Ammunition for crossbows</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 5,
+    "ud": {
+      "max": 2,
+      "value": 2,
+      "trigger": "activate",
+      "restore": "useless",
+      "refuelWith": ""
+    },
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 hickory log",
+      "goal": 5
+    },
+    "source": "Crows Playtest 2, POI and Dungeon Cards"
+  }
+}

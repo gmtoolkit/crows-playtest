@@ -1,0 +1,13 @@
+{
+  "__key": "net",
+  "name": "Net",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>This fishing net unfurls when hurled. You can hurl it at a Medium or smaller creature as part of the Grab maneuver, which gives you an edge on the test, and gives them a bane on tests made to break the grab. It has 5 Stamina.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 5,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

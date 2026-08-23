@@ -1,0 +1,13 @@
+{
+  "__key": "bucket",
+  "name": "Bucket",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Can hold up to 3 gallons of liquid … also good for hiding your face!</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 2,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

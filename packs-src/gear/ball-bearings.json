@@ -1,0 +1,17 @@
+{
+  "__key": "ball-bearings",
+  "name": "Ball Bearings",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A bag of 1,000. Spread over a 2 x 2 area of ground. Creature entering must make an Agility RR. ≤11 12-16 17+ Prone Prone No and 4 effect dam</p>",
+    "slots": 1,
+    "stack": 2,
+    "price": 5,
+    "source": "Crows Playtest 2, Profession Cards",
+    "activation": {
+      "type": "maneuver",
+      "description": "Spread over a 2 x 2 area of ground. Creature entering must make an Agility RR."
+    }
+  }
+}

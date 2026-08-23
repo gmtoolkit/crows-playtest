@@ -1,0 +1,13 @@
+{
+  "__key": "potion",
+  "name": "Potion",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Just drink it. What’s the worst that could happen?</p>",
+    "slots": 1,
+    "stack": 5,
+    "price": 0,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "__key": "journal",
+  "name": "Journal",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>A bound journal of 200 pages that are blank. Don’t worry, you’ll fill them!</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 2,
+    "source": "Crows Playtest 2, Inventory Cards"
+  }
+}

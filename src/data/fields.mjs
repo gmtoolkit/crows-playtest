@@ -118,6 +118,28 @@ export function cardFields() {
     carried: carriedField(),
     ud: usageDiceField(),
     crafting: craftingField(),
+
+    /**
+     * The fine and masterwork upgrades a card offers.
+     *
+     * Real card data, not prose: James's own annotation on the deck reads
+     * "Price and effect for fine and masterwork items is listed like this".
+     * A Torch prints "Fine (100 gc): 2 UD / Masterwork (200 gc): 3 UD", and a
+     * Rope prints an entirely different EFFECT at each tier.
+     *
+     * It needs its own field because the extractor was dumping these lines
+     * into `description`, which both lost the item's actual prose and left
+     * eleven gear cards describing themselves as a price list.
+     */
+    qualityTiers: new fields.ArrayField(
+      new fields.SchemaField({
+        tier: new fields.StringField({ required: true, blank: false, choices: ["fine", "masterwork"] }),
+        price: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
+        effect: new fields.StringField({ required: false, blank: true, initial: "" })
+      }),
+      { required: true, initial: [] }
+    ),
+
     /** Provenance so a takedown or a playtest revision can be traced. */
     source: new fields.StringField({ required: false, blank: true, initial: "" })
   };

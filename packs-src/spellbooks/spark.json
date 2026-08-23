@@ -1,0 +1,32 @@
+{
+  "__key": "spark",
+  "name": "Spark",
+  "type": "spellbook",
+  "img": "icons/svg/book.svg",
+  "system": {
+    "description": "",
+    "slots": 1,
+    "stack": 1,
+    "price": 250,
+    "ud": {
+      "max": 1,
+      "value": 1,
+      "trigger": "activate",
+      "restore": "rest",
+      "refuelWith": ""
+    },
+    "source": "Crows Playtest 2, Inventory Cards",
+    "rank": 0,
+    "isAttack": true,
+    "discipline": "elemental",
+    "castingTime": "action",
+    "range": {
+      "type": "ranged",
+      "value": 5
+    },
+    "target": "2 targets",
+    "targets": 2,
+    "tier2": "1 + @mod",
+    "tier3": "3 + @mod"
+  }
+}

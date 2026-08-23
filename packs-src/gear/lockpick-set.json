@@ -1,0 +1,19 @@
+{
+  "__key": "lockpick-set",
+  "name": "Lockpick Set",
+  "type": "gear",
+  "img": "icons/svg/item-bag.svg",
+  "system": {
+    "description": "<p>Without this, you take a bane on tests made to pick locks.</p>",
+    "slots": 1,
+    "stack": 1,
+    "price": 25,
+    "crafting": {
+      "expertise": "blacksmithing",
+      "uses": 1,
+      "materials": "1 iron bar",
+      "goal": 10
+    },
+    "source": "Crows Playtest 2, Profession Cards"
+  }
+}
