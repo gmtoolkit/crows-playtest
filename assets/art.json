@@ -1,0 +1,81 @@
+{
+  "art": [
+    {
+      "key": "blood-creature-a",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature A.jpg",
+      "file": "assets/art/blood-creature-a.webp",
+      "token": "assets/art/blood-creature-a-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "blood-creature-b",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature B.jpg",
+      "file": "assets/art/blood-creature-b.webp",
+      "token": "assets/art/blood-creature-b-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "blood-creature-c",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature C.jpg",
+      "file": "assets/art/blood-creature-c.webp",
+      "token": "assets/art/blood-creature-c-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "undead-a",
+      "source": "Monster Illustrations/Undead/Undead A.jpg",
+      "file": "assets/art/undead-a.webp",
+      "token": "assets/art/undead-a-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-b",
+      "source": "Monster Illustrations/Undead/Undead B.jpg",
+      "file": "assets/art/undead-b.webp",
+      "token": "assets/art/undead-b-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-c",
+      "source": "Monster Illustrations/Undead/Undead C.jpg",
+      "file": "assets/art/undead-c.webp",
+      "token": "assets/art/undead-c-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-d",
+      "source": "Monster Illustrations/Undead/Undead D.jpg",
+      "file": "assets/art/undead-d.webp",
+      "token": "assets/art/undead-d-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-e",
+      "source": "Monster Illustrations/Undead/Undead E.jpg",
+      "file": "assets/art/undead-e.webp",
+      "token": "assets/art/undead-e-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-f",
+      "source": "Monster Illustrations/Undead/Undead F.jpg",
+      "file": "assets/art/undead-f.webp",
+      "token": "assets/art/undead-f-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-g",
+      "source": "Monster Illustrations/Undead/Undead G.jpg",
+      "file": "assets/art/undead-g.webp",
+      "token": "assets/art/undead-g-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-h",
+      "source": "Monster Illustrations/Undead/Undead H.jpg",
+      "file": "assets/art/undead-h.webp",
+      "token": "assets/art/undead-h-token.webp",
+      "category": "undead"
+    }
+  ]
+}

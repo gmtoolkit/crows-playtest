@@ -1,13 +1,13 @@
 {
-  "__key": "floating-manor-labels-89x54",
+  "__key": "floating-manor-no-labels-89x54",
   "__folder": "Floating Manor",
-  "name": "The Floating Manor (Ref key)",
-  "navigation": false,
-  "navOrder": 21,
+  "name": "The Floating Manor",
+  "navigation": true,
+  "navOrder": 20,
   "width": 6230,
   "height": 3780,
   "padding": 0.1,
-  "thumb": "systems/crows/assets/thumbs/floating-manor-labels-89x54.webp",
+  "thumb": "modules/crows-cornath/assets/thumbs/floating-manor-no-labels-89x54.webp",
   "grid": {
     "type": 1,
     "size": 70,
@@ -19,12 +19,12 @@
     "units": "ft"
   },
   "environment": {
-    "darknessLevel": 0,
+    "darknessLevel": 1,
     "globalLight": {
-      "enabled": true
+      "enabled": false
     }
   },
-  "tokenVision": false,
+  "tokenVision": true,
   "fog": {
     "mode": 2
   },
@@ -36,18 +36,18 @@
         "top": 20
       },
       "background": {
-        "src": "systems/crows/assets/maps/floating-manor-labels-89x54.webp",
+        "src": "modules/crows-cornath/assets/maps/floating-manor-no-labels-89x54.webp",
         "color": "#000000"
       },
       "sort": 0
     }
   ],
   "flags": {
-    "crows": {
-      "sourceImage": "Maps/Floating Manor/Floating Manor Labels 89x54.png",
+    "crows-cornath": {
+      "sourceImage": "Maps/Floating Manor/Floating Manor No Labels 89x54.png",
       "gridVerified": true,
       "gridSquares": "89x54",
-      "refOnly": true
+      "refOnly": false
     }
   },
   "ownership": {

@@ -1,13 +1,13 @@
 {
-  "__key": "gridless-140ppi-vtt-42x65-blood-library-full",
+  "__key": "gridless-140ppi-vtt-42x24-blood-library-upper",
   "__folder": "Blood Library",
-  "name": "Blood Library",
+  "name": "Blood Library — Upper Floor",
   "navigation": true,
-  "navOrder": 10,
+  "navOrder": 11,
   "width": 5880,
-  "height": 9100,
+  "height": 3360,
   "padding": 0.1,
-  "thumb": "systems/crows/assets/thumbs/gridless-140ppi-vtt-42x65-blood-library-full.webp",
+  "thumb": "modules/crows-cornath/assets/thumbs/gridless-140ppi-vtt-42x24-blood-library-upper.webp",
   "grid": {
     "type": 1,
     "size": 140,
@@ -36,17 +36,17 @@
         "top": 20
       },
       "background": {
-        "src": "systems/crows/assets/maps/gridless-140ppi-vtt-42x65-blood-library-full.webp",
+        "src": "modules/crows-cornath/assets/maps/gridless-140ppi-vtt-42x24-blood-library-upper.webp",
         "color": "#000000"
       },
       "sort": 0
     }
   ],
   "flags": {
-    "crows": {
-      "sourceImage": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x65_Blood-Library-Full.jpg",
+    "crows-cornath": {
+      "sourceImage": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x24_Blood-Library-Upper.jpg",
       "gridVerified": true,
-      "gridSquares": "42x65",
+      "gridSquares": "42x24",
       "refOnly": false
     }
   },

@@ -7,12 +7,16 @@
   "scripts": {
     "build": "vite build",
     "watch": "vite build --watch",
-    "extract": "node tools/extract-all.mjs",
-    "packs": "node tools/build-packs.mjs",
-    "scenes": "node tools/build-scenes.mjs",
+    "extract": "node tools/extract-creatures.mjs",
     "art": "node tools/convert-art.mjs",
-    "deploy": "npm run build && npm run packs && node tools/deploy-local.mjs",
-    "test": "node --test test/"
+    "scenes": "node tools/build-scenes.mjs",
+    "packs:system": "node tools/build-packs.mjs --target system",
+    "packs:adventure": "node tools/build-packs.mjs --target adventure",
+    "packs": "npm run packs:system && npm run packs:adventure",
+    "deploy:system": "npm run build && npm run packs:system && node tools/deploy-local.mjs --target system",
+    "deploy:adventure": "npm run packs:adventure && node tools/deploy-local.mjs --target adventure",
+    "deploy": "npm run deploy:system && npm run deploy:adventure",
+    "test": "node --test"
   },
   "devDependencies": {
     "classic-level": "^3.0.0",

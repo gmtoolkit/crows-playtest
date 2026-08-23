@@ -1,6 +1,9 @@
 /**
- * Compile `packs-src/<pack>/*.json` into LevelDB compendium packs under
- * `packs/<pack>`, and register them in system.json.
+ * Compile `<target>/packs-src/<pack>/*.json` into LevelDB compendium packs and
+ * register them in that target's manifest.
+ *
+ *   node tools/build-packs.mjs --target system
+ *   node tools/build-packs.mjs --target adventure
  *
  * Written directly with classic-level rather than @foundryvtt/foundryvtt-cli.
  * Three v14 facts make that worth the 40 lines (all learned the hard way in
@@ -17,33 +20,17 @@
  */
 import { ClassicLevel } from "classic-level";
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync, statSync } from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { join } from "node:path";
+import { targetFromArgs, CORE_VERSION } from "./packages.mjs";
 
-const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const target = targetFromArgs();
+const root = target.root;
 const SRC = join(root, "packs-src");
 const OUT = join(root, "packs");
 
-/** Must track the Foundry build this system is verified against. */
-const PACK_CORE_VERSION = "14.365";
-
-/**
- * Pack definitions. `collection` is the LevelDB key prefix Foundry expects and
- * matches the document type.
- */
-const PACKS = [
-  { name: "creatures", label: "Crows: Creatures", type: "Actor", collection: "actors" },
-  { name: "weapons", label: "Crows: Weapons", type: "Item", collection: "items" },
-  { name: "armor", label: "Crows: Armor", type: "Item", collection: "items" },
-  { name: "gear", label: "Crows: Gear", type: "Item", collection: "items" },
-  { name: "spellbooks", label: "Crows: Spellbooks", type: "Item", collection: "items" },
-  { name: "traits", label: "Crows: Traits", type: "Item", collection: "items" },
-  { name: "backgrounds", label: "Crows: Backgrounds", type: "Item", collection: "items" },
-  { name: "scenes", label: "Crows: Maps", type: "Scene", collection: "scenes" },
-  { name: "journals", label: "Crows: Dungeons & Lore", type: "JournalEntry", collection: "journal" },
-  { name: "tables", label: "Crows: Tables", type: "RollTable", collection: "tables" }
-];
+const PACK_CORE_VERSION = CORE_VERSION;
+const PACKS = target.packs;
 
 /** Embedded collections shipped as sub-entries, by document type. */
 const EMBEDDED = {
@@ -60,6 +47,8 @@ export function did(seed) {
 }
 
 function stamp(doc) {
+  // systemId stays "crows" even for module packs: it names the system the
+  // documents are FOR, which is what Foundry validates against.
   doc._stats = { coreVersion: PACK_CORE_VERSION, systemId: "crows", ...doc._stats };
   return doc;
 }
@@ -108,16 +97,19 @@ for (const pack of PACKS) {
       const folderName = doc.__folder;
       delete doc.__folder;
       if (!folders.has(folderName)) {
-        folders.set(folderName, stamp({
-          _id: did(`folder:${pack.name}:${folderName}`),
-          name: folderName,
-          type: pack.type,
-          folder: null,
-          sorting: "a",
-          sort: 0,
-          color: null,
-          flags: {}
-        }));
+        folders.set(
+          folderName,
+          stamp({
+            _id: did(`folder:${pack.name}:${folderName}`),
+            name: folderName,
+            type: pack.type,
+            folder: null,
+            sorting: "a",
+            sort: 0,
+            color: null,
+            flags: {}
+          })
+        );
       }
       doc.folder = folders.get(folderName)._id;
     }
@@ -157,11 +149,10 @@ for (const pack of PACKS) {
 }
 
 /* -------------------------------------------- */
-/*  Register the built packs in system.json     */
+/*  Register the built packs in the manifest    */
 /* -------------------------------------------- */
 
-const manifestPath = join(root, "system.json");
-const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+const manifest = JSON.parse(readFileSync(target.manifest, "utf8"));
 
 manifest.packs = built.map((p) => ({
   name: p.name,
@@ -169,17 +160,13 @@ manifest.packs = built.map((p) => ({
   path: `packs/${p.name}`,
   type: p.type,
   system: "crows",
-  ownership: { PLAYER: "OBSERVER", ASSISTANT: "OWNER" }
+  // Stat blocks, dungeon keys and random tables are the Ref's business.
+  ownership: p.gmOnly
+    ? { PLAYER: "NONE", ASSISTANT: "OWNER" }
+    : { PLAYER: "OBSERVER", ASSISTANT: "OWNER" }
 }));
 
-// Creature stat blocks and dungeon keys are the Ref's business.
-for (const pack of manifest.packs) {
-  if (["creatures", "journals", "tables"].includes(pack.name)) {
-    pack.ownership = { PLAYER: "NONE", ASSISTANT: "OWNER" };
-  }
-}
+writeFileSync(target.manifest, JSON.stringify(manifest, null, 2) + "\n");
 
-writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
-
-console.log(`\n${totalDocs} documents across ${built.length} packs`);
-console.log(`system.json packs updated (${manifest.packs.map((p) => p.name).join(", ")})`);
+console.log(`\n[${target.id}] ${totalDocs} documents across ${built.length} packs`);
+console.log(`manifest updated (${manifest.packs.map((p) => p.name).join(", ") || "none"})`);

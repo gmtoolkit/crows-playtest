@@ -1,0 +1,47 @@
+{
+  "id": "crows-cornath",
+  "title": "Crows: Cornath (Playtest 2 Adventure)",
+  "description": "The published Crows playtest adventure for Foundry VTT: the Blood Library and the Floating Manor with grid-perfect battlemaps, the Cornath overland map, points of interest, and the village of Gadwick. Requires the Crows system. Unofficial fan content, not affiliated with or endorsed by MCDM Productions.",
+  "version": "0.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14.365"
+  },
+  "authors": [
+    {
+      "name": "Cliff Colvin",
+      "url": "https://github.com/cliffcolvin"
+    }
+  ],
+  "url": "https://github.com/gmtoolkit/crows-playtest",
+  "manifest": "https://github.com/gmtoolkit/crows-playtest/releases/latest/download/module.json",
+  "download": "https://github.com/gmtoolkit/crows-playtest/releases/latest/download/crows-cornath.zip",
+  "license": "LICENSE",
+  "readme": "README.md",
+  "bugs": "https://github.com/gmtoolkit/crows-playtest/issues",
+  "relationships": {
+    "systems": [
+      {
+        "id": "crows",
+        "type": "system",
+        "compatibility": {
+          "minimum": "0.1.0"
+        }
+      }
+    ]
+  },
+  "packs": [
+    {
+      "name": "scenes",
+      "label": "Cornath: Maps",
+      "path": "packs/scenes",
+      "type": "Scene",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": []
+}

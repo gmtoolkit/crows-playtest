@@ -15,7 +15,12 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, rmSync } from "node
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const root = dirname(dirname(fileURLToPath(import.meta.url)));
+import { PACKAGES } from "./packages.mjs";
+
+// Scenes are ADVENTURE content: they ship in the crows-cornath module, not in
+// the system, so their asset paths resolve under modules/ rather than systems/.
+const adventure = PACKAGES.adventure;
+const root = adventure.root;
 const OUT = join(root, "packs-src", "scenes");
 
 const manifestPath = join(root, "assets", "maps.json");
@@ -25,7 +30,7 @@ if (!existsSync(manifestPath)) {
 }
 const { maps } = JSON.parse(readFileSync(manifestPath, "utf8"));
 
-const SYSTEM = "crows";
+const PACKAGE_PATH = `modules/${adventure.id}`;
 const GRID_SQUARE = 1;
 const GRID_GRIDLESS = 0;
 
@@ -125,7 +130,7 @@ for (const spec of SCENES) {
     width: map.width,
     height: map.height,
     padding: 0.1,
-    thumb: `systems/${SYSTEM}/${map.thumb}`,
+    thumb: `${PACKAGE_PATH}/${map.thumb}`,
 
     grid: {
       type: useGrid ? GRID_SQUARE : GRID_GRIDLESS,
@@ -154,13 +159,13 @@ for (const spec of SCENES) {
       {
         name: "Ground",
         elevation: { bottom: 0, top: 20 },
-        background: { src: `systems/${SYSTEM}/${map.file}`, color: "#000000" },
+        background: { src: `${PACKAGE_PATH}/${map.file}`, color: "#000000" },
         sort: 0
       }
     ],
 
     flags: {
-      [SYSTEM]: {
+      [adventure.id]: {
         sourceImage: map.source,
         gridVerified: !!useGrid,
         gridSquares: map.grid ? `${map.grid.cols}x${map.grid.rows}` : null,

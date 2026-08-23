@@ -110,7 +110,10 @@ export class DungeonTurn {
       this.#warned.add(key);
       if (!game.settings.get(CROWS.id, "turnWarnings")) continue;
 
-      ui.notifications.warn(game.i18n.format("CROWS.DTWarning", { minutes: threshold }));
+      // Foundry's i18n has no plural rules, so the singular gets its own
+      // message rather than announcing "1 minutes left".
+      const message = threshold === 1 ? "CROWS.DTWarningOne" : "CROWS.DTWarning";
+      ui.notifications.warn(game.i18n.format(message, { minutes: threshold }));
       foundry.audio.AudioHelper.play(
         { src: "sounds/notify.wav", volume: 0.35, autoplay: true, loop: false },
         false

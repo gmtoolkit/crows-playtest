@@ -59,7 +59,7 @@ compendium content are in progress.
 Paste this manifest URL into Foundry's *Install System* dialog:
 
 ```
-https://github.com/cliffcolvin/crows-playtest/releases/latest/download/system.json
+https://github.com/gmtoolkit/crows-playtest/releases/latest/download/system.json
 ```
 
 ## Development

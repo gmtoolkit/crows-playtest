@@ -1,5 +1,8 @@
 /**
- * Copy the built system into the local Foundry data directory.
+ * Copy a built package into the local Foundry data directory.
+ *
+ *   node tools/deploy-local.mjs --target system
+ *   node tools/deploy-local.mjs --target adventure
  *
  * A COPY, not a junction. classic-level cannot open a LevelDB through a Windows
  * directory junction — its manifest renames fail with "path not found" and the
@@ -9,33 +12,29 @@
  */
 import { cpSync, existsSync, mkdirSync, rmSync } from "node:fs";
 import { homedir } from "node:os";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { join } from "node:path";
+import { targetFromArgs } from "./packages.mjs";
 
-const root = dirname(dirname(fileURLToPath(import.meta.url)));
+const target = targetFromArgs();
 
-const target = join(
+const dataDir = join(
   process.env.LOCALAPPDATA ?? join(homedir(), "AppData", "Local"),
   "FoundryVTT",
-  "Data",
-  "systems",
-  "crows"
+  "Data"
 );
+const dest = join(dataDir, target.installDir, target.id);
 
-/** Exactly what ships. Keep in sync with the release workflow. */
-const SHIP = ["system.json", "LICENSE", "NOTICE.md", "README.md", "dist", "lang", "templates", "packs", "assets"];
+mkdirSync(dest, { recursive: true });
 
-mkdirSync(target, { recursive: true });
-
-for (const entry of SHIP) {
-  const src = join(root, entry);
+for (const entry of target.ship) {
+  const src = join(target.root, entry);
   if (!existsSync(src)) {
     console.warn(`skip (absent): ${entry}`);
     continue;
   }
   try {
-    rmSync(join(target, entry), { recursive: true, force: true });
-    cpSync(src, join(target, entry), { recursive: true });
+    rmSync(join(dest, entry), { recursive: true, force: true });
+    cpSync(src, join(dest, entry), { recursive: true });
   } catch (err) {
     // Foundry holds an exclusive lock on every open compendium LevelDB, so a
     // running world makes `packs` undeletable. The error itself says only
@@ -53,5 +52,4 @@ for (const entry of SHIP) {
   console.log(`copied ${entry}`);
 }
 
-console.log(`\ndeployed to ${target}`);
-console.log("Restart Foundry (or reload the world) to pick up manifest changes.");
+console.log(`\n[${target.id}] deployed to ${dest}`);

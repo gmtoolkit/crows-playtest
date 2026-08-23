@@ -13,12 +13,12 @@
       "url": "https://github.com/cliffcolvin"
     }
   ],
-  "url": "https://github.com/cliffcolvin/crows-playtest",
-  "manifest": "https://github.com/cliffcolvin/crows-playtest/releases/latest/download/system.json",
-  "download": "https://github.com/cliffcolvin/crows-playtest/releases/latest/download/crows.zip",
+  "url": "https://github.com/gmtoolkit/crows-playtest",
+  "manifest": "https://github.com/gmtoolkit/crows-playtest/releases/latest/download/system.json",
+  "download": "https://github.com/gmtoolkit/crows-playtest/releases/latest/download/crows.zip",
   "license": "LICENSE",
   "readme": "README.md",
-  "bugs": "https://github.com/cliffcolvin/crows-playtest/issues",
+  "bugs": "https://github.com/gmtoolkit/crows-playtest/issues",
   "esmodules": [
     "dist/crows.mjs"
   ],
@@ -43,23 +43,12 @@
   "packs": [
     {
       "name": "creatures",
-      "label": "Crows: Creatures",
+      "label": "Crows: Bestiary",
       "path": "packs/creatures",
       "type": "Actor",
       "system": "crows",
       "ownership": {
         "PLAYER": "NONE",
-        "ASSISTANT": "OWNER"
-      }
-    },
-    {
-      "name": "scenes",
-      "label": "Crows: Maps",
-      "path": "packs/scenes",
-      "type": "Scene",
-      "system": "crows",
-      "ownership": {
-        "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       }
     }
