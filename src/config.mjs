@@ -455,6 +455,15 @@ CROWS.traitTrees = {
 
 CROWS.creation = {
   startingSpeed: 5,
+  /**
+   * The per-expertise cap before the first bonus (under 100 TXP).
+   *
+   * NOT STATED IN THE BOOK — the advancement table's first row is 100 TXP, so
+   * a fresh crow has no printed cap. 2 is the only reading consistent with the
+   * text: no background grants more than 2 uses in one expertise, and 2 is the
+   * cap for the whole first five bonuses. Flagged for the playtest survey.
+   */
+  startingMaxUses: 2,
   /** Every PC starts with these regardless of background. */
   startingGold: "3d6",
   freeEquipment: ["coin purse", "knife", "rope", "rations (6)"],

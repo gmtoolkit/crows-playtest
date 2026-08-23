@@ -1,0 +1,132 @@
+{{!-- Taking an Expertise & Stamina bonus (C p6), and a Characteristics bonus
+      (C p7). Two separate tables with their own thresholds; they collide at
+      5,000 and 30,000 TXP, where a crow gets one of each. --}}
+<div class="adv-body">
+
+  <header class="adv-head">
+    <div class="adv-stat" data-tooltip="{{localize 'CROWS.TXPHint'}}">
+      <span class="adv-value">{{txp}}</span>
+      <span class="adv-label">{{localize "CROWS.TotalXP"}}</span>
+    </div>
+    <div class="adv-stat {{#if adv.available}}owed{{/if}}">
+      <span class="adv-value">{{adv.available}}</span>
+      <span class="adv-label">{{localize "CROWS.BonusesToTake"}}</span>
+    </div>
+    <div class="adv-stat" data-tooltip="{{localize 'CROWS.MaxUsesHint'}}">
+      <span class="adv-value">{{adv.maxUses}}</span>
+      <span class="adv-label">{{localize "CROWS.MaxUses"}}</span>
+    </div>
+    <div class="adv-stat {{#if adv.charAvailable}}owed{{/if}}">
+      <span class="adv-value">{{adv.charAvailable}}</span>
+      <span class="adv-label">{{localize "CROWS.CharacteristicBonusesToTake"}}</span>
+    </div>
+  </header>
+
+  <div class="adv-scroll">
+
+    {{!-- ---- Expertise & Stamina ------------------------------------- --}}
+    <section class="adv-section">
+      <h3>{{localize "CROWS.ExpertiseStaminaBonus"}}</h3>
+      <p class="tab-hint">{{localize "CROWS.BonusHint"}}</p>
+
+      <div class="adv-options">
+        {{#each options}}
+          <button type="button" class="adv-option {{#if this.active}}active{{/if}}"
+                  data-action="pickOption" data-option="{{this.key}}">
+            <span class="opt-label">{{this.label}}</span>
+          </button>
+        {{/each}}
+      </div>
+
+      {{#if budget}}
+        <div class="adv-alloc">
+          <p class="alloc-count">
+            {{#if remaining}}
+              {{localize "CROWS.PlaceRemaining"}} <b>{{remaining}}</b>
+            {{else}}
+              <span class="ready">{{localize "CROWS.AllPlaced"}}</span>
+            {{/if}}
+          </p>
+
+          <ul class="alloc-list">
+            {{#each rows}}
+              <li class="alloc-row {{#if this.add}}allocated{{/if}} {{#if this.atCap}}at-cap{{/if}}">
+                <span class="alloc-name">{{this.label}}</span>
+                <span class="alloc-now" data-tooltip="{{localize 'CROWS.CurrentUses'}}">{{this.current}}</span>
+                <button type="button" class="alloc-btn" data-action="bump" data-expertise="{{this.key}}"
+                        data-delta="-1" {{#unless this.canRemove}}disabled{{/unless}}
+                        data-tooltip="{{localize 'CROWS.TakeBack'}}">&minus;</button>
+                <span class="alloc-add">{{#if this.add}}+{{this.add}}{{else}}&mdash;{{/if}}</span>
+                <button type="button" class="alloc-btn" data-action="bump" data-expertise="{{this.key}}"
+                        data-delta="1" {{#unless this.canAdd}}disabled{{/unless}}
+                        data-tooltip="{{#if this.atCap}}{{localize 'CROWS.AtCap'}}{{else}}{{localize 'CROWS.AddUse'}}{{/if}}">+</button>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+      {{else}}
+        <p class="tab-hint">{{localize "CROWS.NoUsesToPlace"}}</p>
+      {{/if}}
+
+      <footer class="adv-claim">
+        <button type="button" class="claim" data-action="claim" {{#unless canClaim}}disabled{{/unless}}>
+          <i class="fa-solid fa-check"></i> {{localize "CROWS.TakeBonus"}}
+        </button>
+        {{#unless canClaim}}
+          <span class="blocker">{{#each blockers}}{{this}}{{#unless @last}} &middot; {{/unless}}{{/each}}</span>
+        {{/unless}}
+      </footer>
+
+      {{#if taken.length}}
+        <h4>{{localize "CROWS.BonusesTaken"}}</h4>
+        <ul class="taken-list">
+          {{#each taken}}
+            <li>
+              <span class="taken-label">{{this.label}}</span>
+              <span class="taken-detail">
+                {{this.uses}}{{#if this.stamina}}{{#if this.uses}} &middot; {{/if}}{{localize "CROWS.Stamina"}} +{{this.stamina}}{{/if}}
+              </span>
+              <button type="button" class="icon danger" data-action="undo" data-index="{{this.index}}"
+                      data-tooltip="{{localize 'CROWS.UndoBonus'}}"><i class="fa-solid fa-rotate-left"></i></button>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </section>
+
+    {{!-- ---- Characteristics ------------------------------------------ --}}
+    <section class="adv-section">
+      <h3>{{localize "CROWS.CharacteristicBonus"}}</h3>
+      <p class="tab-hint">{{localize "CROWS.CharacteristicHint"}}</p>
+
+      {{#if allCharsMaxed}}
+        <p class="tab-hint warn">{{localize "CROWS.AllCharsMaxed"}}</p>
+      {{/if}}
+
+      <ul class="char-list">
+        {{#each characteristics}}
+          <li class="char-row {{#if this.atCap}}at-cap{{/if}}">
+            <span class="char-name">{{this.label}}</span>
+            <span class="char-value">{{crowsSigned this.value}}</span>
+            <button type="button" data-action="raiseCharacteristic" data-characteristic="{{this.key}}"
+                    {{#unless this.canRaise}}disabled{{/unless}}
+                    data-tooltip="{{#if this.atCap}}{{localize 'CROWS.CharacteristicAtCap'}}{{else}}{{localize 'CROWS.RaiseByOne'}}{{/if}}">+1</button>
+          </li>
+        {{/each}}
+      </ul>
+
+      {{#if charTaken.length}}
+        <h4>{{localize "CROWS.BonusesTaken"}}</h4>
+        <ul class="taken-list">
+          {{#each charTaken}}
+            <li>
+              <span class="taken-label">{{this.label}}</span>
+              <button type="button" class="icon danger" data-action="undoCharacteristic" data-index="{{this.index}}"
+                      data-tooltip="{{localize 'CROWS.UndoBonus'}}"><i class="fa-solid fa-rotate-left"></i></button>
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </section>
+  </div>
+</div>

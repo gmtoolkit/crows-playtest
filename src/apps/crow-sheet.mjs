@@ -29,6 +29,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       drawFromPack: CrowSheet.#onDrawFromPack,
       rollUsageDice: CrowSheet.#onRollUsageDice,
       toggleExpertiseUse: CrowSheet.#onToggleExpertiseUse,
+      openAdvancement: CrowSheet.#onOpenAdvancement,
       wearArmor: CrowSheet.#onWearArmor,
       repairArmor: CrowSheet.#onRepairArmor,
       rest: CrowSheet.#onRest,
@@ -108,19 +109,27 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   }
 
   /**
-   * Bleed the sheet in proportion to the wounds taken.
+   * Darken the sheet as the crow nears death.
    *
-   * Wounds already occupy the backpack slots, so the cost is legible — but the
-   * sheet as a whole should feel it too. This publishes a 0..1 ratio the
-   * stylesheet uses to grow the blood running down from the header, so a
-   * healthy crow's sheet is merely dark and a nearly-dead one is visibly
-   * bleeding without a number having to be read.
+   * Published as CLASSES, never as a numeric custom property.
+   *
+   * This used to set `--crows-blood` to a 0..1 wound ratio to drive a blood
+   * drip. But `--crows-blood` is already the palette's blood COLOUR (#9d2222),
+   * so writing a number into it broke every rule painting with it — and the
+   * worst casualty was `.wound-box.wounded`, the wound markers on the Slots
+   * tab, which rendered TRANSPARENT from the first wound onwards. The markers
+   * went blank at exactly the moment they started to matter. Verified in-world:
+   * four wounded boxes all computed `rgba(0, 0, 0, 0)` instead of
+   * `rgb(157, 34, 34)`, and the dead banner and the dungeon-turn bar lost their
+   * fills with them.
+   *
+   * A class cannot collide with a colour. See the guard in
+   * test/style-tokens.test.mjs.
    */
   _onRender(context, options) {
     super._onRender(context, options);
     const sys = this.actor.system;
     const ratio = sys.wounds.length ? sys.woundCount / sys.wounds.length : 0;
-    this.element.style.setProperty("--crows-blood", ratio.toFixed(3));
     this.element.classList.toggle("bleeding", ratio > 0);
     this.element.classList.toggle("dying", ratio >= 0.7);
   }
@@ -394,6 +403,11 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   static async #onBuyTrait() {
     const { TraitBrowser } = await import("./trait-browser.mjs");
     return new TraitBrowser({ actor: this.actor }).render({ force: true });
+  }
+
+  static async #onOpenAdvancement() {
+    const { AdvancementApp } = await import("./advancement.mjs");
+    return new AdvancementApp({ actor: this.actor }).render({ force: true });
   }
 
   static async #onOpenBuilder() {

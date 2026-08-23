@@ -1717,10 +1717,16 @@
  *
  *  1. OILED BLACK FEATHERS — a faint barred sheen across the header, the way
  *     light catches a crow's back. Two low-contrast gradients, no images.
- *  2. BLOOD THAT TRACKS THE MECHANICS — the drip under the header grows with
- *     the wounds actually taken (--crows-blood, set by the sheet on render).
- *     A healthy crow's sheet is just dark; a nearly-dead one is visibly
- *     bleeding, so the sheet's mood is the character's state.
+ *  2. THE PAGE DARKENS AS THE CROW DOES — a vignette that deepens and takes a
+ *     red cast near death, driven by the `.dying` class alone.
+ *
+ * There WAS a blood drip here that scaled with the wound count. It is gone,
+ * and deliberately not coming back in CSS: drawn out of gradients it never
+ * looked like blood, and the effort to make it look like blood is not worth
+ * what it adds. Anything replacing it should be authored art, not shapes
+ * assembled from radial-gradients.
+ *
+ * It also took a real bug with it — see `_onRender` in crow-sheet.mjs.
  */
 
 .crows.crow .window-content,
@@ -1754,68 +1760,6 @@
       rgba(0, 0, 0, 0.16) 0 3px,
       transparent 3px 11px
     );
-}
-
-/**
- * The blood running off the tab bar.
- *
- * This is NOT decoration: length and opacity both scale with --crows-blood,
- * the fraction of wound slots actually filled, so a healthy crow's sheet is
- * merely dark and a nearly-dead one is visibly bleeding.
- *
- * It hangs from the TAB BAR rather than the header. Under the header it fell
- * into the few pixels between the action buttons and the tabs, where a reader
- * takes it for a divider artefact; below the tabs it has open content to run
- * into and reads as what it is.
- *
- * Droplets are irregular in width, length and spacing so it looks like a run
- * rather than a repeating pattern.
- */
-.crows.crow > .window-content > nav.sheet-tabs {
-  position: relative;
-  overflow: visible;
-}
-
-.crows.crow > .window-content > nav.sheet-tabs::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  height: calc(4px + var(--crows-blood, 0) * 46px);
-  pointer-events: none;
-  z-index: 3;
-  /**
-   * Deliberately steeper than linear. A crow with two wounds should already
-   * look like they are bleeding, not like a rounding error — but a fresh crow
-   * (blood 0) still shows nothing at all.
-   */
-  opacity: calc(var(--crows-blood, 0) * 1.9);
-  /**
-   * NO transition here, deliberately.
-   *
-   * Both height and opacity are calc()s over --crows-blood, and Chrome
-   * transitions those against the STALE variable value: the drip settles on
-   * the previous wound count and stays there until some other style change
-   * kicks it. Verified in-world — healing to 0 wounds left a 22.4px drip,
-   * then going to 7 wounds showed 4px. It was showing the wound count from
-   * one update ago the whole time.
-   */
-  background:
-    radial-gradient(6px 17px at 6% 0%, #7d1414 70%, transparent 73%),
-    radial-gradient(4px 9px at 12% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(8px 26px at 19% 0%, #6e1010 70%, transparent 73%),
-    radial-gradient(5px 12px at 28% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(7px 21px at 35% 0%, #7d1414 70%, transparent 73%),
-    radial-gradient(4px 8px at 44% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(9px 30px at 51% 0%, #6e1010 70%, transparent 73%),
-    radial-gradient(5px 11px at 59% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(7px 19px at 67% 0%, #7d1414 70%, transparent 73%),
-    radial-gradient(4px 10px at 75% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(8px 24px at 82% 0%, #6e1010 70%, transparent 73%),
-    radial-gradient(5px 14px at 90% 0%, #8f1a1a 70%, transparent 73%),
-    radial-gradient(6px 16px at 96% 0%, #7d1414 70%, transparent 73%),
-    linear-gradient(180deg, rgba(125, 20, 20, 0.9) 0 4px, transparent 4px);
 }
 
 /* Near death the whole page takes a red cast and the name goes with it. */
@@ -1886,6 +1830,233 @@
   justify-content: flex-end;
   max-width: 5.5rem;
   row-gap: 2px;
+}
+
+/* -------------------------------------------- */
+/*  Advancement                                 */
+/* -------------------------------------------- */
+
+/* The two strip cells that open the app read as buttons, not as readouts. */
+.crows .advancement .adv-stat.action {
+  cursor: pointer;
+  font: inherit;
+}
+
+/* Something is owed. This is the only gold-filled state on the strip. */
+.crows .advancement .adv-stat.owed,
+.crows .adv-head .adv-stat.owed {
+  border-color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.14);
+}
+
+.crows .adv-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 0.6rem;
+  gap: 0.6rem;
+}
+
+.crows .adv-head {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.crows .adv-head .adv-stat {
+  flex: 1 1 7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.3rem 0.4rem;
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+}
+
+.crows .adv-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.crows .adv-options {
+  display: grid;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.crows .adv-option {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.78rem;
+}
+
+.crows .adv-option.active {
+  border-color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.16);
+  color: var(--crows-gold);
+}
+
+.crows .alloc-count {
+  margin: 0 0 0.35rem;
+  font-size: 0.75rem;
+  color: var(--crows-muted);
+}
+
+.crows .alloc-count b {
+  color: var(--crows-gold);
+  font-size: 0.95rem;
+}
+
+.crows .alloc-count .ready {
+  color: var(--crows-green);
+}
+
+.crows .alloc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.15rem 0.4rem;
+}
+
+.crows .alloc-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto 1.9rem auto;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.15rem 0.35rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  font-size: 0.74rem;
+}
+
+.crows .alloc-row.allocated {
+  outline: 1px solid var(--crows-gold);
+}
+
+/* At the cap, dim it rather than hide it: "why can I not" beats "where did it go". */
+.crows .alloc-row.at-cap .alloc-name {
+  color: var(--crows-muted);
+}
+
+.crows .alloc-now {
+  color: var(--crows-muted);
+  min-width: 1rem;
+  text-align: right;
+}
+
+.crows .alloc-add {
+  text-align: center;
+  color: var(--crows-gold);
+  font-weight: 600;
+}
+
+.crows .alloc-btn {
+  padding: 0 0.35rem;
+  line-height: 1.4;
+  font-size: 0.85rem;
+}
+
+.crows .alloc-btn:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.crows .adv-claim {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.crows .adv-claim .claim {
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+.crows .adv-claim .claim:not(:disabled) {
+  border-color: var(--crows-gold);
+  color: var(--crows-gold);
+}
+
+.crows .adv-claim .claim:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Say WHY the button is dead, next to the dead button. */
+.crows .adv-claim .blocker {
+  font-size: 0.7rem;
+  color: var(--crows-muted);
+  font-style: italic;
+}
+
+.crows .taken-list,
+.crows .char-list {
+  list-style: none;
+  margin: 0.3rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.crows .taken-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.2rem 0.4rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  font-size: 0.74rem;
+}
+
+.crows .taken-label {
+  color: var(--crows-gold);
+}
+
+.crows .taken-detail {
+  color: var(--crows-muted);
+}
+
+.crows .char-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.4rem;
+  background: var(--crows-stone-2);
+  border-radius: var(--crows-radius);
+  font-size: 0.8rem;
+}
+
+.crows .char-value {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--crows-gold);
+  min-width: 1.6rem;
+  text-align: right;
+}
+
+.crows .char-row.at-cap .char-name {
+  color: var(--crows-muted);
+}
+
+.crows .char-row button:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.crows .tab-hint.warn {
+  color: var(--crows-gold);
 }
 
 /* -------------------------------------------- */

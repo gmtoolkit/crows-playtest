@@ -1,0 +1,257 @@
+import { test, describe } from "node:test";
+import assert from "node:assert/strict";
+
+import { CROWS } from "../src/config.mjs";
+import {
+  earnedBonuses,
+  earnedCharacteristicBonuses,
+  grantedTotals,
+  backgroundUses,
+  validateAllocation,
+  claimBonus,
+  undoBonus,
+  undoWouldStrand
+} from "../src/system/advancement.mjs";
+
+/** A sheet's worth of expertises, defaulting everything else to zero uses. */
+const sheet = (overrides = {}) =>
+  Object.fromEntries(
+    Object.keys(CROWS.expertises).map((k) => [k, { uses: overrides[k] ?? 0, spent: 0 }])
+  );
+
+describe("Expertise & Stamina advancement (C p6)", () => {
+  test("no bonus before the first threshold", () => {
+    assert.equal(earnedBonuses(0).count, 0);
+    assert.equal(earnedBonuses(99).count, 0);
+    assert.equal(earnedBonuses(100).count, 1);
+  });
+
+  test("the printed table is followed exactly", () => {
+    const expected = [
+      [100, 1],
+      [500, 2],
+      [1250, 3],
+      [2250, 4],
+      [3500, 5],
+      [5000, 6],
+      [10000, 7],
+      [20000, 8],
+      [30000, 9]
+    ];
+    for (const [txp, count] of expected) {
+      assert.equal(earnedBonuses(txp).count, count, `${txp} TXP should be bonus ${count}`);
+    }
+  });
+
+  test("past the table, another bonus every 30,000 TXP", () => {
+    assert.equal(earnedBonuses(59999).count, 9);
+    assert.equal(earnedBonuses(60000).count, 10);
+    assert.equal(earnedBonuses(90000).count, 11);
+  });
+
+  test("the per-expertise cap rises 2 -> 3 -> 4 and stops", () => {
+    assert.equal(earnedBonuses(0).maxUses, 2, "a fresh crow's cap is not printed; 2 is the only consistent reading");
+    assert.equal(earnedBonuses(3500).maxUses, 2);
+    assert.equal(earnedBonuses(5000).maxUses, 3);
+    assert.equal(earnedBonuses(10000).maxUses, 3);
+    assert.equal(earnedBonuses(20000).maxUses, 4);
+    assert.equal(earnedBonuses(1000000).maxUses, 4, "the ceiling is 4 forever");
+  });
+
+  test("characteristics are a SEPARATE table, and the two collide at 5,000 and 30,000", () => {
+    assert.equal(earnedCharacteristicBonuses(4999), 0);
+    assert.equal(earnedCharacteristicBonuses(5000), 1);
+    assert.equal(earnedCharacteristicBonuses(15000), 2);
+    assert.equal(earnedCharacteristicBonuses(30000), 3);
+
+    // Both tables pay out at these two totals.
+    for (const txp of [5000, 30000]) {
+      assert.ok(earnedBonuses(txp).count > 0 && earnedCharacteristicBonuses(txp) > 0, `${txp} pays both`);
+    }
+  });
+});
+
+describe("allocating a bonus's expertise uses", () => {
+  const maxUses = 2;
+
+  test("the three uses must be placed exactly, not merely not-exceeded", () => {
+    // Under-placing silently loses a use, which is worse than a blocked dialog.
+    const short = validateAllocation({
+      option: "expertise",
+      allocation: { stealth: 2 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(short.ok, false);
+    assert.match(short.errors.join(" "), /exactly 3/);
+
+    const exact = validateAllocation({
+      option: "expertise",
+      allocation: { stealth: 2, thievery: 1 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(exact.ok, true, exact.errors.join("; "));
+  });
+
+  test("over-placing is refused too", () => {
+    const over = validateAllocation({
+      option: "expertise",
+      allocation: { stealth: 2, thievery: 2 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(over.ok, false);
+  });
+
+  test("the cap counts uses ALREADY on the sheet, not just the ones being added", () => {
+    // A crow with 1 use in Stealth can only take 1 more at a cap of 2.
+    const bad = validateAllocation({
+      option: "expertise",
+      allocation: { stealth: 2, thievery: 1 },
+      expertises: sheet({ stealth: 1 }),
+      maxUses
+    });
+    assert.equal(bad.ok, false);
+    assert.match(bad.errors.join(" "), /stealth would reach 3/i);
+  });
+
+  test("an expertise you have never trained is a legal target", () => {
+    // "including expertises you don't already have" — this IS how you acquire one.
+    const fresh = sheet();
+    assert.equal(fresh.alchemy.uses, 0);
+    const ok = validateAllocation({
+      option: "expertise",
+      allocation: { alchemy: 2, stealth: 1 },
+      expertises: fresh,
+      maxUses
+    });
+    assert.equal(ok.ok, true, ok.errors.join("; "));
+  });
+
+  test("the Stamina option accepts no expertise allocation at all", () => {
+    assert.equal(validateAllocation({ option: "stamina", allocation: {}, expertises: sheet(), maxUses }).ok, true);
+    const meddling = validateAllocation({
+      option: "stamina",
+      allocation: { stealth: 1 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(meddling.ok, false);
+  });
+
+  test("the split option is one use, not three", () => {
+    const three = validateAllocation({
+      option: "split",
+      allocation: { stealth: 1, thievery: 1, search: 1 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(three.ok, false);
+
+    const one = validateAllocation({ option: "split", allocation: { stealth: 1 }, expertises: sheet(), maxUses });
+    assert.equal(one.ok, true, one.errors.join("; "));
+  });
+
+  test("a key that is not an expertise is rejected", () => {
+    const bogus = validateAllocation({
+      option: "expertise",
+      allocation: { flying: 3 },
+      expertises: sheet(),
+      maxUses
+    });
+    assert.equal(bogus.ok, false);
+    assert.match(bogus.errors.join(" "), /not an expertise/);
+  });
+});
+
+describe("claiming and giving back", () => {
+  test("claiming writes the uses and records where they went", () => {
+    const expertises = sheet({ stealth: 1 });
+    const { update, entry } = claimBonus({
+      option: "expertise",
+      allocation: { stealth: 1, thievery: 2 },
+      expertises,
+      staminaMax: 5,
+      staminaValue: 5
+    });
+    assert.equal(update["system.expertises.stealth.uses"], 2);
+    assert.equal(update["system.expertises.thievery.uses"], 2);
+    assert.deepEqual(entry.uses, { stealth: 1, thievery: 2 });
+    assert.equal(entry.stamina, 0);
+    assert.equal(update["system.stamina.max"], undefined, "the expertise option touches no Stamina");
+  });
+
+  test("the Stamina option raises the maximum by 2 and lets you use it now", () => {
+    const { update, entry } = claimBonus({
+      option: "stamina",
+      allocation: {},
+      expertises: sheet(),
+      staminaMax: 5,
+      staminaValue: 5
+    });
+    assert.equal(update["system.stamina.max"], 7);
+    assert.equal(update["system.stamina.value"], 7);
+    assert.equal(entry.stamina, 2);
+  });
+
+  test("a raised maximum never pushes current Stamina above the new maximum", () => {
+    const { update } = claimBonus({
+      option: "split",
+      allocation: { stealth: 1 },
+      expertises: sheet(),
+      staminaMax: 5,
+      staminaValue: 2
+    });
+    assert.equal(update["system.stamina.max"], 6);
+    assert.equal(update["system.stamina.value"], 3);
+    assert.ok(update["system.stamina.value"] <= update["system.stamina.max"]);
+  });
+
+  test("giving a bonus back removes exactly what it granted", () => {
+    const entry = { option: "split", uses: { stealth: 1 }, stamina: 1 };
+    const update = undoBonus({
+      entry,
+      expertises: sheet({ stealth: 2 }),
+      staminaMax: 6,
+      staminaValue: 6
+    });
+    assert.equal(update["system.expertises.stealth.uses"], 1);
+    assert.equal(update["system.stamina.max"], 5);
+    assert.equal(update["system.stamina.value"], 5);
+  });
+
+  test("a bonus cannot be given back once its uses are gone", () => {
+    // Otherwise `uses` drops below what the ledger granted, silently rewriting
+    // the background's own uses — the one number nothing else records.
+    const entry = { option: "expertise", uses: { stealth: 2, thievery: 1 }, stamina: 0 };
+    assert.deepEqual(undoWouldStrand({ entry, expertises: sheet({ stealth: 2, thievery: 1 }) }), []);
+    assert.deepEqual(undoWouldStrand({ entry, expertises: sheet({ stealth: 1, thievery: 1 }) }), ["stealth"]);
+  });
+});
+
+describe("what the background gave, derived rather than stored", () => {
+  test("uses the ledger does not account for came from the background", () => {
+    const bonuses = [
+      { option: "expertise", uses: { stealth: 2, thievery: 1 }, stamina: 0 },
+      { option: "split", uses: { search: 1 }, stamina: 1 }
+    ];
+    const totals = grantedTotals(bonuses);
+    assert.equal(totals.usesTotal, 4);
+    assert.equal(totals.stamina, 1);
+
+    // Thief starts with Stealth 2, Thievery 2, Search 2 from its background.
+    const base = backgroundUses(sheet({ stealth: 4, thievery: 3, search: 3, athletics: 1 }), bonuses);
+    assert.equal(base.stealth, 2);
+    assert.equal(base.thievery, 2);
+    assert.equal(base.search, 2);
+    assert.equal(base.athletics, 1, "an expertise no bonus touched is all background");
+    assert.equal(base.alchemy, 0);
+  });
+
+  test("an empty ledger means every use on the sheet is the background's", () => {
+    const base = backgroundUses(sheet({ stealth: 2, gymnastics: 2 }), []);
+    assert.equal(base.stealth, 2);
+    assert.equal(base.gymnastics, 2);
+  });
+});

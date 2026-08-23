@@ -1,5 +1,88 @@
 # Decisions — crows-playtest
 
+## 2026-08-23 — Training is a ledger, not a text box; and the blood is gone
+
+**Decision:** Three things.
+
+1. **Advancement bonuses are now claimed, not merely counted.** A new stored
+   `system.advancement` ledger records every Expertise & Stamina bonus taken,
+   which package was chosen, and WHERE its expertise uses landed. A new
+   `AdvancementApp` is how a crow trains.
+2. **The wound blood drip is removed** and is not coming back in CSS.
+3. **`--crows-blood` is a colour again**, and a test enforces it.
+
+**Why:**
+
+Cliff asked "how does one train the expertise?" The honest answer was: you
+typed a number into a box and nothing anywhere reacted. The Expertises tab
+showed "Expertise & Stamina bonuses: 3" under a tooltip reading "still to
+assign", but the number was recomputed from lifetime TXP on every prepare and
+could not move. There was no assign.
+
+The rules make this a real mechanic. Expertise uses are NOT bought with XP; XP
+buys traits and nothing else. Uses arrive when TXP crosses a threshold and
+hands you a bonus, and a bonus is one pick from three fixed packages: three
+uses divided as you like, or +2 Stamina, or one use and +1 Stamina. The
+per-expertise cap rises 2 -> 3 -> 4 with TXP. Characteristics are a separate
+table that collides with the first at 5,000 and 30,000 TXP, where a crow
+receives one of each.
+
+The blood came out because it never looked like blood. Assembled from
+radial-gradients it read as a divider artefact, and Cliff's judgement after
+several passes was that more effort would not fix it. Recorded so nobody
+rebuilds it the same way: replacing it means authored art, not shapes made of
+gradients.
+
+**Removing it fixed a real bug it had caused.** `_onRender` wrote a 0..1 wound
+ratio into `--crows-blood`, which the palette already defines as `#9d2222`. A
+custom property is one namespace shared by the stylesheet and every script
+writing inline styles, and nothing warns when the two disagree — the property
+just holds the last write and every rule reading it computes to garbage. The
+worst casualty was `.wound-box.wounded`: the wound markers on the Slots tab
+rendered TRANSPARENT from the first wound onwards, going blank at exactly the
+moment they started to matter. The dead banner and the dungeon-turn bar lost
+their fills with them. Verified in-world before and after: four wounded boxes
+computed `rgba(0, 0, 0, 0)`, and now compute `rgb(157, 34, 34)`.
+
+**Alternatives:**
+
+*Storing the background's uses* was rejected: recording where each bonus's uses
+land makes the background's own uses fall out as a subtraction, so there is no
+second number to keep in sync and no migration for existing crows.
+
+*Deriving Stamina as base + granted* was rejected because there is no base
+field — `stamina.max` IS the field the background sets. The bonus writes into
+it and undo subtracts, which is what the book's imperative ("increase your
+Stamina maximum by 2") describes anyway.
+
+*Letting a partial allocation through* was rejected. The budget must be spent
+exactly: "gain three uses ... divided however you choose" is a grant, not a
+ceiling, so leaving one unplaced silently loses it, and a lost use is worse
+than a blocked button.
+
+*Removing the raw `uses` input* was rejected while backgrounds are unmodelled —
+a crow still needs its starting uses entered by hand. It is relabelled as an
+import/Ref field.
+
+**Consequences:**
+
+- `system.advancement` is now BOTH stored and derived. `prepareDerivedData`
+  must `Object.assign` onto it; assigning over it drops the ledger. The same
+  namespace-collision that broke the wound markers applies here.
+- The pre-100-TXP cap of 2 is NOT in the book. It is the only reading
+  consistent with the text (no background exceeds 2 uses in one expertise, and
+  2 is the cap for the whole first five bonuses), and it is flagged for the
+  playtest survey. The previous code used 1, which would have made several
+  printed backgrounds illegal on their own sheets.
+- Undo is refused when an expertise no longer holds the uses a bonus granted,
+  because subtracting anyway would silently rewrite the background's uses — the
+  one number nothing else records.
+- `test/style-tokens.test.mjs` fails if any script writes to a custom property
+  the stylesheet declares as a colour. Mutation-tested: reintroducing the
+  `--crows-blood` write fails it.
+- The rules encoded here were researched from the PDFs and then adversarially
+  re-checked; see the Activity Log entry for what the verification found.
+
 ## 2026-08-23 — The sheet's state readouts, and a drip that was a whole update behind
 
 **Decision:** Three changes to how the crow sheet reports state.

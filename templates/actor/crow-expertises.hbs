@@ -16,14 +16,18 @@
       <span class="adv-value">{{system.advancement.maxUses}}</span>
       <span class="adv-label">{{localize "CROWS.MaxUses"}}</span>
     </div>
-    <div class="adv-stat" data-tooltip="{{localize 'CROWS.ExpertiseBonusesHint'}}">
-      <span class="adv-value">{{system.advancement.expertiseBonuses}}</span>
-      <span class="adv-label">{{localize "CROWS.ExpertiseBonuses"}}</span>
-    </div>
-    <div class="adv-stat" data-tooltip="{{localize 'CROWS.CharacteristicBonusesHint'}}">
-      <span class="adv-value">{{system.advancement.characteristicBonuses}}</span>
-      <span class="adv-label">{{localize "CROWS.CharacteristicBonuses"}}</span>
-    </div>
+    {{!-- Owed, not earned-ever. The old strip showed a lifetime count that
+          never moved however much the crow trained. --}}
+    <button type="button" class="adv-stat action {{#if system.advancement.available}}owed{{/if}}"
+            data-action="openAdvancement" data-tooltip="{{localize 'CROWS.BonusesToTakeHint'}}">
+      <span class="adv-value">{{system.advancement.available}}</span>
+      <span class="adv-label">{{localize "CROWS.BonusesToTake"}}</span>
+    </button>
+    <button type="button" class="adv-stat action {{#if system.advancement.charAvailable}}owed{{/if}}"
+            data-action="openAdvancement" data-tooltip="{{localize 'CROWS.CharacteristicBonusesToTakeHint'}}">
+      <span class="adv-value">{{system.advancement.charAvailable}}</span>
+      <span class="adv-label">{{localize "CROWS.CharacteristicBonusesToTake"}}</span>
+    </button>
   </header>
 
   <p class="tab-hint">{{localize "CROWS.ExpertiseHint"}}</p>

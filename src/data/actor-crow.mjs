@@ -1,4 +1,10 @@
 import { CROWS } from "../config.mjs";
+import {
+  earnedBonuses,
+  earnedCharacteristicBonuses,
+  grantedTotals,
+  backgroundUses
+} from "../system/advancement.mjs";
 
 const fields = foundry.data.fields;
 
@@ -79,6 +85,44 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
         /** Lifetime total; advancement thresholds read this and it never drops. */
         total: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
         spent: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 })
+      }),
+
+      /**
+       * The advancement bonuses this crow has actually TAKEN (C p6-7).
+       *
+       * TXP says how many bonuses are owed; this says which have been claimed
+       * and what was chosen, so "3 bonuses" can finally mean "1 still to take"
+       * rather than a number that never moves.
+       *
+       * Each entry records WHERE its expertise uses landed. That is what makes
+       * a bonus undoable, and it is also what makes the background's own uses
+       * derivable without storing them — anything on the sheet this ledger
+       * does not account for came from the background.
+       *
+       * NOTE the namespace: `prepareDerivedData` merges derived counts onto
+       * `this.advancement` rather than replacing it. Replacing it would drop
+       * the stored ledger on every prepare.
+       */
+      advancement: new fields.SchemaField({
+        bonuses: new fields.ArrayField(
+          new fields.SchemaField({
+            option: new fields.StringField({
+              required: true,
+              blank: false,
+              initial: "expertise",
+              choices: Object.keys(CROWS.expertiseBonusOptions)
+            }),
+            /** { expertiseKey: usesGranted } */
+            uses: new fields.ObjectField({ required: true, initial: () => ({}) }),
+            stamina: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 })
+          }),
+          { required: true, initial: [] }
+        ),
+        /** Which characteristic each claimed characteristic bonus raised. */
+        characteristics: new fields.ArrayField(
+          new fields.StringField({ required: true, blank: true, initial: "" }),
+          { required: true, initial: [] }
+        )
       }),
 
       coin: new fields.NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 }),
@@ -199,7 +243,9 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
     /* --- Advancement ----------------------------------------------------- */
 
     this.xp.available = Math.max(0, this.xp.total - this.xp.spent);
-    this.advancement = this.#deriveAdvancement();
+    // MERGE, never assign: `advancement` is a stored schema field holding the
+    // ledger of claimed bonuses, and replacing the object would drop it.
+    Object.assign(this.advancement, this.#deriveAdvancement());
 
     /* --- Carried light ---------------------------------------------------- */
 
@@ -258,35 +304,36 @@ export default class CrowData extends foundry.abstract.TypeDataModel {
   /* -------------------------------------------- */
 
   /**
-   * How many advancement bonuses this crow's total XP has unlocked, and the
-   * expertise use ceiling that comes with the latest one (C p6-7).
+   * What TXP has unlocked, against what has actually been claimed (C p6-7).
+   *
+   * The counts this returns are EARNED and TAKEN separately, because they are
+   * different questions and the sheet was answering only the first one — it
+   * showed a bonus count that never moved no matter how much a crow trained,
+   * under a tooltip promising "still to assign".
    */
   #deriveAdvancement() {
     const txp = this.xp.total;
-    const table = CROWS.expertiseAdvancement;
+    const { count: earned, maxUses } = earnedBonuses(txp);
+    const charEarned = earnedCharacteristicBonuses(txp);
 
-    let expertiseBonuses = 0;
-    let maxUses = 1;
-    for (const row of table) {
-      if (txp >= row.txp) {
-        expertiseBonuses++;
-        maxUses = row.maxUses;
-      }
-    }
-    // Past the printed table, another bonus every 30,000 TXP.
-    const last = table.at(-1);
-    if (txp > last.txp) {
-      expertiseBonuses += Math.floor((txp - last.txp) / CROWS.expertiseAdvancementStep);
-      maxUses = CROWS.expertiseMaxUsesCap;
-    }
+    const bonuses = this.advancement?.bonuses ?? [];
+    const taken = bonuses.length;
+    const charTaken = (this.advancement?.characteristics ?? []).length;
+    const granted = grantedTotals(bonuses);
 
-    let characteristicBonuses = CROWS.characteristicAdvancement.filter((t) => txp >= t).length;
-    const lastChar = CROWS.characteristicAdvancement.at(-1);
-    if (txp > lastChar) {
-      characteristicBonuses += Math.floor((txp - lastChar) / CROWS.characteristicAdvancementStep);
-    }
-
-    return { expertiseBonuses, characteristicBonuses, maxUses };
+    return {
+      earned,
+      taken,
+      available: Math.max(0, earned - taken),
+      maxUses,
+      charEarned,
+      charTaken,
+      charAvailable: Math.max(0, charEarned - charTaken),
+      grantedUses: granted.usesTotal,
+      grantedStamina: granted.stamina,
+      grantedByExpertise: granted.uses,
+      backgroundUses: backgroundUses(this.expertises, bonuses)
+    };
   }
 
   /* -------------------------------------------- */
