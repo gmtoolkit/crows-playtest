@@ -16,7 +16,8 @@
     "deploy:system": "npm run build && npm run packs:system && node tools/deploy-local.mjs --target system",
     "deploy:adventure": "npm run packs:adventure && node tools/deploy-local.mjs --target adventure",
     "deploy": "npm run deploy:system && npm run deploy:adventure",
-    "test": "node --test"
+    "test": "node --test",
+    "export:scenes": "node tools/export-scene.mjs"
   },
   "devDependencies": {
     "classic-level": "^3.0.0",

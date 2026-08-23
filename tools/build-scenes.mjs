@@ -166,6 +166,10 @@ for (const spec of SCENES) {
 
     flags: {
       [adventure.id]: {
+        // The packs-src filename this scene came from. `export-scene.mjs`
+        // matches on this rather than on the name, so renaming a scene in the
+        // world does not silently start a new source file.
+        key: spec.key,
         sourceImage: map.source,
         gridVerified: !!useGrid,
         gridSquares: map.grid ? `${map.grid.cols}x${map.grid.rows}` : null,

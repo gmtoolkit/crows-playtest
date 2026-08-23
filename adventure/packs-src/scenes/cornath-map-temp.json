@@ -44,6 +44,7 @@
   ],
   "flags": {
     "crows-cornath": {
+      "key": "cornath-map-temp",
       "sourceImage": "Maps/Cornath Map TEMP.png",
       "gridVerified": false,
       "gridSquares": null,

@@ -44,6 +44,7 @@
   ],
   "flags": {
     "crows-cornath": {
+      "key": "gridless-140ppi-vtt-42x41-blood-library-lower",
       "sourceImage": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x41_Blood-Library-Lower.jpg",
       "gridVerified": true,
       "gridSquares": "42x41",
