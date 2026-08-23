@@ -1,0 +1,10 @@
+node_modules/
+dist/
+packs/
+.DS_Store
+*.log
+
+# Extraction scratch: raw text pulled out of the MCDM PDFs. Regenerable with
+# `npm run extract`, and deliberately untracked so the repo never carries a
+# verbatim dump of the books (see NOTICE.md).
+tools/.cache/

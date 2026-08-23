@@ -1,0 +1,23 @@
+{
+  "name": "crows-playtest",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Unofficial Foundry VTT system for MCDM's Crows (public playtest 2)",
+  "scripts": {
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "extract": "node tools/extract-all.mjs",
+    "packs": "node tools/build-packs.mjs",
+    "scenes": "node tools/build-scenes.mjs",
+    "art": "node tools/convert-art.mjs",
+    "deploy": "npm run build && npm run packs && node tools/deploy-local.mjs",
+    "test": "node --test test/"
+  },
+  "devDependencies": {
+    "classic-level": "^3.0.0",
+    "sass": "^1.80.0",
+    "sharp": "^0.34.0",
+    "vite": "^7.0.0"
+  }
+}
