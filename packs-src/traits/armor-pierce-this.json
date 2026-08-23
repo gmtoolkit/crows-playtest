@@ -1,0 +1,21 @@
+{
+  "__key": "armor-pierce-this",
+  "__folder": "Armor",
+  "name": "Pierce This",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Wall of Protection",
+      "Immovable",
+      "Jury-Rig Repairs"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you take piercing damage you can turn it into regular damage (no action required). Once you use this trait, you can’t use it again until you finish a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

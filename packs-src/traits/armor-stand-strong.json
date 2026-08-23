@@ -1,0 +1,17 @@
+{
+  "__key": "armor-stand-strong",
+  "__folder": "Armor",
+  "name": "Stand Strong",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>While you wear armor, you gain a +1 bonus on Strength RRs.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

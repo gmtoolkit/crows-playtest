@@ -1,0 +1,20 @@
+{
+  "__key": "chopping-stop",
+  "__folder": "Chopping",
+  "name": "Stop",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Where I Want You",
+      "Unrelenting Death"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you hit with an opportunity attack made with a chopping weapon, the target’s speed is reduced to 0 until the end of the current combat turn.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

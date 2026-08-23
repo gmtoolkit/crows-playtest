@@ -1,0 +1,20 @@
+{
+  "__key": "alchemy-you-in-particular",
+  "__folder": "Alchemy",
+  "name": "You In Particular",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Big Boom",
+      "Lasting Brew"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you use a bomb, choose one creature who must make the RR against its effects. That creature takes -2 penalty to the RR against the bomb.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

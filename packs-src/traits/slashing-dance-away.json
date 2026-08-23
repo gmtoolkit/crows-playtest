@@ -1,0 +1,21 @@
+{
+  "__key": "slashing-dance-away",
+  "__folder": "Slashing",
+  "name": "Dance Away",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Finesse the Blade",
+      "Quickstep",
+      "Swordplay"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you counter, you can take the Shift maneuver as part of the reaction while you are wielding a slashing weapon.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "travel-camp-builder",
+  "__folder": "Travel",
+  "name": "Camp Builder",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Fade Away",
+      "Troubadour",
+      "Hunting Expert"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you are in the support role and get a tier 3 result on the test to make camp while carrying blacksmith’s tools, you can ignore the normal benefits to create a camp that counts as resting outside of the Miasma.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

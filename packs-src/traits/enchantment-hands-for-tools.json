@@ -1,0 +1,17 @@
+{
+  "__key": "enchantment-hands-for-tools",
+  "__folder": "Enchantment",
+  "name": "Hands for Tools",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>You don’t need tools to make crafting rolls for alchemy, blacksmithing, or enchanting items.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

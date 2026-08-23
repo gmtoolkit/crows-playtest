@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-here-s-one-for-free",
+  "__folder": "Reputation",
+  "name": "Here’s One for Free",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Discount"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you purchase 5 or more a single item that is destroyed or useless after being used (such as a torch, ration, or potion) from the merchant affected by your Discount trait, you get one of that item for free.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

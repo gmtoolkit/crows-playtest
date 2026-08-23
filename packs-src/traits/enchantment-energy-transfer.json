@@ -1,0 +1,19 @@
+{
+  "__key": "enchantment-energy-transfer",
+  "__folder": "Enchantment",
+  "name": "Energy Transfer",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Most of Magic"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>As a rest activity, choose a magic item you can touch and an item you’re crafting. You destroy the magic item, and the other item gains a number of crafting points equal to the destroyed item’s crafting goal.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

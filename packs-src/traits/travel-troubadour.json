@@ -1,0 +1,21 @@
+{
+  "__key": "travel-troubadour",
+  "__folder": "Travel",
+  "name": "Troubadour",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "I Spy",
+      "Orienteering",
+      "Foraging Expert"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When are in the support role while carrying a musical instrument, any test you make that grants a bonus to other travel roles has that bonus increased by 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

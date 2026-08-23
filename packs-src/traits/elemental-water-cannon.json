@@ -1,0 +1,19 @@
+{
+  "__key": "elemental-water-cannon",
+  "__folder": "Elemental",
+  "name": "Water Cannon",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Water Shield"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When a Huge or smaller creature takes damage from an elemental spell you cast, you can slide the creature a number of squares equal to your Mind after the spell resolves.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

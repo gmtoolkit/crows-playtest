@@ -1,0 +1,19 @@
+{
+  "__key": "stabbing-grappling-spear",
+  "__folder": "Stabbing",
+  "name": "Grappling Spear",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Javelin"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>If you attach your spear to a rope, you can use it like a grappling hook.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

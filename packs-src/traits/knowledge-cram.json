@@ -1,0 +1,17 @@
+{
+  "__key": "knowledge-cram",
+  "__folder": "Knowledge",
+  "name": "Cram",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you read a lore book as a rest activity, you can read a second lore book as part of the same activity.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

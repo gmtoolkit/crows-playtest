@@ -1,0 +1,19 @@
+{
+  "__key": "leverage-stacks-on-stacks",
+  "__folder": "Leverage",
+  "name": "Stacks on Stacks",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Half Portions"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you carry an item with a stack limit greater than 1, its stack limit increases by 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

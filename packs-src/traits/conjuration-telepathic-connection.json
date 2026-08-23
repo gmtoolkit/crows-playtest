@@ -1,0 +1,19 @@
+{
+  "__key": "conjuration-telepathic-connection",
+  "__folder": "Conjuration",
+  "name": "Telepathic Connection",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Improved Summons"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you summon a creature with a conjuration spell, you can telepathically communicate with them and use their senses as your own (while still using yours) over any distance until the spell ends.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

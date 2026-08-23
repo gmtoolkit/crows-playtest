@@ -1,0 +1,19 @@
+{
+  "__key": "leverage-drink-fully",
+  "__folder": "Leverage",
+  "name": "Drink Fully",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Organ Harvester"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>You can consume a healing potion as an action instead of a maneuver. If you do, you don’t roll dice to determine how much Stamina you regain. Instead, you gain the maximum amount the dice allow.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

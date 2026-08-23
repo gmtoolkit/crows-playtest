@@ -1,0 +1,20 @@
+{
+  "__key": "benefaction-split-benefaction",
+  "__folder": "Benefaction",
+  "name": "Split Benefaction",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Ranged Benefaction",
+      "Some For Me"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you cast an benefaction spell that has a target of 1 creature, object, ally, enemy, or target, you can target one additional qualifying target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

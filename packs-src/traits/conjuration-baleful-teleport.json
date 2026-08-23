@@ -1,0 +1,20 @@
+{
+  "__key": "conjuration-baleful-teleport",
+  "__folder": "Conjuration",
+  "name": "Baleful Teleport",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Conjuration Mastery",
+      "Long Distance Jump"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you teleport a target with a conjuration spell, you can choose to have the target take damage equal to twice your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

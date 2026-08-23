@@ -1,0 +1,17 @@
+{
+  "__key": "bashing-destructive",
+  "__folder": "Bashing",
+  "name": "Destructive",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>You deal double damage to objects with bashing weapon attacks.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "conjuration-blessed-summons",
+  "__folder": "Conjuration",
+  "name": "Blessed Summons",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Conjuration",
+      "Jumper",
+      "Summoning Ward"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you summon a creature with a conjuration spell, they are blessed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

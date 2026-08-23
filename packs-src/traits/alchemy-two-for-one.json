@@ -1,0 +1,19 @@
+{
+  "__key": "alchemy-two-for-one",
+  "__folder": "Alchemy",
+  "name": "Two for One",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Eschew Ingredients"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you finishing crafting an alchemy item, you craft two of the item instead of one.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

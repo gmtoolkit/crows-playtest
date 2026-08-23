@@ -498,5 +498,17 @@
   "CROWS.DTWarningOne": "One minute left in this dungeon turn.",
   "CROWS.EditPlacedToken": "Configure the token on the canvas",
   "CROWS.NoPlacedToken": "This actor has no token on the current scene.",
-  "CROWS.ConfigureSheet": "Sheet configuration"
+  "CROWS.ConfigureSheet": "Sheet configuration",
+  "CROWS.TraitsFor": "Trait trees — {name}",
+  "CROWS.XPToSpend": "XP to spend",
+  "CROWS.AvailableXPHint": "Total XP earned, less what you have already spent on traits.",
+  "CROWS.Invested": "invested",
+  "CROWS.TraitsOwned": "traits owned in this tree",
+  "CROWS.SelectTraitTree": "Open a trait tree",
+  "CROWS.AllTreesOpened": "You have already invested in every tree.",
+  "CROWS.Open": "Open",
+  "CROWS.TraitLocked": "You do not have a prerequisite for that trait.",
+  "CROWS.RefundTrait": "Give this trait back",
+  "CROWS.RefundTraitConfirm": "Give back {trait} and recover {cost} XP?",
+  "CROWS.TraitHasDependents": "Cannot give that back: {names} would be left with no prerequisite."
 }

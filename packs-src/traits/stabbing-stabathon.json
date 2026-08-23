@@ -1,0 +1,17 @@
+{
+  "__key": "stabbing-stabathon",
+  "__folder": "Stabbing",
+  "name": "Stabathon",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you score a crit with a stabbing weapon, any other attacks you make on the same turn gain a +2 bonus.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

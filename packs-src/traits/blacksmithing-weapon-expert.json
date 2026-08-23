@@ -1,0 +1,17 @@
+{
+  "__key": "blacksmithing-weapon-expert",
+  "__folder": "Blackmsithing",
+  "name": "Weapon Expert",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you make a crafting roll for a weapon item, double the result to determine the number of crafting points added to the project.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

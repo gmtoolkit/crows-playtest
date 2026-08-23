@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-blessings-for-a-curse",
+  "__folder": "Necromancy",
+  "name": "Blessings for a Curse",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Necromancy Mastery"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you cast a necromancy spell that targets a creature, you can remove the blessed condition from you and any willing ally within 5 squares of you to make the target vulnerable.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

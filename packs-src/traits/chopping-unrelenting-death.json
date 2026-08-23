@@ -1,0 +1,21 @@
+{
+  "__key": "chopping-unrelenting-death",
+  "__folder": "Chopping",
+  "name": "Unrelenting Death",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Axe Hurler",
+      "Hone the Blade",
+      "Chop ‘Em Down"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you score a crit with a chopping weapon, any other chopping weapon attacks you make one the same turn gain a +2 bonus.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

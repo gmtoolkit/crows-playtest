@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-dodgy",
+  "__folder": "Thievery",
+  "name": "Dodgy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Above It All"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>You gain a +2 bonus on Agility RRs while you are not wearing armor.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

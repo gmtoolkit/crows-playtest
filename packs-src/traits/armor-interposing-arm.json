@@ -1,0 +1,17 @@
+{
+  "__key": "armor-interposing-arm",
+  "__folder": "Armor",
+  "name": "Interposing Arm",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you wield a shield with at least 1 AD and a creature makes a weapon attack against a creature adjacent to you, you can use your reaction to cause the damage to apply your shield before the target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "__key": "illusion-mind-shatter",
+  "__folder": "Illusion",
+  "name": "Mind Shatter",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Illusion",
+      "Long-Distance Illusion"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When a creature makes one of your illusions created by an illusion spell you cast disappear by interacting with it, they take 1d6 damage.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

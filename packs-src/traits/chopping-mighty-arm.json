@@ -1,0 +1,21 @@
+{
+  "__key": "chopping-mighty-arm",
+  "__folder": "Chopping",
+  "name": "Mighty Arm",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Axe Hurler",
+      "Hone the Blade",
+      "Chop ‘Em Down"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>While you wield a handaxe, it’s non-melee range increases by 2 squares. This bonus stacks with Axe Hurler.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

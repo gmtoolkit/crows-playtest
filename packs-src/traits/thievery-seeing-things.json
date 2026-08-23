@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-seeing-things",
+  "__folder": "Thievery",
+  "name": "Seeing Things",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Dark Senses"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you get a tier 1 or 2 result a test made to hide from or sneak by another creature wile you are not wearing armor, you can reroll the test but must use the new result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

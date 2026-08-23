@@ -1,0 +1,17 @@
+{
+  "__key": "necromancy-distant-necromancy",
+  "__folder": "Necromancy",
+  "name": "Distant Necromancy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast a ranged necromancy spell, the spell’s range increases a number of squares equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

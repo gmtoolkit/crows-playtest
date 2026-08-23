@@ -1,0 +1,21 @@
+{
+  "__key": "travel-specialized-hunter",
+  "__folder": "Travel",
+  "name": "Specialized Hunter",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Must Go Faster",
+      "Camp Builder",
+      "Food Finder"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you are in the tracker role while carrying a compass, you can choose two tasks in the role and make a test for both during a travel day.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

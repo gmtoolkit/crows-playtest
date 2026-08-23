@@ -1,0 +1,21 @@
+{
+  "__key": "pets-travel-animal",
+  "__folder": "Pets",
+  "name": "Travel Animal",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Buddy",
+      "Tricks",
+      "Mounted Speed"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you make a test related to the forager, guide, or scout travel role, you can have one pet you own help you. The test gains a +1 bonus.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

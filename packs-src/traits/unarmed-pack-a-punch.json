@@ -1,0 +1,17 @@
+{
+  "__key": "unarmed-pack-a-punch",
+  "__folder": "Unarmed",
+  "name": "Pack a Punch",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>For you, an empty hand slot is an unarmed strike that deals 2 + S or A dam on a tier 2 result and 4 + S or A dam on a tier 3 result. This unarmed strike has the Light weapon property.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

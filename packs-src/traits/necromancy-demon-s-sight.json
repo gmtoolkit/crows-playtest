@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-demon-s-sight",
+  "__folder": "Necromancy",
+  "name": "Demon’s Sight",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Flow Like Blood"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you cast a necromancy spell, you treat dim light and darkness as if they were bright light until the end of the DT.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

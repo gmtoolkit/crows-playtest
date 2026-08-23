@@ -1,0 +1,17 @@
+{
+  "__key": "illusion-long-distance-illusion",
+  "__folder": "Illusion",
+  "name": "Long-Distance Illusion",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast a ranged illusion spell, the spell’s range increases a number of squares equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

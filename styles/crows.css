@@ -1766,3 +1766,290 @@
   text-shadow: 0 0 14px rgba(0, 0, 0, 0.9);
   transform: scaleX(-1); /* facing back into the sheet */
 }
+
+/* -------------------------------------------- */
+/*  Expertises: columns, not a tall list        */
+/* -------------------------------------------- */
+
+/**
+ * Thirty expertises as full-width rows made the tab a very long scroll for
+ * what is really a reference list. Columns fit them in roughly a third the
+ * height; auto-fill means a narrow sheet drops to one column rather than
+ * squeezing.
+ */
+.crows .expertise-list {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.2rem 0.4rem;
+}
+
+.crows .expertise-row {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "name pips" "inputs inputs";
+  row-gap: 0.15rem;
+}
+
+.crows .expertise-row .exp-name {
+  grid-area: name;
+}
+
+.crows .expertise-row .exp-pips {
+  grid-area: pips;
+}
+
+.crows .expertise-row .exp-uses,
+.crows .expertise-row .exp-spent {
+  width: 100%;
+}
+
+/* Editable mode needs the two number fields on their own row. */
+.crows .expertise-row:has(.exp-uses) {
+  grid-template-columns: 1fr auto auto;
+  grid-template-areas: "name pips pips" "inputs inputs inputs";
+}
+
+.crows .expertise-row .exp-count {
+  grid-area: pips;
+}
+
+/* -------------------------------------------- */
+/*  Trait tree browser                          */
+/* -------------------------------------------- */
+
+.crows .trait-browser-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* Nav: budget on the left, invested-tree chips and the plus on the right. */
+.crows .tb-nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid var(--crows-edge);
+  flex-wrap: wrap;
+}
+
+.crows .tb-budget {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.crows .tb-avail {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--crows-gold);
+}
+
+.crows .tb-avail-label,
+.crows .tb-invested {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--crows-muted);
+}
+
+.crows .tb-chips {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-left: auto;
+  align-items: center;
+}
+
+/* One chip per tree the crow has spent XP in, showing that investment. */
+.crows .tb-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.74rem;
+  border-radius: 999px;
+}
+
+.crows .tb-chip .chip-xp {
+  font-size: 0.66rem;
+  color: var(--crows-gold);
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  padding: 0 0.35rem;
+}
+
+.crows .tb-chip.active {
+  border-color: var(--crows-gold);
+  background: #3a2f26;
+}
+
+.crows .tb-add {
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+  color: var(--crows-gold);
+}
+
+.crows .tree-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding: 0.7rem;
+}
+
+/* The grid: rows of boxes separated by connector bands. */
+.crows .trait-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.crows .tree-row {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.crows .row-cost {
+  flex: 0 0 3.4rem;
+  align-self: center;
+  text-align: right;
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--crows-muted);
+}
+
+.crows .row-cells {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--tree-cols), minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.crows .trait-box {
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  padding: 0.4rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 120px;
+}
+
+.crows .trait-box.empty-slot {
+  background: transparent;
+  border: none;
+}
+
+.crows .trait-box header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.crows .tb-name {
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--crows-bone);
+}
+
+.crows .tb-tag {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--crows-muted);
+  border: 1px solid var(--crows-edge);
+  border-radius: 2px;
+  padding: 0 0.25rem;
+}
+
+.crows .tb-desc {
+  flex: 1;
+  font-size: 0.72rem;
+  color: var(--crows-parchment);
+}
+
+.crows .trait-box footer {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.crows .tb-cost {
+  font-size: 0.7rem;
+  color: var(--crows-gold);
+}
+
+.crows .trait-box footer button,
+.crows .tb-state {
+  margin-left: auto;
+  font-size: 0.68rem;
+  padding: 0.15rem 0.45rem;
+}
+
+.crows .tb-state {
+  color: var(--crows-muted);
+}
+
+/**
+ * Four states, visually distinct because they mean different things:
+ * owned, buyable, locked (path not opened), and unaffordable.
+ */
+.crows .trait-box.owned {
+  border-color: var(--crows-green);
+  background: rgba(109, 143, 74, 0.1);
+}
+
+.crows .trait-box.owned .tb-refund {
+  color: var(--crows-green);
+  border-color: rgba(109, 143, 74, 0.5);
+}
+
+.crows .trait-box.available {
+  border-color: var(--crows-gold);
+  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.18);
+}
+
+.crows .trait-box.available .tb-buy {
+  color: var(--crows-gold);
+  border-color: var(--crows-gold);
+}
+
+/* Locked and unaffordable are both non-interactive, and read that way. */
+.crows .trait-box.locked,
+.crows .trait-box.too-poor {
+  opacity: 0.4;
+}
+
+.crows .trait-box.locked {
+  border-style: dashed;
+}
+
+/* Connector bands between rows: the bars from the printed page. */
+.crows .tree-band {
+  display: flex;
+  height: 26px;
+  margin-left: calc(3.4rem + 0.5rem);
+}
+
+.crows .tree-band svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.crows .tree-band .link {
+  fill: none;
+  stroke: var(--crows-edge);
+  stroke-width: 0.035;
+  vector-effect: non-scaling-stroke;
+  stroke-linejoin: round;
+}
+
+/* A path the crow has actually opened is lit. */
+.crows .tree-band .link.lit {
+  stroke: var(--crows-gold);
+  stroke-width: 0.06;
+}

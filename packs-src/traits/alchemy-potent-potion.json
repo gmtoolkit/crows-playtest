@@ -1,0 +1,17 @@
+{
+  "__key": "alchemy-potent-potion",
+  "__folder": "Alchemy",
+  "name": "Potent Potion",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>Healing potions you craft restore additional Stamina equal to your Mind or remove 1 additional wound if the drinker is already at full Stamina.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

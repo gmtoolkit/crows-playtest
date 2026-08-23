@@ -1,0 +1,20 @@
+{
+  "__key": "leverage-half-portions",
+  "__folder": "Leverage",
+  "name": "Half Portions",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Recycling",
+      "Break It"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>You only need to eat half of a ration’s worth of food during a rest to get the benefit of resting.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

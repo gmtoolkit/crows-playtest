@@ -1,0 +1,21 @@
+{
+  "__key": "enchantment-mind-protection",
+  "__folder": "Enchantment",
+  "name": "Mind Protection",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Material Transfer",
+      "Twice Enchanted",
+      "Hands for Tools"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you wear a magic item in your head slot, you gain a +1 bonus to Mind RRs.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

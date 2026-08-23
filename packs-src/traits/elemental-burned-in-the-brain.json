@@ -1,0 +1,21 @@
+{
+  "__key": "elemental-burned-in-the-brain",
+  "__folder": "Elemental",
+  "name": "Burned in the Brain",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Fire Ward",
+      "Selective Storm",
+      "Might of Waves"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>As a rest activity, you can absorb an elemental spellbook. The book is destroyed, and you always wield it. It occupies no slots. If you use this rest activity again, you lose previously absorbed books.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

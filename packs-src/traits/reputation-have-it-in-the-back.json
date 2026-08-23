@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-have-it-in-the-back",
+  "__folder": "Reputation",
+  "name": "Have it in the Back",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "VIP Treatment"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>You can ask the merchant affected by your Favorite Customer trait to start crafting an item you don’t have the materials for. There’s a 20% they have the materials and charge you 10% for the work.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

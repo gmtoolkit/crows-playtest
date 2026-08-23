@@ -1,0 +1,19 @@
+{
+  "__key": "leverage-fire-bomb",
+  "__folder": "Leverage",
+  "name": "Fire Bomb",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Lights Out"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You can use a lit lantern like a fire bomb. The lantern and its oil are destroyed after being used this way.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

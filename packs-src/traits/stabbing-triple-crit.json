@@ -1,0 +1,20 @@
+{
+  "__key": "stabbing-triple-crit",
+  "__folder": "Stabbing",
+  "name": "Triple Crit",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Bury the Point",
+      "Stabathon"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you score a crit with a stabbing weapon, you deal triple the weapon’s tier 3 damage instead of double.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

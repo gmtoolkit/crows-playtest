@@ -1,0 +1,19 @@
+{
+  "__key": "armor-wall-of-protection",
+  "__folder": "Armor",
+  "name": "Wall of Protection",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Hurl Shield"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>While you have a shield equipped, you gain a +1 bonus on Agility RRs. When you make an Agility RR while wielding a shield, you can use a reaction to grant a +1 bonus to adjacent allies on the same RR.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

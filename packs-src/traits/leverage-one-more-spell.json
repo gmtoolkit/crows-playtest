@@ -1,0 +1,17 @@
+{
+  "__key": "leverage-one-more-spell",
+  "__folder": "Leverage",
+  "name": "One More Spell",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>You can cast a spell from a spellbook that has no UD remaining. If you do, the spellbook is destroyed after casting the spell.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

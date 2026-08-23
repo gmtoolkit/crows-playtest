@@ -1,0 +1,21 @@
+{
+  "__key": "thievery-into-the-pack",
+  "__folder": "Thievery",
+  "name": "Into the Pack",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Sieze the Advantage",
+      "Safe Cracking",
+      "Stealthy"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you use the Move Speed maneuver, you can use the Pick Up Item maneuver too. You don’t need to have a free hand slot and can put the item in any free slot when you use the Pick Up Item maneuver.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

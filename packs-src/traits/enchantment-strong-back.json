@@ -1,0 +1,20 @@
+{
+  "__key": "enchantment-strong-back",
+  "__folder": "Enchantment",
+  "name": "Strong Back",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Enchanting Epiphany",
+      "Mind Protection"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you wear a magic item in your waist slot, you gain a +1 bonus to Strength RRs.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

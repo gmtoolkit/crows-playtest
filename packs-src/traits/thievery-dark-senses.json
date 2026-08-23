@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-dark-senses",
+  "__folder": "Thievery",
+  "name": "Dark Senses",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "From the Shadows"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>While you are not wearing armor and not wielding a shield, you treat dim light and darkness as if they were bright light until the end of the DT.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

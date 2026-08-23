@@ -1,0 +1,17 @@
+{
+  "__key": "chopping-hone-the-blade",
+  "__folder": "Chopping",
+  "name": "Hone the Blade",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>As a rest activity, you can sharpen the blade of up to two chopping weapons. These weapons gain a +1 damage bonus that lasts until you get a tier 1 result on an attack with the weapon or you finish a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

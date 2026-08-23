@@ -1,0 +1,21 @@
+{
+  "__key": "thievery-from-the-shadows",
+  "__folder": "Thievery",
+  "name": "From the Shadows",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Sieze the Advantage",
+      "Safe Cracking",
+      "Stealthy"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>When you make a weapon attack against a target you are hidden from using Agility, the attack gains a +3 bonus instead the normal +2 bonus for being hidden.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

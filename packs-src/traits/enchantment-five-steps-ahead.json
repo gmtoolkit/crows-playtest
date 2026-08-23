@@ -1,0 +1,19 @@
+{
+  "__key": "enchantment-five-steps-ahead",
+  "__folder": "Enchantment",
+  "name": "Five Steps Ahead",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Items"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you start crafting a new enchanting item, the item automatically gains crafting points equal to 5d10 multiplied by your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

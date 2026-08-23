@@ -1,0 +1,19 @@
+{
+  "__key": "armor-hurl-shield",
+  "__folder": "Armor",
+  "name": "Hurl Shield",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Interposing Arm"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>You can make a ranged weapon attack with your shield. This attack is a Strength test that is ranged 5 and deals 3 + S damage on a tier 2 result and 6 + S damage on a tier 3 result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "knowledge-special-item",
+  "__folder": "Knowledge",
+  "name": "Special Item",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Improvised Bomb"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>As a rest activity, choose a non- weapon, non-armor mundane item you have. You gain a +1 bonus on tests that reasonably incorporate the use of this item (per the Ref). The bonus lasts until you use this activity again.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

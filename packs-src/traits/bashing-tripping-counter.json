@@ -1,0 +1,17 @@
+{
+  "__key": "bashing-tripping-counter",
+  "__folder": "Bashing",
+  "name": "Tripping Counter",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you counter with a bashing weapon against a creature who got a doom result on the triggering attack, you knock the target prone regardless of their size.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

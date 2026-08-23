@@ -1,0 +1,17 @@
+{
+  "__key": "elemental-water-shield",
+  "__folder": "Elemental",
+  "name": "Water Shield",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you cast an elemental spell, you can harness the magic to surround your body in a water ward and gain AD equal to your Mind. The AD granted by this trait disappears at the end of a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

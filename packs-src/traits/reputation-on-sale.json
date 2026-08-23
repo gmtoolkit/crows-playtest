@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-on-sale",
+  "__folder": "Reputation",
+  "name": "On Sale",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Double Discount"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>Items affect by your Discount trait are 10% cheaper for you instead of 5%.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

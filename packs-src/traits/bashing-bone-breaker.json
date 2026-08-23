@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-bone-breaker",
+  "__folder": "Bashing",
+  "name": "Bone Breaker",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Further Back",
+      "Big Ain’t Nothing",
+      "Piledriver"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you hit a grappled, prone, vulenarble, or weakened with a bashing weapon attack, you deal additional damage equal to your Strength.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

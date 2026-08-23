@@ -1,0 +1,19 @@
+{
+  "__key": "illusion-goodbye",
+  "__folder": "Illusion",
+  "name": "Goodbye",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Strong Glow"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you activate your Free Light trait, you can choose to become invisible until the end of your next combat turn instead of creating light. This invisibility ends if you attack or cast a spell.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

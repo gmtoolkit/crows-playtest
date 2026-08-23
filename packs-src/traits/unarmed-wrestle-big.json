@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-wrestle-big",
+  "__folder": "Unarmed",
+  "name": "Wrestle Big",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Pack a Punch"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>While you have at least 1 hand slot free, you can target creatures 1 size larger than you or smaller with the Grab maneuver.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

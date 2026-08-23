@@ -1,0 +1,19 @@
+{
+  "__key": "archery-double-quiver",
+  "__folder": "Archery",
+  "name": "Double Quiver",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Double Tap"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You can hold up to 40 arrows in one quiver and it takes up only 1 slot.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

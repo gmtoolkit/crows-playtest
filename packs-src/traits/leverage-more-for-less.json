@@ -1,0 +1,17 @@
+{
+  "__key": "leverage-more-for-less",
+  "__folder": "Leverage",
+  "name": "More for Less",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you roll a UD for a piece of mundane equipment that has only 1 die remaining at the start of rolling the item’s dice, then you can only lose the UD on a result of 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "slashing-swordplay",
+  "__folder": "Slashing",
+  "name": "Swordplay",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>You can add your Strength to the Parry quality of any slashing weapon you wield.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

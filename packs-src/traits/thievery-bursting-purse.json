@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-bursting-purse",
+  "__folder": "Thievery",
+  "name": "Bursting Purse",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Out of the Pack"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You can carry an additional 500 gc in a coin purse.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

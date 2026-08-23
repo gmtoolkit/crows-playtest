@@ -1,0 +1,21 @@
+{
+  "__key": "travel-this-way",
+  "__folder": "Travel",
+  "name": "This Way",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Must Go Faster",
+      "Camp Builder",
+      "Food Finder"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you make a test related to the guide role while carrying a compass that doesn’t result in the group getting or remaining lost, you can increase the group’s distance traveled that day by 1 hex.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

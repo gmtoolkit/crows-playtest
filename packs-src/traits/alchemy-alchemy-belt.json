@@ -1,0 +1,19 @@
+{
+  "__key": "alchemy-alchemy-belt",
+  "__folder": "Alchemy",
+  "name": "Alchemy Belt",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Potion to Gas"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You gain an additional belt slot that can only be used to hold alchemy items.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

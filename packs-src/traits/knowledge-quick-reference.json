@@ -1,0 +1,20 @@
+{
+  "__key": "knowledge-quick-reference",
+  "__folder": "Knowledge",
+  "name": "Quick Reference",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Cram",
+      "Schematics"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you fail a Mind test to recall lore and have a lore book that relates to the lore, you can attempt the test again. You can use this trait a number of times equal to your Mind, regaining all uses when you finish a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

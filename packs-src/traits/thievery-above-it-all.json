@@ -1,0 +1,21 @@
+{
+  "__key": "thievery-above-it-all",
+  "__folder": "Thievery",
+  "name": "Above It All",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Sieze the Advantage",
+      "Safe Cracking",
+      "Stealthy"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>You gain a +2 bonus to tests made to climb, jump, swim, or do gymnastics while you are not wearing armor.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

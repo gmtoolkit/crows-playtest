@@ -1,0 +1,19 @@
+{
+  "__key": "leverage-lights-out",
+  "__folder": "Leverage",
+  "name": "Lights Out",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Torch Warrior"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>If you damage another creature with a torch attack, you can choose to have the torch be extinguished and destroyed in the attack. The damage is doubled.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

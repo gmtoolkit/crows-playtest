@@ -1,0 +1,19 @@
+{
+  "__key": "knowledge-monster-expert",
+  "__folder": "Knowledge",
+  "name": "Monster Expert",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Expert Plan"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you are wielding a monster lore book and a monster is in your line of effect, you know the monster’s Stamina, power, and the names of their attacks and traits.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

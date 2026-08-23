@@ -1,0 +1,21 @@
+{
+  "__key": "slashing-swift-block",
+  "__folder": "Slashing",
+  "name": "Swift Block",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Finesse the Blade",
+      "Quickstep",
+      "Swordplay"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>You can add your Agility to the Parry quality of any slashing weapon you wield.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

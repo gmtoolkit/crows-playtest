@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-weapon-upgrade-i",
+  "__folder": "Blackmsithing",
+  "name": "Weapon Upgrade I",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Weapon Expert"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you craft a weapon, you can add the Brutal or Pummeling qualities to it if the weapon doesn’t already have those qualities.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "thievery-safe-cracking",
+  "__folder": "Thievery",
+  "name": "Safe Cracking",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you use lock picks on a test made to pick a lock, you can roll the test twice and choose either result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "archery-split-shot",
+  "__folder": "Archery",
+  "name": "Split Shot",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Walls Can’t Save You"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you make an attack with a bow, you can use twice as much ammunition and select two targets within range for the attack.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "archery-shot-in-the-dark",
+  "__folder": "Archery",
+  "name": "Shot in the Dark",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Aim",
+      "Greater Range",
+      "Scrap Arrows"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>Attacks you make with bows don’t suffer a penalty for the target being in dim light or similar concealment, and they only suffer a -2 penalty against target in darkness or similar concealment.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

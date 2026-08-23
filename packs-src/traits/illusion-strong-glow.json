@@ -1,0 +1,19 @@
+{
+  "__key": "illusion-strong-glow",
+  "__folder": "Illusion",
+  "name": "Strong Glow",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Free Light"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>The light granted by your Free Light trait becomes 5/5.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

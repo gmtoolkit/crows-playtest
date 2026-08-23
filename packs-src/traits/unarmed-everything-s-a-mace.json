@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-everything-s-a-mace",
+  "__folder": "Unarmed",
+  "name": "Everything’s a Mace",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Throw Stuff"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>When you use an improvised weapon, ask the Ref if it most resembles a hammer, mace, maul, or flail. The improvised weapon uses the same stats except that it has no weapon qualities.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

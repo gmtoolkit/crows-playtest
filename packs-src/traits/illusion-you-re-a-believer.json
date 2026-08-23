@@ -1,0 +1,20 @@
+{
+  "__key": "illusion-you-re-a-believer",
+  "__folder": "Illusion",
+  "name": "You’re a Believer",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Illusion Mastery",
+      "Mind Shatter"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you cast an illusion spell that targets a creature, you can choose to take 1d6 P damage before you roll to gain a +1 bonus on the casting against that creature.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

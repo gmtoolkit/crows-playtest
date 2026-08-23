@@ -1,0 +1,17 @@
+{
+  "__key": "thievery-sieze-the-advantage",
+  "__folder": "Thievery",
+  "name": "Sieze the Advantage",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you hit with a weapon attack using Agility that has at least one edge and no banes, you deal additional damage equal to twice your Agility.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-bashing-benefits",
+  "__folder": "Unarmed",
+  "name": "Bashing Benefits",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Break Stuff"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>Any improvised weapon you wield counts as a bashing weapon and has the Pummeling quality.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

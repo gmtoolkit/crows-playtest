@@ -1,0 +1,17 @@
+{
+  "__key": "slashing-finesse-the-blade",
+  "__folder": "Slashing",
+  "name": "Finesse the Blade",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>You can use Agility instead of Strength when making an attack and dealing damage with a sword.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

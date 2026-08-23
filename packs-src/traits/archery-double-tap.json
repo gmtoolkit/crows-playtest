@@ -1,0 +1,21 @@
+{
+  "__key": "archery-double-tap",
+  "__folder": "Archery",
+  "name": "Double Tap",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Aim",
+      "Greater Range",
+      "Scrap Arrows"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you make an attack with a bow, you can use two pieces of ammunition per target. If the attack hits, it deals additional damage equal to your Agility.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

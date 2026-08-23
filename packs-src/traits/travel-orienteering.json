@@ -1,0 +1,17 @@
+{
+  "__key": "travel-orienteering",
+  "__folder": "Travel",
+  "name": "Orienteering",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you make a test related to the guide role while carrying a compass, you can roll the test twice and choose either result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

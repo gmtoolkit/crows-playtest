@@ -1,0 +1,21 @@
+{
+  "__key": "travel-food-finder",
+  "__folder": "Travel",
+  "name": "Food Finder",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Fade Away",
+      "Troubadour",
+      "Hunting Expert"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you make a test related to the tracker role and gain at least 1 ration, you gain 1 additional ration. This trait stacks with Foraging Expert.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

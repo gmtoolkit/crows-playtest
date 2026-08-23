@@ -1,0 +1,21 @@
+{
+  "__key": "leverage-torch-warrior",
+  "__folder": "Leverage",
+  "name": "Torch Warrior",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "One More Spell",
+      "More for Less",
+      "Lasting Light"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>You can wield a lit torch as a melee weapon with a range of melee 1 that deals 3 + A or S damage on a tier 2 result and 6 + A or S damage on a tier 3 result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

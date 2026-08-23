@@ -1,0 +1,17 @@
+{
+  "__key": "stabbing-bury-the-point",
+  "__folder": "Stabbing",
+  "name": "Bury the Point",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you hit a creature with a melee stabbing weapon attack, you can deal twice as much damage as you normally would, but the weapon becomes useless until you use a rest activity to fix it.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "pets-buddy",
+  "__folder": "Pets",
+  "name": "Buddy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>As a rest activity, choose a number of pets you own equal to your Mind (minimum 1). You gain a +2 bonus on Mind tests made to interact with those pets until you use the activity again.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

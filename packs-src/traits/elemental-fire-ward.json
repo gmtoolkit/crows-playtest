@@ -1,0 +1,19 @@
+{
+  "__key": "elemental-fire-ward",
+  "__folder": "Elemental",
+  "name": "Fire Ward",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Lingering Fire"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you cast an elemental spell, you gain a fire ward that lasts until the start of your next combat turn. When a creature deals damage to you with a melee attack while the ward is active, they take 1d10 damage.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

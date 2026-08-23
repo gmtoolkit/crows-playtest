@@ -1,0 +1,21 @@
+{
+  "__key": "leverage-recycling",
+  "__folder": "Leverage",
+  "name": "Recycling",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "One More Spell",
+      "More for Less",
+      "Lasting Light"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>When a potion is consumed, you can retrieve the vial that is left behind. When you have 10 vials from the same potion, you can collect the residue into one vial to create a potion of that type as a rest activity.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

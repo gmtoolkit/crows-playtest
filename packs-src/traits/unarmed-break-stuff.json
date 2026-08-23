@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-break-stuff",
+  "__folder": "Unarmed",
+  "name": "Break Stuff",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Everything’s a Mace"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you hit with a melee attack with an improvised weapon, you can break the weapon and deal additional damage equal to your Agility or Strength (your choice).</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

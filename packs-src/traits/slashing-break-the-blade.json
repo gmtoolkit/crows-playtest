@@ -1,0 +1,19 @@
+{
+  "__key": "slashing-break-the-blade",
+  "__folder": "Slashing",
+  "name": "Break the Blade",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Interceding Blade"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When an attack reduces a slashing weapon you wield to 0 AD and there is still damage left, you can reduce the remaining damage to 0. If you do, the weapon is destroyed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

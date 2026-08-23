@@ -1,0 +1,17 @@
+{
+  "__key": "conjuration-jumper",
+  "__folder": "Conjuration",
+  "name": "Jumper",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast a conjuration spell that teleports a target, you can teleport the target an additional number of squares equal to your Mind. This trait stacks with Long Distance Jump.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-pack-a-big-punch",
+  "__folder": "Unarmed",
+  "name": "Pack a Big Punch",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Hard to Pin"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>While you have at least 1 hand slot free, your unarmed strikes deals additional damage equal to your Agility or Strength.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

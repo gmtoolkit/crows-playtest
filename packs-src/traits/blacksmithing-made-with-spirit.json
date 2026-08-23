@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-made-with-spirit",
+  "__folder": "Blackmsithing",
+  "name": "Made with Spirit",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Smithing Epiphany"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>You can ignore the material requirements for crafting a blacksmithing item if the item’s crafting goal is 100 or lower.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "illusion-lasting-illusion",
+  "__folder": "Illusion",
+  "name": "Lasting Illusion",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you cast an illusion spell with a duration listed in UD, add an additional 1 UD to the duration.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

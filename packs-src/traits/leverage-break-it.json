@@ -1,0 +1,21 @@
+{
+  "__key": "leverage-break-it",
+  "__folder": "Leverage",
+  "name": "Break It",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "One More Spell",
+      "More for Less",
+      "Lasting Light"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you use a piece of mundane equipment as part of a test to overcome a goal and get a non-doom result on the test, you can destroy the equipment to improve the result of the test by 1 tier.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

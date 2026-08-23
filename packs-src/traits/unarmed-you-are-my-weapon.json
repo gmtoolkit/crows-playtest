@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-you-are-my-weapon",
+  "__folder": "Unarmed",
+  "name": "You Are My Weapon",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "To the Walls"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you force move a creature into another while you have at least 1 hand slot free, both creatures take damage equal to the forced movement remaining when they collide.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

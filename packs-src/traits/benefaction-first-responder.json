@@ -1,0 +1,17 @@
+{
+  "__key": "benefaction-first-responder",
+  "__folder": "Benefaction",
+  "name": "First Responder",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you have a benefaction spell that can restore Stamina to a creature equipped and a creature within the spell’s range take damage, you can use your reaction to cast the spell, targeting that creature.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

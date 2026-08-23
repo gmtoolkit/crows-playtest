@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-movement-stone",
+  "__folder": "Alteration",
+  "name": "Movement Stone",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Morphing Stone"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>Add the following benefits to those your stone can confer: You can breathe underwater • and gain a swimming speed equal to your speed. You gain a climbing speed • equal to your speed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

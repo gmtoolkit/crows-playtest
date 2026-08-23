@@ -1,0 +1,19 @@
+{
+  "__key": "pets-beastheart",
+  "__folder": "Pets",
+  "name": "Beastheart",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Move Together"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you take the Command maneuver, you can command up to two pets you own.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

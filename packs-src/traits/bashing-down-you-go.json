@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-down-you-go",
+  "__folder": "Bashing",
+  "name": "Down You Go",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Collision Damage",
+      "Bashing Crit",
+      "Bone Breaker"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you get a tier 3 result on a bashing weapon attack that results in the target being pushed, you can knock the target prone instead of pushing them.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

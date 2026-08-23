@@ -1,0 +1,20 @@
+{
+  "__key": "alteration-wings",
+  "__folder": "Alteration",
+  "name": "Wings",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Improved Animal",
+      "Horns"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you cast an alteration spell, you can harness the magic to grow wings that last until the end of the DT. While you have these wings, you gain a flying speed equal to your speed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

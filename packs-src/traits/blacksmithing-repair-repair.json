@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-repair-repair",
+  "__folder": "Blackmsithing",
+  "name": "Repair, Repair",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Armor Expert"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you take the Repair Armor rest activity, you can choose up to two pieces of armor and restore their AD instead of one.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

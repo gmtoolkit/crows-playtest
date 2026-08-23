@@ -1,0 +1,20 @@
+{
+  "__key": "knowledge-specific-research",
+  "__folder": "Knowledge",
+  "name": "Specific Research",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Cram",
+      "Schematics"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>As a rest activity, you can read a lore book. Instead of gaining its normal benefits, you can ask the Ref up to three questions about the book’s subject, which the Ref answers honestly if the answer isn’t secret.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

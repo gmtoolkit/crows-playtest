@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-weapon-upgrade-ii",
+  "__folder": "Blackmsithing",
+  "name": "Weapon Upgrade II",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Weapon Upgrade I"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you craft a weapon, you can add the Defensive or Dismembering qualities to it if the weapon doesn’t already have those qualities. Alternatively, you add a range of ranged 5 to the weapon.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

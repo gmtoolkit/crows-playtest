@@ -1,0 +1,21 @@
+{
+  "__key": "slashing-scabbard",
+  "__folder": "Slashing",
+  "name": "Scabbard",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Knife Chucker",
+      "Follow Up",
+      "Break the Blade"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You gain an additional belt slot that can only hold slashing weapons.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

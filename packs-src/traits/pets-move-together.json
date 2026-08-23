@@ -1,0 +1,19 @@
+{
+  "__key": "pets-move-together",
+  "__folder": "Pets",
+  "name": "Move Together",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Pack Animals"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you use the Command maneuver, you can take the Move Speed maneuver as part of the same maneuver.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

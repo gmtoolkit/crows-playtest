@@ -1,0 +1,20 @@
+{
+  "__key": "alchemy-lasting-brew",
+  "__folder": "Alchemy",
+  "name": "Lasting Brew",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "It Burns",
+      "Potent Potion"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>Potions and poisons you craft that have a duration listed in UD gain 1 additional UD.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "unarmed-throw-stuff",
+  "__folder": "Unarmed",
+  "name": "Throw Stuff",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you use an improvised weapon that occupies 1 slot, it has a range of melee 1/range 5.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

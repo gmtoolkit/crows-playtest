@@ -1,0 +1,19 @@
+{
+  "__key": "alchemy-don-t-waste-a-drop",
+  "__folder": "Alchemy",
+  "name": "Don’t Waste a Drop",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "You In Particular"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You can use an acid or a poison twice before it is consumed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

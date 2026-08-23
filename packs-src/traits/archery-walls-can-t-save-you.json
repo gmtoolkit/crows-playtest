@@ -1,0 +1,21 @@
+{
+  "__key": "archery-walls-can-t-save-you",
+  "__folder": "Archery",
+  "name": "Walls Can’t Save You",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Aim",
+      "Greater Range",
+      "Scrap Arrows"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>Attacks you make with bows don’t suffer a penalty for the target having cover.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "chopping-chop-em-down",
+  "__folder": "Chopping",
+  "name": "Chop ‘Em Down",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you roll on the Dismember table after scoring a crit with a chopping weapon, roll twice and choose the result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

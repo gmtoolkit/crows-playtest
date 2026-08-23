@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-bashing-crit",
+  "__folder": "Bashing",
+  "name": "Bashing Crit",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Further Back",
+      "Big Ain’t Nothing",
+      "Piledriver"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>You score a crit on bashing weapon attacks when the dice without modifiers equal 18, 19, or 20.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

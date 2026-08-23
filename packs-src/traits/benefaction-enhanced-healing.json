@@ -1,0 +1,17 @@
+{
+  "__key": "benefaction-enhanced-healing",
+  "__folder": "Benefaction",
+  "name": "Enhanced Healing",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast a benefaction spell that restores Stamina to a target, the target regains additional Stamina equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

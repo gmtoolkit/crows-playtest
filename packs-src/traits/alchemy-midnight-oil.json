@@ -1,0 +1,17 @@
+{
+  "__key": "alchemy-midnight-oil",
+  "__folder": "Alchemy",
+  "name": "Midnight Oil",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you work on crafting an alchemy item as part of the Craft Equipment rest activity, you can make two crafting rolls for the item or make a second crafting roll for a different alchemy item.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

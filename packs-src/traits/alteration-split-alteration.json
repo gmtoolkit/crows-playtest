@@ -1,0 +1,20 @@
+{
+  "__key": "alteration-split-alteration",
+  "__folder": "Alteration",
+  "name": "Split Alteration",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Improved Animal",
+      "Horns"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you cast an alteration spell that has a target of 1 creature, object, ally, enemy, or target, you can target one additional qualifying target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

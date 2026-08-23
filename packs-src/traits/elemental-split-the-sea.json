@@ -1,0 +1,21 @@
+{
+  "__key": "elemental-split-the-sea",
+  "__folder": "Elemental",
+  "name": "Split the Sea",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Fire Ward",
+      "Selective Storm",
+      "Might of Waves"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you cast an elemental spell that has a target of 1 creature, object, ally, enemy, or target, you can target one additional qualifying target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

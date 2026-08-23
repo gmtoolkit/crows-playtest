@@ -1,0 +1,21 @@
+{
+  "__key": "pets-dungeon-critter",
+  "__folder": "Pets",
+  "name": "Dungeon Critter",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Buddy",
+      "Tricks",
+      "Mounted Speed"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>Squeezing doesn’t halve the speed of or grant a bonus to attack the pets you own.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

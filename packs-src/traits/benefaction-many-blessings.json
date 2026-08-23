@@ -1,0 +1,21 @@
+{
+  "__key": "benefaction-many-blessings",
+  "__folder": "Benefaction",
+  "name": "Many Blessings",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Benefaction",
+      "Enhanced Healing",
+      "First Responder"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you cast a benefaction spell that makes the spell’s target blessed, you can become blessed as well. You can use this trait a number of times equal to your Mind, regaining all uses when you finish a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

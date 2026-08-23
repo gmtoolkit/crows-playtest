@@ -1,0 +1,19 @@
+{
+  "__key": "camping-prepare-your-gear",
+  "__folder": "Camping",
+  "name": "Prepare Your Gear",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Weakness Diagram"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>As a rest activity, you can choose up to two pieces of gear you can touch that have UD. The number of UD these items have is increased by 1 until you finish another rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

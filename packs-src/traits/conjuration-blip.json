@@ -1,0 +1,20 @@
+{
+  "__key": "conjuration-blip",
+  "__folder": "Conjuration",
+  "name": "Blip",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Conjuration Mastery",
+      "Long Distance Jump"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you cast a conjuration spell, you can teleport a number of squares equal to your Mind after the spell resolves.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

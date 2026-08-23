@@ -1,0 +1,20 @@
+{
+  "__key": "slashing-knife-chucker",
+  "__folder": "Slashing",
+  "name": "Knife Chucker",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Swift Block",
+      "Dance Away"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you wield a knife, it’s non-melee range increases by 2 squares.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "pets-mounted-speed",
+  "__folder": "Pets",
+  "name": "Mounted Speed",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>While you ride a pet you own, their speed is increased by 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

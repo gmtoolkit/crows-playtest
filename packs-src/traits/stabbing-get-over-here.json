@@ -1,0 +1,19 @@
+{
+  "__key": "stabbing-get-over-here",
+  "__folder": "Stabbing",
+  "name": "Get Over Here",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Grappling Spear"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you hit with a ranged attack with a stabbing weapon attached to a rope and they are your size or smaller and not further from you than the rope’s length, you can pull the target 1 square towards you.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

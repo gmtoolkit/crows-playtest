@@ -1,0 +1,17 @@
+{
+  "__key": "blacksmithing-double-duty",
+  "__folder": "Blackmsithing",
+  "name": "Double Duty",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you work on crafting a blacksmithing item as part of the Craft Equipment rest activity, you can make two crafting rolls for the item or make a second crafting roll for a different blacksmithing item.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

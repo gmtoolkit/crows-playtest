@@ -1,0 +1,17 @@
+{
+  "__key": "archery-prone-position",
+  "__folder": "Archery",
+  "name": "Prone Position",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>If you are prone, you gain a +1 bonus on attacks made with crossbows.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

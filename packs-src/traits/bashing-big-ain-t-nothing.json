@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-big-ain-t-nothing",
+  "__folder": "Bashing",
+  "name": "Big Ain’t Nothing",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Push ‘Em Back",
+      "Destructive",
+      "Tripping Counter"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>You can force move and knock prone creatures one size category larger than you and smaller with bashing weapon attacks.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

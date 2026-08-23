@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-smithing-epiphany",
+  "__folder": "Blackmsithing",
+  "name": "Smithing Epiphany",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Double Duty"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>When you make a crafting roll for an blacksmithing item, you get a crit when the dice without modifiers equal 18, 19, or 20.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

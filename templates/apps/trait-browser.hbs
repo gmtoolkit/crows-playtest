@@ -1,54 +1,107 @@
+{{!-- Trait trees, laid out like the printed page: a 3x4 grid of boxes with
+      the connector bars drawn between rows. The bars are the purchase rule
+      (C p7), so they are shown rather than implied. --}}
 <div class="trait-browser-body">
 
-  <header class="tb-head">
-    <span class="tb-xp">{{localize "CROWS.AvailableXP"}}: <strong>{{available}}</strong></span>
-  </header>
+  {{!-- Nav: XP budget, a chip per invested tree, and the plus to open more. --}}
+  <nav class="tb-nav">
+    <div class="tb-budget">
+      <span class="tb-avail" data-tooltip="{{localize 'CROWS.AvailableXPHint'}}">
+        <i class="fa-solid fa-coins"></i> {{available}}
+      </span>
+      <span class="tb-avail-label">{{localize "CROWS.XPToSpend"}}</span>
+      {{#if totalInvested}}
+        <span class="tb-invested">{{localize "CROWS.Invested"}} {{totalInvested}}</span>
+      {{/if}}
+    </div>
+
+    <div class="tb-chips">
+      {{#each chips}}
+        <button type="button" class="tb-chip {{#if this.active}}active{{/if}}"
+                data-action="selectTree" data-tree="{{this.key}}"
+                data-tooltip="{{this.count}} {{localize 'CROWS.TraitsOwned'}}">
+          <span class="chip-name">{{this.label}}</span>
+          <span class="chip-xp">{{this.xp}}</span>
+        </button>
+      {{/each}}
+
+      <button type="button" class="tb-add" data-action="pickTree"
+              data-tooltip="{{localize 'CROWS.SelectTraitTree'}}">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </nav>
 
   {{#unless hasTraits}}
     <p class="empty">{{localize "CROWS.NoTraitPack"}}</p>
   {{/unless}}
 
-  <div class="tb-layout">
-    <nav class="tree-list">
-      {{#each trees}}
-        <button type="button" data-action="selectTree" data-tree="{{this.key}}"
-                class="{{#if this.active}}active{{/if}}">
-          <span class="tree-name">{{this.label}}</span>
-          <span class="tree-count">{{this.ownedCount}}/{{this.count}}</span>
-        </button>
-      {{/each}}
-    </nav>
+  <section class="tree-body">
+    {{#if tree}}
+      <h3>{{treeLabel}}</h3>
 
-    <section class="tree-body">
-      {{#if tree}}
-        <h3>{{treeLabel}}</h3>
-        <ul class="trait-options">
-          {{#each rows}}
-            <li class="trait-option {{#if this.owned}}owned{{/if}} {{#unless this.unlocked}}locked{{/unless}}">
-              <header>
-                <span class="to-name">{{this.name}}</span>
-                {{#if this.starting}}<span class="to-tag">{{localize "CROWS.Starting"}}</span>{{/if}}
-                <span class="to-cost {{#unless this.affordable}}unaffordable{{/unless}}">{{this.cost}} XP</span>
-                {{#if this.owned}}
-                  <span class="to-state"><i class="fa-solid fa-check"></i> {{localize "CROWS.Owned"}}</span>
-                {{else if this.canBuy}}
-                  <button type="button" data-action="buy" data-uuid="{{this.uuid}}">{{localize "CROWS.Buy"}}</button>
-                {{else if this.unlocked}}
-                  <span class="to-state">{{localize "CROWS.NotEnoughXP"}}</span>
+      <div class="trait-grid" style="--tree-cols: {{cols}};">
+        {{#each grid}}
+          <div class="tree-row" data-row="{{this.row}}">
+            <span class="row-cost">{{this.cost}} XP</span>
+            <div class="row-cells">
+              {{#each this.cells}}
+                {{#if this}}
+                  <div class="trait-box {{#if this.owned}}owned{{/if}} {{#if this.locked}}locked{{/if}} {{#if this.tooPoor}}too-poor{{/if}} {{#if this.canBuy}}available{{/if}}">
+                    <header>
+                      <span class="tb-name">{{this.name}}</span>
+                      {{#if this.starting}}<span class="tb-tag">{{localize "CROWS.Starting"}}</span>{{/if}}
+                    </header>
+
+                    <div class="tb-desc">{{{this.description}}}</div>
+
+                    <footer>
+                      <span class="tb-cost">{{this.cost}} XP</span>
+                      {{#if this.owned}}
+                        <button type="button" class="tb-refund" data-action="refund" data-item-id="{{this.id}}"
+                                data-tooltip="{{localize 'CROWS.RefundTrait'}}">
+                          <i class="fa-solid fa-check"></i> {{localize "CROWS.Owned"}}
+                        </button>
+                      {{else if this.canBuy}}
+                        <button type="button" class="tb-buy" data-action="buy" data-uuid="{{this.uuid}}">
+                          {{localize "CROWS.Buy"}}
+                        </button>
+                      {{else if this.locked}}
+                        <span class="tb-state" data-tooltip="{{localize 'CROWS.Requires'}}: {{#each this.prerequisites}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}">
+                          <i class="fa-solid fa-lock"></i>
+                        </span>
+                      {{else}}
+                        <span class="tb-state">{{localize "CROWS.NotEnoughXP"}}</span>
+                      {{/if}}
+                    </footer>
+                  </div>
                 {{else}}
-                  <span class="to-state"><i class="fa-solid fa-lock"></i> {{localize "CROWS.Locked"}}</span>
+                  <div class="trait-box empty-slot"></div>
                 {{/if}}
-              </header>
-              <div class="to-desc">{{{this.description}}}</div>
-              {{#unless this.unlocked}}
-                <p class="to-prereq">{{localize "CROWS.Requires"}}: {{#each this.prerequisites}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</p>
-              {{/unless}}
-            </li>
+              {{/each}}
+            </div>
+          </div>
+
+          {{!-- The connector band below this row, if there is one. --}}
+          {{#each ../bands}}
+            {{#if (crowsEq this.afterRow ../this.row)}}
+              <div class="tree-band">
+                <svg viewBox="0 0 {{this.cols}} 1" preserveAspectRatio="none" aria-hidden="true">
+                  {{#each this.links}}
+                    <path class="link {{#if this.lit}}lit{{/if}}"
+                          d="M {{crowsColCenter this.from}} 0
+                             L {{crowsColCenter this.from}} 0.42
+                             L {{crowsColCenter this.to}} 0.58
+                             L {{crowsColCenter this.to}} 1" />
+                  {{/each}}
+                </svg>
+              </div>
+            {{/if}}
           {{/each}}
-        </ul>
-      {{else}}
-        <p class="empty">{{localize "CROWS.PickATree"}}</p>
-      {{/if}}
-    </section>
-  </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="empty">{{localize "CROWS.PickATree"}}</p>
+    {{/if}}
+  </section>
 </div>

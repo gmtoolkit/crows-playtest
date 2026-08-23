@@ -1,0 +1,21 @@
+{
+  "__key": "slashing-interceding-blade",
+  "__folder": "Slashing",
+  "name": "Interceding Blade",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Finesse the Blade",
+      "Quickstep",
+      "Swordplay"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you wield a slashing weapon and a creature makes a weapon attack against a creature adjacent to you, you can use your reaction to cause the damage to apply your weapon before the target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "elemental-selective-storm",
+  "__folder": "Elemental",
+  "name": "Selective Storm",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Elemental Mastery"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you cast an elemental spell that affects all creatures in an area of effect, you can choose a number of creatures equal to your Mind. Those creatures aren’t targeted by the spell.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

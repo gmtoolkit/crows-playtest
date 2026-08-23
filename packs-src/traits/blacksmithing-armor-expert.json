@@ -1,0 +1,17 @@
+{
+  "__key": "blacksmithing-armor-expert",
+  "__folder": "Blackmsithing",
+  "name": "Armor Expert",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you make a crafting roll for an armor item, double the result to determine the number of crafting points added to the project.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

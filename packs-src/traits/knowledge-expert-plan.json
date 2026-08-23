@@ -1,0 +1,21 @@
+{
+  "__key": "knowledge-expert-plan",
+  "__folder": "Knowledge",
+  "name": "Expert Plan",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Specific Research",
+      "Quick Reference",
+      "Labeled Inventory"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you take the Prepare for Task rest activity and have a journal, quill, and inkpot, you can diagram your preparations to share with your allies. Each human who rests with you gains the activity’s benefit.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

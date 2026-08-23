@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-no-waste",
+  "__folder": "Blackmsithing",
+  "name": "No Waste",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Made with Spirit"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you craft a blacksmithing item, you only use half the prerequisite materials required.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

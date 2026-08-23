@@ -1,0 +1,19 @@
+{
+  "__key": "chopping-improved-chop",
+  "__folder": "Chopping",
+  "name": "Improved Chop",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Chopping Crit"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You score a crit on chopping weapon attacks when the dice without modifiers equal 17, 18, 19, or 20.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

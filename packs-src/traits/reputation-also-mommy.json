@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-also-mommy",
+  "__folder": "Reputation",
+  "name": "Also Mommy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Call Daddy"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>Your Call Daddy trait can apply to two merchants of your choice. You can change one or both once every cycle.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

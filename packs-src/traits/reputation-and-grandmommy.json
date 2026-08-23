@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-and-grandmommy",
+  "__folder": "Reputation",
+  "name": "And Grandmommy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Call Grandaddy"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>Your Call Daddy trait applies to three merchants of your choice. You can change up to three once every cycle.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "travel-ambush",
+  "__folder": "Travel",
+  "name": "Ambush",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Must Go Faster",
+      "Camp Builder",
+      "Food Finder"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you get a tier 3 result on a test related to the scout travel role while carrying a spyglass, any creatures you encounter while traveling are surprised by you and your allies.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

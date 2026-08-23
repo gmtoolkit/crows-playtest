@@ -1,0 +1,20 @@
+{
+  "__key": "leverage-organ-harvester",
+  "__folder": "Leverage",
+  "name": "Organ Harvester",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Recycling",
+      "Break It"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you harvest crafting materials from the corpse of a creature, you gain an additional number of parts equal to your Mind .</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-knock-em-together",
+  "__folder": "Bashing",
+  "name": "Knock ‘Em Together",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Collision Damage",
+      "Bashing Crit",
+      "Bone Breaker"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you force move a creature into another with a bashing weapon attack, both creatures take damage equal to the forced movement remaining when they collide.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

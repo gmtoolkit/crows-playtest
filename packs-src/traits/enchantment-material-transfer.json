@@ -1,0 +1,17 @@
+{
+  "__key": "enchantment-material-transfer",
+  "__folder": "Enchantment",
+  "name": "Material Transfer",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>As a rest activity, touch two armors or weapons that can be crafted from the same material but are not, such as iron heavy armor and a steel sword. The materials used in each item are magically swapped.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

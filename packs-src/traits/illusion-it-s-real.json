@@ -1,0 +1,19 @@
+{
+  "__key": "illusion-it-s-real",
+  "__folder": "Illusion",
+  "name": "It’s Real",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "You’re a Believer"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you cast an illusion spell, you can choose one mundane object that is part of the illusion that becomes real until the end of the DT.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

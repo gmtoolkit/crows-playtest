@@ -1,0 +1,20 @@
+{
+  "__key": "pets-share-food",
+  "__folder": "Pets",
+  "name": "Share Food",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Extra Tricks",
+      "Charge"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You can stack rations and animal feed in the same slot. You can eat animal feed and pets you car for can eat rations.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

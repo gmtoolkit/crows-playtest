@@ -1,0 +1,21 @@
+{
+  "__key": "travel-hunting-expert",
+  "__folder": "Travel",
+  "name": "Hunting Expert",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "I Spy",
+      "Orienteering",
+      "Foraging Expert"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you make a test in the tracker role to hunt carrying a bow weapon and ammunition for it, you can roll the test twice and choose either result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

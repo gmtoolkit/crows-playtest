@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-alteration-mastery",
+  "__folder": "Alteration",
+  "name": "Alteration Mastery",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Alteration"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>Non-doom tier 1 results of rank 0 and 1 alteration spells you cast don’t add to the chaos count. Your alteration spells of rank 2 and higher are treated as 2 ranks lower when they trigger a backlash.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

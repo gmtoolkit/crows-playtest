@@ -1,0 +1,21 @@
+{
+  "__key": "knowledge-improvised-bomb",
+  "__folder": "Knowledge",
+  "name": "Improvised Bomb",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Specific Research",
+      "Quick Reference",
+      "Labeled Inventory"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>As a rest activity, you can make 1 fire bomb without any materials or crafting rolls. The bomb becomes useless at the end of your next rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

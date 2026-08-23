@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-horns",
+  "__folder": "Alteration",
+  "name": "Horns",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Hooves"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you cast an alteration spell, you can harness the magic to grow horns from your head that last until the end of the DT. You can make an unarmed attack with the horns as a maneuver.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

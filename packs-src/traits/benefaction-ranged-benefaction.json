@@ -1,0 +1,19 @@
+{
+  "__key": "benefaction-ranged-benefaction",
+  "__folder": "Benefaction",
+  "name": "Ranged Benefaction",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Benefaction Mastery"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you cast a benefaction spell with a range of Melee 1, you can change it to Ranged 5.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-out-of-the-pack",
+  "__folder": "Thievery",
+  "name": "Out of the Pack",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Into the Pack"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>Each of your backpack slot’s number is reduced by 1 (minimum 1).</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

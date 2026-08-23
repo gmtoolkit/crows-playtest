@@ -1,0 +1,17 @@
+{
+  "__key": "travel-foraging-expert",
+  "__folder": "Travel",
+  "name": "Foraging Expert",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "travel",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you make a test related to the tracker roll and gain at least 1 ration, you gain 1 additional ration. This trait stacks with Food Finder.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

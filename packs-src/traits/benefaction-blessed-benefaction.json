@@ -1,0 +1,20 @@
+{
+  "__key": "benefaction-blessed-benefaction",
+  "__folder": "Benefaction",
+  "name": "Blessed Benefaction",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "benefaction",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Many Blessings",
+      "Benefaction Ward"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you cast a benefaction spell, you harness the magic to make a creature within 5 squares of you blessed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

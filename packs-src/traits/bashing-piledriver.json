@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-piledriver",
+  "__folder": "Bashing",
+  "name": "Piledriver",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Push ‘Em Back",
+      "Destructive",
+      "Tripping Counter"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you knock a creature prone with a bashing weapon attack, you deal additional damage to them equal to your Strength.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "thievery-tumble",
+  "__folder": "Thievery",
+  "name": "Tumble",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Dodgy"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you take damage while not wearing armor, you can use your reaction to halve the damage. You can use this trait a number of times equal to your Agility and then must finish a rest before your use it again.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

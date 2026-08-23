@@ -1,0 +1,17 @@
+{
+  "__key": "armor-stalwart",
+  "__folder": "Armor",
+  "name": "Stalwart",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>While wearing armor, the distance you can be force moved is reduced by 1, and you can’t be knocked prone by tier 1 and 2 attack results or by tier 2 and 3 RR results.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

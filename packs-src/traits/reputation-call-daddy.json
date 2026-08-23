@@ -1,0 +1,17 @@
+{
+  "__key": "reputation-call-daddy",
+  "__folder": "Reputation",
+  "name": "Call Daddy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>Choose a merchant in your village. When you purchase goods from that merchant, treat their level as 1 higher . You can change your choice of merchant once every cycle.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

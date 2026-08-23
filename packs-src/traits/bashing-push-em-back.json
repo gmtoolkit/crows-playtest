@@ -1,0 +1,17 @@
+{
+  "__key": "bashing-push-em-back",
+  "__folder": "Bashing",
+  "name": "Push ‘Em Back",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you get a tier 3 result on an attack with a bashing and pummeling weapon, you push the target 1 additional square. This trait stacks with Further Back.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

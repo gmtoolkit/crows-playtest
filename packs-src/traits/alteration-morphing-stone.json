@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-morphing-stone",
+  "__folder": "Alteration",
+  "name": "Morphing Stone",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Alteration Stone"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>A creature who holds the stone can use a maneuver to change it into the shape of a mace, maul, flail, or back to its original form. The stone gains the stats of its weapon form while retaining its own stats.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "elemental-hurl-the-storm",
+  "__folder": "Elemental",
+  "name": "Hurl the Storm",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast a ranged elemental spell, the spell’s range increases a number of squares equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

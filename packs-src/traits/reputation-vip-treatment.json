@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-vip-treatment",
+  "__folder": "Reputation",
+  "name": "VIP Treatment",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Favorite Customer"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When a merchant affected by your Favorite Customer trait begins crafting an item for you, the item starts with 10% of its crafting points.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

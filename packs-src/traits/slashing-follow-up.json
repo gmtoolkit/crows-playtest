@@ -1,0 +1,20 @@
+{
+  "__key": "slashing-follow-up",
+  "__folder": "Slashing",
+  "name": "Follow Up",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Swift Block",
+      "Dance Away"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>When you push a target with the Knockback maneuver while wielding a slashing weapon, you can move into any space they vacated without provoking opportunity attacks as part of the maneuver.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

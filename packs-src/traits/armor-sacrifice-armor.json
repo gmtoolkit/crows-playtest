@@ -1,0 +1,20 @@
+{
+  "__key": "armor-sacrifice-armor",
+  "__folder": "Armor",
+  "name": "Sacrifice Armor",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Stalwart",
+      "Stand Strong"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When an attack reduces armor you wear or a shield you wield to 0 AD and there is still damage left, you can reduce the remaining damage to 0. If you do, the armor reduced to 0 AD is destroyed.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

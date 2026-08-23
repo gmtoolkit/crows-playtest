@@ -1,0 +1,19 @@
+{
+  "__key": "archery-careful-shot",
+  "__folder": "Archery",
+  "name": "Careful Shot",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Shot in the Dark"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>When you get a non-doom tier 1 result on an attack made with a bow, you don’t hit an ally within 1 square of the target.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

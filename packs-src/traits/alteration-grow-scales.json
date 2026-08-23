@@ -1,0 +1,17 @@
+{
+  "__key": "alteration-grow-scales",
+  "__folder": "Alteration",
+  "name": "Grow Scales",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you cast an alteration spell, you can harness the magic to grow temporary scales on your body and gain AD equal to your Mind. The AD granted by this trait disappears at the end of a rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

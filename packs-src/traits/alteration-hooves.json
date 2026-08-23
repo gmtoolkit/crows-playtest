@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-hooves",
+  "__folder": "Alteration",
+  "name": "Hooves",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Grow Scales"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you cast an alteration spell, you can harness the magic to change your feet into powerful hooves until the end of the DT. While you have these hooves, your speed increase by your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

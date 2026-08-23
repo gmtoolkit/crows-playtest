@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-you-ll-suffer",
+  "__folder": "Necromancy",
+  "name": "You’ll Suffer",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Many Curses"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you cast a necromancy spell that targets a creature, you can choose to take 1d6 P damage before you roll to gain a +1 bonus on the casting against that creature.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

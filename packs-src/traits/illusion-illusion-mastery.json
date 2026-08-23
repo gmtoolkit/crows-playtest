@@ -1,0 +1,20 @@
+{
+  "__key": "illusion-illusion-mastery",
+  "__folder": "Illusion",
+  "name": "Illusion Mastery",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Lasting Illusion",
+      "Long-Distance Illusion"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>Non-doom tier 1 results of rank 0 and 1 illusion spells you cast don’t add to the chaos count. Your illusion spells of rank 2 and higher are treated as 2 ranks lower when they trigger a backlash.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

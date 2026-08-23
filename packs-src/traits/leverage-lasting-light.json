@@ -1,0 +1,17 @@
+{
+  "__key": "leverage-lasting-light",
+  "__folder": "Leverage",
+  "name": "Lasting Light",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "leverage",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you carry a mundane light source, its UD maximum increases by 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "chopping-axe-hurler",
+  "__folder": "Chopping",
+  "name": "Axe Hurler",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>While you wield a handaxe, it’s non-melee range increases by 2 squares. This bonus stacks with Mighty Arm.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

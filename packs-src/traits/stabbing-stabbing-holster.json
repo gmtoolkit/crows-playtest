@@ -1,0 +1,20 @@
+{
+  "__key": "stabbing-stabbing-holster",
+  "__folder": "Stabbing",
+  "name": "Stabbing Holster",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "stabbing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Nope",
+      "Stabbing Crit"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>You gain an additional belt slot that can only hold stabbing weapons.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

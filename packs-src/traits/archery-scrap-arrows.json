@@ -1,0 +1,21 @@
+{
+  "__key": "archery-scrap-arrows",
+  "__folder": "Archery",
+  "name": "Scrap Arrows",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Point Blank",
+      "Range Finder",
+      "Prone Position"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>As a rest activity, you can turn sticks and scraps of nearby wood into arrows and gain 2d6 arrows when you finish the rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

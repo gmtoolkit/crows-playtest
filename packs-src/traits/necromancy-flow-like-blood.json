@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-flow-like-blood",
+  "__folder": "Necromancy",
+  "name": "Flow Like Blood",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Undead Fortitude"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>When you cast a necromancy spell, you have an amorphous body and gear until the end of the DT. While in this state, you can fit through openings that are at least 1 inch square.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

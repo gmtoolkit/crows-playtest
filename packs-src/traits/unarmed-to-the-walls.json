@@ -1,0 +1,19 @@
+{
+  "__key": "unarmed-to-the-walls",
+  "__folder": "Unarmed",
+  "name": "To the Walls",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Big Push"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you force move a creature into an object while you have at least 1 hand slot free, the creature takes additional damage equal to the forced movement remaining when they collide.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "__key": "alchemy-it-burns",
+  "__folder": "Alchemy",
+  "name": "It Burns",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>Acids and poisons you craft deal additional damage equal to twice your Mind. Bombs you craft deal additional damage equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

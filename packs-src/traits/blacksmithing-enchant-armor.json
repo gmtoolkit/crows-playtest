@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-enchant-armor",
+  "__folder": "Blackmsithing",
+  "name": "Enchant Armor",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Emergency Repairs"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You can use your blacksmith’s tools as enchanter’s tools and your number of uses in the Blacksmithing expertise in place of Enchantment when crafting magic armor.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-building-efficiency",
+  "__folder": "Reputation",
+  "name": "Building Efficiency",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Have it in the Back"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>The merchant affected by your Favorite Customer trait operates as if they were 1 level higher than their actual level.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

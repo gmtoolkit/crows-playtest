@@ -1,0 +1,17 @@
+{
+  "__key": "unarmed-extra-push",
+  "__folder": "Unarmed",
+  "name": "Extra Push",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "unarmed",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>While you have at least 1 hand slot free and push a target with the Knockback maneuver, you can push them 1 additional square.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

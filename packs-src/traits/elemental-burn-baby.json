@@ -1,0 +1,17 @@
+{
+  "__key": "elemental-burn-baby",
+  "__folder": "Elemental",
+  "name": "Burn Baby",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "elemental",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 0,
+    "description": "<p>When you cast an elemental spell that deals damage to a target, the target takes additional damage equal to your Mind.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

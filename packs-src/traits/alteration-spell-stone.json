@@ -1,0 +1,19 @@
+{
+  "__key": "alteration-spell-stone",
+  "__folder": "Alteration",
+  "name": "Spell Stone",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Movement Stone"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>Choose up to three alteration spellbooks in your possession. The stone absorbs and destroys those books. A creature wielding the stone has those spellbooks equipped. The stone can only hold three spells.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

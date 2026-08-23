@@ -1,0 +1,21 @@
+{
+  "__key": "bashing-bashing-holster",
+  "__folder": "Bashing",
+  "name": "Bashing Holster",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "bashing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Collision Damage",
+      "Bashing Crit",
+      "Bone Breaker"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You gain an additional belt slot that can only hold bashing weapons.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

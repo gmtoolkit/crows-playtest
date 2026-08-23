@@ -1,0 +1,20 @@
+{
+  "__key": "camping-leftovers",
+  "__folder": "Camping",
+  "name": "Leftovers",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Hearty Meals",
+      "Plotting"
+    ],
+    "row": 1,
+    "column": 0,
+    "description": "<p>As a rest activity, you can use cook’s utensils and rations to make a meal for you and each human with you. You use half as many rations as there are humans. This meal counts as rations for the rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

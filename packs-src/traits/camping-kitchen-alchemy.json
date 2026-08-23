@@ -1,0 +1,19 @@
+{
+  "__key": "camping-kitchen-alchemy",
+  "__folder": "Camping",
+  "name": "Kitchen Alchemy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Leftovers"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>You can use your cook’s utensils instead of alchemist’s tools when crafting an alchemy item.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

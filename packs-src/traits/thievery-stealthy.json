@@ -1,0 +1,17 @@
+{
+  "__key": "thievery-stealthy",
+  "__folder": "Thievery",
+  "name": "Stealthy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "thievery",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>When you make a test to hide or sneak while you are not wearing armor, you can roll the test twice and choose either result.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

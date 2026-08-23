@@ -1,0 +1,17 @@
+{
+  "__key": "reputation-discount",
+  "__folder": "Reputation",
+  "name": "Discount",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>Choose a merchant in your village. You can purchase items in that merchant’s shop for 5% cheaper. You can change your choice of merchant once every cycle.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

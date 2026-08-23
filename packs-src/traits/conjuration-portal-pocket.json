@@ -1,0 +1,21 @@
+{
+  "__key": "conjuration-portal-pocket",
+  "__folder": "Conjuration",
+  "name": "Portal Pocket",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "conjuration",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Blip",
+      "Baleful Teleport",
+      "Improved Summons"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>You gain an additional belt slot that exists in an extradimensional space only you can access. If you die, any items in that slot disappear into the void.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "__key": "armor-jury-rig-repairs",
+  "__folder": "Armor",
+  "name": "Jury-Rig Repairs",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Headgear"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>You can quickly repair a piece of armor while you are not in combat, restoring 1d6 AD to it. You can’t use this trait again until you finish a rest. This trait stacks with Emergency Repairs from the Blacksmithing tree.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

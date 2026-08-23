@@ -51,6 +51,17 @@
         "PLAYER": "NONE",
         "ASSISTANT": "OWNER"
       }
+    },
+    {
+      "name": "traits",
+      "label": "Crows: Traits",
+      "path": "packs/traits",
+      "type": "Item",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
     }
   ],
   "packFolders": [],

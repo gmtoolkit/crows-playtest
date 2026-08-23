@@ -1,24 +1,30 @@
 import { CROWS } from "../config.mjs";
 
-const { ApplicationV2, HandlebarsApplicationMixin } = foundry.applications.api;
+const { ApplicationV2, HandlebarsApplicationMixin, DialogV2 } = foundry.applications.api;
 
 /**
  * Trait tree browser and purchaser (C p7).
  *
- * Purchase rules: a starting trait (top of a tree) costs 500 XP and needs no
- * prerequisite; anything else needs a trait you already own in the same tree
- * connected by a line. `prerequisites` lists those connections, and owning ANY
- * one of them unlocks the node — the trees branch, they do not require rows.
+ * Laid out like the printed page: a 3x4 grid of trait boxes with the
+ * connector bars drawn between rows, because the bars ARE the rule —
+ * "You can only purchase a starting trait on a trait tree or a trait connected
+ * by a line to another trait you already have on the same tree."
+ *
+ * The navigation follows how advancement actually goes: a crow invests in a
+ * few trees over a career and returns to them, so every tree they have spent
+ * XP in gets a chip showing that investment, and the plus opens the rest.
  */
 export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
   static DEFAULT_OPTIONS = {
     id: "crows-trait-browser",
     classes: ["crows", "trait-browser"],
     window: { title: "CROWS.BrowseTraits", icon: "fa-solid fa-diagram-project", resizable: true },
-    position: { width: 720, height: 760 },
+    position: { width: 860, height: 720 },
     actions: {
+      pickTree: TraitBrowser.#onPickTree,
       selectTree: TraitBrowser.#onSelectTree,
-      buy: TraitBrowser.#onBuy
+      buy: TraitBrowser.#onBuy,
+      refund: TraitBrowser.#onRefund
     }
   };
 
@@ -30,6 +36,10 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
     super(options);
     this.actor = options.actor;
     this.tree = options.tree ?? null;
+  }
+
+  get title() {
+    return game.i18n.format("CROWS.TraitsFor", { name: this.actor?.name ?? "" });
   }
 
   /* -------------------------------------------- */
@@ -48,52 +58,116 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
 
   async _prepareContext() {
     const all = await this.allTraits();
-    const owned = new Set(this.actor.items.filter((i) => i.type === "trait").map((i) => i.name));
+    const owned = new Map(
+      this.actor.items.filter((i) => i.type === "trait").map((i) => [i.name, i])
+    );
     const available = this.actor.system.xp.available;
 
-    const trees = Object.entries(CROWS.traitTrees).map(([key, label]) => ({
-      key,
-      label: game.i18n.localize(label),
-      count: all.filter((t) => t.system.tree === key).length,
-      ownedCount: all.filter((t) => t.system.tree === key && owned.has(t.name)).length,
-      active: this.tree === key
-    }));
+    /* --- Chips: trees this crow has already invested in --------------- */
 
-    let rows = [];
-    if (this.tree) {
-      rows = all
-        .filter((t) => t.system.tree === this.tree)
-        .sort((a, b) => a.system.cost - b.system.cost || a.name.localeCompare(b.name))
-        .map((t) => {
-          const isOwned = owned.has(t.name);
-          // A starting trait is always reachable; anything else needs one of
-          // its prerequisites already owned in this tree.
-          const unlocked = t.system.starting || t.system.prerequisites.some((p) => owned.has(p));
-          return {
-            id: t.id,
-            uuid: t.uuid,
-            name: t.name,
-            cost: t.system.cost,
-            starting: t.system.starting,
-            description: t.system.description,
-            prerequisites: t.system.prerequisites,
-            owned: isOwned,
-            unlocked,
-            affordable: available >= t.system.cost,
-            canBuy: !isOwned && unlocked && available >= t.system.cost
-          };
-        });
+    const invested = new Map();
+    for (const item of owned.values()) {
+      const key = item.system.tree;
+      invested.set(key, (invested.get(key) ?? 0) + item.system.cost);
     }
 
-    return {
+    const chips = [...invested.entries()]
+      .map(([key, xp]) => ({
+        key,
+        label: game.i18n.localize(CROWS.traitTrees[key] ?? key),
+        xp,
+        count: [...owned.values()].filter((i) => i.system.tree === key).length,
+        active: this.tree === key
+      }))
+      .sort((a, b) => b.xp - a.xp);
+
+    /* --- Trees still available to open -------------------------------- */
+
+    const unopened = Object.entries(CROWS.traitTrees)
+      .filter(([key]) => !invested.has(key))
+      .map(([key, label]) => ({ key, label: game.i18n.localize(label) }))
+      .sort((a, b) => a.label.localeCompare(b.label));
+
+    const context = {
       actor: this.actor,
-      trees,
-      tree: this.tree,
-      treeLabel: this.tree ? game.i18n.localize(CROWS.traitTrees[this.tree]) : null,
-      rows,
       available,
-      hasTraits: all.length > 0
+      totalInvested: [...invested.values()].reduce((a, b) => a + b, 0),
+      chips,
+      unopened,
+      hasTraits: all.length > 0,
+      tree: this.tree,
+      treeLabel: this.tree ? game.i18n.localize(CROWS.traitTrees[this.tree] ?? this.tree) : null
     };
+
+    if (!this.tree) return context;
+
+    /* --- The selected tree, as a grid --------------------------------- */
+
+    const inTree = all.filter((t) => t.system.tree === this.tree);
+    const rows = Math.max(0, ...inTree.map((t) => t.system.row)) + 1;
+    const cols = Math.max(0, ...inTree.map((t) => t.system.column)) + 1;
+
+    const cellFor = (t) => {
+      const isOwned = owned.has(t.name);
+      const unlocked = t.system.starting || t.system.prerequisites.some((p) => owned.has(p));
+      const affordable = available >= t.system.cost;
+      return {
+        id: t.id,
+        uuid: t.uuid,
+        name: t.name,
+        cost: t.cost ?? t.system.cost,
+        starting: t.system.starting,
+        description: t.system.description,
+        prerequisites: t.system.prerequisites,
+        row: t.system.row,
+        column: t.system.column,
+        owned: isOwned,
+        unlocked,
+        affordable,
+        // Disabled states are distinct on purpose: "you have not opened the
+        // path" and "you cannot pay for it" are different problems.
+        locked: !isOwned && !unlocked,
+        tooPoor: !isOwned && unlocked && !affordable,
+        canBuy: !isOwned && unlocked && affordable
+      };
+    };
+
+    context.grid = Array.from({ length: rows }, (_, r) => ({
+      row: r,
+      cost: inTree.find((t) => t.system.row === r)?.system.cost ?? 0,
+      cells: Array.from({ length: cols }, (_, c) => {
+        const t = inTree.find((x) => x.system.row === r && x.system.column === c);
+        return t ? cellFor(t) : null;
+      })
+    }));
+
+    /**
+     * Connector bands between adjacent rows.
+     *
+     * Rendered as an SVG per gap using COLUMN INDICES as coordinates, so the
+     * lines scale with the grid and need no pixel arithmetic. A link is drawn
+     * lit when the crow owns the prerequisite, which makes the paths they have
+     * actually opened readable at a glance.
+     */
+    context.bands = [];
+    for (let r = 1; r < rows; r++) {
+      const links = [];
+      for (const t of inTree.filter((x) => x.system.row === r)) {
+        for (const prereqName of t.system.prerequisites) {
+          const from = inTree.find((x) => x.name === prereqName);
+          if (!from) continue;
+          links.push({
+            from: from.system.column,
+            to: t.system.column,
+            lit: owned.has(prereqName)
+          });
+        }
+      }
+      context.bands.push({ afterRow: r - 1, links, cols });
+    }
+
+    context.cols = cols;
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -103,17 +177,48 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
     return this.render();
   }
 
+  /** The plus: open a tree this crow has not invested in yet. */
+  static async #onPickTree() {
+    const { unopened } = await this._prepareContext();
+    if (!unopened.length) return ui.notifications.info(game.i18n.localize("CROWS.AllTreesOpened"));
+
+    const options = unopened.map((t) => `<option value="${t.key}">${t.label}</option>`).join("");
+    const result = await DialogV2.prompt({
+      window: { title: game.i18n.localize("CROWS.SelectTraitTree") },
+      content: `<div class="form-group"><label>${game.i18n.localize(
+        "CROWS.Tree"
+      )}</label><select name="tree" autofocus>${options}</select></div>`,
+      ok: {
+        label: game.i18n.localize("CROWS.Open"),
+        callback: (_e, button) => new FormDataExtended(button.form).object.tree
+      },
+      rejectClose: false
+    });
+
+    if (!result) return;
+    this.tree = result;
+    return this.render();
+  }
+
+  /* -------------------------------------------- */
+
   static async #onBuy(event, target) {
-    const uuid = target.dataset.uuid;
-    const doc = await fromUuid(uuid);
+    const doc = await fromUuid(target.dataset.uuid);
     if (!doc) return;
 
     const cost = doc.system.cost;
+    const owned = this.actor.items.filter((i) => i.type === "trait");
+
+    // Re-check at purchase time: the sheet may be stale if XP changed in
+    // another window.
+    if (owned.some((i) => i.name === doc.name)) {
+      return ui.notifications.warn(game.i18n.localize("CROWS.AlreadyOwned"));
+    }
+    const unlocked =
+      doc.system.starting || doc.system.prerequisites.some((p) => owned.some((i) => i.name === p));
+    if (!unlocked) return ui.notifications.warn(game.i18n.localize("CROWS.TraitLocked"));
     if (this.actor.system.xp.available < cost) {
       return ui.notifications.warn(game.i18n.localize("CROWS.NotEnoughXP"));
-    }
-    if (this.actor.items.some((i) => i.type === "trait" && i.name === doc.name)) {
-      return ui.notifications.warn(game.i18n.localize("CROWS.AlreadyOwned"));
     }
 
     await this.actor.createEmbeddedDocuments("Item", [doc.toObject()]);
@@ -128,6 +233,47 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
       })}</div>`
     });
 
+    return this.render();
+  }
+
+  /**
+   * Give a trait back.
+   *
+   * Refused when another owned trait depends on it, so refunding cannot strand
+   * a purchase behind a prerequisite the crow no longer has.
+   */
+  static async #onRefund(event, target) {
+    const item = this.actor.items.get(target.dataset.itemId);
+    if (!item) return;
+
+    const dependents = this.actor.items.filter(
+      (i) => i.type === "trait" && i.system.prerequisites.includes(item.name)
+    );
+    const stranded = dependents.filter(
+      (d) =>
+        !d.system.prerequisites.some(
+          (p) => p !== item.name && this.actor.items.some((i) => i.type === "trait" && i.name === p)
+        )
+    );
+    if (stranded.length) {
+      return ui.notifications.warn(
+        game.i18n.format("CROWS.TraitHasDependents", { names: stranded.map((d) => d.name).join(", ") })
+      );
+    }
+
+    const ok = await DialogV2.confirm({
+      window: { title: game.i18n.localize("CROWS.RefundTrait") },
+      content: `<p>${game.i18n.format("CROWS.RefundTraitConfirm", {
+        trait: item.name,
+        cost: item.system.cost
+      })}</p>`
+    });
+    if (!ok) return;
+
+    await this.actor.update({
+      "system.xp.spent": Math.max(0, this.actor.system.xp.spent - item.system.cost)
+    });
+    await item.delete();
     return this.render();
   }
 }

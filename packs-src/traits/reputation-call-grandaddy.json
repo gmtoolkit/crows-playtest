@@ -1,0 +1,19 @@
+{
+  "__key": "reputation-call-grandaddy",
+  "__folder": "Reputation",
+  "name": "Call Grandaddy",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "reputation",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Also Mommy"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>Your Call Daddy trait increase the merchant's level by 2 instead of 1 .</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "archery-greater-range",
+  "__folder": "Archery",
+  "name": "Greater Range",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "archery",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Point Blank",
+      "Range Finder",
+      "Prone Position"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>While you wield a bow weapon, it’s range increases by 2 squares. This bonus stacks with Range Finder.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

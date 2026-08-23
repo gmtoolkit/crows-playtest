@@ -1,0 +1,19 @@
+{
+  "__key": "camping-weakness-diagram",
+  "__folder": "Camping",
+  "name": "Weakness Diagram",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Prepare Campsite"
+    ],
+    "row": 2,
+    "column": 1,
+    "description": "<p>As a rest activity, you can use a journal, quill, and inkpot to sketch a monster you have seen before. You and each ally who rests with you gains a +1 bonus to attacks against this creature until you finish another rest.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

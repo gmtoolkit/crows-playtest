@@ -43,6 +43,14 @@ export function registerHandlebars() {
     return new Handlebars.SafeString(filled + spent);
   });
 
+  /**
+   * Centre of a trait-tree column, in the connector SVG's coordinate space.
+   *
+   * The band SVGs use column indices as coordinates (viewBox "0 0 cols 1") so
+   * the connectors scale with the grid instead of needing pixel arithmetic.
+   */
+  Handlebars.registerHelper("crowsColCenter", (column) => (Number(column) || 0) + 0.5);
+
   Handlebars.registerHelper("crowsEq", (a, b) => a === b);
   Handlebars.registerHelper("crowsOr", (...args) => args.slice(0, -1).some(Boolean));
   Handlebars.registerHelper("crowsAnd", (...args) => args.slice(0, -1).every(Boolean));

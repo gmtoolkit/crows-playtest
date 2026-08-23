@@ -1,0 +1,19 @@
+{
+  "__key": "knowledge-labeled-inventory",
+  "__folder": "Knowledge",
+  "name": "Labeled Inventory",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Improvised Equipment"
+    ],
+    "row": 1,
+    "column": 2,
+    "description": "<p>Each of your backpack slot’s number is reduced by 1 (minimum 1), making it easier to pull equipment from your backpack.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

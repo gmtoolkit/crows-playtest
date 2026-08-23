@@ -1,0 +1,19 @@
+{
+  "__key": "camping-soothing-candies",
+  "__folder": "Camping",
+  "name": "Soothing Candies",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Kitchen Alchemy"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>As a rest activity, you can use your cook’s utensils to turn a ration into 1d10 soothing candies (which have an equipment card).</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

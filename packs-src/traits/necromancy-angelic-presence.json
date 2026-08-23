@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-angelic-presence",
+  "__folder": "Necromancy",
+  "name": "Angelic Presence",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Demon’s Sight"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you cast a necromancy spell, enemies who are within 2 squares of you take a -1 penalty to their RRs until the end of the DT.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

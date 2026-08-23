@@ -1,0 +1,19 @@
+{
+  "__key": "necromancy-sacrifice",
+  "__folder": "Necromancy",
+  "name": "Sacrifice",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "necromancy",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "You’ll Suffer"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When you cast a necromancy spell that deals damage to creature, you can choose to take 1d6 P damage to deal additional damage with the spell equal to the damage you take.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

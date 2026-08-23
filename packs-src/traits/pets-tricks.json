@@ -1,0 +1,17 @@
+{
+  "__key": "pets-tricks",
+  "__folder": "Pets",
+  "name": "Tricks",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "pets",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>While you own a pet, they gain a two expertises from the following list: Athletics, Endurance, Lift, Search, or Stealth. This trait stacks with Extra Tricks.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "__key": "armor-shield-bash",
+  "__folder": "Armor",
+  "name": "Shield Bash",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Wall of Protection",
+      "Immovable",
+      "Jury-Rig Repairs"
+    ],
+    "row": 3,
+    "column": 0,
+    "description": "<p>When get a tier 3 result on the Knockback maneuver and force move the target while you have a shield equipped, the target is also knocked prone.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

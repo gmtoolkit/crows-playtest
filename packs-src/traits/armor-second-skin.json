@@ -1,0 +1,21 @@
+{
+  "__key": "armor-second-skin",
+  "__folder": "Armor",
+  "name": "Second Skin",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "armor",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Wall of Protection",
+      "Immovable",
+      "Jury-Rig Repairs"
+    ],
+    "row": 3,
+    "column": 1,
+    "description": "<p>Armor you wear occupies 1 fewer slots.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

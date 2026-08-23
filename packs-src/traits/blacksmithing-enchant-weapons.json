@@ -1,0 +1,19 @@
+{
+  "__key": "blacksmithing-enchant-weapons",
+  "__folder": "Blackmsithing",
+  "name": "Enchant Weapons",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "blacksmithing",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Weapon Upgrade II"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>You can use your blacksmith’s tools as enchanter’s tools and your number of uses in the Blacksmithing expertise in place of Enchantment when crafting magic weapons.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

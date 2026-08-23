@@ -1,0 +1,19 @@
+{
+  "__key": "camping-bard",
+  "__folder": "Camping",
+  "name": "Bard",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Delayed Inspiration"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>Your Song of Rest feature allows allies to become blessed twice during the day instead of once.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

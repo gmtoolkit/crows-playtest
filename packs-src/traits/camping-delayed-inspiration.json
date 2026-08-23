@@ -1,0 +1,19 @@
+{
+  "__key": "camping-delayed-inspiration",
+  "__folder": "Camping",
+  "name": "Delayed Inspiration",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "camping",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Song of Travel"
+    ],
+    "row": 2,
+    "column": 2,
+    "description": "<p>When you use the Song of Rest trait, instead of your allies ending the rest blessed, they can choose to be blessed at the start of any DT before they finish their next rest. They can only make this choice once.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

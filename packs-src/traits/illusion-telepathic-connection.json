@@ -1,0 +1,19 @@
+{
+  "__key": "illusion-telepathic-connection",
+  "__folder": "Illusion",
+  "name": "Telepathic Connection",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "illusion",
+    "cost": 2000,
+    "starting": false,
+    "prerequisites": [
+      "Goodbye"
+    ],
+    "row": 3,
+    "column": 2,
+    "description": "<p>When you use your Goodbye trait, you can choose another creature within 5 squares of your to become invisible instead of you.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

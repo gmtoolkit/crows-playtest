@@ -1,0 +1,21 @@
+{
+  "__key": "knowledge-shared-knowledge",
+  "__folder": "Knowledge",
+  "name": "Shared Knowledge",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "knowledge",
+    "cost": 1500,
+    "starting": false,
+    "prerequisites": [
+      "Specific Research",
+      "Quick Reference",
+      "Labeled Inventory"
+    ],
+    "row": 2,
+    "column": 0,
+    "description": "<p>When you read a lore book as a rest activity to gain an expertise, you can read the book aloud. If you do, choose one human who rests with you. They gain the benefit too.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

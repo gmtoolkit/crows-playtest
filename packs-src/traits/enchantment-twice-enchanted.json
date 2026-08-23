@@ -1,0 +1,17 @@
+{
+  "__key": "enchantment-twice-enchanted",
+  "__folder": "Enchantment",
+  "name": "Twice Enchanted",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "enchantment",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you work on crafting an enchanting item as part of the Craft Equipment rest activity, you can make two crafting rolls for the item or make a second crafting roll for a different enchanting item.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

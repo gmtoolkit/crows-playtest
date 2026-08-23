@@ -1,0 +1,17 @@
+{
+  "__key": "slashing-quickstep",
+  "__folder": "Slashing",
+  "name": "Quickstep",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "slashing",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 1,
+    "description": "<p>When you use the Shift maneuver while wielding a slashing weapon, you can move 3 squares instead of 2.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

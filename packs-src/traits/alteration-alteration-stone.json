@@ -1,0 +1,17 @@
+{
+  "__key": "alteration-alteration-stone",
+  "__folder": "Alteration",
+  "name": "Alteration Stone",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alteration",
+    "cost": 500,
+    "starting": true,
+    "prerequisites": [],
+    "row": 0,
+    "column": 2,
+    "description": "<p>As a rest activity, you can create an alteration stone (which has an equipment card). This stone disappears if you create a new one.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

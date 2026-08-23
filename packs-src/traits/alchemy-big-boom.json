@@ -1,0 +1,20 @@
+{
+  "__key": "alchemy-big-boom",
+  "__folder": "Alchemy",
+  "name": "Big Boom",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "alchemy",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "It Burns",
+      "Potent Potion"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>Bombs you craft have the size of the cube they effect increased by 1.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}

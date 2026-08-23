@@ -1,0 +1,21 @@
+{
+  "__key": "chopping-where-i-want-you",
+  "__folder": "Chopping",
+  "name": "Where I Want You",
+  "type": "trait",
+  "img": "icons/svg/upgrade.svg",
+  "system": {
+    "tree": "chopping",
+    "cost": 1000,
+    "starting": false,
+    "prerequisites": [
+      "Axe Hurler",
+      "Hone the Blade",
+      "Chop ‘Em Down"
+    ],
+    "row": 1,
+    "column": 1,
+    "description": "<p>When you get a tier 3 result on a melee chopping weapon attack against a target of your size or smaller, you can slide the target 1 square after resolving all other effects of the attack.</p>",
+    "source": "Crows Playtest 2, Characters Book"
+  }
+}
