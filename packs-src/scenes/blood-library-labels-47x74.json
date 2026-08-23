@@ -1,0 +1,56 @@
+{
+  "__key": "blood-library-labels-47x74",
+  "__folder": "Blood Library",
+  "name": "Blood Library (Ref key)",
+  "navigation": false,
+  "navOrder": 13,
+  "width": 3290,
+  "height": 5180,
+  "padding": 0.1,
+  "thumb": "systems/crows/assets/thumbs/blood-library-labels-47x74.webp",
+  "grid": {
+    "type": 1,
+    "size": 70,
+    "style": "solidLines",
+    "thickness": 1,
+    "color": "#000000",
+    "alpha": 0.15,
+    "distance": 5,
+    "units": "ft"
+  },
+  "environment": {
+    "darknessLevel": 0,
+    "globalLight": {
+      "enabled": true
+    }
+  },
+  "tokenVision": false,
+  "fog": {
+    "mode": 2
+  },
+  "levels": [
+    {
+      "name": "Ground",
+      "elevation": {
+        "bottom": 0,
+        "top": 20
+      },
+      "background": {
+        "src": "systems/crows/assets/maps/blood-library-labels-47x74.webp",
+        "color": "#000000"
+      },
+      "sort": 0
+    }
+  ],
+  "flags": {
+    "crows": {
+      "sourceImage": "Maps/Blood Library/Blood Library Labels 47x74.png",
+      "gridVerified": true,
+      "gridSquares": "47x74",
+      "refOnly": true
+    }
+  },
+  "ownership": {
+    "default": 0
+  }
+}

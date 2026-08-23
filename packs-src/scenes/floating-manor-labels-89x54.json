@@ -1,0 +1,56 @@
+{
+  "__key": "floating-manor-labels-89x54",
+  "__folder": "Floating Manor",
+  "name": "The Floating Manor (Ref key)",
+  "navigation": false,
+  "navOrder": 21,
+  "width": 6230,
+  "height": 3780,
+  "padding": 0.1,
+  "thumb": "systems/crows/assets/thumbs/floating-manor-labels-89x54.webp",
+  "grid": {
+    "type": 1,
+    "size": 70,
+    "style": "solidLines",
+    "thickness": 1,
+    "color": "#000000",
+    "alpha": 0.15,
+    "distance": 5,
+    "units": "ft"
+  },
+  "environment": {
+    "darknessLevel": 0,
+    "globalLight": {
+      "enabled": true
+    }
+  },
+  "tokenVision": false,
+  "fog": {
+    "mode": 2
+  },
+  "levels": [
+    {
+      "name": "Ground",
+      "elevation": {
+        "bottom": 0,
+        "top": 20
+      },
+      "background": {
+        "src": "systems/crows/assets/maps/floating-manor-labels-89x54.webp",
+        "color": "#000000"
+      },
+      "sort": 0
+    }
+  ],
+  "flags": {
+    "crows": {
+      "sourceImage": "Maps/Floating Manor/Floating Manor Labels 89x54.png",
+      "gridVerified": true,
+      "gridSquares": "89x54",
+      "refOnly": true
+    }
+  },
+  "ownership": {
+    "default": 0
+  }
+}

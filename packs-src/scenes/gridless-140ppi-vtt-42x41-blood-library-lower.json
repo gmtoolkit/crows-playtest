@@ -1,0 +1,56 @@
+{
+  "__key": "gridless-140ppi-vtt-42x41-blood-library-lower",
+  "__folder": "Blood Library",
+  "name": "Blood Library — Lower Floor",
+  "navigation": true,
+  "navOrder": 12,
+  "width": 5880,
+  "height": 5740,
+  "padding": 0.1,
+  "thumb": "systems/crows/assets/thumbs/gridless-140ppi-vtt-42x41-blood-library-lower.webp",
+  "grid": {
+    "type": 1,
+    "size": 140,
+    "style": "solidLines",
+    "thickness": 1,
+    "color": "#000000",
+    "alpha": 0.15,
+    "distance": 5,
+    "units": "ft"
+  },
+  "environment": {
+    "darknessLevel": 1,
+    "globalLight": {
+      "enabled": false
+    }
+  },
+  "tokenVision": true,
+  "fog": {
+    "mode": 2
+  },
+  "levels": [
+    {
+      "name": "Ground",
+      "elevation": {
+        "bottom": 0,
+        "top": 20
+      },
+      "background": {
+        "src": "systems/crows/assets/maps/gridless-140ppi-vtt-42x41-blood-library-lower.webp",
+        "color": "#000000"
+      },
+      "sort": 0
+    }
+  ],
+  "flags": {
+    "crows": {
+      "sourceImage": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x41_Blood-Library-Lower.jpg",
+      "gridVerified": true,
+      "gridSquares": "42x41",
+      "refOnly": false
+    }
+  },
+  "ownership": {
+    "default": 0
+  }
+}

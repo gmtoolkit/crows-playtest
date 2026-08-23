@@ -40,7 +40,19 @@
   },
   "primaryTokenAttribute": "stamina",
   "secondaryTokenAttribute": "armor",
-  "packs": [],
+  "packs": [
+    {
+      "name": "scenes",
+      "label": "Crows: Maps",
+      "path": "packs/scenes",
+      "type": "Scene",
+      "system": "crows",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
   "packFolders": [],
   "socket": true,
   "documentTypes": {

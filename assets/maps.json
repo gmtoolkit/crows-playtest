@@ -1,0 +1,253 @@
+{
+  "maps": [
+    {
+      "key": "blood-library-labels-47x74",
+      "source": "Maps/Blood Library/Blood Library Labels 47x74.png",
+      "file": "assets/maps/blood-library-labels-47x74.webp",
+      "thumb": "assets/thumbs/blood-library-labels-47x74.webp",
+      "width": 3290,
+      "height": 5180,
+      "grid": {
+        "cols": 47,
+        "rows": 74,
+        "size": 70
+      },
+      "priority": 0,
+      "gridless": false,
+      "labels": true
+    },
+    {
+      "key": "gridded-140ppi-vtt-42x24-blood-library-upper",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridded/MAD_MCDM_CROWS_Gridded_140ppi-VTT_42x24_Blood-Library-Upper.jpg",
+      "file": "assets/maps/gridded-140ppi-vtt-42x24-blood-library-upper.webp",
+      "thumb": "assets/thumbs/gridded-140ppi-vtt-42x24-blood-library-upper.webp",
+      "width": 5880,
+      "height": 3360,
+      "grid": {
+        "cols": 42,
+        "rows": 24,
+        "size": 140
+      },
+      "priority": 95,
+      "gridless": false,
+      "labels": false
+    },
+    {
+      "key": "gridded-140ppi-vtt-42x41-blood-library-lower",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridded/MAD_MCDM_CROWS_Gridded_140ppi-VTT_42x41_Blood-Library-Lower.jpg",
+      "file": "assets/maps/gridded-140ppi-vtt-42x41-blood-library-lower.webp",
+      "thumb": "assets/thumbs/gridded-140ppi-vtt-42x41-blood-library-lower.webp",
+      "width": 5880,
+      "height": 5740,
+      "grid": {
+        "cols": 42,
+        "rows": 41,
+        "size": 140
+      },
+      "priority": 95,
+      "gridless": false,
+      "labels": false
+    },
+    {
+      "key": "gridded-140ppi-vtt-42x65-blood-library-full",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridded/MAD_MCDM_CROWS_Gridded_140ppi-VTT_42x65_Blood-Library-Full.jpg",
+      "file": "assets/maps/gridded-140ppi-vtt-42x65-blood-library-full.webp",
+      "thumb": "assets/thumbs/gridded-140ppi-vtt-42x65-blood-library-full.webp",
+      "width": 5880,
+      "height": 9100,
+      "grid": {
+        "cols": 42,
+        "rows": 65,
+        "size": 140
+      },
+      "priority": 95,
+      "gridless": false,
+      "labels": false
+    },
+    {
+      "key": "gridless-140ppi-vtt-42x24-blood-library-upper",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x24_Blood-Library-Upper.jpg",
+      "file": "assets/maps/gridless-140ppi-vtt-42x24-blood-library-upper.webp",
+      "thumb": "assets/thumbs/gridless-140ppi-vtt-42x24-blood-library-upper.webp",
+      "width": 5880,
+      "height": 3360,
+      "grid": {
+        "cols": 42,
+        "rows": 24,
+        "size": 140
+      },
+      "priority": 110,
+      "gridless": true,
+      "labels": false
+    },
+    {
+      "key": "gridless-140ppi-vtt-42x41-blood-library-lower",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x41_Blood-Library-Lower.jpg",
+      "file": "assets/maps/gridless-140ppi-vtt-42x41-blood-library-lower.webp",
+      "thumb": "assets/thumbs/gridless-140ppi-vtt-42x41-blood-library-lower.webp",
+      "width": 5880,
+      "height": 5740,
+      "grid": {
+        "cols": 42,
+        "rows": 41,
+        "size": 140
+      },
+      "priority": 110,
+      "gridless": true,
+      "labels": false
+    },
+    {
+      "key": "gridless-140ppi-vtt-42x65-blood-library-full",
+      "source": "Maps/Blood Library/Good Maps/140ppi VTT Gridless/MAD_MCDM_CROWS_Gridless_140ppi-VTT_42x65_Blood-Library-Full.jpg",
+      "file": "assets/maps/gridless-140ppi-vtt-42x65-blood-library-full.webp",
+      "thumb": "assets/thumbs/gridless-140ppi-vtt-42x65-blood-library-full.webp",
+      "width": 5880,
+      "height": 9100,
+      "grid": {
+        "cols": 42,
+        "rows": 65,
+        "size": 140
+      },
+      "priority": 110,
+      "gridless": true,
+      "labels": false
+    },
+    {
+      "key": "cornath-map-temp",
+      "source": "Maps/Cornath Map TEMP.png",
+      "file": "assets/maps/cornath-map-temp.webp",
+      "thumb": "assets/thumbs/cornath-map-temp.webp",
+      "width": 2772,
+      "height": 1500,
+      "grid": null,
+      "priority": 0,
+      "gridless": false,
+      "labels": false
+    },
+    {
+      "key": "floating-manor-labels-89x54",
+      "source": "Maps/Floating Manor/Floating Manor Labels 89x54.png",
+      "file": "assets/maps/floating-manor-labels-89x54.webp",
+      "thumb": "assets/thumbs/floating-manor-labels-89x54.webp",
+      "width": 6230,
+      "height": 3780,
+      "grid": {
+        "cols": 89,
+        "rows": 54,
+        "size": 70
+      },
+      "priority": 0,
+      "gridless": false,
+      "labels": true
+    },
+    {
+      "key": "floating-manor-no-labels-89x54",
+      "source": "Maps/Floating Manor/Floating Manor No Labels 89x54.png",
+      "file": "assets/maps/floating-manor-no-labels-89x54.webp",
+      "thumb": "assets/thumbs/floating-manor-no-labels-89x54.webp",
+      "width": 6230,
+      "height": 3780,
+      "grid": {
+        "cols": 89,
+        "rows": 54,
+        "size": 70
+      },
+      "priority": 3,
+      "gridless": true,
+      "labels": false
+    }
+  ],
+  "art": [
+    {
+      "key": "blood-creature-a",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature A.jpg",
+      "file": "assets/art/blood-creature-a.webp",
+      "token": "assets/art/blood-creature-a-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "blood-creature-b",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature B.jpg",
+      "file": "assets/art/blood-creature-b.webp",
+      "token": "assets/art/blood-creature-b-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "blood-creature-c",
+      "source": "Monster Illustrations/Blood Creatures/Blood Creature C.jpg",
+      "file": "assets/art/blood-creature-c.webp",
+      "token": "assets/art/blood-creature-c-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "blood-library-entrance",
+      "source": "Monster Illustrations/Blood Creatures/Blood Library Entrance.jpg",
+      "file": "assets/art/blood-library-entrance.webp",
+      "token": "assets/art/blood-library-entrance-token.webp",
+      "category": "blood"
+    },
+    {
+      "key": "floating-manor-crypt-entrance",
+      "source": "Monster Illustrations/Undead/Floating Manor Crypt Entrance.jpg",
+      "file": "assets/art/floating-manor-crypt-entrance.webp",
+      "token": "assets/art/floating-manor-crypt-entrance-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-a",
+      "source": "Monster Illustrations/Undead/Undead A.jpg",
+      "file": "assets/art/undead-a.webp",
+      "token": "assets/art/undead-a-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-b",
+      "source": "Monster Illustrations/Undead/Undead B.jpg",
+      "file": "assets/art/undead-b.webp",
+      "token": "assets/art/undead-b-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-c",
+      "source": "Monster Illustrations/Undead/Undead C.jpg",
+      "file": "assets/art/undead-c.webp",
+      "token": "assets/art/undead-c-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-d",
+      "source": "Monster Illustrations/Undead/Undead D.jpg",
+      "file": "assets/art/undead-d.webp",
+      "token": "assets/art/undead-d-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-e",
+      "source": "Monster Illustrations/Undead/Undead E.jpg",
+      "file": "assets/art/undead-e.webp",
+      "token": "assets/art/undead-e-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-f",
+      "source": "Monster Illustrations/Undead/Undead F.jpg",
+      "file": "assets/art/undead-f.webp",
+      "token": "assets/art/undead-f-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-g",
+      "source": "Monster Illustrations/Undead/Undead G.jpg",
+      "file": "assets/art/undead-g.webp",
+      "token": "assets/art/undead-g-token.webp",
+      "category": "undead"
+    },
+    {
+      "key": "undead-h",
+      "source": "Monster Illustrations/Undead/Undead H.jpg",
+      "file": "assets/art/undead-h.webp",
+      "token": "assets/art/undead-h-token.webp",
+      "category": "undead"
+    }
+  ]
+}
