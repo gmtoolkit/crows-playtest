@@ -32,6 +32,7 @@ import { DungeonTurn, DungeonTurnPanel } from "./system/dungeon-turn.mjs";
 import { registerSettings } from "./system/settings.mjs";
 import { registerHandlebars } from "./system/handlebars.mjs";
 import { CrowsCombat } from "./system/combat.mjs";
+import { createItemMacro, useItemMacro } from "./system/macros.mjs";
 
 const SYSTEM_ID = CROWS.id;
 
@@ -91,6 +92,7 @@ Hooks.once("init", () => {
     PowerRoll,
     DungeonTurn,
     DungeonTurnPanel,
+    useItemMacro,
     documents: { CrowsActor, CrowsItem }
   };
 });
@@ -123,11 +125,44 @@ function registerSheets() {
 /*  Ready                                       */
 /* -------------------------------------------- */
 
-Hooks.once("ready", () => {
+/**
+ * Dropping a card on the macro hotbar makes a macro that uses it.
+ *
+ * Returning false stops Foundry's default, which would otherwise create a
+ * plain "open this document" macro that does not use the item.
+ */
+Hooks.on("hotbarDrop", (bar, data, slot) => {
+  if (data?.type !== "Item" || !data?.crows?.name) return;
+  createItemMacro(data, slot);
+  return false;
+});
+
+Hooks.once("ready", async () => {
   DungeonTurn.initialise();
   // The clock is permanent furniture, so it goes up on load rather than
   // waiting for someone to think to open it.
   DungeonTurnPanel.show();
+
+  /**
+   * Mark anything that is ALREADY dead.
+   *
+   * The updateActor hook only fires on a change, so a creature that hit 0
+   * Stamina before this existed — or in a session before the world was
+   * reloaded — would sit on the map unmarked forever, which is exactly the
+   * case Cliff hit. Sweeping once on ready costs nothing and is idempotent.
+   */
+  if (!game.user.isGM) return;
+  for (const token of canvas.tokens?.placeables ?? []) {
+    await token.actor?.syncDeathMarker?.();
+  }
+});
+
+/** A newly-activated scene brings its own tokens, which need the same sweep. */
+Hooks.on("canvasReady", async () => {
+  if (!game.user.isGM) return;
+  for (const token of canvas.tokens?.placeables ?? []) {
+    await token.actor?.syncDeathMarker?.();
+  }
 });
 
 /**
@@ -206,6 +241,30 @@ for (const hook of ["createItem", "updateItem", "deleteItem"]) {
     actor.syncCarriedLight();
   });
 }
+
+/* -------------------------------------------- */
+/*  Death marker                                */
+/* -------------------------------------------- */
+
+/**
+ * Show death on the TOKEN, not just the sheet.
+ *
+ * Both actor models already derived `system.dead` — a Ref-controlled creature
+ * at 0 Stamina, or anyone whose backpack slots are all wounds (R p12) — and
+ * the map showed nothing, so a dead monster looked exactly like a healthy one
+ * in the one place the table is actually looking during a fight.
+ *
+ * Driven from updateActor because that is where Stamina and wounds land,
+ * whatever route the damage took.
+ */
+Hooks.on("updateActor", (actor) => {
+  if (!(actor instanceof Actor)) return;
+  if (!["crow", "creature"].includes(actor.type)) return;
+  actor.syncDeathMarker();
+});
+
+/** A token dropped onto the scene should arrive already marked if it is dead. */
+Hooks.on("createToken", (token) => token.actor?.syncDeathMarker?.());
 
 /* -------------------------------------------- */
 /*  Chat card interactions                      */

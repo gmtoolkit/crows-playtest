@@ -316,7 +316,17 @@ CROWS.conditions = {
   unconscious: { label: "CROWS.CondUnconscious", icon: "icons/magic/control/sleep-bubble-purple.webp" },
   weakened: { label: "CROWS.CondWeakened", icon: "icons/magic/control/debuff-body-blue.webp", endsAt: "dt" },
   surprised: { label: "CROWS.CondSurprised", icon: "icons/magic/perception/eye-ringed-glow-angry-red.webp" },
-  hidden: { label: "CROWS.CondHidden", icon: "icons/magic/perception/silhouette-stealth-shadow.webp" }
+  hidden: { label: "CROWS.CondHidden", icon: "icons/magic/perception/silhouette-stealth-shadow.webp" },
+
+  /**
+   * Not a condition the rules list, but the state every table needs to see on
+   * the map. A Ref-controlled creature dies at 0 Stamina (R p12); a PC, human
+   * or animal dies when every backpack slot holds a wound.
+   *
+   * Applied automatically from `system.dead`, which both actor models already
+   * derive — the token just never showed it.
+   */
+  dead: { label: "CROWS.CondDead", icon: "icons/svg/skull.svg", auto: true }
 };
 
 /** Extra damage taken per instance of damage while vulnerable (R p12). */

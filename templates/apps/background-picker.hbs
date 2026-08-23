@@ -1,0 +1,86 @@
+{{!-- 36 backgrounds as cards, because this is the biggest decision in making a
+      crow and a dropdown of names asks you to choose between things it will
+      not show you. Each card carries everything the background actually
+      grants. --}}
+<div class="bg-body">
+
+  <header class="bg-head">
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" name="query" value="{{query}}" autofocus
+             placeholder="{{localize 'CROWS.SearchBackgrounds'}}">
+    </div>
+    <button type="button" data-action="roll" data-tooltip="{{localize 'CROWS.RollBackgroundHint'}}">
+      <i class="fa-solid fa-dice"></i> {{localize "CROWS.RollBackground"}}
+    </button>
+    <span class="count">{{localize "CROWS.ShowingCount" shown=shown total=total}}</span>
+  </header>
+
+  {{#unless hasAny}}
+    <p class="empty">{{localize "CROWS.NoBackgrounds"}}</p>
+  {{/unless}}
+
+  <div class="bg-grid">
+    {{#each cards}}
+      <article class="bg-card {{#if this.current}}current{{/if}}" data-uuid="{{this.uuid}}">
+        <header>
+          <span class="bg-name">{{this.name}}</span>
+          <span class="bg-roll" data-tooltip="{{localize 'CROWS.RollResult'}}">{{this.roll}}</span>
+        </header>
+
+        <p class="bg-desc">{{{this.description}}}</p>
+
+        <div class="bg-stats">
+          <span class="stat" data-tooltip="{{localize 'CROWS.Stamina'}}">
+            <i class="fa-solid fa-heart"></i> {{this.stamina}}
+          </span>
+          <span class="stat {{#if this.hasChoice}}choice{{/if}}"
+                data-tooltip="{{#if this.hasChoice}}{{localize 'CROWS.CharChoiceHint'}}{{else}}{{localize 'CROWS.CharAt2'}}{{/if}}">
+            <i class="fa-solid fa-dumbbell"></i>
+            {{#each this.characteristics}}{{this}}{{#unless @last}} / {{/unless}}{{/each}} 2
+          </span>
+          <span class="stat" data-tooltip="{{localize 'CROWS.TotalUsesHint'}}">
+            <i class="fa-solid fa-hand-fist"></i> {{this.totalUses}}
+          </span>
+        </div>
+
+        <div class="bg-line">
+          <span class="bg-label">{{localize "CROWS.StartingTrait"}}</span>
+          <span class="bg-trait">{{this.trait}}</span>
+        </div>
+
+        <div class="bg-line">
+          <span class="bg-label">{{localize "CROWS.Expertises"}}</span>
+          <span class="bg-exp">
+            {{#each this.expertises}}
+              <span class="exp-chip">{{this.label}}{{#if (crowsGt this.uses 1)}} <b>{{this.uses}}</b>{{/if}}</span>
+            {{/each}}
+          </span>
+        </div>
+
+        <div class="bg-line">
+          <span class="bg-label">{{localize "CROWS.Equipment"}}</span>
+          <span class="bg-kit">
+            {{#each this.equipment}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}
+            {{#if this.bonusGold}}, <b>{{this.bonusGold}} gc</b>{{/if}}
+          </span>
+        </div>
+
+        {{#if this.spellbooks.length}}
+          <div class="bg-line">
+            <span class="bg-label">{{localize "CROWS.Spellbooks"}}</span>
+            <span class="bg-kit">{{#each this.spellbooks}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+          </div>
+        {{/if}}
+
+        <footer>
+          {{#if this.current}}
+            <span class="bg-current"><i class="fa-solid fa-check"></i> {{localize "CROWS.CurrentBackground"}}</span>
+          {{else}}
+            <button type="button" data-action="choose">{{localize "CROWS.Choose"}}</button>
+          {{/if}}
+        </footer>
+      </article>
+    {{/each}}
+  </div>
+</div>

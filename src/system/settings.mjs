@@ -142,6 +142,23 @@ export function registerSettings() {
     }
   });
 
+  /**
+   * Offer "knock unconscious instead" when a blow would kill a creature.
+   *
+   * DEFAULT OFF, because a prompt on every kill is friction in a fight and
+   * 0 Stamina meaning dead is the rule. R p12 makes this an ASK ("you can ask
+   * the Ref"), not an automatic step — and when granted the creature sits at
+   * ONE Stamina, never zero, because zero is what dead is.
+   */
+  game.settings.register(id, "askKnockUnconscious", {
+    name: "CROWS.Settings.AskKnockUnconscious",
+    hint: "CROWS.Settings.AskKnockUnconsciousHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
   /** Play a sound when a dungeon turn ends. Torches going out should sting. */
   game.settings.register(id, "turnEndSound", {
     name: "CROWS.Settings.TurnEndSound",

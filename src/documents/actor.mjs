@@ -321,13 +321,51 @@ export class CrowsActor extends Actor {
       usesWounds: sys.usesWounds
     });
 
+    /**
+     * "If you reduce a Ref-controlled creature to 0 Stamina, you can ask the
+     * Ref if the damage could instead knock the creature unconscious. If the
+     * Ref says it's okay, then the creature is reduced to 1 Stamina instead of
+     * 0 and regains consciousness at the end of the dungeon turn." (R p12)
+     *
+     * Note what that means and what it is easy to get wrong: unconscious is a
+     * ONE Stamina state, never zero. A creature left at 0 is dead, so knocking
+     * one out has to stop the kill, not decorate it.
+     *
+     * Asked only of the Ref, only when the blow would actually be lethal, and
+     * only for creatures that die at 0 rather than taking wounds.
+     */
+    let staminaAfter = outcome.staminaAfter;
+    let spared = false;
+    const askFirst = game.settings.get(CROWS.id, "askKnockUnconscious");
+    if (askFirst && game.user.isGM && outcome.dead && !sys.usesWounds && staminaAfter <= 0) {
+      spared = await foundry.applications.api.DialogV2.confirm({
+        window: { title: game.i18n.localize("CROWS.KnockUnconscious") },
+        content: `<p>${game.i18n.format("CROWS.KnockUnconsciousHint", { name: this.name })}</p>`,
+        yes: { label: game.i18n.localize("CROWS.KnockOut") },
+        no: { label: game.i18n.localize("CROWS.LetItDie") },
+        rejectClose: false
+      });
+      if (spared) staminaAfter = 1;
+    }
+
     await this.update({
       "system.ad.value": outcome.adAfter,
-      "system.stamina.value": outcome.staminaAfter,
+      "system.stamina.value": staminaAfter,
       "system.wounds.value": outcome.woundsAfter
     });
-    await this.#announceDamage(amount, outcome, piercing);
-    return outcome;
+
+    if (spared) {
+      await this.toggleStatusEffect("unconscious", { active: true });
+      await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor: this }),
+        content: `<div class="crows-damage">${game.i18n.format("CROWS.KnockedOut", {
+          name: this.name
+        })}</div>`
+      });
+    }
+
+    await this.#announceDamage(amount, { ...outcome, dead: outcome.dead && !spared }, piercing);
+    return { ...outcome, spared, staminaAfter };
   }
 
   async #announceDamage(amount, outcome, piercing) {
@@ -484,6 +522,33 @@ export class CrowsActor extends Actor {
         { name: this.name }
       )}</div>`
     });
+  }
+
+  /**
+   * Put the death marker on the token, or take it off.
+   *
+   * `system.dead` was already derived on both actor types and shown on the
+   * sheet, but the map never said so — a monster at 0 Stamina looked exactly
+   * like one at full health, which is the one place the table is actually
+   * looking during a fight.
+   *
+   * Idempotent, so it can be called from any hook without stacking effects.
+   * GM-only writes: a player's client must not try to stamp a monster.
+   */
+  async syncDeathMarker() {
+    if (!game.user.isGM) return;
+    const dead = !!this.system.dead;
+    const has = this.statuses?.has?.("dead") ?? false;
+    if (dead === has) return;
+
+    await this.toggleStatusEffect("dead", { active: dead, overlay: true });
+
+    // A dead combatant should stop taking turns.
+    for (const combatant of game.combats?.contents.flatMap((c) => c.combatants.contents) ?? []) {
+      if (combatant.actorId === this.id && combatant.defeated !== dead) {
+        await combatant.update({ defeated: dead });
+      }
+    }
   }
 
   /** Eating clears every starvation wound at once (R p16). */

@@ -198,9 +198,24 @@
   border-bottom-color: var(--crows-edge);
 }
 
+/**
+ * Both fields share the row evenly.
+ *
+ * The feature input had no flex basis, so it claimed its default input width
+ * and squeezed the background lookup beside it down to ELEVEN PIXELS. The
+ * value was there and the colours were fine; the field was simply too narrow
+ * to show a character of it. `min-width: 0` is the part that actually matters:
+ * a flex item defaults to `min-width: auto` and refuses to shrink below its
+ * content, which is what made the collapse land entirely on its neighbour.
+ */
 .crows .names .sub {
   display: flex;
   gap: 0.3rem;
+}
+
+.crows .names .sub > * {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .crows .names .sub input {
@@ -2824,4 +2839,209 @@
   opacity: 0.6;
   padding: 0.2rem 0.4rem;
   cursor: help;
+}
+
+/* -------------------------------------------- */
+/*  Background picker                           */
+/* -------------------------------------------- */
+
+/**
+ * Cards, not a list. A background fixes a characteristic, Stamina, a starting
+ * trait, every starting expertise use and a kit — a player cannot weigh that
+ * from a name in a dropdown.
+ */
+.crows .bg-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  padding: 0.6rem;
+  gap: 0.5rem;
+}
+
+.crows .bg-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.crows .bg-head .search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  color: var(--crows-muted);
+}
+
+.crows .bg-head .search input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+}
+
+.crows .bg-head .count {
+  font-size: 0.66rem;
+  color: var(--crows-muted);
+  white-space: nowrap;
+}
+
+.crows .bg-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.crows .bg-card {
+  display: grid;
+  gap: 0.35rem;
+  align-content: start;
+  padding: 0.55rem 0.6rem;
+  background: var(--crows-stone-2);
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  font-size: 0.74rem;
+}
+
+.crows .bg-card.current {
+  border-color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.08);
+}
+
+.crows .bg-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.crows .bg-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--crows-gold);
+}
+
+.crows .bg-roll {
+  font-size: 0.66rem;
+  color: var(--crows-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.crows .bg-desc {
+  margin: 0;
+  color: var(--crows-parchment);
+  font-style: italic;
+  font-size: 0.7rem;
+}
+
+.crows .bg-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.2rem 0;
+  border-block: 1px solid var(--crows-edge);
+}
+
+.crows .bg-stats .stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+}
+
+.crows .bg-stats .stat i {
+  color: var(--crows-muted);
+  font-size: 0.66rem;
+}
+
+/* A choice of characteristic is a decision, so it is marked as one. */
+.crows .bg-stats .stat.choice {
+  color: var(--crows-gold);
+}
+
+.crows .bg-line {
+  display: grid;
+  grid-template-columns: 4.6rem 1fr;
+  gap: 0.4rem;
+  align-items: start;
+}
+
+.crows .bg-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--crows-muted);
+  padding-top: 0.1rem;
+}
+
+.crows .bg-trait {
+  color: var(--crows-bone);
+}
+
+.crows .bg-exp {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+}
+
+.crows .exp-chip {
+  padding: 0.05rem 0.3rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--crows-radius);
+  font-size: 0.66rem;
+}
+
+.crows .exp-chip b {
+  color: var(--crows-gold);
+}
+
+.crows .bg-kit {
+  color: var(--crows-parchment);
+  font-size: 0.68rem;
+}
+
+.crows .bg-card footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.15rem;
+}
+
+.crows .bg-card footer button {
+  padding: 0.2rem 0.7rem;
+  font-size: 0.72rem;
+  border-color: var(--crows-gold);
+  color: var(--crows-gold);
+}
+
+.crows .bg-current {
+  color: var(--crows-gold);
+  font-size: 0.7rem;
+}
+
+/**
+ * Identity fields carry a visible label.
+ *
+ * They were bare inputs relying on placeholder text, which vanishes as soon as
+ * the field is filled — so a crow's distinguishing feature sat in an unmarked
+ * box and nobody could tell what it was for.
+ */
+.crows .names .sub .field {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.crows .names .sub .field > label {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--crows-muted);
 }

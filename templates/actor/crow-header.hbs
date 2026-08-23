@@ -23,18 +23,28 @@
               voice, strong personality trait, or the like" (C p1) — no table,
               nothing derives from it. Free text is the correct shape there, and
               making it a picker would invent a list MCDM did not print. --}}
-        <div class="lookup">
-          <input type="text" name="system.biography.background" value="{{system.biography.background}}"
-                 placeholder="{{localize 'CROWS.Background'}}" readonly
-                 data-tooltip="{{localize 'CROWS.BackgroundHint'}}">
-          <button type="button" class="icon" data-action="pickBackground"
-                  data-tooltip="{{localize 'CROWS.PickBackground'}}">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+        {{!-- Both fields carry a VISIBLE label. A placeholder is not a label:
+              it disappears the moment the field is filled, which left "Missing
+              two fingers" sitting in an unmarked box that nobody could
+              identify. --}}
+        <div class="field">
+          <label>{{localize "CROWS.Background"}}</label>
+          <div class="lookup">
+            <input type="text" name="system.biography.background" value="{{system.biography.background}}"
+                   placeholder="{{localize 'CROWS.BackgroundNone'}}" readonly
+                   data-tooltip="{{localize 'CROWS.BackgroundHint'}}">
+            <button type="button" class="icon" data-action="pickBackground"
+                    data-tooltip="{{localize 'CROWS.PickBackground'}}">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
         </div>
-        <input type="text" name="system.biography.feature" value="{{system.biography.feature}}"
-               placeholder="{{localize 'CROWS.Feature'}}"
-               data-tooltip="{{localize 'CROWS.FeatureHint'}}">
+        <div class="field">
+          <label>{{localize "CROWS.Feature"}}</label>
+          <input type="text" name="system.biography.feature" value="{{system.biography.feature}}"
+                 placeholder="{{localize 'CROWS.FeaturePlaceholder'}}"
+                 data-tooltip="{{localize 'CROWS.FeatureHint'}}">
+        </div>
       </div>
     </div>
   </div>

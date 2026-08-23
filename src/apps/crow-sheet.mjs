@@ -337,6 +337,33 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   /*  Drag and drop                               */
   /* -------------------------------------------- */
 
+  /**
+   * Standard Foundry drag data, so a card can leave the sheet.
+   *
+   * Without this the sheet's own slot-to-slot drag worked (the drop handler
+   * reads the DOM) but nothing else did: dropping a card on the macro hotbar
+   * did nothing, because Foundry's hotbar reads `{type, uuid}` off the drag
+   * event and there was none.
+   *
+   * The `crows` payload rides along so the macro can name the actor without
+   * re-deriving it from the UUID, which matters for an unlinked token whose
+   * item UUID is scene-relative.
+   */
+  _onDragStart(event) {
+    const el = event.currentTarget.closest("[data-item-id]");
+    const item = this.actor.items.get(el?.dataset.itemId);
+    if (!item) return super._onDragStart(event);
+
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({
+        type: "Item",
+        uuid: item.uuid,
+        crows: { actorUuid: this.actor.uuid, itemId: item.id, name: item.name, img: item.img }
+      })
+    );
+  }
+
   /** @inheritDoc */
   async _onDrop(event) {
     const data = foundry.applications.ux.TextEditor.getDragEventData(event);
@@ -535,43 +562,9 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
    * creation's job, and that is the builder.
    */
   static async #onPickBackground() {
-    const { DialogV2 } = foundry.applications.api;
-    const docs = await CrowSheet.#backgrounds();
-    if (!docs.length) return ui.notifications.warn(game.i18n.localize("CROWS.NoBackgrounds"));
-
-    const current = this.actor.system.biography.background;
-    const options = docs
-      .map((d) => {
-        const r = d.system.roll;
-        const selected = d.name === current ? " selected" : "";
-        return `<option value="${d.name}"${selected}>${d.name} &mdash; ${r.first}${r.second}</option>`;
-      })
-      .join("");
-
-    const picked = await DialogV2.prompt({
-      window: { title: game.i18n.localize("CROWS.PickBackground") },
-      content:
-        `<div class="form-group"><label>${game.i18n.localize("CROWS.Background")}</label>` +
-        `<select name="background" autofocus>${options}</select></div>` +
-        `<p class="hint">${game.i18n.localize("CROWS.PickBackgroundHint")}</p>`,
-      ok: {
-        label: game.i18n.localize("CROWS.Choose"),
-        callback: (_e, button) => new FormDataExtended(button.form).object.background
-      },
-      rejectClose: false
-    });
-
-    if (!picked) return;
-    return this.actor.update({ "system.biography.background": picked });
-  }
-
-  /** Backgrounds from the compendium plus any the Ref authored in-world. */
-  static async #backgrounds() {
-    const docs = [];
-    const pack = game.packs.get("crows.backgrounds");
-    if (pack) docs.push(...(await pack.getDocuments()));
-    docs.push(...game.items.filter((i) => i.type === "background"));
-    return docs.sort((a, b) => a.name.localeCompare(b.name));
+    // A gallery, not a dropdown: 36 names give a player nothing to choose on.
+    const { BackgroundPicker } = await import("./background-picker.mjs");
+    return new BackgroundPicker({ actor: this.actor }).render({ force: true });
   }
 
   /**
