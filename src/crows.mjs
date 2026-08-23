@@ -163,10 +163,10 @@ Hooks.on("getSceneControlButtons", (controls) => {
  * Item hooks cover every route: equipping, moving between slots, spending
  * usage dice at the end of a dungeon turn, and dropping it.
  */
-for (const hook of [createItem, updateItem, deleteItem]) {
+for (const hook of ["createItem", "updateItem", "deleteItem"]) {
   Hooks.on(hook, (item) => {
     const actor = item.parent;
-    if (!(actor instanceof Actor) || actor.type !== crow) return;
+    if (!(actor instanceof Actor) || actor.type !== "crow") return;
     if (!actor.isOwner) return;
     actor.syncCarriedLight();
   });
