@@ -1,5 +1,87 @@
 # Decisions — crows-playtest
 
+## 2026-08-23 — Four name collisions in one day, and what they cost
+
+**Decision:** Four separate bugs this session had the same shape: a name that
+meant two things. Each is now guarded by a test, because every one of them
+failed SILENTLY and presented as something unrelated.
+
+| Collision | Looked like | Actually broke |
+|---|---|---|
+| `--crows-blood` was a palette colour and a wound ratio | a styling nitpick | wound markers, dead banner and turn bar rendered TRANSPARENT |
+| `advancement` was about to be a stored field and a derived object | fine | would have dropped the ledger on every prepare |
+| `state` assigned over an ApplicationV2 getter | a dead button | the Builder threw in its constructor and never opened |
+| `CROWS.Situation` was a string and a namespace | a failed deploy | the ENTIRE 717-key language file discarded |
+
+**Why they matter more than their size:** none produced an error a user could
+act on. The wound markers looked deliberate. The Builder button looked inert.
+The lang failure named one key out of 717 in a console nobody had open, and
+every label in the system rendered as a raw key — which reads as "the files
+did not copy", not "one key is wrong".
+
+**Guards now in place:**
+- `test/style-tokens.test.mjs` — no script may write a CSS custom property the
+  stylesheet declares as a colour.
+- `test/lang.test.mjs` — no localization key may be both a value and a prefix.
+- `test/packs-src.test.mjs` — no extractor may emit a field its data model does
+  not declare (a TypeDataModel drops undeclared fields in silence).
+
+All three are mutation-tested: reintroducing the original bug fails them.
+
+**Consequences:** `system.advancement` remains both stored and derived, so
+`prepareDerivedData` must MERGE onto it rather than assign. That is the one
+surviving instance of the pattern and it is commented where it lives.
+
+## 2026-08-23 — Circumstances are named, and measured is distinguished from asked
+
+**Decision:** The roll dialog lists every situational edge and bane Crows
+defines, with its rulebook page. Rows the VTT MEASURED arrive ticked; rows
+needing a Ref's judgement arrive unticked and look different. Edge and bane
+counts sync from the ticks but stay editable.
+
+**Why:** Crows funnels every circumstance into edges and banes, and the dialog
+already accepted the numbers — as three bare boxes. Counting them was invisible
+mental work, so it was skipped, and the whole cover/concealment/lighting layer
+of the rules went unused at the table.
+
+**Alternatives:** Auto-applying everything was rejected. Foundry can measure
+light, elevation, status effects and walls; it cannot tell fog from smoke or
+judge whether a barrel hides half of you. A system that decided those quietly
+would be wrong often and invisibly, which is worse than counting by hand.
+
+Collapsing edges and banes into one net number was rejected: two of either is a
+tier shift rather than arithmetic, which is exactly the rule they turn on.
+
+**Consequences:** The modifier list in `src/system/situation.mjs` is a reading
+of R p12/p16/p17/p20. A rule granting an edge elsewhere in the books will
+simply not be offered, and nothing will say so.
+
+## 2026-08-23 — Content is extracted, not authored
+
+**Decision:** All 519 compendium documents come out of the official PDFs via
+`tools/extract-*.mjs`: 71 creatures, 276 traits, 36 backgrounds, 23 weapons,
+4 armor, 82 gear, 27 spellbooks.
+
+**Why:** A takedown is then a directory delete, and a playtest revision is a
+re-run rather than a re-typing.
+
+**What the extraction taught, worth keeping:**
+- Column splitting by nearest centroid is WRONG on these pages: the last word
+  of a wrapped left-column line sits nearer the right column's centre. The
+  gutter is the widest uncovered band, and the extractor asserts no text item
+  crosses it rather than parsing through the error.
+- Deck 05 is a 13 Aug snapshot; deck 02 is the 19 Aug revision. The annotated
+  one is OLDER, which is the opposite of the obvious assumption, and its 40
+  annotations are James's own field spec.
+- Connector bars in trait trees form a GRAPH, not independent segments — the
+  common shape is box, stub, long rail, stub, box, and the rail touches no box
+  at all. Reading them one at a time silently drops every branch.
+
+**Consequences:** `packs-src/` and `assets/art/` hold MCDM's content and
+nothing else does; `assets/tokens/` is generated from SVG in this repo and is
+MIT with the code. `NOTICE.md` names them separately so a takedown cannot
+destroy original work.
+
 ## 2026-08-23 — Quality tiers are card data; a priced copy outranks a rich one
 
 **Decision:** Three repairs to `tools/extract-items.mjs`, plus one reordering
