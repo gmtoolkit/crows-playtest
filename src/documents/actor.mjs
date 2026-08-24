@@ -1,5 +1,6 @@
 import { CROWS } from "../config.mjs";
 import { PowerRoll } from "../dice/power-roll.mjs";
+import { detectSituation } from "../system/detect.mjs";
 import { applyDamage, applyCreatureDamage, restRecovery, clearStarvation } from "../system/damage-math.mjs";
 import { resolveUsageDice } from "../dice/tiers.mjs";
 
@@ -139,6 +140,9 @@ export class CrowsActor extends Actor {
       const answered = await PowerRoll.prompt({
         label: label ?? game.i18n.format("CROWS.TestOf", { name: this.name }),
         characteristic,
+        // Even a plain test carries the roller own conditions, and the
+        // judgement calls are worth offering.
+        situation: detectSituation({ actor: this }),
         ...options
       });
       if (!answered) return null;
@@ -179,6 +183,7 @@ export class CrowsActor extends Actor {
         label: item.name,
         characteristic,
         characteristicChoices: this.#characteristicChoices(characteristic),
+        situation: detectSituation({ actor: this, item }),
         ...options
       });
       if (!answered) return null;

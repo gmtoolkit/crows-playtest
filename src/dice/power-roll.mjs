@@ -15,8 +15,42 @@ export class PowerRoll {
    * behaviour qualitatively (a tier shift instead of a number) and players need
    * to be able to say "I have three edges here".
    */
-  static async prompt({ label, characteristic, characteristicChoices = null, edges = 0, banes = 0, bonus = 0 }) {
+  static async prompt({
+    label,
+    characteristic,
+    characteristicChoices = null,
+    edges = 0,
+    banes = 0,
+    bonus = 0,
+    situation = null
+  }) {
     const chars = characteristicChoices ?? Object.keys(CROWS.characteristics);
+
+    /**
+     * The situation panel: every edge and bane the circumstances give you,
+     * named, with its page.
+     *
+     * DETECTED ones arrive ticked because Foundry measured them — the light on
+     * the target's square, an elevation difference, a status effect, a wall in
+     * the way. JUDGEMENT ones arrive unticked because the answer is a Ref's:
+     * whether that fog is light or heavy concealment, whether the barrel really
+     * hides half of you, whether you and an ally are truly flanking. Ticking
+     * those for you would be wrong often and invisibly.
+     *
+     * Every box adjusts the edge and bane counts below it, which stay editable
+     * — the panel is a nudge, not a gate.
+     */
+    const rows = (situation?.modifiers ?? []).map((m) => {
+      const sign = m.kind === "edge" ? "+" : "−";
+      const cls = m.kind === "edge" ? "edge" : "bane";
+      return `<label class="sit-row ${cls} ${m.detected ? "detected" : "judgement"}">
+        <input type="checkbox" name="sit" value="${m.key}"
+               data-kind="${m.kind}" data-count="${m.count}" ${m.active ? "checked" : ""}>
+        <span class="sit-label">${game.i18n.localize(m.label)}</span>
+        <span class="sit-value">${sign}${m.count}</span>
+        <span class="sit-page">${m.page}</span>
+      </label>`;
+    });
     const charOptions = chars
       .map(
         (key) =>
@@ -49,6 +83,19 @@ export class PowerRoll {
           <input type="number" name="bonus" value="${bonus}" step="1">
         </div>
         <p class="hint">${game.i18n.localize("CROWS.EdgeBaneHint")}</p>
+
+        ${
+          rows.length
+            ? `<div class="crows-situation">
+                 <p class="sit-head">
+                   ${game.i18n.localize("CROWS.SituationTitle")}
+                   ${situation?.target ? `<span class="sit-target">${situation.target}</span>` : ""}
+                 </p>
+                 ${rows.join("")}
+                 <p class="hint">${game.i18n.localize("CROWS.SituationNote")}</p>
+               </div>`
+            : ""
+        }
       </fieldset>`;
 
     const result = await DialogV2.prompt({
@@ -57,6 +104,32 @@ export class PowerRoll {
       ok: {
         label: game.i18n.localize("CROWS.Roll"),
         callback: (_event, button) => new FormDataExtended(button.form).object
+      },
+      /**
+       * Keep the counts in step with the boxes.
+       *
+       * The totals stay editable on purpose — a player may know about an edge
+       * the canvas cannot see — so this SETS them from the ticks rather than
+       * locking them, and only while the boxes are being touched.
+       */
+      render: (_event, dialog) => {
+        const form = dialog.element.querySelector("form") ?? dialog.element;
+        const boxes = [...form.querySelectorAll('input[name="sit"]')];
+        if (!boxes.length) return;
+        const sync = () => {
+          let e = 0;
+          let b = 0;
+          for (const box of boxes) {
+            if (!box.checked) continue;
+            const n = Number(box.dataset.count) || 0;
+            if (box.dataset.kind === "edge") e += n;
+            else b += n;
+          }
+          form.querySelector('input[name="edges"]').value = String(e);
+          form.querySelector('input[name="banes"]').value = String(b);
+        };
+        for (const box of boxes) box.addEventListener("change", sync);
+        sync();
       },
       rejectClose: false
     });

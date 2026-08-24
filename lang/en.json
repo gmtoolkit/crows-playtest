@@ -699,5 +699,21 @@
   "CROWS.TraitsOwnedOf": "{owned} of {total}",
   "CROWS.CheapestTrait": "From {xp} XP",
   "CROWS.CannotAfford": "Nothing here you can afford yet",
-  "CROWS.RollForBackground": "Roll for background"
+  "CROWS.RollForBackground": "Roll for background",
+  "CROWS.Situation.dimLight": "Target in dim light",
+  "CROWS.Situation.darkness": "Target in darkness",
+  "CROWS.Situation.lightConcealment": "Light concealment (fog, rain)",
+  "CROWS.Situation.heavyConcealment": "Heavy concealment",
+  "CROWS.Situation.invisible": "Target invisible or hidden",
+  "CROWS.Situation.cover": "Target has cover",
+  "CROWS.Situation.highGround": "You have high ground",
+  "CROWS.Situation.flanking": "Flanking with an ally",
+  "CROWS.Situation.targetProne": "Target is prone (melee)",
+  "CROWS.Situation.targetProneRanged": "Target is prone (ranged)",
+  "CROWS.Situation.targetGrabbed": "Target is grabbed",
+  "CROWS.Situation.weakened": "You are weakened",
+  "CROWS.Situation.selfProne": "You are prone",
+  "CROWS.GuessSquare": "You must guess which square the target occupies. A wrong guess misses automatically.",
+  "CROWS.SituationTitle": "Circumstances",
+  "CROWS.SituationNote": "Ticked ones were measured from the map. Unticked ones are judgement calls — the rules cannot tell fog from smoke, and neither can Foundry. Edges and banes below stay editable either way."
 }

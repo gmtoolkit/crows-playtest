@@ -311,7 +311,7 @@ CROWS.campfires = {
 CROWS.conditions = {
   blessed: { label: "CROWS.CondBlessed", icon: "icons/magic/holy/yin-yang-balance-symbol.webp", endsAt: "dt" },
   grabbed: { label: "CROWS.CondGrabbed", icon: "icons/magic/control/debuff-chains-ropes-red.webp" },
-  prone: { label: "CROWS.CondProne", icon: "icons/magic/control/debuff-energy-hold-blue.webp" },
+  prone: { label: "CROWS.CondProne", icon: "icons/svg/falling.svg" },
   vulnerable: { label: "CROWS.CondVulnerable", icon: "icons/magic/death/skull-energy-light-purple.webp", endsAt: "dt" },
   unconscious: { label: "CROWS.CondUnconscious", icon: "icons/magic/control/sleep-bubble-purple.webp" },
   weakened: { label: "CROWS.CondWeakened", icon: "icons/magic/control/debuff-body-blue.webp", endsAt: "dt" },

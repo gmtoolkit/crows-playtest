@@ -123,3 +123,33 @@ describe("dynamic key families are complete", () => {
     }
   });
 });
+
+/**
+ * A key cannot be both a VALUE and a NAMESPACE.
+ *
+ * Foundry expands dotted keys into nested objects, so declaring both
+ * "CROWS.Situation" (a string) and "CROWS.Situation.darkness" makes it try to
+ * set a property on a string. That throws inside the loader and it does not
+ * degrade gracefully: the ENTIRE language file is discarded, so every label in
+ * the system renders as its raw key. It looks like the file failed to deploy.
+ *
+ * Cost when it happened: the whole sheet, every dialog and the turn HUD went
+ * to raw keys, and the console error named one key out of 717.
+ */
+describe("no localization key is both a leaf and a namespace", () => {
+  test("every key is either a value or a prefix, never both", () => {
+    const keys = Object.keys(lang);
+    const collisions = keys
+      .filter((k) => keys.some((other) => other !== k && other.startsWith(`${k}.`)))
+      .map((k) => {
+        const children = keys.filter((o) => o !== k && o.startsWith(`${k}.`));
+        return `"${k}" is a string but also the prefix of ${children.length} key(s), e.g. "${children[0]}"`;
+      });
+
+    assert.deepEqual(
+      collisions,
+      [],
+      `Foundry discards the WHOLE file on this:\n  ${collisions.join("\n  ")}`
+    );
+  });
+});

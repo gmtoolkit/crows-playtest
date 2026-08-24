@@ -3213,3 +3213,85 @@
 .crows-chat .band-range {
   font-variant-numeric: tabular-nums;
 }
+
+/* -------------------------------------------- */
+/*  Situational edges and banes                 */
+/* -------------------------------------------- */
+
+/**
+ * The nudge panel on the roll dialog.
+ *
+ * Two visual states, and the difference is the whole point: DETECTED rows were
+ * measured off the map and arrive ticked; JUDGEMENT rows are questions only a
+ * Ref can answer and arrive blank. Making them look identical would imply the
+ * system knows things it cannot know.
+ */
+.crows-situation {
+  margin-top: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px solid var(--crows-edge, #4a3c30);
+  display: grid;
+  gap: 0.1rem;
+}
+
+.crows-situation .sit-head {
+  margin: 0 0 0.2rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--crows-gold, #c9a227);
+  display: flex;
+  gap: 0.4rem;
+  align-items: baseline;
+}
+
+.crows-situation .sit-target {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--crows-parchment, #cfc2a8);
+}
+
+.crows-situation .sit-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.12rem 0.25rem;
+  border-radius: 3px;
+  font-size: 0.74rem;
+  cursor: pointer;
+}
+
+.crows-situation .sit-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Measured: stated plainly. */
+.crows-situation .sit-row.detected .sit-label {
+  color: var(--crows-bone, #e6dcc8);
+}
+
+/* A question, not a fact. */
+.crows-situation .sit-row.judgement .sit-label {
+  color: var(--crows-muted, #94866f);
+  font-style: italic;
+}
+
+.crows-situation .sit-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.crows-situation .sit-row.edge .sit-value {
+  color: var(--crows-green, #6d8f4a);
+}
+
+.crows-situation .sit-row.bane .sit-value {
+  color: var(--crows-blood-bright, #d33a3a);
+}
+
+.crows-situation .sit-page {
+  font-size: 0.62rem;
+  color: var(--crows-muted, #94866f);
+  opacity: 0.75;
+}
