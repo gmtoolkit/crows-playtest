@@ -10,6 +10,16 @@
     </div>
   </header>
 
+  {{!-- Who this was aimed at. A card that says "Miss" without naming what was
+        missed is unreadable an hour later in the log, and at the table it is
+        the first thing anyone asks. --}}
+  {{#if targets.length}}
+    <div class="pr-targets">
+      <i class="fa-solid fa-crosshairs"></i>
+      <span>{{#each targets}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</span>
+    </div>
+  {{/if}}
+
   <div class="pr-result">
     <div class="pr-tier">
       {{#if result.crit}}
@@ -29,6 +39,39 @@
       <span class="total">{{result.total}}</span>
     </div>
   </div>
+
+  {{!-- Showing the work. Crows has no DC: a roll lands in one of three bands,
+        so the honest equivalent is the bands themselves with the one you hit
+        marked, plus every part that made the total. --}}
+  {{#if breakdown}}
+    <div class="pr-work">
+      <div class="pr-sum">
+        {{#each breakdown.parts}}
+          <span class="part">
+            <span class="part-label">{{this.label}}</span>
+            {{#unless @first}}<span class="part-value">{{crowsSigned this.value}}</span>{{/unless}}
+          </span>
+        {{/each}}
+        <span class="eq">=</span>
+        <span class="sum-total">{{breakdown.total}}</span>
+      </div>
+
+      <div class="pr-bands {{#if breakdown.overridden}}overridden{{/if}}">
+        {{#each breakdown.bands}}
+          <span class="band tier-{{this.tier}} {{#if this.active}}hit{{/if}}">
+            <span class="band-tier">{{localize (concat "CROWS.Tier" this.tier)}}</span>
+            <span class="band-range">{{this.label}}</span>
+          </span>
+        {{/each}}
+      </div>
+
+      {{#if breakdown.overridden}}
+        {{!-- A crit or doom is read off the RAW dice, so the band did not
+              decide this result and saying otherwise would be a lie. --}}
+        <p class="pr-note">{{localize "CROWS.BandOverridden" raw=breakdown.rawTotal}}</p>
+      {{/if}}
+    </div>
+  {{/if}}
 
   {{#if result.tierShift}}
     <p class="pr-note">

@@ -3045,3 +3045,171 @@
   letter-spacing: 0.09em;
   color: var(--crows-muted);
 }
+
+/* -------------------------------------------- */
+/*  Trait tree gallery                          */
+/* -------------------------------------------- */
+
+/**
+ * The landing view. It used to be the words "Pick a trait tree." over an empty
+ * panel, with the only way in hidden behind a plus in the nav — a dead end on
+ * the screen where a career gets spent.
+ */
+.crows .tree-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.4rem;
+  padding: 0.2rem;
+  align-content: start;
+}
+
+.crows .tree-card {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  min-height: 0;
+}
+
+.crows .tree-card header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.crows .tc-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--crows-gold);
+}
+
+/* Invested trees are the ones you come back to, so they read as yours. */
+.crows .tree-card.invested {
+  border-color: var(--crows-gold);
+  background: rgba(201, 162, 39, 0.09);
+}
+
+.crows .tc-xp {
+  font-size: 0.68rem;
+  color: var(--crows-gold);
+  white-space: nowrap;
+}
+
+.crows .tc-spec {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--crows-parchment);
+  font-style: italic;
+}
+
+/**
+ * Both footer items sit LEFT on a fixed column.
+ *
+ * space-between pushed one to each edge, so the gap between "0 of 12" and
+ * "From 500 XP" changed with every card and the eye read it as sloppy
+ * alignment rather than as two facts. A fixed first column makes the second
+ * item start at the same x on every card in the grid.
+ */
+.crows .tree-card footer {
+  display: grid;
+  grid-template-columns: 4.2rem auto;
+  justify-content: start;
+  gap: 0.5rem;
+  font-size: 0.64rem;
+  color: var(--crows-muted);
+}
+
+.crows .tc-cost.can {
+  color: var(--crows-green);
+}
+
+/* Dimmed, never hidden: you can still see what a tree costs to open. */
+.crows .tree-card.unaffordable {
+  opacity: 0.62;
+}
+
+.crows .tree-body h3 .back {
+  padding: 0.1rem 0.35rem;
+  font-size: 0.7rem;
+}
+
+/* A tab with something waiting on it. */
+.crows nav.sheet-tabs [data-tab].has-pending {
+  color: var(--crows-gold);
+}
+
+.crows nav.sheet-tabs [data-tab].has-pending::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 0.3rem;
+  border-radius: 50%;
+  background: var(--crows-gold);
+  vertical-align: middle;
+}
+
+/* Chat: target line, and the roll bands. */
+.crows-chat .pr-targets {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78em;
+  color: var(--crows-parchment);
+  padding: 0.15rem 0;
+}
+
+.crows-chat .pr-work {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.3rem 0;
+}
+
+.crows-chat .pr-sum {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  font-size: 0.76em;
+  color: var(--crows-muted);
+}
+
+.crows-chat .pr-sum .sum-total {
+  color: var(--crows-bone);
+  font-weight: 700;
+}
+
+.crows-chat .pr-bands {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.crows-chat .pr-bands .band {
+  flex: 1;
+  display: grid;
+  gap: 0.05rem;
+  padding: 0.15rem 0.25rem;
+  border: 1px solid var(--crows-edge);
+  border-radius: var(--crows-radius);
+  text-align: center;
+  font-size: 0.62em;
+  color: var(--crows-muted);
+  opacity: 0.55;
+}
+
+.crows-chat .pr-bands .band.hit {
+  opacity: 1;
+  border-color: var(--crows-gold);
+  color: var(--crows-bone);
+}
+
+/* A crit or doom was decided by the raw dice, so no band is "the" answer. */
+.crows-chat .pr-bands.overridden .band.hit {
+  border-color: var(--crows-blood-bright);
+}
+
+.crows-chat .band-range {
+  font-variant-numeric: tabular-nums;
+}

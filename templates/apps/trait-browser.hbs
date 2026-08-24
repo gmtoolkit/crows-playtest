@@ -37,8 +37,41 @@
   {{/unless}}
 
   <section class="tree-body">
+    {{#unless tree}}
+      {{!-- The landing view: every tree as a card. This used to be the words
+            "Pick a trait tree." over an empty panel, with the only way in
+            hidden behind a plus button. Invested trees sort first, because a
+            career is built by coming back to one. --}}
+      <div class="tree-gallery">
+        {{#each gallery}}
+          <button type="button" class="tree-card {{#if this.invested}}invested{{/if}} {{#unless this.affordable}}unaffordable{{/unless}}"
+                  data-action="selectTree" data-tree="{{this.key}}">
+            <header>
+              <span class="tc-name">{{this.label}}</span>
+              {{#if this.invested}}<span class="tc-xp">{{this.xp}} XP</span>{{/if}}
+            </header>
+            <p class="tc-spec">{{this.spec}}</p>
+            <footer>
+              <span class="tc-owned">{{localize "CROWS.TraitsOwnedOf" owned=this.owned total=this.total}}</span>
+              {{#if this.cheapest}}
+                <span class="tc-cost {{#if this.affordable}}can{{/if}}">
+                  {{localize "CROWS.CheapestTrait" xp=this.cheapest}}
+                </span>
+              {{/if}}
+            </footer>
+          </button>
+        {{/each}}
+      </div>
+    {{/unless}}
+
     {{#if tree}}
-      <h3>{{treeLabel}}</h3>
+      <h3>
+        <button type="button" class="icon back" data-action="backToTrees"
+                data-tooltip="{{localize 'CROWS.BackToTrees'}}">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        {{treeLabel}}
+      </h3>
 
       <div class="trait-grid" style="--tree-cols: {{cols}};">
         {{#each grid}}
@@ -100,8 +133,6 @@
           {{/each}}
         {{/each}}
       </div>
-    {{else}}
-      <p class="empty">{{localize "CROWS.PickATree"}}</p>
     {{/if}}
   </section>
 </div>

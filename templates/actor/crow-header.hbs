@@ -107,15 +107,23 @@
     {{/if}}
   </div>
 
+  {{!-- Only what you do to the CHARACTER. Document controls (token art,
+        portrait, ownership, sheet config) moved to the window title bar via
+        _getHeaderControls, which is where every other system puts them and
+        where they stop competing with Rest for width. --}}
   <div class="action-bar">
     <nav class="header-actions">
       <button type="button" data-action="rest"><i class="fa-solid fa-campground"></i> {{localize "CROWS.Rest"}}</button>
-      <button type="button" data-action="openBuilder"><i class="fa-solid fa-wand-magic-sparkles"></i> {{localize "CROWS.Builder"}}</button>
-      {{!-- No dungeon-turn button here. The clock is the table's, not one
-            crow's, and it now lives permanently above the player list where
-            everyone can see it without opening a sheet. --}}
+
+      {{!-- The Builder is character CREATION, so it only appears on a crow who
+            has not been created yet. Once a background is set it is noise, and
+            re-running it would overwrite an advanced crow. --}}
+      {{#unless system.biography.background}}
+        <button type="button" data-action="openBuilder">
+          <i class="fa-solid fa-dice"></i> {{localize "CROWS.RollForBackground"}}
+        </button>
+      {{/unless}}
     </nav>
-    {{> "systems/crows/templates/partials/document-controls.hbs"}}
   </div>
 
   {{#if system.dead}}

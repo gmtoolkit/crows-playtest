@@ -24,7 +24,8 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
       pickTree: TraitBrowser.#onPickTree,
       selectTree: TraitBrowser.#onSelectTree,
       buy: TraitBrowser.#onBuy,
-      refund: TraitBrowser.#onRefund
+      refund: TraitBrowser.#onRefund,
+      backToTrees: TraitBrowser.#onBackToTrees
     }
   };
 
@@ -74,7 +75,7 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
     const chips = [...invested.entries()]
       .map(([key, xp]) => ({
         key,
-        label: game.i18n.localize(CROWS.traitTrees[key] ?? key),
+        label: game.i18n.localize(CROWS.traitTrees[key]?.label ?? key),
         xp,
         count: [...owned.values()].filter((i) => i.system.tree === key).length,
         active: this.tree === key
@@ -85,8 +86,55 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
 
     const unopened = Object.entries(CROWS.traitTrees)
       .filter(([key]) => !invested.has(key))
-      .map(([key, label]) => ({ key, label: game.i18n.localize(label) }))
+      .map(([key, cfg]) => ({ key, label: game.i18n.localize(cfg.label) }))
       .sort((a, b) => a.label.localeCompare(b.label));
+
+    /**
+     * The gallery, which is what you land on.
+     *
+     * Every tree as a card carrying the book's own one-line specialization
+     * (C p7's "Tree / Specialization" table), what you have already sunk into
+     * it, and the cheapest thing you could buy there. Landing on "Pick a trait
+     * tree." with nothing to pick from was a dead end.
+     *
+     * Invested trees sort FIRST, because a career is built by returning to a
+     * tree; everything else follows alphabetically.
+     */
+    const byTree = new Map();
+    for (const t of all) {
+      if (!byTree.has(t.system.tree)) byTree.set(t.system.tree, []);
+      byTree.get(t.system.tree).push(t);
+    }
+
+    const gallery = Object.entries(CROWS.traitTrees)
+      .map(([key, cfg]) => {
+        const inTree = byTree.get(key) ?? [];
+        const ownedHere = inTree.filter((t) => owned.has(t.name));
+        // What could actually be bought here right now: a starting trait, or
+        // anything a trait already owned unlocks.
+        const buyable = inTree.filter(
+          (t) =>
+            !owned.has(t.name) &&
+            (t.system.starting || t.system.prerequisites.some((p) => owned.has(p)))
+        );
+        const cheapest = buyable.length ? Math.min(...buyable.map((t) => t.system.cost)) : null;
+        return {
+          key,
+          label: game.i18n.localize(cfg.label),
+          spec: game.i18n.localize(cfg.spec ?? ""),
+          xp: invested.get(key) ?? 0,
+          invested: invested.has(key),
+          owned: ownedHere.length,
+          total: inTree.length,
+          cheapest,
+          affordable: cheapest !== null && cheapest <= available
+        };
+      })
+      .sort((a, b) => {
+        if (a.invested !== b.invested) return a.invested ? -1 : 1;
+        if (a.invested && b.invested) return b.xp - a.xp;
+        return a.label.localeCompare(b.label);
+      });
 
     const context = {
       actor: this.actor,
@@ -95,8 +143,9 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
       chips,
       unopened,
       hasTraits: all.length > 0,
+      gallery,
       tree: this.tree,
-      treeLabel: this.tree ? game.i18n.localize(CROWS.traitTrees[this.tree] ?? this.tree) : null
+      treeLabel: this.tree ? game.i18n.localize(CROWS.traitTrees[this.tree]?.label ?? this.tree) : null
     };
 
     if (!this.tree) return context;
@@ -171,6 +220,12 @@ export class TraitBrowser extends HandlebarsApplicationMixin(ApplicationV2) {
   }
 
   /* -------------------------------------------- */
+
+  /** Return to the gallery, so a player can spend across several trees. */
+  static async #onBackToTrees() {
+    this.tree = null;
+    return this.render();
+  }
 
   static async #onSelectTree(event, target) {
     this.tree = target.dataset.tree;

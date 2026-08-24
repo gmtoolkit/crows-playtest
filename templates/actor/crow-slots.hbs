@@ -42,7 +42,14 @@
           {{#if this.item}}
             {{> "systems/crows/templates/partials/card-face.hbs" item=this.item container="magic"}}
           {{else}}
-            <div class="slot-placeholder"><i class="fa-regular fa-gem"></i></div>
+            {{!-- Clicking a magic slot searches for things that fit THAT slot.
+                  A ring browser that offers boots is a browser you have to
+                  filter by hand every time. --}}
+            <button type="button" class="slot-placeholder" data-action="browseItems"
+                    data-container="magic" data-magic-slot="{{this.key}}"
+                    data-tooltip="{{localize 'CROWS.BrowseMagicSlotHint' slot=this.label}}">
+              <i class="fa-regular fa-gem"></i>
+            </button>
           {{/if}}
           {{#if this.overloaded}}
             <div class="overload-flag" data-tooltip="{{localize 'CROWS.MagicOverloadWarning'}}">

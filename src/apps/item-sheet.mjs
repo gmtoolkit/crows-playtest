@@ -100,7 +100,10 @@ export default class CrowsItemSheet extends HandlebarsApplicationMixin(ItemSheet
       udTriggers: CROWS.udTriggers,
       udRestore: CROWS.udRestore,
       magicSlots: CROWS.magicSlots,
-      traitTrees: CROWS.traitTrees,
+      // selectOptions wants {key: label}; traitTrees entries carry a spec too.
+      traitTrees: Object.fromEntries(
+        Object.entries(CROWS.traitTrees).map(([k, v]) => [k, v.label])
+      ),
       expertises: CROWS.expertises,
       sizes: CROWS.sizes,
       activation: {

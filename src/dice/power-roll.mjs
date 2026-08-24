@@ -197,7 +197,10 @@ export class PowerRoll {
         expertiseRemaining: remaining,
         canApplyExpertise: result.canApplyExpertise && remaining > 0,
         formula: roll.formula,
-        faces: roll.dice[0].results.filter((r) => r.active).map((r) => r.result)
+        faces: roll.dice[0].results.filter((r) => r.active).map((r) => r.result),
+        // Who this was aimed at, and how the total got there.
+        targets: this.targetNames(),
+        breakdown: this.breakdown({ roll, result, mod, characteristic, actor })
       }
     );
 
@@ -240,9 +243,58 @@ export class PowerRoll {
     }
     if (["weapon", "spellbook", "attack"].includes(item.type)) {
       if (tier === 1) return sys.tier1 || game.i18n.localize("CROWS.Miss");
-      return sys[`tier${tier}`] || null;
+      /**
+       * The PRINTED notation, never the stored one.
+       *
+       * `sys.tier3` holds "7 + @mod" — an internal placeholder — and putting it
+       * straight on the card leaked "@mod" into chat above the resolved damage.
+       * The models already derive `notationTier2`/`notationTier3`, which render
+       * the same thing the card prints: "7 + S".
+       */
+      return sys[`notationTier${tier}`] || sys[`tier${tier}`] || null;
     }
     return null;
+  }
+
+  /**
+   * How the total was reached, and what it had to beat.
+   *
+   * Crows has no DC to compare against — the roll lands in one of three bands
+   * (<=11, 12-16, 17+), so "showing the work" means showing the bands and which
+   * one the total fell in, plus every part that made up the total.
+   */
+  static breakdown({ roll, result, mod, characteristic, actor }) {
+    const faces = roll.dice[0].results.filter((r) => r.active).map((r) => r.result);
+    const parts = [{ key: "dice", label: `${faces.join(" + ")}`, value: faces.reduce((a, b) => a + b, 0) }];
+
+    if (mod) {
+      parts.push({
+        key: "characteristic",
+        label: game.i18n.localize(CROWS.characteristics[characteristic]?.abbr ?? "") || characteristic || "",
+        value: mod
+      });
+    }
+    if (result.modifier) {
+      parts.push({ key: "edges", label: game.i18n.localize("CROWS.EdgeBaneModifier"), value: result.modifier });
+    }
+
+    return {
+      parts,
+      total: result.total,
+      bands: [
+        { tier: 1, label: `≤ ${CROWS.roll.tier2Min - 1}`, active: result.tier === 1 },
+        { tier: 2, label: `${CROWS.roll.tier2Min}–${CROWS.roll.tier3Min - 1}`, active: result.tier === 2 },
+        { tier: 3, label: `${CROWS.roll.tier3Min}+`, active: result.tier === 3 }
+      ],
+      // A crit or doom is read off the RAW dice, so the bands did not decide it.
+      overridden: !!(result.crit || result.doom),
+      rawTotal: faces.reduce((a, b) => a + b, 0)
+    };
+  }
+
+  /** Whoever the roller had targeted when they rolled. */
+  static targetNames() {
+    return Array.from(game.user?.targets ?? []).map((t) => t.name).filter(Boolean);
   }
 
   /* -------------------------------------------- */

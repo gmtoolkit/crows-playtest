@@ -38,6 +38,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
       openBuilder: CrowSheet.#onOpenBuilder,
       openTurnPanel: CrowSheet.#onOpenTurnPanel,
       changeTokenArt: CrowSheet.#onChangeTokenArt,
+      changePortrait: CrowSheet.#onChangePortrait,
       pickBackground: CrowSheet.#onPickBackground,
       browseItems: CrowSheet.#onBrowseItems,
       openPlacedToken: CrowSheet.#onOpenPlacedToken
@@ -76,6 +77,50 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
   };
 
   /* -------------------------------------------- */
+
+  /**
+   * Document controls belong in the WINDOW HEADER, not in the sheet body.
+   *
+   * They were a row of buttons competing with Rest for space inside the sheet.
+   * Every other system — Pathfinder included — puts token art, portrait,
+   * ownership and sheet configuration in the title bar's controls menu, beside
+   * close and copy-uuid, because they are things you do to the DOCUMENT rather
+   * than to the character.
+   *
+   * ApplicationV2 assembles this menu from `_getHeaderControls`, and each entry
+   * dispatches the same `action` name the body buttons used, so the handlers
+   * are unchanged.
+   */
+  _getHeaderControls() {
+    const controls = super._getHeaderControls();
+
+    /**
+     * Only what Foundry does NOT already provide.
+     *
+     * ActorSheetV2 already contributes Prototype Token, Configure Sheet,
+     * Configure Ownership and the two VIEW-artwork entries — adding a
+     * prototype-token control here listed it twice.
+     *
+     * What is missing is CHANGING art rather than viewing it, which is the gap
+     * that made token art unreachable in the first place. `editImage` is not
+     * reused because it reads its target from a `data-edit` attribute that a
+     * menu entry has no way to carry.
+     */
+    controls.push(
+      { action: "changeTokenArt", icon: "fa-solid fa-image-portrait", label: "CROWS.ChangeTokenArt" },
+      { action: "changePortrait", icon: "fa-solid fa-image", label: "CROWS.ChangePortrait" }
+    );
+
+    if (placedTokenFor(this.actor)) {
+      controls.push({
+        action: "openPlacedToken",
+        icon: "fa-solid fa-location-crosshairs",
+        label: "CROWS.EditPlacedToken"
+      });
+    }
+
+    return controls;
+  }
 
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
@@ -177,6 +222,30 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const ratio = sys.wounds.length ? sys.woundCount / sys.wounds.length : 0;
     this.element.classList.toggle("bleeding", ratio > 0);
     this.element.classList.toggle("dying", ratio >= 0.7);
+
+    /**
+     * Flag the tabs that have something waiting.
+     *
+     * XP sits unspent because nothing says it is there — the number lives on a
+     * tab you are not looking at. A cheapest-trait test rather than "any XP":
+     * 400 XP with a 500 floor is not spendable, and a badge that lights when
+     * you can afford nothing is noise.
+     */
+    const nav = this.element.querySelector(".window-content > nav.sheet-tabs");
+    const traitTab = nav?.querySelector('[data-tab="traits"]');
+    if (traitTab) {
+      traitTab.classList.toggle("has-pending", sys.xp.available >= CROWS.traitStartingCost);
+      traitTab.dataset.tooltip = sys.xp.available >= CROWS.traitStartingCost
+        ? game.i18n.format("CROWS.TraitsAffordable", { xp: sys.xp.available })
+        : "";
+    }
+
+    const expTab = nav?.querySelector('[data-tab="expertises"]');
+    if (expTab) {
+      const owed = sys.advancement.available + sys.advancement.charAvailable;
+      expTab.classList.toggle("has-pending", owed > 0);
+      expTab.dataset.tooltip = owed > 0 ? game.i18n.format("CROWS.BonusesWaiting", { n: owed }) : "";
+    }
   }
 
   /* -------------------------------------------- */
@@ -334,7 +403,7 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
     const trees = {};
     for (const trait of owned) {
       const tree = trait.system.tree;
-      trees[tree] ??= { key: tree, label: game.i18n.localize(CROWS.traitTrees[tree] ?? tree), traits: [] };
+      trees[tree] ??= { key: tree, label: game.i18n.localize(CROWS.traitTrees[tree]?.label ?? tree), traits: [] };
       trees[tree].traits.push(trait);
     }
     for (const tree of Object.values(trees)) tree.traits.sort((a, b) => a.system.cost - b.system.cost);
@@ -584,6 +653,25 @@ export default class CrowSheet extends HandlebarsApplicationMixin(ActorSheetV2) 
    * token, because changing "my token art" and then finding the figure on the
    * map unchanged is the same bug from the player's side.
    */
+  /**
+   * Pick a new portrait.
+   *
+   * Its own action rather than reusing `editImage`, which reads its target
+   * from a `data-edit` attribute on the clicked element — a header-menu entry
+   * has nowhere to put one.
+   */
+  static async #onChangePortrait() {
+    const picker = new foundry.applications.apps.FilePicker.implementation({
+      type: "image",
+      current: this.actor.img,
+      callback: async (path) => {
+        await this.actor.update({ img: path });
+        this.render(false);
+      }
+    });
+    return picker.browse();
+  }
+
   static async #onChangeTokenArt() {
     const current = this.actor.prototypeToken?.texture?.src ?? this.actor.img;
     const picker = new foundry.applications.apps.FilePicker.implementation({
